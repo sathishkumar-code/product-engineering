@@ -1,0 +1,6274 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "PointClickCare",
+    "description": "API Error Codes:<br/><br/>\n\n<b>400</b> Bad Request<br/>\n<b>401</b> Client Unauthorized<br/>\n<b>403</b> Forbidden<br/>\n<b>404</b> Not Found<br/>\n<b>500</b> Internal Error<br/>\n<b>405</b> Method Not Allowed<br/>\n<b>501</b> Not Implemented<br/>\n<b>422</b> Unprocessable Entity<br/>\n<b>409</b> Conflict<br/>\n<b>410</b> Gone<br/>\n<b>412</b> Precondition Failed<br/>\n",
+    "version": "4.0"
+  },
+  "servers": [
+    {
+      "url": "https://connect2.pointclickcare.com/fhir/R4",
+      "description": "PointClickCare"
+    }
+  ],
+  "tags": [
+    {
+      "name": "System Level Operations",
+      "description": "Server-level operations"
+    },
+    {
+      "name": "AllergyIntolerance",
+      "description": "The AllergyIntolerance FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/allergyintolerance<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-allergyintolerance|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-allergyintolerance|6.1.0"
+    },
+    {
+      "name": "CarePlan",
+      "description": "The CarePlan FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/careplan<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-careplan|3.1.1"
+    },
+    {
+      "name": "CareTeam",
+      "description": "The CareTeam FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/careteam<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-careteam|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-careteam|6.1.0"
+    },
+    {
+      "name": "Condition",
+      "description": "The Condition FHIR resource type<br/><p>Note: Health concerns and Problem lists are available through the Condition resource</p>\n<br/>Base profile: http://hl7.org/fhir/R4/condition<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition-encounter-diagnosis|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition-problems-health-concerns|6.1.0"
+    },
+    {
+      "name": "Coverage",
+      "description": "The Coverage FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/coverage<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-coverage|6.1.0"
+    },
+    {
+      "name": "Device",
+      "description": "The Device FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/device<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-implantable-device|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-implantable-device|6.1.0"
+    },
+    {
+      "name": "DiagnosticReport",
+      "description": "The DiagnosticReport FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/diagnosticreport<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-lab|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-note|3.1.1"
+    },
+    {
+      "name": "DocumentReference",
+      "description": "The DocumentReference FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/documentreference<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-documentreference|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-documentreference|6.1.0"
+    },
+    {
+      "name": "Encounter",
+      "description": "The Encounter FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/encounter<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter|3.1.1"
+    },
+    {
+      "name": "Goal",
+      "description": "The Goal FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/goal<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-goal|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-goal|6.1.0"
+    },
+    {
+      "name": "Group",
+      "description": "The Group FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/group"
+    },
+    {
+      "name": "Immunization",
+      "description": "The Immunization FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/immunization<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-immunization|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-immunization|6.1.0"
+    },
+    {
+      "name": "Location",
+      "description": "The Location FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/location<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-location|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-location|6.1.0"
+    },
+    {
+      "name": "Medication",
+      "description": "The Medication FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/medication<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-medication|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-medication|6.1.0"
+    },
+    {
+      "name": "MedicationDispense",
+      "description": "The MedicationDispense FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/medicationdispense<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-medicationdispense|6.1.0"
+    },
+    {
+      "name": "MedicationRequest",
+      "description": "The MedicationRequest FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/medicationrequest<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-medicationrequest|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-medicationrequest|6.1.0"
+    },
+    {
+      "name": "Observation",
+      "description": "The Observation FHIR resource type<br/><p>Note: Smoking status, Occupation, Sexual Orientation, Vital signs, and Lab results are available through the Observation resource</p>\n<br/>Base profile: http://hl7.org/fhir/R4/observation<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-sexual-orientation|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-occupation|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-screening-assessment|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-clinical-result|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-pregnancyintent|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-pregnancystatus|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-smokingstatus|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-bmi|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-height|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-weight|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-temperature|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-respiratory-rate|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-head-circumference|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/pediatric-weight-for-height|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/head-occipital-frontal-circumference-percentile|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/pediatric-bmi-for-age|6.1.0<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-pulse-oximetry|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/pediatric-weight-for-height|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/pediatric-bmi-for-age|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/head-occipital-frontal-circumference-percentile|3.1.1<br/>Supported profile: http://hl7.org/fhir/bodyheight<br/>Supported profile: http://hl7.org/fhir/bodytemp<br/>Supported profile: http://hl7.org/fhir/bp<br/>Supported profile: http://hl7.org/fhir/bodyweight<br/>Supported profile: http://hl7.org/fhir/heartrate<br/>Supported profile: http://hl7.org/fhir/resprate"
+    },
+    {
+      "name": "Organization",
+      "description": "The Organization FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/organization<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-organization|6.1.0"
+    },
+    {
+      "name": "Patient",
+      "description": "The Patient FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/patient<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient|6.1.0"
+    },
+    {
+      "name": "Practitioner",
+      "description": "The Practitioner FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/practitioner<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitioner|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitioner|6.1.0"
+    },
+    {
+      "name": "PractitionerRole",
+      "description": "The PractitionerRole FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/practitionerrole<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitionerrole|6.1.0"
+    },
+    {
+      "name": "Procedure",
+      "description": "The Procedure FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/procedure<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure|3.1.1"
+    },
+    {
+      "name": "Provenance",
+      "description": "The Provenance FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/provenance<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-provenance|3.1.1<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-provenance|6.1.0"
+    },
+    {
+      "name": "RelatedPerson",
+      "description": "The RelatedPerson FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/relatedperson<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-relatedperson|6.1.0"
+    },
+    {
+      "name": "ServiceRequest",
+      "description": "The ServiceRequest FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/servicerequest<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-servicerequest|6.1.0"
+    },
+    {
+      "name": "Specimen",
+      "description": "The Specimen FHIR resource type<br/>Base profile: http://hl7.org/fhir/R4/specimen<br/>Supported profile: http://hl7.org/fhir/us/core/StructureDefinition/us-core-specimen|6.1.0"
+    }
+  ],
+  "paths": {
+    "/{tenantId}/metadata": {
+      "get": {
+        "tags": [
+          "System Level Operations"
+        ],
+        "summary": "server-capabilities: Fetch the server FHIR CapabilityStatement",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                },
+                "example": "{\n  \"resourceType\": \"CapabilityStatement\"\n}"
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                },
+                "example": "<CapabilityStatement xmlns=\"http://hl7.org/fhir\"/>"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/$export-poll-status": {
+      "get": {
+        "tags": [
+          "System Level Operations"
+        ],
+        "summary": "GET: /$export-poll-status",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "_jobId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "System Level Operations"
+        ],
+        "summary": "POST: /$export-poll-status",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/fhir+json": {
+              "schema": {
+                "title": "FHIR Resource",
+                "type": "object"
+              },
+              "example": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [ {\n    \"name\": \"_jobId\",\n    \"valueString\": \"example\"\n  } ]\n}"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/AllergyIntolerance/{id}": {
+      "get": {
+        "tags": [
+          "AllergyIntolerance"
+        ],
+        "summary": "read-instance: Read AllergyIntolerance instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/AllergyIntolerance": {
+      "get": {
+        "tags": [
+          "AllergyIntolerance"
+        ],
+        "summary": "read-list: List all AllergyIntolerance instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "External ids for this item",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who the sensitivity is for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clinical-status",
+            "in": "query",
+            "description": "active | inactive | resolved",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/AllergyIntolerance/_search": {
+      "get": {
+        "tags": [
+          "AllergyIntolerance"
+        ],
+        "summary": "search-type: Search for AllergyIntolerance instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "External ids for this item",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who the sensitivity is for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clinical-status",
+            "in": "query",
+            "description": "active | inactive | resolved",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/CarePlan/{id}": {
+      "get": {
+        "tags": [
+          "CarePlan"
+        ],
+        "summary": "read-instance: Read CarePlan instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/CarePlan": {
+      "get": {
+        "tags": [
+          "CarePlan"
+        ],
+        "summary": "read-list: List all CarePlan instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Time period plan covers",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "External Ids for this plan",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who the care plan is for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Type of plan",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "draft | active | on-hold | revoked | completed | entered-in-error | unknown",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/CarePlan/_search": {
+      "get": {
+        "tags": [
+          "CarePlan"
+        ],
+        "summary": "search-type: Search for CarePlan instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Time period plan covers",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "External Ids for this plan",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who the care plan is for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Type of plan",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "draft | active | on-hold | revoked | completed | entered-in-error | unknown",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/CareTeam/{id}": {
+      "get": {
+        "tags": [
+          "CareTeam"
+        ],
+        "summary": "read-instance: Read CareTeam instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/CareTeam": {
+      "get": {
+        "tags": [
+          "CareTeam"
+        ],
+        "summary": "read-list: List all CareTeam instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "External Ids for this team",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who care team is for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "proposed | active | suspended | inactive | entered-in-error",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/CareTeam/_search": {
+      "get": {
+        "tags": [
+          "CareTeam"
+        ],
+        "summary": "search-type: Search for CareTeam instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "External Ids for this team",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who care team is for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "proposed | active | suspended | inactive | entered-in-error",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Condition/{id}": {
+      "get": {
+        "tags": [
+          "Condition"
+        ],
+        "summary": "read-instance: Read Condition instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Condition": {
+      "get": {
+        "tags": [
+          "Condition"
+        ],
+        "summary": "read-list: List all Condition instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A unique identifier of the condition record",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "Code for the condition",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clinical-status",
+            "in": "query",
+            "description": "The clinical status of the condition",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "encounter",
+            "in": "query",
+            "description": "Encounter created as part of",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onset-date",
+            "in": "query",
+            "description": "Date related onsets (dateTime and Period)",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who has the condition?",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "The category of the condition",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Condition/_search": {
+      "get": {
+        "tags": [
+          "Condition"
+        ],
+        "summary": "search-type: Search for Condition instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A unique identifier of the condition record",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "Code for the condition",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "clinical-status",
+            "in": "query",
+            "description": "The clinical status of the condition",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "encounter",
+            "in": "query",
+            "description": "Encounter created as part of",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onset-date",
+            "in": "query",
+            "description": "Date related onsets (dateTime and Period)",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who has the condition?",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "The category of the condition",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Coverage/{id}": {
+      "get": {
+        "tags": [
+          "Coverage"
+        ],
+        "summary": "read-instance: Read Coverage instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Coverage": {
+      "get": {
+        "tags": [
+          "Coverage"
+        ],
+        "summary": "read-list: List all Coverage instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "The primary identifier of the insured and the coverage",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Retrieve coverages for a patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Coverage/_search": {
+      "get": {
+        "tags": [
+          "Coverage"
+        ],
+        "summary": "search-type: Search for Coverage instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "The primary identifier of the insured and the coverage",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Retrieve coverages for a patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Device/{id}": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "read-instance: Read Device instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Device": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "read-list: List all Device instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Instance id from manufacturer, owner, and others",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Patient information, if the resource is affixed to a person",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The type of the device",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Device/_search": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "search-type: Search for Device instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Instance id from manufacturer, owner, and others",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Patient information, if the resource is affixed to a person",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The type of the device",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/DiagnosticReport/{id}": {
+      "get": {
+        "tags": [
+          "DiagnosticReport"
+        ],
+        "summary": "read-instance: Read DiagnosticReport instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/DiagnosticReport": {
+      "get": {
+        "tags": [
+          "DiagnosticReport"
+        ],
+        "summary": "read-list: List all DiagnosticReport instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "The clinically relevant time of the report",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "An identifier for the report",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "The code for the report, as opposed to codes for the atomic results, which are the names on the observation resource referred to from the result",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The subject of the report if a patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Which diagnostic discipline/department created the report",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The status of the report",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/DiagnosticReport/_search": {
+      "get": {
+        "tags": [
+          "DiagnosticReport"
+        ],
+        "summary": "search-type: Search for DiagnosticReport instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "The clinically relevant time of the report",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "An identifier for the report",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "The code for the report, as opposed to codes for the atomic results, which are the names on the observation resource referred to from the result",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The subject of the report if a patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Which diagnostic discipline/department created the report",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The status of the report",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/DocumentReference/{id}": {
+      "get": {
+        "tags": [
+          "DocumentReference"
+        ],
+        "summary": "read-instance: Read DocumentReference instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/DocumentReference": {
+      "get": {
+        "tags": [
+          "DocumentReference"
+        ],
+        "summary": "read-list: List all DocumentReference instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "When this document reference was created",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Master Version Specific Identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "Time of service that is being documented\n\nWhen used for searching for CCD documents (type=http://loinc.org|34133-9 OR type=34133-9), a subset of the FHIR specification is allowed:\n\n1. period={qualifier}{date}\nQualifier: gt (greater than), lt (less than), ge (greater than or equal to), le (less than or equal to)\n2. period={date}\nInferred qualifier of eq (equals)\n3. period={qualifier}{date}&period={qualifier}{date}\nQualifier: one gt and one lt\nDate formats: yyyy-MM-dd",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Kind of document (LOINC if possible)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who/what is the subject of the document",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Logical id of this artifact",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Categorization of document",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "current | superseded | entered-in-error",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/DocumentReference/_search": {
+      "get": {
+        "tags": [
+          "DocumentReference"
+        ],
+        "summary": "search-type: Search for DocumentReference instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "When this document reference was created",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Master Version Specific Identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "description": "Time of service that is being documented\n\nWhen used for searching for CCD documents (type=http://loinc.org|34133-9 OR type=34133-9), a subset of the FHIR specification is allowed:\n\n1. period={qualifier}{date}\nQualifier: gt (greater than), lt (less than), ge (greater than or equal to), le (less than or equal to)\n2. period={date}\nInferred qualifier of eq (equals)\n3. period={qualifier}{date}&period={qualifier}{date}\nQualifier: one gt and one lt\nDate formats: yyyy-MM-dd",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Kind of document (LOINC if possible)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who/what is the subject of the document",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Logical id of this artifact",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Categorization of document",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "current | superseded | entered-in-error",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Encounter/{id}": {
+      "get": {
+        "tags": [
+          "Encounter"
+        ],
+        "summary": "read-instance: Read Encounter instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Encounter": {
+      "get": {
+        "tags": [
+          "Encounter"
+        ],
+        "summary": "read-list: List all Encounter instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "A date within the period the Encounter lasted",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Identifier(s) by which this encounter is known",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Specific type of encounter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The patient or group present at the encounter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Logical id of this artifact",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "class",
+            "in": "query",
+            "description": "Classification of patient encounter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "planned | arrived | triaged | in-progress | onleave | finished | cancelled +",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Encounter/_search": {
+      "get": {
+        "tags": [
+          "Encounter"
+        ],
+        "summary": "search-type: Search for Encounter instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "A date within the period the Encounter lasted",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Identifier(s) by which this encounter is known",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Specific type of encounter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The patient or group present at the encounter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Logical id of this artifact",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "class",
+            "in": "query",
+            "description": "Classification of patient encounter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "planned | arrived | triaged | in-progress | onleave | finished | cancelled +",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Goal/{id}": {
+      "get": {
+        "tags": [
+          "Goal"
+        ],
+        "summary": "read-instance: Read Goal instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Goal": {
+      "get": {
+        "tags": [
+          "Goal"
+        ],
+        "summary": "read-list: List all Goal instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "External Ids for this goal",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lifecycle-status",
+            "in": "query",
+            "description": "proposed | planned | accepted | active | on-hold | completed | cancelled | entered-in-error | rejected",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who this goal is intended for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target-date",
+            "in": "query",
+            "description": "Reach goal on or before",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Goal/_search": {
+      "get": {
+        "tags": [
+          "Goal"
+        ],
+        "summary": "search-type: Search for Goal instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "External Ids for this goal",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lifecycle-status",
+            "in": "query",
+            "description": "proposed | planned | accepted | active | on-hold | completed | cancelled | entered-in-error | rejected",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Who this goal is intended for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target-date",
+            "in": "query",
+            "description": "Reach goal on or before",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Group/{id}": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "summary": "read-instance: Read Group instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Group": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "summary": "read-list: List all Group instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "actual",
+            "in": "query",
+            "description": "Descriptive or actual",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Unique id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "managing-entity",
+            "in": "query",
+            "description": "Entity that is the custodian of the Group's definition",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "The kind of resources contained",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The type of resources the group contains",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "characteristic",
+            "in": "query",
+            "description": "Kind of characteristic",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "member",
+            "in": "query",
+            "description": "Reference to the group member",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exclude",
+            "in": "query",
+            "description": "Group includes or excludes",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "description": "Value held by characteristic",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Group"
+        ],
+        "summary": "create-type: Create a new Group instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/fhir+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+              },
+              "example": "{\n  \"resourceType\": \"Group\"\n}"
+            },
+            "application/fhir+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+              },
+              "example": "<Group xmlns=\"http://hl7.org/fhir\"/>"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Group/_search": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "summary": "search-type: Search for Group instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "actual",
+            "in": "query",
+            "description": "Descriptive or actual",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Unique id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "managing-entity",
+            "in": "query",
+            "description": "Entity that is the custodian of the Group's definition",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "The kind of resources contained",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "The type of resources the group contains",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "characteristic",
+            "in": "query",
+            "description": "Kind of characteristic",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "member",
+            "in": "query",
+            "description": "Reference to the group member",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exclude",
+            "in": "query",
+            "description": "Group includes or excludes",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "value",
+            "in": "query",
+            "description": "Value held by characteristic",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Group/{id}/$export": {
+      "get": {
+        "tags": [
+          "Group"
+        ],
+        "summary": "GET: /Group/{id}/$export",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          },
+          {
+            "name": "_outputFormat",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_since",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_until",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_typeFilter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_typePostFetchFilterUrl",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_exportId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_includeHistory",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_mdm",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Group"
+        ],
+        "summary": "POST: /Group/{id}/$export",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/fhir+json": {
+              "schema": {
+                "title": "FHIR Resource",
+                "type": "object"
+              },
+              "example": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [ {\n    \"name\": \"_outputFormat\",\n    \"valueString\": \"example\"\n  }, {\n    \"name\": \"_type\",\n    \"valueString\": \"example\"\n  }, {\n    \"name\": \"_since\"\n  }, {\n    \"name\": \"_until\"\n  }, {\n    \"name\": \"_typeFilter\",\n    \"valueString\": \"example\"\n  }, {\n    \"name\": \"_typePostFetchFilterUrl\",\n    \"valueString\": \"example\"\n  }, {\n    \"name\": \"_exportId\",\n    \"valueString\": \"example\"\n  }, {\n    \"name\": \"_includeHistory\",\n    \"valueBoolean\": false\n  }, {\n    \"name\": \"_mdm\",\n    \"valueBoolean\": false\n  }, {\n    \"name\": \"patient\"\n  } ]\n}"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Immunization/{id}": {
+      "get": {
+        "tags": [
+          "Immunization"
+        ],
+        "summary": "read-instance: Read Immunization instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Immunization": {
+      "get": {
+        "tags": [
+          "Immunization"
+        ],
+        "summary": "read-list: List all Immunization instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Vaccination  (non)-Administration Date",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Business identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The patient for the vaccination record",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Immunization event status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Immunization/_search": {
+      "get": {
+        "tags": [
+          "Immunization"
+        ],
+        "summary": "search-type: Search for Immunization instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Vaccination  (non)-Administration Date",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Business identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The patient for the vaccination record",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Immunization event status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Location/{id}": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "read-instance: Read Location instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Location": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "read-list: List all Location instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "An identifier for the location",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "description": "A (part of the) address of the location",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-state",
+            "in": "query",
+            "description": "A state specified in an address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-postalcode",
+            "in": "query",
+            "description": "A postal code specified in an address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A portion of the location's name or alias",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-city",
+            "in": "query",
+            "description": "A city specified in an address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Location/_search": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "search-type: Search for Location instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "An identifier for the location",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "description": "A (part of the) address of the location",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-state",
+            "in": "query",
+            "description": "A state specified in an address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-postalcode",
+            "in": "query",
+            "description": "A postal code specified in an address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A portion of the location's name or alias",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address-city",
+            "in": "query",
+            "description": "A city specified in an address",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Medication/{id}": {
+      "get": {
+        "tags": [
+          "Medication"
+        ],
+        "summary": "read-instance: Read Medication instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Medication": {
+      "get": {
+        "tags": [
+          "Medication"
+        ],
+        "summary": "read-list: List all Medication instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Returns medications with this external identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Medication/_search": {
+      "get": {
+        "tags": [
+          "Medication"
+        ],
+        "summary": "search-type: Search for Medication instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Returns medications with this external identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/MedicationDispense/{id}": {
+      "get": {
+        "tags": [
+          "MedicationDispense"
+        ],
+        "summary": "read-instance: Read MedicationDispense instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/MedicationDispense": {
+      "get": {
+        "tags": [
+          "MedicationDispense"
+        ],
+        "summary": "read-list: List all MedicationDispense instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Returns dispenses with this external identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The identity of a patient to list dispenses  for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/MedicationDispense/_search": {
+      "get": {
+        "tags": [
+          "MedicationDispense"
+        ],
+        "summary": "search-type: Search for MedicationDispense instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Returns dispenses with this external identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The identity of a patient to list dispenses  for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/MedicationRequest/{id}": {
+      "get": {
+        "tags": [
+          "MedicationRequest"
+        ],
+        "summary": "read-instance: Read MedicationRequest instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/MedicationRequest": {
+      "get": {
+        "tags": [
+          "MedicationRequest"
+        ],
+        "summary": "read-list: List all MedicationRequest instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Return prescriptions with this external identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authoredon",
+            "in": "query",
+            "description": "Return prescriptions written on this date",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "medication",
+            "in": "query",
+            "description": "Return prescriptions for this medication reference",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "encounter",
+            "in": "query",
+            "description": "Multiple Resources: \r\n\r\n* [MedicationRequest](medicationrequest.html): Return prescriptions with this encounter identifier\r\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intent",
+            "in": "query",
+            "description": "Returns prescriptions with different intents",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Returns prescriptions for a specific patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status of the prescription",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/MedicationRequest/_search": {
+      "get": {
+        "tags": [
+          "MedicationRequest"
+        ],
+        "summary": "search-type: Search for MedicationRequest instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Return prescriptions with this external identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authoredon",
+            "in": "query",
+            "description": "Return prescriptions written on this date",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "medication",
+            "in": "query",
+            "description": "Return prescriptions for this medication reference",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "encounter",
+            "in": "query",
+            "description": "Multiple Resources: \r\n\r\n* [MedicationRequest](medicationrequest.html): Return prescriptions with this encounter identifier\r\n",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "intent",
+            "in": "query",
+            "description": "Returns prescriptions with different intents",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Returns prescriptions for a specific patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status of the prescription",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Observation/{id}": {
+      "get": {
+        "tags": [
+          "Observation"
+        ],
+        "summary": "read-instance: Read Observation instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Observation": {
+      "get": {
+        "tags": [
+          "Observation"
+        ],
+        "summary": "read-list: List all Observation instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Obtained date/time. If the obtained element is a period, a date that falls in the period",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "The unique id for a particular observation",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "The code of the observation type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The subject that the observation is about (if patient)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "The classification of the type of observation",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The status of the observation",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Observation/_search": {
+      "get": {
+        "tags": [
+          "Observation"
+        ],
+        "summary": "search-type: Search for Observation instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Obtained date/time. If the obtained element is a period, a date that falls in the period",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "The unique id for a particular observation",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "The code of the observation type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The subject that the observation is about (if patient)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "The classification of the type of observation",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "The status of the observation",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Organization/{id}": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "read-instance: Read Organization instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Organization": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "read-list: List all Organization instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Any identifier for the organization (not the accreditation issuer's identifier)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "description": "A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A portion of the organization's name or alias",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Organization/_search": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "search-type: Search for Organization instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Any identifier for the organization (not the accreditation issuer's identifier)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "description": "A server defined search that may match any of the string fields in the Address, including line, city, district, state, country, postalCode, and/or text",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A portion of the organization's name or alias",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Patient/{id}": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "summary": "read-instance: Read Patient instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Patient": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "summary": "read-list: List all Patient instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A patient identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "given",
+            "in": "query",
+            "description": "A portion of the given name of the patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "birthdate",
+            "in": "query",
+            "description": "The patient's date of birth",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "description": "Gender of the patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "general-practitioner",
+            "in": "query",
+            "description": "Patient's nominated general practitioner, not the organization that manages the record",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "organization",
+            "in": "query",
+            "description": "The organization that is the custodian of the patient record",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Logical id of this artifact",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "family",
+            "in": "query",
+            "description": "A portion of the family name of the patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Patient/_search": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "summary": "search-type: Search for Patient instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A patient identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "given",
+            "in": "query",
+            "description": "A portion of the given name of the patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "birthdate",
+            "in": "query",
+            "description": "The patient's date of birth",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "description": "Gender of the patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "general-practitioner",
+            "in": "query",
+            "description": "Patient's nominated general practitioner, not the organization that manages the record",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "organization",
+            "in": "query",
+            "description": "The organization that is the custodian of the patient record",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Logical id of this artifact",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "family",
+            "in": "query",
+            "description": "A portion of the family name of the patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Practitioner/{id}": {
+      "get": {
+        "tags": [
+          "Practitioner"
+        ],
+        "summary": "read-instance: Read Practitioner instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Practitioner": {
+      "get": {
+        "tags": [
+          "Practitioner"
+        ],
+        "summary": "read-list: List all Practitioner instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A practitioner's Identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Logical id of this artifact",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Practitioner/_search": {
+      "get": {
+        "tags": [
+          "Practitioner"
+        ],
+        "summary": "search-type: Search for Practitioner instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A practitioner's Identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Logical id of this artifact",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/PractitionerRole/{id}": {
+      "get": {
+        "tags": [
+          "PractitionerRole"
+        ],
+        "summary": "read-instance: Read PractitionerRole instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/PractitionerRole": {
+      "get": {
+        "tags": [
+          "PractitionerRole"
+        ],
+        "summary": "read-list: List all PractitionerRole instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A practitioner's Identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endpoint",
+            "in": "query",
+            "description": "Technical endpoints providing access to services operated for the practitioner with this role",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "specialty",
+            "in": "query",
+            "description": "The practitioner has this specialty at an organization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "practitioner",
+            "in": "query",
+            "description": "Practitioner that is able to provide the defined services for the organization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Logical id of this artifact",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/PractitionerRole/_search": {
+      "get": {
+        "tags": [
+          "PractitionerRole"
+        ],
+        "summary": "search-type: Search for PractitionerRole instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A practitioner's Identifier",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endpoint",
+            "in": "query",
+            "description": "Technical endpoints providing access to services operated for the practitioner with this role",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "specialty",
+            "in": "query",
+            "description": "The practitioner has this specialty at an organization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "practitioner",
+            "in": "query",
+            "description": "Practitioner that is able to provide the defined services for the organization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "_id",
+            "in": "query",
+            "description": "Logical id of this artifact",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Procedure/{id}": {
+      "get": {
+        "tags": [
+          "Procedure"
+        ],
+        "summary": "read-instance: Read Procedure instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Procedure": {
+      "get": {
+        "tags": [
+          "Procedure"
+        ],
+        "summary": "read-list: List all Procedure instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "When the procedure was performed",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A unique identifier for a procedure",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "A code to identify a  procedure",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Search by subject - a patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Procedure/_search": {
+      "get": {
+        "tags": [
+          "Procedure"
+        ],
+        "summary": "search-type: Search for Procedure instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "When the procedure was performed",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "A unique identifier for a procedure",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "A code to identify a  procedure",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Search by subject - a patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Provenance/{id}": {
+      "get": {
+        "tags": [
+          "Provenance"
+        ],
+        "summary": "read-instance: Read Provenance instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Provenance": {
+      "get": {
+        "tags": [
+          "Provenance"
+        ],
+        "summary": "read-list: List all Provenance instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Target Reference(s) (usually version specific)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "description": "Target Reference(s) (usually version specific)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Provenance/_search": {
+      "get": {
+        "tags": [
+          "Provenance"
+        ],
+        "summary": "search-type: Search for Provenance instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Target Reference(s) (usually version specific)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "description": "Target Reference(s) (usually version specific)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/RelatedPerson/{id}": {
+      "get": {
+        "tags": [
+          "RelatedPerson"
+        ],
+        "summary": "read-instance: Read RelatedPerson instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/RelatedPerson": {
+      "get": {
+        "tags": [
+          "RelatedPerson"
+        ],
+        "summary": "read-list: List all RelatedPerson instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "An Identifier of the RelatedPerson",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The patient this related person is related to",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/RelatedPerson/_search": {
+      "get": {
+        "tags": [
+          "RelatedPerson"
+        ],
+        "summary": "search-type: Search for RelatedPerson instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "An Identifier of the RelatedPerson",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The patient this related person is related to",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/ServiceRequest/{id}": {
+      "get": {
+        "tags": [
+          "ServiceRequest"
+        ],
+        "summary": "read-instance: Read ServiceRequest instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/ServiceRequest": {
+      "get": {
+        "tags": [
+          "ServiceRequest"
+        ],
+        "summary": "read-list: List all ServiceRequest instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "authored",
+            "in": "query",
+            "description": "Date request signed",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Identifiers assigned to this order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "What is being requested/ordered",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Search by subject - a patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Classification of service",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/ServiceRequest/_search": {
+      "get": {
+        "tags": [
+          "ServiceRequest"
+        ],
+        "summary": "search-type: Search for ServiceRequest instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "authored",
+            "in": "query",
+            "description": "Date request signed",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "string",
+                  "format": "date"
+                }
+              ]
+            }
+          },
+          {
+            "name": "identifier",
+            "in": "query",
+            "description": "Identifiers assigned to this order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "What is being requested/ordered",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "Search by subject - a patient",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Classification of service",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Specimen/{id}": {
+      "get": {
+        "tags": [
+          "Specimen"
+        ],
+        "summary": "read-instance: Read Specimen instance",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The resource ID",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Specimen": {
+      "get": {
+        "tags": [
+          "Specimen"
+        ],
+        "summary": "read-list: List all Specimen instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The patient the specimen comes from",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{tenantId}/Specimen/_search": {
+      "get": {
+        "tags": [
+          "Specimen"
+        ],
+        "summary": "search-type: Search for Specimen instances",
+        "description": "This is a search type",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "The name of the tenant to target",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "minimum": 1,
+              "type": "string"
+            },
+            "example": "DEFAULT"
+          },
+          {
+            "name": "patient",
+            "in": "query",
+            "description": "The patient the specimen comes from",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/fhir+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-JSON-RESOURCE"
+                }
+              },
+              "application/fhir+xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/FHIR-XML-RESOURCE"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FHIR-JSON-RESOURCE": {
+        "type": "object",
+        "description": "A FHIR resource"
+      },
+      "FHIR-XML-RESOURCE": {
+        "type": "object",
+        "description": "A FHIR resource"
+      }
+    }
+  }
+}

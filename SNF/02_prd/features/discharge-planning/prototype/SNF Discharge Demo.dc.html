@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background:#eef0f3; }
+  a { color:#a8085a; text-decoration:none; }
+  a:hover { color:#7d0443; }
+  input, textarea, select, button { font-family:inherit; }
+  input:focus, textarea:focus, select:focus { outline:none; border-color:#a8085a !important; }
+  ::selection { background:#fbe9f1; }
+  .om-scroll::-webkit-scrollbar { width:10px; height:10px; }
+  .om-scroll::-webkit-scrollbar-thumb { background:#d3d7dd; border-radius:6px; }
+</style>
+</helmet>
+<div style="font-family:Inter,sans-serif; color:#111827; -webkit-font-smoothing:antialiased; min-height:100vh; position:relative;">
+
+  <!-- ===================== DESKTOP (STAFF) ===================== -->
+  <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex; min-height:100vh; background:#eef0f3;">
+
+      <!-- SIDEBAR -->
+      <aside style="width:236px; flex:0 0 236px; background:#ffffff; border-right:1px solid #eaecef; display:flex; flex-direction:column; padding:22px 0;">
+        <div style="padding:0 22px 20px;">
+          <div style="font-size:16px; font-weight:700; letter-spacing:-0.01em; color:#111827;">Skilled Nursing</div>
+          <div style="font-size:14px; color:#a8085a; font-weight:600; margin-top:1px;">Shashi.ai</div>
+        </div>
+        <nav style="display:flex; flex-direction:column; gap:2px; padding:0 12px; overflow-y:auto;" class="om-scroll">
+          <sc-for list="{{ nav }}" as="n" hint-placeholder-count="14">
+            <div onClick="{{ n.onClick }}" style="{{ n.style }}">
+              <i data-lucide="{{ n.icon }}" style="width:17px; height:17px;"></i>
+              <span style="flex:1;">{{ n.label }}</span>
+              <sc-if value="{{ n.badge }}" hint-placeholder-val="">
+                <span style="background:#a8085a; color:#fff; font-size:13px; font-weight:700; border-radius:10px; padding:1px 7px;">{{ n.badge }}</span>
+              </sc-if>
+            </div>
+          </sc-for>
+        </nav>
+      </aside>
+
+      <!-- MAIN COLUMN -->
+      <div style="flex:1 1 auto; display:flex; flex-direction:column; min-width:0;">
+        <!-- TOP BAR -->
+        <header style="background:#fff; border-bottom:1px solid #eaecef; padding:16px 34px; display:flex; align-items:center; justify-content:space-between;">
+          <div>
+            <div style="font-size:16px; font-weight:600; color:#111827;">Good Afternoon, Admin!</div>
+            <div style="font-size:14px; color:#475467; margin-top:1px;">03/31/2026</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:16px;">
+            <div style="position:relative;"><i data-lucide="bell" style="width:19px; height:19px; color:#475467;"></i><span style="position:absolute; top:-2px; right:-2px; width:7px; height:7px; background:#a8085a; border-radius:50%;"></span></div>
+            <div style="width:32px; height:32px; border-radius:50%; background:#1f2430; color:#fff; font-size:13px; font-weight:600; display:flex; align-items:center; justify-content:center;">A</div>
+          </div>
+        </header>
+
+        <div style="flex:1 1 auto; overflow-y:auto;" class="om-scroll">
+
+          <!-- ============ RESIDENTS LIST ============ -->
+          <sc-if value="{{ isResidents }}" hint-placeholder-val="{{ true }}">
+            <div style="padding:30px 34px 60px;">
+              <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:22px;">
+                <div>
+                  <h1 style="font-size:22px; font-weight:700; margin:0; color:#111827;">Discharge Planning</h1>
+                </div>
+                <button onClick="{{ openPicker }}" style="background:#a8085a; color:#fff; border:none; border-radius:22px; padding:10px 18px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; cursor:pointer; box-shadow:0 4px 12px rgba(230,17,125,0.28);">
+                  <i data-lucide="user-plus" style="width:15px; height:15px;"></i> Start a new Safe Discharge Plan
+                </button>
+              </div>
+
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin:0 0 12px;">
+                <h2 style="font-size:16px; font-weight:700; margin:0; color:#111827;">Upcoming Discharges</h2>
+                <div style="display:flex; align-items:center; gap:9px; flex-wrap:wrap;">
+                  <sc-for list="{{ gridFilters }}" as="f" hint-placeholder-count="3">
+                    <select value="{{ f.value }}" onChange="{{ f.onChange }}" style="{{ f.style }}">
+                      <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="3">
+                        <option value="{{ o.value }}">{{ o.label }}</option>
+                      </sc-for>
+                    </select>
+                  </sc-for>
+                  <sc-if value="{{ anyGridFilter }}" hint-placeholder-val="">
+                    <button onClick="{{ clearGridFilters }}" style="background:none; border:none; color:#a8085a; font-size:14px; font-weight:600; cursor:pointer; padding:6px 2px;">Clear</button>
+                  </sc-if>
+                </div>
+              </div>
+
+              <div style="background:#fff; border:1px solid #eaecef; border-radius:12px; overflow:hidden;">
+                <div style="display:grid; grid-template-columns:{{ gridCols }}; column-gap:12px; padding:10px 20px; background:#fafbfc; border-bottom:1px solid #eef0f2; font-size:14px; font-weight:600; color:#475467;">
+                  <div onClick="{{ sortByresident }}" title="{{ residentSortTitle }}" style="{{ residentSortStyle }}">Resident / Risk <i data-lucide="{{ residentSortIcon }}" style="{{ residentSortIconStyle }}"></i></div>
+                  <div onClick="{{ sortBydischarge }}" title="{{ dischargeSortTitle }}" style="{{ dischargeSortStyle }}">Discharge Date <i data-lucide="{{ dischargeSortIcon }}" style="{{ dischargeSortIconStyle }}"></i></div>
+                  <sc-if value="{{ gridWide }}" hint-placeholder-val="{{ true }}"><div onClick="{{ sortBystay }}" title="{{ staySortTitle }}" style="{{ staySortStyle }}">Length of Stay <i data-lucide="{{ staySortIcon }}" style="{{ staySortIconStyle }}"></i></div></sc-if>
+                  <sc-if value="{{ gridWide }}" hint-placeholder-val="{{ true }}"><div onClick="{{ sortBypayer }}" title="{{ payerSortTitle }}" style="{{ payerSortStyle }}">Payer Source <i data-lucide="{{ payerSortIcon }}" style="{{ payerSortIconStyle }}"></i></div></sc-if>
+                  <div onClick="{{ sortByphysician }}" title="{{ physicianSortTitle }}" style="{{ physicianSortStyle }}">Physician <i data-lucide="{{ physicianSortIcon }}" style="{{ physicianSortIconStyle }}"></i></div>
+                  <div onClick="{{ sortByprogress }}" title="{{ progressSortTitle }}" style="{{ progressSortStyle }}">Progress <i data-lucide="{{ progressSortIcon }}" style="{{ progressSortIconStyle }}"></i></div>
+                  <div>Actions</div>
+                </div>
+                <sc-for list="{{ residents }}" as="r" hint-placeholder-count="6">
+                  <div onClick="{{ r.onDischarge }}" title="Open the Safe Discharge Plan flow" style="display:grid; grid-template-columns:{{ gridCols }}; column-gap:12px; padding:6px 20px; min-height:48px; border-bottom:1px solid #f2f4f6; align-items:center; font-size:14px; color:#374151; cursor:pointer;">
+                    <div style="display:flex; align-items:center; gap:9px; min-width:0;">
+                      <div style="min-width:0;">
+                        <div style="font-weight:400; color:#111827;">{{ r.name }}</div>
+                        <div style="display:flex; align-items:center; flex-wrap:wrap; gap:6px; row-gap:2px; margin-top:1px; min-width:0;"><span style="font-size:13px; color:#475467;">{{ r.room }}</span><span title="Readmission risk (Dashboard / IDT)" style="{{ r.riskStyle }}">{{ r.riskShort }}</span><sc-if value="{{ gridNarrow }}" hint-placeholder-val=""><span style="font-size:13px; color:#475467;">{{ r.stayPayer }}</span></sc-if></div>
+                      </div>
+                    </div>
+                    <div style="font-weight:400; color:#111827; white-space:nowrap; font-size:14px;">{{ r.dischargeDate }}</div>
+                    <sc-if value="{{ gridWide }}" hint-placeholder-val="{{ true }}"><div>{{ r.stay }}</div></sc-if>
+                    <sc-if value="{{ gridWide }}" hint-placeholder-val="{{ true }}"><div>{{ r.payer }}</div></sc-if>
+                    <div>{{ r.physician }}</div>
+                    <div title="{{ r.progressTitle }}">
+                      <div style="display:flex; gap:3px; align-items:center;">
+                        <sc-for list="{{ r.progressSegs }}" as="p" hint-placeholder-count="5">
+                          <div style="{{ p.style }}"></div>
+                        </sc-for>
+                      </div>
+                      <div style="font-size:13px; color:#475467; margin-top:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ r.progressLabel }}</div>
+                    </div>
+                    <div style="display:flex; gap:8px; justify-content:flex-end;">
+                      <button onClick="{{ r.onDelete }}" title="Delete plan" style="width:48px; height:48px; border-radius:50%; border:none; background:none; color:#a4142b; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:none; margin:-8px 0;" style-hover="background:#fdecec;"><i data-lucide="trash-2" style="width:18px; height:18px;"></i></button>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+
+              <sc-if value="{{ pickerOpen }}" hint-placeholder-val="">
+                <div style="position:fixed; inset:0; background:rgba(17,24,39,0.45); display:flex; align-items:center; justify-content:center; z-index:60;">
+                  <div style="background:#fff; border-radius:14px; width:520px; max-width:92%; max-height:80%; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 22px 60px rgba(0,0,0,0.28);">
+                    <div style="padding:18px 22px; border-bottom:1px solid #eef0f2; display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+                      <div>
+                        <div style="font-size:16px; font-weight:700; color:#111827;">Choose a resident</div>
+                        <div style="font-size:14px; color:#475467; margin-top:2px;">Select who this Safe Discharge Plan is for</div>
+                      </div>
+                      <button onClick="{{ closePicker }}" style="background:none; border:none; cursor:pointer; color:#475467; display:flex; padding:2px;"><i data-lucide="x" style="width:18px; height:18px;"></i></button>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:9px; margin:14px 22px 4px; background:#f6f7f9; border:1px solid #edeff2; border-radius:9px; padding:9px 13px;">
+                      <i data-lucide="search" style="width:15px; height:15px; color:#475467;"></i>
+                      <span style="font-size:13px; color:#475467;">Search residents by name or room no...</span>
+                    </div>
+                    <div style="overflow-y:auto; padding:8px 12px 16px;" class="om-scroll">
+                      <sc-for list="{{ pickerResidents }}" as="r" hint-placeholder-count="2">
+                        <div onClick="{{ r.onDischarge }}" style="display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:10px; cursor:pointer;" style-hover="background:#fbe9f1;">
+                          <div style="width:34px; height:34px; border-radius:50%; background:{{ r.avatarBg }}; color:#fff; font-size:14px; font-weight:600; display:flex; align-items:center; justify-content:center; flex:0 0 34px;">{{ r.initials }}</div>
+                          <div style="flex:1 1 auto;">
+                            <div style="font-size:14px; font-weight:600; color:#111827;">{{ r.name }}</div>
+                            <div style="font-size:13px; color:#475467;">Room No {{ r.room }} · {{ r.payer }}</div>
+                          </div>
+                          <i data-lucide="chevron-right" style="width:16px; height:16px; color:#98a2b3;"></i>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </div>
+              </sc-if>
+
+              <div style="margin-top:16px; font-size:14px; color:#475467;">Tip: click any <span style="color:#a8085a; font-weight:600;">resident row</span> to open the Safe Discharge Plan flow.</div>
+            </div>
+          </sc-if>
+
+          <!-- ============ DISCHARGE FLOW ============ -->
+          <sc-if value="{{ isDischarge }}" hint-placeholder-val="">
+            <div style="padding:20px 34px 14px;">
+              <!-- header row -->
+              <div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; row-gap:10px; margin-bottom:4px;">
+                <div style="display:flex; align-items:center; gap:12px; min-width:0;">
+                  <button onClick="{{ goResidents }}" style="background:none; border:none; color:#475467; cursor:pointer; display:flex; align-items:center; gap:5px; font-size:13px;"><i data-lucide="arrow-left" style="width:16px; height:16px;"></i></button>
+                  <div>
+                    <div style="display:flex; align-items:center; flex-wrap:wrap; row-gap:6px; gap:10px; min-width:0;"><h1 style="font-size:22px; font-weight:700; margin:0; color:#111827; white-space:nowrap;">{{ dischargeMenuLabel }}</h1><span style="font-size:13px; font-weight:600; color:#a8085a; background:#fdecf5; padding:2px 9px; border-radius:10px;">{{ overallStatusLabel }}</span><span style="display:flex; align-items:center; gap:5px; font-size:14px; color:#475467; white-space:nowrap;"><i data-lucide="trending-up" style="width:13px; height:13px; color:#98a2b3;"></i> Overall Progress: <strong style="color:#a8085a;">{{ progressPct }}</strong></span></div>
+                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:13px; color:#374151; margin-top:3px;"><span>{{ residentName }}</span><span>·</span><span>Discharge {{ dischargeDate }}</span><span>·</span><span>{{ destLabel }}</span><span>·</span><span style="{{ planRiskStyle }}">{{ planRiskLabel }}</span></div>
+                  </div>
+                </div>
+                <div style="display:flex; gap:10px;">
+                  <button onClick="{{ goResidents }}" style="background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:8px 14px; font-size:13px; color:#374151; display:flex; align-items:center; gap:6px; cursor:pointer;"><i data-lucide="x" style="width:15px; height:15px;"></i> Close</button>
+                </div>
+              </div>
+
+              <!-- STEPPER -->
+              <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 22px; margin-top:10px;">
+                <div style="display:flex; align-items:flex-start;">
+                  <sc-for list="{{ stepper }}" as="st" hint-placeholder-count="5">
+                    <div style="flex:1 1 0; display:flex; flex-direction:column; align-items:center; position:relative;">
+                      <sc-if value="{{ st.showBar }}" hint-placeholder-val="">
+                        <div style="position:absolute; top:16px; left:calc(-50% + 18px); right:calc(50% + 18px); height:2px; background:{{ st.barColor }};"></div>
+                      </sc-if>
+                      <div onClick="{{ st.onClick }}" style="{{ st.circleStyle }}">
+                        <sc-if value="{{ st.done }}" hint-placeholder-val=""><i data-lucide="check" style="width:16px; height:16px;"></i></sc-if>
+                        <sc-if value="{{ st.showNum }}" hint-placeholder-val="{{ true }}">{{ st.n }}</sc-if>
+                      </div>
+                      <div style="{{ st.labelStyle }}">{{ st.label }}</div>
+                      <div style="{{ st.subStyle }}">{{ st.sub }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+
+              <!-- STEP BODY MOUNT -->
+              <div style="margin-top:14px;" id="step-body">
+                <!-- STEP 1 -->
+                <sc-if value="{{ isStep1 }}" hint-placeholder-val="">
+                  <div style="display:flex; flex-direction:column; gap:10px;">
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <div style="display:flex; align-items:center; gap:9px; margin-bottom:12px;"><span style="font-size:14px; font-weight:700; color:#111827;">Resident information</span></div>
+                      <div style="display:grid; grid-template-columns:1fr 1fr; gap:11px 22px;">
+                        <div><div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Resident name *</div><div style="border:1px solid #e5e7eb; border-radius:8px; padding:10px 12px; font-size:14px; color:#374151;">{{ residentName }}</div></div>
+                        <div><div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Date of birth * <span style="color:#98a2b3; text-transform:none;">· from PCC</span></div><div style="border:1px solid #e5e7eb; border-radius:8px; padding:10px 12px; font-size:14px; color:#374151;">03/18/2026</div></div>
+                        <div><div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Attending physician * <span style="color:#98a2b3; text-transform:none;">· from PCC</span></div><div style="border:1px solid #e5e7eb; border-radius:8px; padding:10px 12px; font-size:14px; color:#374151;">{{ physicianName }}</div></div>
+                        <div><div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Order date * <span style="color:#98a2b3; text-transform:none;">· date created</span></div><div style="border:1px solid #e5e7eb; border-radius:8px; padding:10px 12px; font-size:14px; color:#374151;">03/31/2026</div></div>
+                      </div>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <div style="display:flex; align-items:center; gap:9px; margin-bottom:10px;"><span style="font-size:14px; font-weight:700; color:#111827;">Discharge details</span></div>
+                      <div style="font-size:13px; color:#475467; margin-bottom:16px;">Resident is ready for discharge per nursing and therapy recommendation.</div>
+                      <div style="display:grid; grid-template-columns:1fr 1fr; gap:11px 22px;">
+                        <div>
+                          <div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Discharge to *</div>
+                          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                            <sc-for list="{{ destinations }}" as="d" hint-placeholder-count="4">
+                              <button onClick="{{ d.onClick }}" style="{{ d.style }}">{{ d.label }}</button>
+                            </sc-for>
+                          </div>
+                        </div>
+                        <div><div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Discharge date</div><div style="position:relative;"><input type="text" inputMode="numeric" value="{{ dischargeDateText }}" onChange="{{ onDischargeDateText }}" placeholder="mm/dd/yyyy" style="width:100%; box-sizing:border-box; border:1px solid #e5e7eb; border-radius:8px; padding:9px 38px 9px 12px; font-size:14px; color:#374151; font-family:inherit; background:#fff;" /><i data-lucide="calendar" style="width:15px; height:15px; color:#475467; position:absolute; right:12px; top:11px; pointer-events:none;"></i><input type="date" value="{{ dischargeDateISO }}" onChange="{{ onDischargeDateChange }}" aria-label="Pick discharge date" style="position:absolute; right:0; top:0; width:38px; height:100%; opacity:0; cursor:pointer;" /></div></div>
+                      </div>
+                      <sc-if value="{{ showHomeAddress }}" hint-placeholder-val="{{ true }}">
+                        <div style="margin-top:16px;">
+                          <div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Destination address <span style="color:#98a2b3; font-weight:500; text-transform:none; letter-spacing:0;">{{ addressHint }}</span></div>
+                          <div style="position:relative;">
+                            <i data-lucide="search" style="width:15px;height:15px;color:#475467;position:absolute;left:11px;top:11px;"></i>
+                            <input onInput="{{ onHomeAddress }}" onFocus="{{ onAddressFocus }}" onBlur="{{ onAddressBlur }}" value="{{ homeAddress }}" placeholder="Search an address on Google Maps" style="width:100%; box-sizing:border-box; border:1px solid #e5e7eb; border-radius:8px; padding:10px 12px 10px 33px; font-size:14px; color:#374151; background:#fafbfc;" />
+                            <sc-if value="{{ showSuggestions }}" hint-placeholder-val="">
+                              <div style="position:absolute; z-index:20; top:calc(100% + 4px); left:0; right:0; background:#fff; border:1px solid #e5e7eb; border-radius:9px; box-shadow:0 8px 24px rgba(16,24,40,0.12); overflow:hidden;">
+                                <sc-for list="{{ addressSuggestions }}" as="a" hint-placeholder-count="3">
+                                  <div onMouseDown="{{ a.onPick }}" style="display:flex; gap:9px; align-items:flex-start; padding:9px 12px; cursor:pointer; border-bottom:1px solid #f2f4f7;" style-hover="background:#f8fafc;">
+                                    <i data-lucide="map-pin" style="width:14px;height:14px;color:#a8085a;margin-top:2px;flex:none;"></i>
+                                    <div>
+                                      <div style="font-size:13px; color:#111827; font-weight:500;">{{ a.main }}</div>
+                                      <div style="font-size:13px; color:#475467;">{{ a.secondary }}</div>
+                                    </div>
+                                  </div>
+                                </sc-for>
+                                <div style="display:flex; align-items:center; gap:6px; padding:7px 12px; font-size:13px; color:#475467; background:#fbfcfd;">
+                                  <i data-lucide="map" style="width:12px;height:12px;"></i> Suggestions powered by Google Maps
+                                </div>
+                              </div>
+                            </sc-if>
+                          </div>
+                          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:6px;">
+                            <div style="font-size:13px; color:#475467;">Prefilled from the resident record — search or edit as needed.</div>
+                            <a href="{{ mapsUrl }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:5px; font-size:13px; font-weight:600; color:#a8085a; text-decoration:none; flex:none;"><i data-lucide="external-link" style="width:13px;height:13px;"></i> View on Google Maps</a>
+                          </div>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{ showForm602 }}" hint-placeholder-val="">
+                        <div onClick="{{ openForm602 }}" style="margin-top:14px; background:#fff8ed; border:1px solid #f6e3bf; border-radius:9px; padding:13px 15px; display:flex; align-items:center; gap:11px; cursor:pointer;" style-hover="background:#fef3e0; border-color:#eccf95;">
+                          <div style="width:34px; height:34px; border-radius:8px; background:#fff; border:1px solid #f0dcb6; display:flex; align-items:center; justify-content:center; flex:none;"><i data-lucide="file-text" style="width:17px;height:17px;color:#7a4a06;"></i></div>
+                          <div style="flex:1; min-width:0;">
+                            <div style="font-size:13px; font-weight:600; color:#7a4a06;">Form 602 — Physician's Report for Community Care Facilities</div>
+                            <div style="font-size:13px; color:#7a4a06;">LIC 602 A · Required for ALF destination · Generated for physician signature</div>
+                          </div>
+                          <span style="display:inline-flex; align-items:center; gap:5px; font-size:13px; font-weight:600; color:#a8085a; flex:none;">Open <i data-lucide="external-link" style="width:13px;height:13px;"></i></span>
+                        </div>
+                      </sc-if>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <div style="display:flex; align-items:center; gap:9px; margin-bottom:6px;"><span style="font-size:14px; font-weight:700; color:#111827;">Required home services</span></div>
+                      <div style="display:flex; flex-direction:column;">
+                        <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
+                          <div onClick="{{ s.onClick }}" style="display:flex; align-items:flex-start; gap:12px; padding:13px 4px; border-bottom:1px solid #f2f4f6; cursor:pointer;">
+                            <div style="{{ s.boxStyle }}"><sc-if value="{{ s.checked }}" hint-placeholder-val=""><i data-lucide="check" style="width:13px;height:13px;"></i></sc-if></div>
+                            <div><div style="font-size:14px; font-weight:600; color:#374151;">{{ s.name }}</div><div style="font-size:14px; color:#475467; margin-top:1px;">{{ s.desc }}</div></div>
+                          </div>
+                          <sc-if value="{{ s.showSub }}" hint-placeholder-val="">
+                            <div style="padding:2px 4px 14px 34px;">
+                              <div style="background:#f9fafb; border:1px solid #eef0f2; border-radius:11px; padding:14px 16px;">
+                                <div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:9px;">Skilled nursing — specify location &amp; instructions (Optional)</div>
+                                <textarea onInput="{{ s.onSnInstructions }}" placeholder="e.g., Sacral decubitus ulcer Stage II — clean with normal saline, apply hydrocolloid dressing…" style="width:100%; box-sizing:border-box; min-height:70px; resize:vertical; border:1px solid #e5e7eb; border-radius:9px; padding:11px 13px; font-size:13px; color:#374151; background:#fff;"></textarea>
+                              </div>
+                            </div>
+                          </sc-if>
+                        </sc-for>
+                      </div>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <div style="display:flex; align-items:center; gap:9px; margin-bottom:11px;"><span style="font-size:14px; font-weight:700; color:#111827;">Additional orders &amp; follow-up</span></div>
+                      <div style="display:flex; flex-direction:column;">
+                        <sc-for list="{{ addlOrders }}" as="o" hint-placeholder-count="2">
+                          <div onClick="{{ o.onClick }}" style="display:flex; align-items:flex-start; gap:12px; padding:13px 4px; border-bottom:1px solid #f2f4f6; cursor:pointer;">
+                            <div style="{{ o.box }}"><sc-if value="{{ o.checked }}" hint-placeholder-val=""><i data-lucide="check" style="width:13px;height:13px;"></i></sc-if></div>
+                            <div><div style="font-size:14px; font-weight:600; color:#374151;">{{ o.name }}</div><div style="font-size:14px; color:#475467; margin-top:1px;">{{ o.desc }}</div></div>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <div style="display:flex; align-items:center; gap:9px; margin-bottom:10px;"><span style="font-size:14px; font-weight:700; color:#111827;">Additional notes</span></div>
+                      <textarea onInput="{{ onNotes }}" style="width:100%; box-sizing:border-box; min-height:90px; resize:vertical; border:1px solid #e5e7eb; border-radius:9px; padding:12px 14px; font-size:14px; color:#374151; background:#fafbfc;"></textarea>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <!-- STEP 2 -->
+                <sc-if value="{{ isStep2 }}" hint-placeholder-val="">
+                  <div style="display:flex; flex-direction:column; gap:10px;">
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <div style="font-size:14px; font-weight:600; color:#374151;">Home Health Agencies <span style="font-weight:400; color:#475467; font-size:14px;">· referral sent via Fax</span></div>
+                      <div style="font-size:13px; font-weight:600; color:#475467; margin:14px 0 8px;">Select agencies *</div>
+                      <div style="display:flex; gap:9px; flex-wrap:wrap;">
+                        <sc-for list="{{ agencies }}" as="a" hint-placeholder-count="4">
+                          <button onClick="{{ a.onClick }}" style="{{ a.style }}"><sc-if value="{{ a.selected }}" hint-placeholder-val=""><i data-lucide="check" style="width:13px;height:13px;"></i></sc-if>{{ a.name }}</button>
+                        </sc-for>
+                      </div>
+                      <div style="font-size:13px; color:#475467; margin-top:9px;">All uploaded referral documents will be faxed to the selected agencies.</div>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;"><div style="font-size:14px; font-weight:600; color:#374151;">Referral Documents <span style="color:#0f5f33; font-weight:600; margin-left:6px;">{{ reportsUploadedLabel }}</span></div><div style="font-size:14px; color:#0f5f33; display:flex; align-items:center; gap:5px;"><i data-lucide="check-circle-2" style="width:14px;height:14px;"></i> All changes auto-saved</div></div>
+                      <div>
+                        <div style="display:grid; grid-template-columns:2.05fr 1.7fr 0.6fr 1.15fr; padding:9px 6px; font-size:13px; font-weight:600; color:#475467; border-bottom:1px solid #eef0f2;"><div>Document Name</div><div>File</div><div></div><div style="text-align:right;">Actions</div></div>
+                        <sc-for list="{{ reports }}" as="r" hint-placeholder-count="5">
+                          <div style="display:grid; grid-template-columns:2.05fr 1.7fr 0.6fr 1.15fr; align-items:center; padding:12px 6px; border-bottom:1px solid #f4f6f7; font-size:13px;">
+                            <div style="{{ r.nameStyle }}"><div onClick="{{ r.onToggle }}" style="{{ r.boxStyle }}" title="{{ r.lockTitle }}"><i data-lucide="check" style="width:11px;height:11px;"></i></div><span onClick="{{ r.onView }}" style="cursor:pointer; white-space:nowrap; text-decoration:underline; text-decoration-color:#e0c3d5; text-underline-offset:2px;">{{ r.name }}</span><span style="{{ r.requiredStyle }}">Required</span></div>
+                            <div style="display:flex; align-items:center; gap:8px; color:#374151; min-width:0;">
+                              <i data-lucide="file-text" style="width:15px;height:15px;color:#a8085a;flex:none;"></i>
+                              <span>{{ r.file }}</span>
+                            </div>
+                            <div style="color:#475467; font-size:14px;">{{ r.size }}</div>
+                            <div style="display:flex; gap:10px; justify-content:flex-end; align-items:center; color:#475467;">
+                              <sc-if value="{{ r.canUploadRow }}" hint-placeholder-val="{{ true }}">
+                                <div onClick="{{ openUpload }}" title="Upload" style="display:inline-flex; align-items:center; gap:5px; border:1px solid #e0c3d5; background:#fdf7fb; color:#a8085a; border-radius:7px; padding:3px 8px; font-size:13px; font-weight:600; cursor:pointer;"><i data-lucide="upload" style="width:11px;height:11px;"></i> Upload</div>
+                              </sc-if>
+                              <i onClick="{{ r.onDelete }}" data-lucide="trash-2" title="Delete" style="width:14px;height:14px;color:#a4142b;cursor:pointer;"></i>
+                            </div>
+                          </div>
+                        </sc-for>
+                      </div>
+                      <div onClick="{{ openUpload }}" style="display:inline-flex; align-items:center; gap:9px; border:1.5px dashed #e0c3d5; background:#fdf7fb; border-radius:10px; padding:9px 14px; cursor:pointer; margin-top:14px;" style-hover="background:#fbeef5;">
+                        <div style="width:26px; height:26px; border-radius:50%; background:#fdecf5; display:flex; align-items:center; justify-content:center; color:#a8085a; flex:none;"><i data-lucide="upload" style="width:14px;height:14px;"></i></div>
+                        <div><div style="font-size:14px; font-weight:600; color:#374151;">Upload additional documents</div><div style="font-size:13px; color:#98a2b3;">PDF, JPG, PNG · or drag &amp; drop</div></div>
+                      </div>
+                    </div>
+
+                    <sc-if value="{{ showFaxStatus }}" hint-placeholder-val="">
+                      <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+                          <div onClick="{{ toggleFaxStatus }}" style="display:flex; align-items:center; gap:10px; cursor:pointer; flex-wrap:wrap;">
+                            <i data-lucide="{{ faxChevron }}" style="width:16px;height:16px;color:#475467;"></i>
+                            <div style="font-size:14px; font-weight:600; color:#374151;">Referral Packet Delivery Status</div>
+                            <div style="background:#eafaf0; border:1px solid #bfe8cd; border-radius:20px; padding:4px 11px; font-size:13px; font-weight:600; color:#0f5f33; display:flex; align-items:center; gap:6px; white-space:nowrap;"><i data-lucide="check-circle-2" style="width:13px;height:13px;"></i> Faxed to {{ agencyCountLabel }}</div>
+                            <div style="{{ faxSummaryStyle }}">{{ faxSummary }}</div>
+                          </div>
+                          <sc-if value="{{ faxStatusExpanded }}" hint-placeholder-val="">
+                            <button onClick="{{ retryAll }}" style="background:#fff; border:1px solid #e5e7eb; color:#374151; border-radius:9px; padding:8px 14px; font-size:14px; font-weight:600; display:flex; align-items:center; gap:7px; cursor:pointer;"><i data-lucide="refresh-cw" style="width:14px;height:14px;"></i> Retry All Agencies</button>
+                          </sc-if>
+                        </div>
+                        <sc-if value="{{ faxStatusExpanded }}" hint-placeholder-val="">
+                        <div style="margin-top:14px;">
+                          <div style="display:grid; grid-template-columns:2fr 1.1fr 1fr 0.8fr; padding:9px 6px; font-size:13px; font-weight:600; color:#475467; border-bottom:1px solid #eef0f2;"><div>Agency</div><div>Last Attempt</div><div>Status</div><div style="text-align:right;">Action</div></div>
+                          <sc-for list="{{ faxAgencyRows }}" as="a" hint-placeholder-count="2">
+                            <div style="display:grid; grid-template-columns:2fr 1.1fr 1fr 0.8fr; align-items:center; padding:11px 6px; border-bottom:1px solid #f4f6f7; font-size:13px;">
+                              <div style="display:flex; align-items:center; gap:8px; color:#374151; font-weight:500;"><i data-lucide="building-2" style="width:15px;height:15px;color:#a8085a;"></i> {{ a.name }}</div>
+                              <div style="color:#475467; font-size:14px;">{{ a.ts }}</div>
+                              <div><span style="{{ a.pill }}"><i data-lucide="{{ a.icon }}" style="width:12px;height:12px;"></i> {{ a.status }}</span></div>
+                              <div style="display:flex; justify-content:flex-end;">
+                                <button onClick="{{ a.onAction }}" style="{{ a.actionStyle }}"><i data-lucide="{{ a.actionIcon }}" style="width:12px;height:12px;"></i> {{ a.actionLabel }}</button>
+                              </div>
+                            </div>
+                          </sc-for>
+                        </div>
+                        </sc-if>
+                      </div>
+                    </sc-if>
+
+                  </div>
+                </sc-if>
+
+                <!-- STEP 3 -->
+                <sc-if value="{{ isStep3 }}" hint-placeholder-val="">
+                  <div style="display:flex; flex-direction:column; gap:10px;">
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <sc-if value="{{ anyDropdownOpen }}" hint-placeholder-val="">
+                        <div onClick="{{ closeDropdowns }}" style="position:fixed; inset:0; z-index:19;"></div>
+                      </sc-if>
+                      <div style="display:flex; align-items:center; gap:8px; font-size:16px; font-weight:700; color:#111827; margin-bottom:12px;"><i data-lucide="calendar-clock" style="width:18px;height:18px;color:#a8085a;"></i> Schedule Discharge Planning Meeting</div>
+                      <div style="display:grid; grid-template-columns:1.05fr 0.85fr 0.95fr 1.15fr; gap:11px 16px;">
+                        <div style="position:relative;">
+                          <div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Family members</div>
+                          <div onClick="{{ toggleFamilyList }}" style="border:1px solid #e5e7eb; border-radius:8px; min-height:40px; box-sizing:border-box; padding:7px 10px; display:flex; align-items:center; gap:5px; flex-wrap:wrap; cursor:pointer;">
+                            <sc-for list="{{ familyChips }}" as="c" hint-placeholder-count="0"><span style="background:#fdecf5; color:#a8085a; font-size:13px; padding:3px 8px; border-radius:12px;">{{ c.name }}</span></sc-for>
+                            <sc-if value="{{ familyEmpty }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px; color:#98a2b3; white-space:nowrap;">Select members</span></sc-if>
+                            <i data-lucide="chevron-down" style="width:15px;height:15px;color:#98a2b3;margin-left:auto;"></i>
+                          </div>
+                          <sc-if value="{{ familyOpen }}" hint-placeholder-val="">
+                            <div style="position:absolute; z-index:20; top:100%; left:0; right:0; margin-top:5px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; box-shadow:0 12px 28px rgba(17,24,39,0.14); padding:5px; max-height:210px; overflow:auto;">
+                              <sc-for list="{{ familyOptions }}" as="o" hint-placeholder-count="4">
+                                <div onClick="{{ o.onClick }}" style="display:flex; align-items:center; gap:9px; padding:8px 9px; border-radius:7px; cursor:pointer; font-size:13px; color:#374151;" style-hover="background:#faf7f9;">
+                                  <div style="{{ o.boxStyle }}"><sc-if value="{{ o.selected }}" hint-placeholder-val=""><i data-lucide="check" style="width:11px;height:11px;"></i></sc-if></div>
+                                  <div style="flex:1;">{{ o.name }}</div><div style="font-size:13px; color:#98a2b3;">{{ o.rel }}</div>
+                                </div>
+                              </sc-for>
+                            </div>
+                          </sc-if>
+                        </div>
+                        <div style="position:relative; grid-column:span 3;">
+                          <div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Care team *</div>
+                          <div onClick="{{ toggleStaffList }}" style="{{ staffBoxStyle }}">
+                            <sc-for list="{{ staffChips }}" as="c" hint-placeholder-count="0"><span style="background:#eef2ff; color:#1d4ed8; font-size:13px; padding:3px 8px; border-radius:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:150px; flex:0 0 auto;">{{ c.name }}</span></sc-for>
+                            <sc-if value="{{ staffOverflow }}" hint-placeholder-val=""><span style="background:#e8ebf5; color:#3f4b63; font-size:13px; font-weight:600; padding:3px 8px; border-radius:12px; white-space:nowrap; flex:none;" title="{{ staffOverflowTitle }}">{{ staffOverflow }}</span></sc-if>
+                            <sc-if value="{{ staffEmpty }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px; color:#98a2b3;">Select care team</span></sc-if>
+                            <i data-lucide="chevron-down" style="width:15px;height:15px;color:#98a2b3;margin-left:auto;flex:none;"></i>
+                          </div>
+                          <sc-if value="{{ errStaff }}" hint-placeholder-val=""><div style="font-size:13px; color:#a4142b; margin-top:5px;">{{ errStaff }}</div></sc-if>
+                          <sc-if value="{{ staffOpen }}" hint-placeholder-val="">
+                            <div style="position:absolute; z-index:20; top:100%; left:0; right:0; margin-top:5px; background:#fff; border:1px solid #e5e7eb; border-radius:10px; box-shadow:0 12px 28px rgba(17,24,39,0.14); padding:5px; max-height:210px; overflow:auto;">
+                              <sc-for list="{{ staffOptions }}" as="o" hint-placeholder-count="5">
+                                <div onClick="{{ o.onClick }}" style="display:flex; align-items:center; gap:9px; padding:8px 9px; border-radius:7px; cursor:pointer; font-size:13px; color:#374151;" style-hover="background:#f6f7fb;">
+                                  <div style="{{ o.boxStyle }}"><sc-if value="{{ o.selected }}" hint-placeholder-val=""><i data-lucide="check" style="width:11px;height:11px;"></i></sc-if></div>
+                                  <div style="flex:1;">{{ o.name }}</div><div style="font-size:13px; color:#98a2b3;">{{ o.rel }}</div>
+                                </div>
+                              </sc-for>
+                            </div>
+                          </sc-if>
+                        </div>
+                        <div><div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Date *</div><div style="position:relative;"><input type="text" inputMode="numeric" value="{{ meetingDateText }}" onChange="{{ onMeetingDateText }}" placeholder="mm/dd/yyyy" style="width:100%; box-sizing:border-box; border:1px solid #e5e7eb; border-radius:8px; padding:9px 38px 9px 12px; font-size:14px; color:#374151; font-family:inherit; background:#fff;" /><i data-lucide="calendar" style="width:15px; height:15px; color:#475467; position:absolute; right:12px; top:11px; pointer-events:none;"></i><input type="date" value="{{ meetingDateISO }}" min="{{ minMeetingDate }}" onChange="{{ onMeetingDateChange }}" aria-label="Pick meeting date" style="position:absolute; right:0; top:0; width:38px; height:100%; opacity:0; cursor:pointer;" /></div>
+                          <sc-if value="{{ errDate }}" hint-placeholder-val=""><div style="font-size:13px; color:#a4142b; margin-top:5px;">{{ errDate }}</div></sc-if>
+                        </div>
+                        <div><div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Time *</div><select value="{{ meetingTime }}" onChange="{{ onMeetingTimeChange }}" style="width:100%; box-sizing:border-box; border:1px solid #e5e7eb; border-radius:8px; padding:9px 12px; font-size:14px; color:#374151; font-family:inherit; background:#fff;">
+                          <option value="">Select time</option>
+                          <sc-for list="{{ timeOptions }}" as="t" hint-placeholder-count="4"><option value="{{ t }}">{{ t }}</option></sc-for>
+                        </select>
+                          <sc-if value="{{ errTime }}" hint-placeholder-val=""><div style="font-size:13px; color:#a4142b; margin-top:5px;">{{ errTime }}</div></sc-if>
+                        </div>
+                        <div><div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Duration *</div><select value="{{ meetDuration }}" onChange="{{ onMeetDurationChange }}" style="width:100%; box-sizing:border-box; border:1px solid #e5e7eb; border-radius:8px; padding:9px 12px; font-size:14px; color:#374151; font-family:inherit; background:#fff;">
+                          <option value="">Select duration</option>
+                          <option value="15 minutes">15 minutes</option>
+                          <option value="30 minutes">30 minutes</option>
+                          <option value="45 minutes">45 minutes</option>
+                          <option value="1 hour">1 hour</option>
+                        </select>
+                          <sc-if value="{{ errDuration }}" hint-placeholder-val=""><div style="font-size:13px; color:#a4142b; margin-top:5px;">{{ errDuration }}</div></sc-if>
+                        </div>
+                        <div><div style="font-size:14px; font-weight:600; color:#475467; margin-bottom:6px;">Where</div><select value="{{ meetingWhere }}" onChange="{{ onMeetingWhereChange }}" style="width:100%; box-sizing:border-box; border:1px solid #e5e7eb; border-radius:8px; padding:9px 12px; font-size:14px; color:#374151; font-family:inherit; background:#fff;">
+                          <option value="">Select location</option>
+                          <option value="Facility conference room">Facility conference room</option>
+                          <option value="Phone call">Phone call</option>
+                          <option value="Patient's room">Patient's room</option>
+                        </select></div>
+                      </div>
+                      <div style="margin-top:16px;"><div style="font-size:13px; font-weight:600; color:#475467; margin-bottom:6px;">Notes</div><textarea value="{{ agendaText }}" onInput="{{ onAgendaText }}" style="width:100%; box-sizing:border-box; min-height:78px; resize:vertical; border:1px solid #e5e7eb; border-radius:9px; padding:11px 13px; font-size:13px; color:#374151; background:#fafbfc;"></textarea></div>
+                      <div style="margin-top:14px; display:flex; align-items:center; gap:10px;">
+                        <span style="font-size:13px; font-weight:600; color:#475467;">Meeting status *</span>
+                        <span style="{{ meetingBadgeStyle }}"><i data-lucide="calendar-check" style="width:13px;height:13px;"></i> {{ meetingStatusLabel }}</span>
+                        <button onClick="{{ scheduleMeeting }}" style="margin-left:auto; {{ scheduleBtnStyle }}">{{ scheduleBtnLabel }}</button>
+                      </div>
+
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <div style="font-size:14px; font-weight:700; color:#111827; margin-bottom:4px;">Meeting Details <span style="font-weight:400; color:#475467; font-size:14px;">(after conference is completed)</span></div>
+                      <div style="margin-top:12px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:8px;">
+                          <div style="display:flex; align-items:center; gap:7px; font-size:14px; font-weight:700; color:#1d4ed8;"><i data-lucide="sparkles" style="width:15px;height:15px;"></i> Meeting Summary</div>
+                          <sc-if value="{{ meetingCompleted }}" hint-placeholder-val="">
+                            <span style="font-size:13px; color:#475467; background:#eaf1fb; padding:2px 8px; border-radius:9px;">Auto-generated · editable</span>
+                          </sc-if>
+                          <sc-if value="{{ meetingPending }}" hint-placeholder-val="{{ true }}">
+                            <button onClick="{{ markMeetingComplete }}" style="background:#fff; border:1px dashed #c3c9d2; color:#475467; border-radius:8px; padding:6px 12px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px; cursor:pointer;"><i data-lucide="check-circle-2" style="width:13px;height:13px;"></i> Demo: mark meeting completed</button>
+                          </sc-if>
+                        </div>
+                        <sc-if value="{{ meetingCompleted }}" hint-placeholder-val="">
+                          <textarea onInput="{{ onMeetingSummary }}" value="{{ meetingSummary }}" placeholder="Review and edit the meeting summary..." style="width:100%; box-sizing:border-box; min-height:130px; resize:vertical; border:1px solid #dbeafe; border-radius:11px; padding:14px 16px; font-size:14px; color:#374151; line-height:1.6; background:#f7fbff;"></textarea>
+                        </sc-if>
+                        <sc-if value="{{ meetingPending }}" hint-placeholder-val="{{ true }}">
+                          <div style="border:1px dashed #dbe1e8; border-radius:11px; padding:20px 18px; text-align:center; background:#fafbfc;">
+                            <i data-lucide="clock" style="width:19px;height:19px;color:#98a2b3;"></i>
+                            <div style="font-size:14px; color:#475467; margin-top:7px; line-height:1.55;">The meeting summary will be filled in once the discharge planning meeting is completed.</div>
+                          </div>
+                        </sc-if>
+                      </div>
+                      <sc-if value="{{ meetingCompleted }}" hint-placeholder-val="">
+                        <div style="margin-top:12px; border:1px solid #eef0f2; border-radius:10px; padding:11px 15px; display:flex; align-items:center; justify-content:space-between;">
+                          <div onClick="{{ toggleTranscript }}" style="display:flex; align-items:center; gap:8px; cursor:pointer; flex:1;"><i data-lucide="{{ transcriptChevron }}" style="width:16px;height:16px;color:#475467;"></i><span style="font-size:13px; font-weight:600; color:#374151;">Transcript</span></div>
+                          <button onClick="{{ downloadTranscript }}" style="display:flex; align-items:center; gap:6px; background:#f7fbff; border:1px solid #dbeafe; color:#1d4ed8; border-radius:8px; padding:6px 12px; font-size:14px; font-weight:600; cursor:pointer;"><i data-lucide="download" style="width:14px;height:14px;"></i> Download</button>
+                        </div>
+                        <sc-if value="{{ showTranscript }}" hint-placeholder-val="">
+                          <div style="border:1px solid #eef0f2; border-top:none; border-radius:0 0 10px 10px; padding:14px 16px; font-size:14px; color:#475467; line-height:1.7; background:#fafbfc; white-space:pre-line;">{{ transcriptText }}</div>
+                        </sc-if>
+                      </sc-if>
+                      <sc-if value="{{ meetingPending }}" hint-placeholder-val="{{ true }}">
+                        <div style="margin-top:12px; border:1px dashed #dbe1e8; border-radius:10px; padding:14px 16px; display:flex; align-items:center; gap:9px; background:#fafbfc;">
+                          <i data-lucide="clock" style="width:15px;height:15px;color:#98a2b3;flex:none;"></i>
+                          <span style="font-size:14px; color:#475467;">The transcript will be available once the discharge planning meeting is completed.</span>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <!-- STEP 4 -->
+                <sc-if value="{{ isStep4 }}" hint-placeholder-val="">
+                  <div style="display:flex; flex-direction:column; gap:10px;">
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <div style="font-size:14px; font-weight:600; color:#374151; margin-bottom:14px;">Discharge Medication List</div>
+                      <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border:1px solid #eef0f2; border-radius:10px;">
+                        <div style="display:flex; align-items:center; gap:10px;"><i data-lucide="file-text" style="width:20px;height:20px;color:#a8085a;"></i><div><div style="font-size:13px; font-weight:600; color:#374151;">Med_List_{{ residentLastName }}.pdf</div><div style="font-size:13px; color:#98a2b3;">PDF · 156 KB</div></div></div>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                          <sc-if value="{{ medSigned }}" hint-placeholder-val=""><span style="background:#eafaf0; color:#0f5f33; font-size:13px; font-weight:600; padding:4px 11px; border-radius:12px; display:flex; align-items:center; gap:5px;"><i data-lucide="check-circle-2" style="width:13px;height:13px;"></i> Approved by Physician</span></sc-if>
+                          <div style="display:flex; gap:9px; color:#475467;"><i data-lucide="eye" style="width:16px;height:16px;cursor:pointer;"></i><i data-lucide="pencil" style="width:15px;height:15px;cursor:pointer;"></i></div>
+                        </div>
+                      </div>
+                      <div style="margin-top:16px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                        <button onClick="{{ downloadMedList }}" style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e5e7eb;color:#374151;border-radius:9px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;"><i data-lucide="download" style="width:15px;height:15px;"></i> Download List</button>
+                        <button onClick="{{ sendMedForSign }}" style="{{ sendMedBtnStyle }}"><i data-lucide="{{ sendMedIcon }}" style="width:15px;height:15px;"></i> {{ sendMedLabel }}</button>
+                      </div>
+                    </div>
+
+                    <!-- PHARMACY -->
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:4px;">
+                        <div style="font-size:14px; font-weight:600; color:#374151;">Pharmacy</div>
+                        <sc-if value="{{ pharmacySent }}" hint-placeholder-val=""><span style="background:#eafaf0; color:#0f5f33; font-size:13px; font-weight:600; padding:4px 11px; border-radius:12px; display:flex; align-items:center; gap:5px;"><i data-lucide="check-circle-2" style="width:13px;height:13px;"></i> Faxed to pharmacy</span></sc-if>
+                      </div>
+                      
+                      <div style="{{ pharmacySearchLabelStyle }}">Search pharmacy *</div>
+                      <div style="position:relative; max-width:460px;">
+                        <div style="{{ pharmacySearchBoxStyle }}">
+                          <i data-lucide="search" style="width:15px; height:15px; color:#98a2b3;"></i>
+                          <input value="{{ pharmacyQuery }}" onInput="{{ onPharmacyInput }}" onFocus="{{ onPharmacyFocus }}" disabled="{{ pharmacyNotRequired }}" placeholder="{{ pharmacySearchPlaceholder }}" style="{{ pharmacySearchInputStyle }}" />
+                        </div>
+                        <sc-if value="{{ showPharmacySuggestions }}" hint-placeholder-val="">
+                          <div style="position:absolute; top:calc(100% + 4px); left:0; right:0; background:#fff; border:1px solid #eaecef; border-radius:10px; box-shadow:0 12px 30px rgba(0,0,0,0.12); overflow:hidden; z-index:20;">
+                            <sc-for list="{{ pharmacySuggestions }}" as="p" hint-placeholder-count="3">
+                              <div onClick="{{ p.onPick }}" style="padding:9px 13px; cursor:pointer; border-bottom:1px solid #f4f5f7;">
+                                <div style="font-size:13px; font-weight:600; color:#111827;">{{ p.name }}</div>
+                                <div style="font-size:13px; color:#475467;">{{ p.detail }}</div>
+                              </div>
+                            </sc-for>
+                          </div>
+                        </sc-if>
+                      </div>
+
+                      <sc-if value="{{ pharmacyChosen }}" hint-placeholder-val="">
+                        <div style="display:flex; align-items:center; gap:10px; margin-top:12px; padding:10px 13px; border:1px solid #eef0f2; border-radius:10px; background:#fafbfc;">
+                          <i data-lucide="building-2" style="width:15px; height:15px; color:#98a2b3;"></i>
+                          <div style="flex:1 1 auto; min-width:0;">
+                            <div style="font-size:13px; font-weight:600; color:#111827;">{{ pharmacyName }}</div>
+                            <div style="font-size:13px; color:#475467;">{{ pharmacyDetail }}</div>
+                          </div>
+                          <button onClick="{{ clearPharmacy }}" style="background:none; border:none; cursor:pointer; color:#475467; display:flex;"><i data-lucide="x" style="width:15px; height:15px;"></i></button>
+                        </div>
+                      </sc-if>
+
+                      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:14px;">
+                        <button onClick="{{ faxToPharmacy }}" style="{{ faxPharmacyBtnStyle }}"><i data-lucide="printer" style="width:15px;height:15px;"></i> {{ faxPharmacyLabel }}</button>
+                      </div>
+
+                      <div onClick="{{ togglePharmacyNotRequired }}" style="display:flex; align-items:center; gap:10px; cursor:pointer; margin-top:12px; font-size:14px; color:#374151; font-weight:600;"><div style="{{ pharmacyNotReqBox }}"><sc-if value="{{ pharmacyNotRequired }}" hint-placeholder-val=""><i data-lucide="check" style="width:12px;height:12px;"></i></sc-if></div> Not required — orders handled through another system</div>
+                    </div>
+
+                  </div>
+                </sc-if>
+
+                <!-- STEP 5 -->
+                <sc-if value="{{ isStep5 }}" hint-placeholder-val="">
+                  <div style="display:flex; flex-direction:column; gap:10px;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                      <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                        <div style="font-size:13px; font-weight:700; color:#a8085a; margin-bottom:14px;">Documentation Checklist</div>
+                        <div style="display:flex; flex-direction:column; gap:11px;">
+                          <sc-for list="{{ docChecklist }}" as="c" hint-placeholder-count="4"><div onClick="{{ c.onClick }}" style="display:flex; align-items:center; gap:10px; cursor:pointer;"><div style="{{ c.box }}"><sc-if value="{{ c.checked }}" hint-placeholder-val=""><i data-lucide="check" style="width:12px;height:12px;"></i></sc-if></div><span style="font-size:13px; color:#374151;">{{ c.label }}</span></div></sc-for>
+                        </div>
+                      </div>
+                      <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                        <div style="font-size:13px; font-weight:700; color:#a8085a; margin-bottom:14px;">Resident Preparation Checklist</div>
+                        <div style="display:flex; flex-direction:column; gap:10px;">
+                          <div>
+                            <div style="font-size:13px; color:#374151; margin-bottom:8px;">DME Status *</div>
+                            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                              <sc-for list="{{ dmeStatusOptions }}" as="o" hint-placeholder-count="4"><button onClick="{{ o.onClick }}" style="{{ o.style }}">{{ o.label }}</button></sc-for>
+                            </div>
+                          </div>
+                          <sc-if value="{{ multiAgency }}" hint-placeholder-val="">
+                            <div>
+                              <div style="font-size:13px; color:#374151; margin-bottom:8px;">Home Health Agency Accepted *</div>
+                              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                                <sc-for list="{{ acceptedAgencyList }}" as="a" hint-placeholder-count="2"><button onClick="{{ a.onClick }}" style="{{ a.style }}">{{ a.name }}</button></sc-for>
+                              </div>
+                            </div>
+                          </sc-if>
+                          <div style="display:flex; flex-direction:column; gap:11px;">
+                            <sc-for list="{{ prepChecklist }}" as="c" hint-placeholder-count="4"><div onClick="{{ c.onClick }}" style="display:flex; align-items:center; gap:10px; cursor:pointer;"><div style="{{ c.box }}"><sc-if value="{{ c.checked }}" hint-placeholder-val=""><i data-lucide="check" style="width:12px;height:12px;"></i></sc-if></div><span style="font-size:13px; color:#374151;">{{ c.label }}</span></div></sc-for>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="background:#fff; border:1px solid #eaecef; border-radius:14px; padding:15px 20px;">
+                      <div style="font-size:13px; font-weight:700; color:#a8085a; margin-bottom:12px;">Additional Comments <span style="font-weight:400; color:#475467; font-size:14px;">(Optional)</span></div>
+                      <textarea style="width:100%; min-height:64px; resize:vertical; border:1px solid #e5e7eb; border-radius:9px; padding:11px 13px; font-size:13px; color:#374151; background:#fafbfc;">Resident ready for discharge. All instructions provided to caregiver.</textarea>
+                    </div>
+
+                    <sc-if value="{{ dischargeComplete }}" hint-placeholder-val="">
+                      <div style="background:#eafaf0; border:1px solid #bfe8cd; border-radius:14px; padding:18px 22px; display:flex; align-items:center; gap:10px; font-size:13px; font-weight:600; color:#0f5f33;"><i data-lucide="party-popper" style="width:18px;height:18px;"></i> Discharge complete — {{ residentName }} has been safely discharged to {{ destLabel }}.</div>
+                    </sc-if>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+            <!-- STICKY ACTION BAR -->
+            <div style="position:sticky; bottom:0; background:#fff; border-top:1px solid #eaecef; padding:14px 34px; display:flex; justify-content:flex-end; gap:12px;">
+              <button onClick="{{ goResidents }}" style="background:#fff; border:1px solid #e5e7eb; border-radius:9px; padding:10px 20px; font-size:13px; font-weight:500; color:#475467; cursor:pointer;">Cancel</button>
+              <sc-if value="{{ planSavedAt }}" hint-placeholder-val="">
+                <div style="display:flex; align-items:center; gap:6px; margin-right:auto; font-size:13px; color:#0f5f33;"><i data-lucide="check-circle-2" style="width:15px;height:15px;"></i> Saved {{ planSavedAt }}</div>
+              </sc-if>
+              <button onClick="{{ savePlan }}" style="background:#fff; border:1px solid #e5e7eb; border-radius:9px; padding:10px 20px; font-size:13px; font-weight:500; color:#374151; display:flex; align-items:center; gap:6px; cursor:pointer;"><i data-lucide="save" style="width:15px;height:15px;"></i> Save</button>
+              <sc-if value="{{ isStep1 }}" hint-placeholder-val="">
+                <button onClick="{{ printDischargeOrder }}" style="background:#fff; border:1px solid #e5e7eb; border-radius:9px; padding:10px 20px; font-size:13px; font-weight:500; color:#374151; display:flex; align-items:center; gap:6px; cursor:pointer;"><i data-lucide="printer" style="width:15px;height:15px;"></i> Print Discharge Order</button>
+              </sc-if>
+              <button onClick="{{ primaryAction }}" style="background:#a8085a; color:#fff; border:none; border-radius:9px; padding:10px 22px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; cursor:pointer; box-shadow:0 4px 12px rgba(230,17,125,0.28);">{{ primaryActionLabel }} <i data-lucide="arrow-right" style="width:15px;height:15px;"></i></button>
+            </div>
+          </sc-if>
+
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===================== PHYSICIAN MOBILE ===================== -->
+  <sc-if value="{{ isPhysician }}" hint-placeholder-val="">
+    <div style="min-height:100vh; background:#dfe3e8; display:flex; align-items:center; justify-content:center; padding:30px;">
+      <div style="width:390px; height:800px; background:#f5f6f8; border-radius:42px; border:10px solid #14171c; box-shadow:0 26px 60px rgba(0,0,0,0.32); overflow:hidden; display:flex; flex-direction:column; position:relative;">
+        <!-- status bar -->
+        <div style="padding:14px 26px 6px; display:flex; justify-content:space-between; align-items:center; font-size:13px; font-weight:600; color:#111827;"><span>9:41</span><div style="display:flex; gap:5px; align-items:center;"><i data-lucide="signal" style="width:15px;height:15px;"></i><i data-lucide="wifi" style="width:15px;height:15px;"></i><i data-lucide="battery-full" style="width:19px;height:19px;"></i></div></div>
+
+        <!-- QUEUE -->
+        <sc-if value="{{ physIsQueue }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:8px 20px 14px; display:flex; align-items:center; justify-content:space-between;"><div style="font-size:16px; font-weight:700; color:#111827;">Pending Sign</div><div style="position:relative;"><i data-lucide="bell" style="width:20px;height:20px; color:#374151;"></i><span style="position:absolute; top:-2px; right:-2px; width:7px; height:7px; background:#a8085a; border-radius:50%;"></span></div></div>
+          <div style="flex:1; overflow-y:auto; padding:6px 16px 16px; display:flex; flex-direction:column; gap:12px;" class="om-scroll">
+            <sc-for list="{{ pendingSigns }}" as="p" hint-placeholder-count="2">
+              <div onClick="{{ p.onClick }}" style="background:#fff; border-radius:16px; padding:15px 16px; box-shadow:0 3px 10px rgba(0,0,0,0.05); display:flex; gap:13px; align-items:flex-start; cursor:pointer; opacity:{{ p.opacity }};">
+                <div style="width:42px; height:42px; border-radius:12px; background:#fdecf5; color:#a8085a; display:flex; align-items:center; justify-content:center; flex:0 0 42px;"><i data-lucide="{{ p.icon }}" style="width:20px;height:20px;"></i></div>
+                <div style="flex:1;">
+                  <div style="font-size:16px; font-weight:700; color:#111827;">{{ p.resident }}</div>
+                  <div style="font-size:13px; color:#a8085a; font-weight:600; margin-top:1px;">{{ p.type }}</div>
+                  <div style="font-size:14px; color:#475467; margin-top:6px; display:flex; align-items:center; gap:5px;"><i data-lucide="calendar" style="width:12px;height:12px;"></i> {{ p.date }}</div>
+                  <div style="font-size:13px; color:#98a2b3; margin-top:2px;">Sent by: {{ p.sentBy }}</div>
+                </div>
+                <sc-if value="{{ p.signed }}" hint-placeholder-val=""><span style="font-size:13px; font-weight:600; color:#0f5f33; background:#eafaf0; padding:3px 8px; border-radius:9px;">Signed</span></sc-if>
+              </div>
+            </sc-for>
+            <sc-if value="{{ noPending }}" hint-placeholder-val="">
+              <div style="text-align:center; color:#475467; font-size:13px; padding:60px 20px;"><i data-lucide="check-circle-2" style="width:34px;height:34px; color:#98a2b3;"></i><div style="margin-top:10px;">Nothing waiting for your signature.</div><div style="font-size:14px; margin-top:4px; color:#98a2b3;">Send a document from the SNF flow (Step 1 or 4).</div></div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <!-- DETAIL -->
+        <sc-if value="{{ physIsDetail }}" hint-placeholder-val="">
+          <div style="padding:8px 16px 12px; display:flex; align-items:center; gap:10px;"><button onClick="{{ physBack }}" style="background:none; border:none; cursor:pointer; color:#374151;"><i data-lucide="arrow-left" style="width:20px;height:20px;"></i></button><div style="font-size:16px; font-weight:700; color:#111827;">{{ physDetailResident }}</div></div>
+          <div style="flex:1; overflow-y:auto; padding:0 16px 12px;" class="om-scroll">
+            <div style="background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 3px 10px rgba(0,0,0,0.05);">
+              <div style="height:8px; background:linear-gradient(90deg,#14171c 60%,#a8085a);"></div>
+              <div style="padding:16px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid #eef0f2; padding-bottom:10px;"><div><div style="font-size:13px; font-weight:700; color:#111827;">{{ physDetailType }}</div><div style="font-size:13px; color:#475467;">Generated on 03/31/2026</div></div><div style="font-size:14px; font-weight:700; color:#111827; text-align:right;">Skilled Nursing<div style="font-size:13px; color:#a8085a;">Shashi.ai</div></div></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px; margin:12px 0; font-size:13px;">
+                  <div><div style="color:#475467;">Patient Name</div><div style="font-weight:600; color:#374151;">{{ physDetailResident }}</div></div>
+                  <div><div style="color:#475467;">Room No</div><div style="font-weight:600; color:#374151;">A-101</div></div>
+                  <div><div style="color:#475467;">Date of Birth</div><div style="font-weight:600; color:#374151;">03/24/1978</div></div>
+                  <div><div style="color:#475467;">Doctor</div><div style="font-weight:600; color:#374151;">{{ physicianName }}</div></div>
+                </div>
+                <div style="font-size:13px; font-weight:700; color:#111827; margin-bottom:6px;">Current Medication Summary</div>
+                <div style="border:1px solid #eef0f2; border-radius:6px; overflow:hidden;">
+                  <div style="display:grid; grid-template-columns:1.2fr 0.9fr 1fr; background:#fafbfc; padding:6px 8px; font-size:13px; font-weight:600; color:#475467;"><div>Medicine</div><div>Dosage</div><div>Frequency</div></div>
+                  <sc-for list="{{ medRows }}" as="m" hint-placeholder-count="6"><div style="display:grid; grid-template-columns:1.2fr 0.9fr 1fr; padding:6px 8px; font-size:13px; color:#374151; border-top:1px solid #f4f6f7;"><div>{{ m.name }}</div><div>{{ m.dose }}</div><div>{{ m.freq }}</div></div></sc-for>
+                </div>
+                <sc-if value="{{ showRiskInput }}" hint-placeholder-val="">
+                  <div style="margin-top:14px; border-top:1px solid #eef0f2; padding-top:12px;">
+                    <div style="font-size:13px; font-weight:700; color:#111827;">Readmission risk</div>
+                    <div style="font-size:13px; color:#475467; margin-top:2px; line-height:1.45;">Optional — leave blank if you do not wish to assess.</div>
+                    <div style="display:flex; flex-direction:column; gap:2px; margin-top:9px;">
+                      <sc-for list="{{ riskOptions }}" as="o" hint-placeholder-count="3">
+                        <label style="{{ o.rowStyle }}">
+                          <input type="radio" name="readmit-risk" checked="{{ o.selected }}" onChange="{{ o.onSelect }}" disabled="{{ o.disabled }}" style="{{ o.inputStyle }}" />
+                          <span style="{{ o.labelStyle }}">{{ o.label }}</span>
+                          <span style="{{ o.chipStyle }}">{{ o.chipText }}</span>
+                        </label>
+                      </sc-for>
+                    </div>
+                    <sc-if value="{{ showRiskClear }}" hint-placeholder-val="">
+                      <button onClick="{{ clearRisk }}" style="margin-top:8px; background:none; border:none; padding:0; font-size:13px; font-weight:600; color:#a8085a; cursor:pointer;">Clear selection</button>
+                    </sc-if>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ physDetailSigned }}" hint-placeholder-val="">
+                  <div style="margin-top:12px; border:1px dashed #bfe8cd; background:#f4fcf7; border-radius:8px; padding:10px 12px; display:flex; align-items:center; gap:9px;"><i data-lucide="pen-tool" style="width:16px;height:16px;color:#0f5f33;"></i><div><div style="font-size:14px; font-weight:700; font-style:italic; color:#0f5f33; font-family:Georgia,serif;">{{ physicianName }}</div><div style="font-size:13px; color:#0f5f33;">Signed electronically · 03/31/2026</div></div></div>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+          <div style="padding:12px 16px 20px; display:flex; gap:12px; background:#f5f6f8;">
+            <button onClick="{{ physAddSign }}" style="flex:1; {{ addSignStyle }}"><i data-lucide="pen-tool" style="width:16px;height:16px;"></i> {{ addSignLabel }}</button>
+            <button onClick="{{ physSubmit }}" style="flex:1; {{ submitStyle }}"><i data-lucide="check" style="width:16px;height:16px;"></i> Submit</button>
+          </div>
+        </sc-if>
+
+        <!-- bottom tab bar -->
+        <div style="background:#fff; border-top:1px solid #eef0f2; padding:9px 0 16px; display:flex; justify-content:space-around;">
+          <sc-for list="{{ physTabs }}" as="t" hint-placeholder-count="4"><div style="display:flex; flex-direction:column; align-items:center; gap:3px; color:{{ t.color }};"><div style="position:relative;"><i data-lucide="{{ t.icon }}" style="width:20px;height:20px;"></i><sc-if value="{{ t.dot }}" hint-placeholder-val=""><span style="position:absolute; top:-1px; right:-3px; width:6px; height:6px; background:#a8085a; border-radius:50%;"></span></sc-if></div><span style="font-size:13px; font-weight:{{ t.weight }};">{{ t.label }}</span></div></sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ uploadOpen }}" hint-placeholder-val="">
+    <div style="position:fixed; inset:0; z-index:90; background:rgba(17,24,39,0.55); display:flex; align-items:center; justify-content:center; padding:24px;">
+      <div style="box-sizing:border-box; width:min(100%, 520px); max-height:100%; overflow:auto; background:#fff; border-radius:13px; box-shadow:0 22px 60px rgba(0,0,0,0.32); padding:24px;">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+          <div>
+            <div style="font-size:16px; font-weight:700; color:#111827;">Upload Document</div>
+            <div style="font-size:14px; color:#475467; margin-top:3px;">Choose the file, then tell us what it is.</div>
+          </div>
+          <button onClick="{{ closeUpload }}" aria-label="Close" style="background:#fff; border:1px solid #8792a5; border-radius:8px; width:30px; height:29px; display:flex; align-items:center; justify-content:center; color:#475467; cursor:pointer; flex:none;"><i data-lucide="x" style="width:15px;height:15px;"></i></button>
+        </div>
+        <div style="font-size:13px; font-weight:600; color:#475467; margin:20px 0 7px;">File *</div>
+        <label style="display:flex; align-items:center; gap:10px; border:1.5px dashed #e0c3d5; background:#fdf7fb; border-radius:10px; padding:12px 14px; cursor:pointer;">
+          <div style="width:28px; height:28px; border-radius:50%; background:#fdecf5; display:flex; align-items:center; justify-content:center; color:#a8085a; flex:none;"><i data-lucide="upload" style="width:14px;height:14px;"></i></div>
+          <div style="min-width:0;">
+            <div style="font-size:14px; font-weight:600; color:#374151;">Choose file</div>
+            <div style="font-size:13px; color:#475467; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ uploadFileLabel }}</div>
+          </div>
+          <input onChange="{{ onUploadFile }}" type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" />
+        </label>
+        <div style="font-size:13px; font-weight:600; color:#475467; margin:18px 0 7px;">Document name *</div>
+        <input onInput="{{ onUploadName }}" value="{{ uploadName }}" placeholder="Choose a file to name it automatically" style="width:100%; box-sizing:border-box; border:1px solid #e5e7eb; border-radius:9px; padding:10px 12px; font-size:13px; color:#374151; background:#fafbfc;" />
+        <div style="font-size:13px; color:#475467; margin-top:6px;">Taken from the file name — edit it, or pick a standard type below.</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:11px;">
+          <sc-for list="{{ uploadTypes }}" as="t" hint-placeholder-count="10">
+            <button onClick="{{ t.onClick }}" style="{{ t.style }}">{{ t.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:9px; margin-top:22px;">
+          <button onClick="{{ closeUpload }}" style="background:#fff; border:1px solid #8792a5; color:#374151; border-radius:9px; padding:9px 16px; font-size:14px; font-weight:600; cursor:pointer;">Cancel</button>
+          <button onClick="{{ confirmUpload }}" style="{{ uploadBtnStyle }}"><i data-lucide="upload" style="width:14px;height:14px;"></i> Add Document</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ editDocOpen }}" hint-placeholder-val="">
+    <div style="position:fixed; inset:0; z-index:90; background:rgba(17,24,39,0.55); display:flex; align-items:center; justify-content:center; padding:24px;">
+      <div style="box-sizing:border-box; width:min(100%, 460px); background:#fff; border-radius:13px; box-shadow:0 22px 60px rgba(0,0,0,0.32); padding:24px;">
+        <div style="font-size:16px; font-weight:700; color:#111827;">Edit Document</div>
+        <div style="font-size:14px; color:#475467; margin-top:3px;">Rename the document or correct its file name.</div>
+        <div style="font-size:13px; font-weight:600; color:#475467; margin:20px 0 6px;">Document name</div>
+        <input onInput="{{ onEditName }}" value="{{ editName }}" style="width:100%; box-sizing:border-box; border:1px solid #e5e7eb; border-radius:9px; padding:10px 12px; font-size:13px; color:#374151; background:#fafbfc;" />
+        <div style="font-size:13px; font-weight:600; color:#475467; margin:15px 0 6px;">File name</div>
+        <input onInput="{{ onEditFile }}" value="{{ editFile }}" style="width:100%; box-sizing:border-box; border:1px solid #e5e7eb; border-radius:9px; padding:10px 12px; font-size:13px; color:#374151; background:#fafbfc;" />
+        <div style="display:flex; justify-content:flex-end; gap:9px; margin-top:22px;">
+          <button onClick="{{ cancelEdit }}" style="background:#fff; border:1px solid #8792a5; color:#374151; border-radius:9px; padding:9px 16px; font-size:14px; font-weight:600; cursor:pointer;">Cancel</button>
+          <button onClick="{{ commitEdit }}" style="background:#a8085a; color:#fff; border:none; border-radius:9px; padding:9px 17px; font-size:14px; font-weight:600; cursor:pointer;">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ exitConfirmOpen }}" hint-placeholder-val="">
+    <div style="position:fixed; inset:0; z-index:96; background:rgba(17,24,39,0.55); display:flex; align-items:center; justify-content:center; padding:24px;">
+      <div style="box-sizing:border-box; width:min(100%, 440px); background:#fff; border-radius:13px; box-shadow:0 22px 60px rgba(0,0,0,0.32); padding:24px;">
+        <div style="display:flex; gap:13px; align-items:flex-start;">
+          <div style="width:36px; height:36px; border-radius:50%; background:#fff6e5; color:#7a4a06; display:flex; align-items:center; justify-content:center; flex:none;"><i data-lucide="alert-triangle" style="width:19px;height:19px;"></i></div>
+          <div style="min-width:0;">
+            <div style="font-size:16px; font-weight:700; color:#111827;">Discard unsaved changes?</div>
+            <div style="font-size:14px; color:#475467; line-height:1.55; margin-top:5px;">Changes made to <strong style="color:#374151;">{{ residentName }}</strong>'s discharge plan in this session have not been saved. Leaving now discards them and returns you to the Discharge Planning list.</div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:9px; margin-top:20px;">
+          <button onClick="{{ cancelExit }}" style="background:#fff; border:1px solid #8792a5; color:#374151; border-radius:9px; padding:9px 16px; font-size:14px; font-weight:600; cursor:pointer;">Keep editing</button>
+          <button onClick="{{ confirmExit }}" style="background:#e5484d; border:none; color:#fff; border-radius:9px; padding:9px 16px; font-size:14px; font-weight:600; cursor:pointer;">Discard changes</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ planDeleteOpen }}" hint-placeholder-val="">
+    <div style="position:fixed; inset:0; z-index:95; background:rgba(17,24,39,0.55); display:flex; align-items:center; justify-content:center; padding:24px;">
+      <div style="box-sizing:border-box; width:min(100%, 440px); background:#fff; border-radius:13px; box-shadow:0 22px 60px rgba(0,0,0,0.32); padding:24px;">
+        <div style="display:flex; gap:13px; align-items:flex-start;">
+          <div style="width:36px; height:36px; border-radius:50%; background:#fdecec; color:#a4142b; display:flex; align-items:center; justify-content:center; flex:none;"><i data-lucide="alert-triangle" style="width:19px;height:19px;"></i></div>
+          <div style="min-width:0;">
+            <div style="font-size:16px; font-weight:700; color:#111827;">Delete this discharge plan?</div>
+            <div style="font-size:14px; color:#475467; line-height:1.55; margin-top:5px;">The discharge plan for <strong style="color:#374151;">{{ planDeleteName }}</strong> ({{ planDeleteRoom }}) and all of its progress will be permanently removed. This cannot be undone.</div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:9px; margin-top:20px;">
+          <button onClick="{{ cancelPlanDelete }}" style="background:#fff; border:1px solid #8792a5; color:#374151; border-radius:9px; padding:9px 16px; font-size:14px; font-weight:600; cursor:pointer;">Cancel</button>
+          <button onClick="{{ confirmPlanDelete }}" style="background:#e5484d; border:none; color:#fff; border-radius:9px; padding:9px 16px; font-size:14px; font-weight:600; display:flex; align-items:center; gap:7px; cursor:pointer;"><i data-lucide="trash-2" style="width:15px;height:15px;"></i>Delete plan</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ deleteConfirmOpen }}" hint-placeholder-val="">
+    <div style="position:fixed; inset:0; z-index:90; background:rgba(17,24,39,0.55); display:flex; align-items:center; justify-content:center; padding:24px;">
+      <div style="box-sizing:border-box; width:min(100%, 420px); background:#fff; border-radius:13px; box-shadow:0 22px 60px rgba(0,0,0,0.32); padding:24px;">
+        <div style="display:flex; align-items:flex-start; gap:13px;">
+          <div style="width:36px; height:36px; border-radius:50%; background:#fdecec; color:#a4142b; display:flex; align-items:center; justify-content:center; flex:none;"><i data-lucide="alert-triangle" style="width:18px;height:18px;"></i></div>
+          <div style="min-width:0;">
+            <div style="font-size:16px; font-weight:700; color:#111827;">Delete this document?</div>
+            <div style="font-size:14px; color:#475467; line-height:1.55; margin-top:5px;"><strong style="color:#374151;">{{ deleteDocName }}</strong> ({{ deleteDocFile }}) will be removed from the referral packet. This can't be undone.</div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:9px; margin-top:20px;">
+          <button onClick="{{ cancelDelete }}" style="background:#fff; border:1px solid #8792a5; color:#374151; border-radius:9px; padding:9px 16px; font-size:14px; font-weight:600; cursor:pointer;">Cancel</button>
+          <button onClick="{{ confirmDelete }}" style="background:#e5484d; border:none; color:#fff; border-radius:9px; padding:9px 16px; font-size:14px; font-weight:600; display:flex; align-items:center; gap:7px; cursor:pointer;"><i data-lucide="trash-2" style="width:14px;height:14px;"></i> Delete Document</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ docViewerOpen }}" hint-placeholder-val="">
+    <div style="position:fixed; inset:0; z-index:85; background:rgba(17,24,39,0.55); display:flex; align-items:center; justify-content:center; padding:28px 20px;">
+      <div style="box-sizing:border-box; width:min(100%, 760px); max-height:100%; background:#fff; border-radius:13px; box-shadow:0 22px 60px rgba(0,0,0,0.32); display:flex; flex-direction:column; overflow:hidden;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 20px; border-bottom:1px solid #eaecef; background:#fbfcfd;">
+          <div style="display:flex; align-items:center; gap:10px; min-width:0;">
+            <div style="width:30px; height:30px; border-radius:8px; background:#fdecf5; color:#a8085a; display:flex; align-items:center; justify-content:center; flex:none;"><i data-lucide="file-text" style="width:16px;height:16px;"></i></div>
+            <div style="min-width:0;">
+              <div style="font-size:14px; font-weight:700; color:#111827; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ viewDocName }}</div>
+              <div style="font-size:13px; color:#475467;">{{ viewDocFile }} · {{ viewDocSize }}</div>
+            </div>
+          </div>
+          <button onClick="{{ closeDocViewer }}" aria-label="Close" style="background:#fff; border:1px solid #8792a5; border-radius:8px; width:32px; height:31px; display:flex; align-items:center; justify-content:center; color:#475467; cursor:pointer; flex:none;"><i data-lucide="x" style="width:15px;height:15px;"></i></button>
+        </div>
+        <div style="background:#f3f4f6; padding:22px; overflow:auto;">
+          <div style="background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.1); margin:0 auto; width:min(100%, 560px); padding:44px 48px; box-sizing:border-box;">
+            <div style="font-size:13px; font-weight:700; letter-spacing:0.1em; color:#475467;">Redwood grove · skilled nursing facility</div>
+            <div style="font-size:16px; font-weight:700; color:#111827; margin:14px 0 4px;">{{ viewDocName }}</div>
+            <div style="font-size:13px; color:#475467; border-bottom:1px solid #eef0f2; padding-bottom:14px;">Resident: {{ residentName }} · Prepared for home health referral</div>
+            <div style="display:flex; flex-direction:column; gap:9px; margin-top:20px;">
+              <div style="height:8px; background:#eef0f2; border-radius:3px; width:92%;"></div>
+              <div style="height:8px; background:#eef0f2; border-radius:3px; width:78%;"></div>
+              <div style="height:8px; background:#eef0f2; border-radius:3px; width:88%;"></div>
+              <div style="height:8px; background:#eef0f2; border-radius:3px; width:54%;"></div>
+              <div style="height:8px; background:#f4f6f7; border-radius:3px; width:84%; margin-top:12px;"></div>
+              <div style="height:8px; background:#f4f6f7; border-radius:3px; width:90%;"></div>
+              <div style="height:8px; background:#f4f6f7; border-radius:3px; width:66%;"></div>
+            </div>
+            <div style="margin-top:32px; font-size:13px; color:#98a2b3; text-align:center;">Preview · page 1 of 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===================== LIC 602 A ===================== -->
+  <sc-if value="{{ form602Open }}" hint-placeholder-val="">
+    <div style="position:fixed; inset:0; z-index:80; background:rgba(17,24,39,0.55); display:block; overflow:auto; padding:28px 20px 60px;">
+      <div style="box-sizing:border-box; width:min(100%, 940px); margin:0 auto; background:#fff; border-radius:12px; box-shadow:0 22px 60px rgba(0,0,0,0.32); overflow:hidden;">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 22px; border-bottom:1px solid #eaecef; background:#fbfcfd; position:sticky; top:0; flex-wrap:wrap; row-gap:8px;">
+          <div style="display:flex; align-items:center; gap:9px; flex:1 1 auto; min-width:0; overflow:hidden;">
+            <i data-lucide="file-text" style="width:16px;height:16px;color:#7a4a06;flex:none;"></i>
+            <span style="font-size:13px; font-weight:700; color:#111827; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">LIC 602 A — Physician's Report for Community Care Facilities</span>
+            <span style="background:#eafaf0; color:#0f5f33; font-size:13px; font-weight:700; border-radius:20px; padding:2px 8px; white-space:nowrap; flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis;">Auto-populated · editable</span>
+            <sc-if value="{{ form602Missing }}" hint-placeholder-val="">
+              <span style="background:#fff8ed; color:#7a4a06; border:1px solid #f6e3bf; font-size:13px; font-weight:700; border-radius:20px; padding:2px 8px; white-space:nowrap; flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis;">{{ form602Missing }} field(s) need input</span>
+            </sc-if>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; flex:none;">
+            <button onClick="{{ printForm602 }}" style="background:#fff; border:1px solid #8792a5; border-radius:8px; padding:7px 13px; font-size:14px; font-weight:600; color:#374151; display:flex; align-items:center; gap:6px; cursor:pointer; flex:none; white-space:nowrap;" style-hover="background:#f8fafc;"><i data-lucide="printer" style="width:13px;height:13px;"></i> Print</button>
+            <button onClick="{{ faxForm602 }}" style="background:#fff; border:1px solid #8792a5; border-radius:8px; padding:7px 13px; font-size:14px; font-weight:600; color:#374151; display:flex; align-items:center; gap:6px; cursor:pointer; flex:none; white-space:nowrap;" style-hover="background:#f8fafc;"><i data-lucide="printer-check" style="width:13px;height:13px;"></i> Fax</button>
+            <button onClick="{{ saveForm602Draft }}" style="background:#fff; border:1px solid #8792a5; border-radius:8px; padding:7px 13px; font-size:14px; font-weight:600; color:#374151; display:flex; align-items:center; gap:6px; cursor:pointer; flex:none; white-space:nowrap;" style-hover="background:#f8fafc;"><i data-lucide="save" style="width:13px;height:13px;"></i> Save as Draft</button>
+            <button onClick="{{ closeForm602 }}" aria-label="Close" style="background:#fff; border:1px solid #8792a5; border-radius:8px; flex:0 0 32px; width:32px; height:31px; display:flex; align-items:center; justify-content:center; color:#475467; cursor:pointer; padding:0;" style-hover="background:#f3f4f6; color:#111827;"><i data-lucide="x" style="width:15px;height:15px;"></i></button>
+          </div>
+        </div>
+        <sc-if value="{{ form602Saved }}" hint-placeholder-val="">
+          <div style="display:flex; align-items:center; gap:6px; padding:8px 22px; background:#f3fbf6; border-bottom:1px solid #dcf0e4; font-size:13px; font-weight:600; color:#0f5f33;">
+            <i data-lucide="check-circle-2" style="width:13px;height:13px;"></i> {{ form602Saved }}
+          </div>
+        </sc-if>
+        <sc-if value="{{ form602FaxOpen }}" hint-placeholder-val="">
+          <div style="display:flex; align-items:center; gap:10px; padding:11px 22px; background:#fdf7fa; border-bottom:1px solid #f3dbe7;">
+            <i data-lucide="printer-check" style="width:15px;height:15px;color:#a8085a;"></i>
+            <span style="font-size:14px; font-weight:600; color:#374151;">Fax to</span>
+            <input value="{{ form602FaxNumber }}" onChange="{{ onForm602FaxNumber }}" placeholder="Fax number" style="width:170px; box-sizing:border-box; border:1px solid #e5e7eb; border-radius:8px; padding:6px 10px; font-size:14px; color:#374151; background:#fff;" />
+            <input value="{{ form602FaxRecipient }}" onChange="{{ onForm602FaxRecipient }}" placeholder="Recipient / facility" style="flex:1; min-width:120px; box-sizing:border-box; border:1px solid #e5e7eb; border-radius:8px; padding:6px 10px; font-size:14px; color:#374151; background:#fff;" />
+            <button onClick="{{ sendForm602Fax }}" style="background:#a8085a; border:none; border-radius:8px; padding:7px 15px; font-size:14px; font-weight:600; color:#fff; display:flex; align-items:center; gap:6px; cursor:pointer;"><i data-lucide="send" style="width:13px;height:13px;"></i> Send Fax</button>
+            <button onClick="{{ cancelForm602Fax }}" style="background:transparent; border:none; font-size:14px; color:#475467; cursor:pointer;">Cancel</button>
+          </div>
+        </sc-if>
+        <div id="form602-sheet" style="padding:38px 46px 46px; font-family:Georgia,'Times New Roman',serif; color:#111827;">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:20px; border-bottom:2px solid #1f2937; padding-bottom:12px;">
+            <div>
+              <div style="font-size:13px; letter-spacing:0.14em; color:#475467; font-family:Helvetica,Arial,sans-serif;">State of california — health and human services agency</div>
+              <div style="font-size:22px; font-weight:700; margin-top:7px;">Physician's Report for Community Care Facilities</div>
+            </div>
+            <div style="text-align:right; font-family:Helvetica,Arial,sans-serif; flex:none;">
+              <div style="font-size:16px; font-weight:700;">LIC 602 A</div>
+              <div style="font-size:13px; color:#475467;">Form 602</div>
+            </div>
+          </div>
+          <sc-for list="{{ form602Blocks }}" as="b" hint-placeholder-count="6">
+            <div style="margin-top:22px;">
+              <div style="font-size:13px; font-weight:700; color:#a8085a; font-family:Helvetica,Arial,sans-serif; margin-bottom:7px;">{{ b.title }}</div>
+              <sc-if value="{{ b.note }}" hint-placeholder-val="">
+                <div style="font-size:13px; color:#475467; font-family:Helvetica,Arial,sans-serif; line-height:1.5; background:#f9fafb; border-left:3px solid #e5e7eb; padding:7px 11px; margin-bottom:9px;">{{ b.note }}</div>
+              </sc-if>
+              <sc-if value="{{ b.isFields }}" hint-placeholder-val="{{ true }}">
+                <div style="display:grid; grid-template-columns:1fr 1fr; border-top:1px solid #e5e7eb; border-left:1px solid #e5e7eb;">
+                  <sc-for list="{{ b.fields }}" as="fl" hint-placeholder-count="4">
+                    <div style="{{ fl.cellStyle }}">
+                      <div style="font-size:13px; color:#475467; font-family:Helvetica,Arial,sans-serif; margin-bottom:4px;">{{ fl.label }}</div>
+                      <sc-if value="{{ fl.isSingle }}" hint-placeholder-val="{{ true }}">
+                        <input value="{{ fl.value }}" onChange="{{ fl.onChange }}" placeholder="{{ fl.placeholder }}" style="{{ fl.inputStyle }}" />
+                      </sc-if>
+                      <sc-if value="{{ fl.isMulti }}" hint-placeholder-val="">
+                        <textarea rows="{{ fl.rows }}" value="{{ fl.value }}" onChange="{{ fl.onChange }}" placeholder="{{ fl.placeholder }}" style="{{ fl.inputStyle }}"></textarea>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ b.isYN }}" hint-placeholder-val="">
+                <div style="border:1px solid #e5e7eb; font-family:Helvetica,Arial,sans-serif;">
+                  <div style="{{ b.headStyle }}">
+                    <div>Condition</div><div style="text-align:center;">Yes</div><div style="text-align:center;">No</div><div>{{ b.deviceHead }}</div><div>Explain</div>
+                  </div>
+                  <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="8">
+                    <div style="{{ r.rowStyle }}">
+                      <div style="font-size:14px; color:#111827;">{{ r.label }}</div>
+                      <button onClick="{{ r.onYes }}" style="{{ r.yesStyle }}">Yes</button>
+                      <button onClick="{{ r.onNo }}" style="{{ r.noStyle }}">No</button>
+                      <input value="{{ r.device }}" onChange="{{ r.onDevice }}" placeholder="Device" style="{{ r.deviceStyle }}" />
+                      <input value="{{ r.explain }}" onChange="{{ r.onExplain }}" placeholder="Explain" style="{{ r.explainStyle }}" />
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ b.isChoice }}" hint-placeholder-val="">
+                <div style="display:flex; flex-direction:column; gap:9px; margin-top:9px;">
+                  <sc-for list="{{ b.choices }}" as="c" hint-placeholder-count="2">
+                    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                      <div style="font-size:13px; color:#374151; font-family:Helvetica,Arial,sans-serif; min-width:230px;">{{ c.label }}</div>
+                      <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <sc-for list="{{ c.opts }}" as="o" hint-placeholder-count="2">
+                          <button onClick="{{ o.onClick }}" style="{{ o.style }}">{{ o.label }}</button>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ b.isChecks }}" hint-placeholder-val="">
+                <div style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
+                  <sc-for list="{{ b.checks }}" as="c" hint-placeholder-count="2">
+                    <div onClick="{{ c.onClick }}" style="display:flex; gap:10px; align-items:flex-start; cursor:pointer; border:1px solid #eef0f3; border-radius:8px; padding:10px 12px;">
+                      <div style="{{ c.boxStyle }}"><sc-if value="{{ c.checked }}" hint-placeholder-val=""><i data-lucide="check" style="width:12px;height:12px;"></i></sc-if></div>
+                      <div>
+                        <div style="font-size:14px; font-weight:600; color:#111827; font-family:Helvetica,Arial,sans-serif;">{{ c.label }}</div>
+                        <div style="font-size:13px; color:#475467; font-family:Helvetica,Arial,sans-serif; line-height:1.45;">{{ c.desc }}</div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+              </div>
+            </div>
+          </sc-for>
+          <div style="margin-top:32px; display:grid; grid-template-columns:1fr 1fr; gap:28px;">
+            <div><div style="border-bottom:1px solid #475467; height:40px;"></div><div style="font-size:13px; color:#475467; margin-top:6px; font-family:Helvetica,Arial,sans-serif;">Physician Signature</div></div>
+            <div><div style="border-bottom:1px solid #475467; height:40px;"></div><div style="font-size:13px; color:#475467; margin-top:6px; font-family:Helvetica,Arial,sans-serif;">Date</div></div>
+          </div>
+          <div style="margin-top:22px; font-size:13px; color:#475467; font-family:Helvetica,Arial,sans-serif;">Fields populated from the resident record and this discharge plan. Review before signature.</div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===================== DEMO ROLE SWITCH ===================== -->
+  <div style="position:fixed; left:18px; bottom:18px; z-index:50; background:#14171c; border-radius:30px; padding:5px; display:flex; gap:4px; box-shadow:0 8px 24px rgba(0,0,0,0.28);">
+    <button onClick="{{ setStaff }}" style="{{ staffTabStyle }}"><i data-lucide="monitor" style="width:14px;height:14px;"></i> SNF Staff</button>
+    <button onClick="{{ setPhysician }}" style="{{ physTabStyle }}"><i data-lucide="smartphone" style="width:14px;height:14px;"></i> Physician <sc-if value="{{ physBadge }}" hint-placeholder-val=""><span style="background:#a8085a; color:#fff; font-size:13px; font-weight:700; border-radius:9px; padding:0 5px; margin-left:2px;">{{ physBadge }}</span></sc-if></button>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:800},&quot;dischargeMenuLabel&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Discharge Planning&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Navigation&quot;}}">
+class Component extends DCLogic {
+  state = {
+    view: 'residents',      // residents | discharge
+    role: 'staff',          // staff | physician
+    step: 1,
+    residentName: 'Margaret Johnson',
+    physicianName: 'Sarah Mitchell',
+    dischargeTo: 'Home',
+    services: { sn:true, pt:true, ot:false, msw:false, st:false, hha:true },
+    dme: true, lab: false,
+    notes: '',
+    homeAddress: '123 Maple St, Springfield, IL 62704',
+    snInstructions: '',
+    step1Sent: false,
+    agencies: { sunrise:true }, sentToAgency: false,
+    faxLog: null, faxTab: '',
+    docList: null, viewDoc: null, deleteDoc: null,
+    deletedPlans: [], deletePlan: null,
+    editDoc: null, editName: '', editFile: '',
+    uploadOpen: false, uploadType: '', uploadName: '', uploadFile: null,
+    meetingScheduled: false, meetingCompleted: false, showTranscript: false,
+    medReviewed: false, medSent: false, medOrdered: 'Yes',
+    pharmacy: '', pharmacySent: false, pharmSearch: '',
+    docChecks: { orders:false, referral:false, docs:true, medlist:false, form602:false },
+    dmeStatus: 'Delivered', acceptedAgency: '', pharmacyNotRequired: false,
+    prepChecks: { dme:true, transport:true, address:true, caregiver:true, followup:true },
+    dischargeDone: false,
+    signed: {},             // { hho:true, medlist:true }
+    physView: 'queue', physSel: null,
+    residentRisk: 'Moderate',  // physician-assessed readmission risk; blank until the physician selects one
+  };
+
+  componentDidMount(){ this.renderIcons(); this._onResize = ()=>this.setState({ vw: window.innerWidth }); window.addEventListener("resize", this._onResize); this._onResize(); }
+  componentWillUnmount(){ window.removeEventListener("resize", this._onResize); }
+  componentDidUpdate(){ this.renderIcons(); }
+  validateMeeting(){
+    const s = this.state, errs = {};
+    if(!Object.values(s.meetStaff||{}).some(Boolean)) errs.staff = 'Select at least one care team member.';
+    const dateISO = s.meetingDateISO || '';
+    if(!dateISO) errs.date = 'Select a meeting date.';
+    else {
+      const today = new Date(); today.setHours(0,0,0,0);
+      const p = dateISO.split('-');
+      const picked = new Date(Number(p[0]), Number(p[1])-1, Number(p[2]));
+      if(picked <= today) errs.date = 'Meeting date must be in the future.';
+    }
+    if(!s.meetingTime) errs.time = 'Select a meeting time.';
+    else {
+      const m = /^(\d+):(\d+)\s*(AM|PM)$/.exec(s.meetingTime);
+      if(m){
+        let h = Number(m[1])%12; if(m[3]==='PM') h += 12;
+        const mins = h*60 + Number(m[2]);
+        if(mins < 9*60 || mins > 21*60) errs.time = 'Time must be between 09:00 and 21:00.';
+      }
+    }
+    if(!s.meetDuration) errs.duration = 'Select an estimated duration.';
+    return errs;
+  }
+  faxTime(offsetMin){
+    const d = new Date(Date.now() - offsetMin*60000);
+    return d.toLocaleDateString('en-US', {month:'2-digit', day:'2-digit', year:'numeric'}) + ', ' + d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit', hour12:true});
+  }
+  docNames(){
+    return ['Discharge Order','Form 602','POLST Form','Face sheet','Rehab notes','Medication list','Wound care report'];
+  }
+  pendingAgencyIds(){
+    const log = this.state.faxLog || {};
+    return ['sunrise','comfort','premier','bayarea'].filter(id=>this.state.agencies[id] && !log[id]);
+  }
+  buildFaxLog(){
+    // Mixed demo data: first agency fully delivered, later agencies show a failure and a queued doc.
+    // Only builds rows for agencies not already sent to, then merges with the existing log.
+    const existing = this.state.faxLog || {};
+    const ids = this.pendingAgencyIds();
+    const log = {...existing};
+    Object.keys(log).forEach(k=>{ log[k] = log[k].map(r=>({...r})); });
+    const offset = Object.keys(existing).length;
+    ids.forEach((id,i)=>{
+      const ai = offset + i;
+      log[id] = this.docNames().map((name,di)=>{
+        let status = 'Delivered';
+        if (ai > 0) {
+          if (di === 2) status = 'Failed';
+          else if (di === 5) status = 'Failed';
+          else if (di === 6) status = 'Queued';
+        }
+        return { name, status, ts: status==='Queued' ? '' : this.faxTime(9 - di + ai*4) };
+      });
+    });
+    return log;
+  }
+  setFaxStatus(agencyId, docName, status){
+    this.setState(st=>{
+      const log = {...(st.faxLog||{})};
+      Object.keys(log).forEach(k=>{ log[k] = log[k].map(r=>({...r})); });
+      const apply = (r)=>{ r.status = status; r.ts = status==='Sending' ? '' : this.faxTime(0); };
+      if (agencyId === '*') Object.keys(log).forEach(k=>log[k].forEach(r=>{ if(docName===null || r.name===docName) apply(r); }));
+      else if (log[agencyId]) log[agencyId].forEach(r=>{ if(docName===null || r.name===docName) apply(r); });
+      return { faxLog: log };
+    });
+  }
+  retryFax(agencyId, docName){
+    this.setFaxStatus(agencyId, docName, 'Sending');
+    setTimeout(()=>this.setFaxStatus(agencyId, docName, 'Delivered'), 1600);
+  }
+  renderIcons(){
+    try {
+      const L = window.lucide; if(!L) return;
+      document.querySelectorAll('i[data-lucide]').forEach(el=>{
+        const name = el.getAttribute('data-lucide');
+        const first = el.firstElementChild;
+        if(first && String(first.tagName).toLowerCase()==='svg'){
+          if(el.getAttribute('data-lucide-rendered')===name) return;
+          el.innerHTML = '';
+        }
+        el.setAttribute('data-lucide-rendered', name);
+        const pascal = name.split('-').map(p=>p.charAt(0).toUpperCase()+p.slice(1)).join('');
+        const node = L[pascal] || L[name];
+        if(!Array.isArray(node)) return;
+        const w = parseFloat(el.style.width)||16, h = parseFloat(el.style.height)||16;
+        const inner = node.map(part=>{
+          const tag = part[0], attrs = part[1] || {};
+          const a = Object.keys(attrs).map(k=>k+'="'+attrs[k]+'"').join(' ');
+          return '<'+tag+' '+a+'></'+tag+'>';
+        }).join('');
+        el.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+inner+'</svg>';
+      });
+    } catch(e){}
+  }
+
+  nav = (v) => this.setState({ view: v });
+
+  // Session snapshot for the discharge flow: everything except navigation/grid/transient UI state.
+  planState = () => {
+    const skip = ['view','step','pickerOpen','sortKey','sortDir','fPhysician','deletePlan','deletedPlans',
+      'viewDoc','deleteDoc','editDoc','editName','editFile','uploadOpen','uploadType','uploadName','uploadFile',
+      'faxTab','exitConfirm'];
+    const out = {};
+    Object.keys(this.state).forEach(k=>{ if(skip.indexOf(k)===-1) out[k] = this.state[k]; });
+    return out;
+  };
+  openPlan = (patch) => this.setState(Object.assign({ planSavedAt:'' }, patch), () => { this.sessionSnap = this.planState(); });
+  // Save commits the session: the current state becomes the new baseline, so exiting no longer prompts.
+  savePlan = () => {
+    const t = new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+    const s = this.state, nm = s.residentName;
+    // A plan started from the picker only joins the grid once it is saved.
+    const isNew = nm && (this.baseNames||[]).indexOf(nm) === -1 && !(s.newPlans||[]).some(r=>r[0]===nm);
+    const row = isNew && (this.unplannedRows||[]).find(r=>r[0]===nm);
+    const patch = { planSavedAt: t };
+    if(row) patch.newPlans = (s.newPlans||[]).concat([row.slice(0,8).concat([s.dischargeDate || '08/04/2026', s.residentRisk || ''])]);
+    this.setState(patch, () => { this.sessionSnap = this.planState(); });
+  };
+  planDirty = () => { try { return JSON.stringify(this.planState()) !== JSON.stringify(this.sessionSnap || {}); } catch(e){ return true; } };
+  exitPlan = () => { if(this.state.view==='discharge' && this.planDirty()) this.setState({exitConfirm:true}); else this.nav('residents'); };
+  confirmExitPlan = () => this.setState(Object.assign({}, this.sessionSnap || {}, { view:'residents', exitConfirm:false }));
+  set = (patch) => this.setState(patch);
+  toggle = (key, id) => this.setState(s => ({ [key]: { ...s[key], [id]: !s[key][id] } }));
+
+  goStep = (n) => this.setState({ step: n });
+
+  primary = () => {
+    const s = this.state;
+    if (s.view !== 'discharge') return;
+    if (s.step === 1) { this.setState({ step1Sent:true, signed:{...s.signed}, step:2 }); this.addSign('hho'); }
+    else if (s.step === 2) {
+      // Stay on step 2 while any selected agency still needs the packet; advance once all are sent.
+      if (this.pendingAgencyIds().length > 0) this.setState({ sentToAgency:true, faxLog: this.buildFaxLog() });
+      else this.setState({ step:3 });
+    }
+    else if (s.step === 3) {
+      // Scheduling is its own action; Continue only moves forward once the meeting is scheduled.
+      const errs = this.validateMeeting();
+      if (!s.meetingScheduled) this.setState({ meetErrors: errs });
+      else this.setState({ step:4 });
+    }
+    else if (s.step === 4) { this.setState({ step:5 }); }
+    else if (s.step === 5) { this.setState({ dischargeDone:true }); }
+  };
+
+  addSign = (id) => this.setState(s => ({ signed: { ...s.signed } })); // pending items are derived; sign happens on physician side
+
+  // ---------- physician ----------
+  openSign = (id) => this.setState({ physView:'detail', physSel:id });
+  physBack = () => this.setState({ physView:'queue', physSel:null });
+  physSubmit = () => this.setState(s => ({ signed:{...s.signed, [s.physSel]:true}, physView:'queue', physSel:null }));
+
+  pillList(items){ return items; }
+
+  renderVals(){
+    const s = this.state;
+    const PINK = '#a8085a';
+    const isDesktop = s.role === 'staff';
+    const btn = (active) => active
+      ? `padding:8px 14px; border-radius:8px; border:1px solid ${PINK}; background:#fdecf5; color:${PINK}; font-size:14px; font-weight:600; cursor:pointer;`
+      : `padding:8px 14px; border-radius:8px; border:1px solid #e5e7eb; background:#fff; color:#475467; font-size:14px; font-weight:500; cursor:pointer;`;
+    const chip = (active) => active
+      ? `display:flex; align-items:center; gap:6px; padding:8px 13px; border-radius:20px; border:1px solid ${PINK}; background:#fdecf5; color:${PINK}; font-size:14px; font-weight:600; cursor:pointer;`
+      : `display:flex; align-items:center; gap:6px; padding:8px 13px; border-radius:20px; border:1px solid #e5e7eb; background:#fff; color:#475467; font-size:14px; font-weight:500; cursor:pointer;`;
+    const boxOn = `width:19px;height:19px;border-radius:5px;border:1px solid ${PINK};background:${PINK};color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 19px;`;
+    const boxOff = `width:19px;height:19px;border-radius:5px;border:1.5px solid #d3d7dd;background:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 19px;`;
+    const rowOn = `width:20px;height:20px;border-radius:6px;border:1px solid ${PINK};background:${PINK};color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 20px;`;
+    const rowOff = `width:20px;height:20px;border-radius:6px;border:1.5px solid #d3d7dd;background:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 20px;`;
+
+    // completion
+    const c1 = s.step1Sent, c2 = s.sentToAgency, c3 = s.meetingCompleted,
+          c4 = s.medSent, c5 = s.dischargeDone;
+    const comp = [c1,c2,c3,c4,c5];
+    const progressPct = Math.round(comp.filter(Boolean).length/5*100) + '%';
+
+    // stepper
+    const stLabels = ['Discharge Order','Home Health Referral','Discharge Planning Meeting','Discharge Medication List','Discharge Checklist'];
+    // Stage 1 (Discharge Order): In Progress -> Submitted -> Signed.
+    // Submitted completes the stage (physician signature is not mandatory).
+    const stage1Status = s.signed.hho ? 'Signed' : s.step1Sent ? 'Submitted' : 'In Progress';
+    // Stage 2 (Home Health Referral): Pending -> In Progress (stage 1 complete) -> Sent (fax dispatched).
+    // Sent completes the stage regardless of per-document delivery status.
+    const stage2Status = s.sentToAgency ? 'Sent' : c1 ? 'In Progress' : 'Pending';
+    // Stage 3 (Discharge Planning Meeting): Pending -> In Progress -> Scheduled -> Completed.
+    // In Progress on stage 2 completion OR on the first edit of any meeting field —
+    // meeting planning can run in parallel with the referral.
+    const stage3Touched = !!(s.meetingDateISO || s.meetingTime || s.meetDuration || s.meetingWhere
+      || (s.agendaText||'').trim()
+      || Object.values(s.meetFamily||{}).some(Boolean)
+      || Object.values(s.meetStaff||{}).some(Boolean));
+    const stage3Status = s.meetingCompleted ? 'Completed' : s.meetingScheduled ? 'Scheduled'
+      : (c2 || stage3Touched) ? 'In Progress' : 'Pending';
+    // Stage 4 (Discharge Medication List): Pending -> In Progress -> Submitted -> Signed.
+    // Submitted completes the stage (physician signature is not mandatory).
+    const stage4Touched = !!(s.medReviewed || s.pharmacy || s.pharmacyNotRequired || s.pharmacySent);
+    const stage4Status = s.signed.medlist ? 'Signed' : s.medSent ? 'Submitted'
+      : (c3 || stage4Touched) ? 'In Progress' : 'Pending';
+    // Stage 5 (Discharge Checklist): Pending -> In Progress (all previous stages complete, or first edit) -> Completed.
+    // "First edit" = any deviation from the screen's default state.
+    const stage5Touched = !!(s.docChecks.form602 || s.acceptedAgency || s.dmeStatus !== 'Delivered'
+      || Object.values(s.prepChecks||{}).some(v => !v));
+    const stage5Status = s.dischargeDone ? 'Completed'
+      : ((c1 && c2 && c3 && c4) || stage5Touched) ? 'In Progress' : 'Pending';
+    const stageStatus = [stage1Status, stage2Status, stage3Status, stage4Status, stage5Status];
+    const stepper = stLabels.map((label,i)=>{
+      const n=i+1, done=comp[i], current=s.step===n;
+      const circleStyle = done
+        ? `width:34px;height:34px;border-radius:50%;background:#0f5f33;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;z-index:1;`
+        : current
+          ? `width:34px;height:34px;border-radius:50%;background:${PINK};color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;z-index:1;box-shadow:0 0 0 4px #fdecf5;`
+          : `width:34px;height:34px;border-radius:50%;background:#eef0f2;color:#475467;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;z-index:1;`;
+      return {
+        n, label, done, showNum: !done,
+        sub: stageStatus[i] || (done ? 'Completed' : current ? 'In Progress' : 'Pending'),
+        showBar: n>1,
+        barColor: comp[i-1] ? '#0f5f33' : '#e5e7eb',
+        circleStyle,
+        labelStyle: `font-size:14px;font-weight:600;margin-top:8px;text-align:center;color:${current?PINK:done?'#0f5f33':'#475467'};`,
+        subStyle: `font-size:13px;margin-top:1px;color:${current?PINK:done?'#0f5f33':'#98a2b3'};`,
+        onClick: () => this.goStep(n),
+      };
+    });
+
+    // nav
+    const dischargeMenuLabel = this.props.dischargeMenuLabel ?? 'Discharge Planning';
+    const navDefs = [['Dashboard','layout-dashboard'],['Residents','users'],['Messages','message-square','8'],['Transportation','bus'],['Activities','calendar-days'],['Rehab','dumbbell'],['Care Conference','users-round'],[dischargeMenuLabel,'send'],['Announcements','megaphone'],['Settings','settings']];
+    const activeLabel = dischargeMenuLabel;
+    const nav = navDefs.map(([label,icon,badge])=>{
+      const active = label===activeLabel;
+      return { label, icon, badge: badge||'',
+        onClick: () => { if(label==='Residents') this.nav('residents'); },
+        style: `display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:9px;font-size:13px;cursor:pointer;font-weight:${active?600:500};color:${active?PINK:'#4b5563'};background:${active?'#fdecf5':'transparent'};` };
+    });
+
+    // residents
+    let rdata = [
+      ['Margaret Johnson','A-101','Short term','45 days','Medicare','Sarah Mitchell','Active','#a8085a','08/04/2026','Moderate'],
+      ['Robert Smith','B-205','Short term','12 days','Medicaid','James Carter','Discharged','#6366f1','07/30/2026','Low'],
+      ['Dorothy Williams','A-203','Short term','30 days','Private Insurance','Emily Chen','Active','#0ea5e9','08/12/2026','High'],
+      ['James Brown','C-305','Long term','7 days','Medicare','Robert Hayes','Active','#f59e0b','07/29/2026','High'],
+      ['Patricia Davis','B-112','Long term','90 days','Self-Pay','Lisa Patel','Discharged','#8b5cf6','08/20/2026','Low'],
+      ['Michael Wilson','A-308','Long term','21 days','Private Insurance','Mark Anderson','Active','#10b981','08/07/2026',''],
+    ];
+    this.baseNames = rdata.map(r=>r[0]);
+    // Plans created from the picker and saved in this session appear in the grid.
+    rdata = rdata.concat(s.newPlans || []);
+    // Residents with no discharge plan yet — these are the only ones offered when starting a new plan.
+    const unplanned = [
+      ['Helen Ramirez','C-210','Short term','9 days','Medicare','Emily Chen','Active','#0f766e','',''],
+      ['Frank Delgado','B-118','Short term','18 days','Medicaid','Lisa Patel','Active','#b45309','',''],
+    ].filter(r=> !(s.newPlans||[]).some(n=>n[0]===r[0]));
+    this.unplannedRows = unplanned;
+    const progressDone = (name)=> ({'James Brown':1,'Robert Smith':4,'Margaret Johnson':2,'Michael Wilson':0,'Dorothy Williams':5,'Patricia Davis':3}[name]) ?? 0;
+    const sortKey = s.sortKey || 'discharge';
+    const sortVal = {
+      resident: r => r[0].split(' ').slice(-1)[0].toLowerCase() + ' ' + r[0].toLowerCase(),
+      discharge: r => new Date(r[8]).getTime(),
+      stay: r => parseInt(r[3], 10) || 0,
+      payer: r => r[4].toLowerCase(),
+      physician: r => r[5].split(' ').slice(-1)[0].toLowerCase(),
+      progress: r => progressDone(r[0]),
+    }[sortKey] || (r => new Date(r[8]).getTime());
+    const dir = s.sortDir === 'desc' ? -1 : 1;
+    rdata = rdata.filter(r=> !(s.deletedPlans||[]).includes(r[0]))
+     .filter(r=> (!s.fPhysician || r[5]===s.fPhysician))
+     .sort((a,b)=>{ const x=sortVal(a), y=sortVal(b); return (x<y?-1:x>y?1:0) * dir; });
+    const selStyle = (on)=>'appearance:none;background:#fff url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%238b929e\' stroke-width=\'2\'><path d=\'M6 9l6 6 6-6\'/></svg>") no-repeat right 9px center/14px 14px;border:1px solid '+(on?'#f4b8d8':'#e5e7eb')+';color:'+(on?'#a8085a':'#4b5563')+';font-weight:'+(on?600:500)+';border-radius:9px;padding:8px 30px 8px 12px;font-size:14px;cursor:pointer;font-family:inherit;';
+    const opts = (all, vals)=>[{value:'',label:all}].concat(vals.map(v=>({value:v,label:v})));
+    const gridFilters = [
+      { value:s.fPhysician||'', options:opts('All Physicians',['Sarah Mitchell','James Carter','Emily Chen','Robert Hayes','Lisa Patel','Mark Anderson']), style:selStyle(!!s.fPhysician), onChange:(e)=>this.setState({fPhysician:e.target.value}) },
+    ];
+    const mapResident = ([name,room,admission,stay,payer,physician,status,bg,dischargeDate,seedRisk])=>{
+      // Risk is the physician's assessment, captured while signing the Discharge Order.
+      // For the active plan it comes from that input and is blank until the physician selects one.
+      const readmitRisk = name === s.residentName ? (s.residentRisk || '') : seedRisk;
+      return {
+      name, room, admission, stay, payer, physician, status, avatarBg:bg, dischargeDate, readmitRisk,
+      riskStyle: (readmitRisk==='High'
+        ? 'background:#fdecec;color:#a4142b;border:1px solid #f7d3d4;'
+        : readmitRisk==='Moderate'
+        ? 'background:#fff6e5;color:#7a4a06;border:1px solid #f6e3c0;'
+        : readmitRisk==='Low'
+        ? 'background:#eafaf0;color:#0f5f33;border:1px solid #cdeed9;'
+        : 'background:#f4f5f7;color:#6b7280;border:1px solid #e3e5e9;')
+        + 'display:inline-block;flex:none;font-size:13px;font-weight:700;line-height:1.2;padding:2px 6px;border-radius:4px;white-space:nowrap;',
+      riskShort: readmitRisk || 'Not available', stayPayer: stay + " · " + payer,
+      initials: name.split(' ').map(w=>w[0]).join('').slice(0,2),
+      statusStyle: status==='Active'
+        ? 'background:#eafaf0;color:#0f5f33;font-size:13px;font-weight:600;padding:3px 11px;border-radius:12px;'
+        : 'background:#fff4e5;color:#7a4a06;font-size:13px;font-weight:600;padding:3px 11px;border-radius:12px;',
+      ...(()=>{
+        const stepNames = ['Home Health Order','Home Health Referral','Discharge Planning Meeting','Medication List','Discharge Checklist'];
+        const done = ({'James Brown':1,'Robert Smith':4,'Margaret Johnson':2,'Michael Wilson':0,'Dorothy Williams':5,'Patricia Davis':3}[name]) ?? 0;
+        return {
+          progressSegs: [0,1,2,3,4].map(i=>({ style:'height:6px; flex:1 1 0; min-width:6px; border-radius:3px; background:'+(i<done ? '#a8085a' : '#eceef1')+';' })),
+          progressLabel: done+' of 5',
+          progressTitle: done===5 ? 'All 5 steps complete' : done===0 ? 'Not started' : done+' of 5 complete · next: '+stepNames[done],
+        };
+      })(),
+      onDischarge: () => this.openPlan({ view:'discharge', step:1, residentName:name, physicianName:physician, dischargeDate, residentRisk:readmitRisk, pickerOpen:false }),
+      onDelete: (e) => { if(e&&e.stopPropagation) e.stopPropagation(); this.setState({ deletePlan:{ name, room } }); },
+      };
+    };
+    const residents = rdata.map(mapResident);
+    const pickerResidents = unplanned.map(mapResident);
+
+    // Google Maps address predictions (mocked Places autocomplete)
+    const homePool = [
+      ['123 Maple St','Springfield, IL 62704, USA'],
+      ['1234 Maple Ave','Springfield, IL 62702, USA'],
+      ['123 Maple Grove Dr','Chatham, IL 62629, USA'],
+      ['450 Oak Ridge Rd','Springfield, IL 62703, USA'],
+      ['88 Sunrise Ln','Sherman, IL 62684, USA'],
+    ];
+    // ALF / Board & Care facility predictions
+    const alfPool = [
+      ['Sunrise Assisted Living','2100 W Iles Ave, Springfield, IL 62704, USA'],
+      ['Maple Court Senior Living','845 N Maple St, Springfield, IL 62702, USA'],
+      ['Oak Ridge Assisted Living','450 Oak Ridge Rd, Springfield, IL 62703, USA'],
+      ['Brookdale Springfield','3606 Sandhill Rd, Springfield, IL 62707, USA'],
+      ['Villas of Holly Brook','1210 S Grand Ave E, Springfield, IL 62703, USA'],
+      ['Concordia Village','4101 W Iles Ave, Springfield, IL 62711, USA'],
+      ['Sherman Meadows Board & Care','88 Sunrise Ln, Sherman, IL 62684, USA'],
+      ['Chatham Gardens Care Home','123 Maple Grove Dr, Chatham, IL 62629, USA'],
+    ];
+    const placePool = (s.dischargeTo==='ALF' || s.dischargeTo==='Board & Care') ? alfPool : homePool;
+    const q = (s.homeAddress||'').trim().toLowerCase();
+    const addressSuggestions = (q.length<1 ? [] : placePool
+      .filter(([m,sec])=> (m+' '+sec).toLowerCase().includes(q) && (m+', '+sec).toLowerCase()!==q)
+      .slice(0,4)
+      .map(([main,secondary])=>({ main, secondary, onPick:()=>this.setState({homeAddress: main+', '+secondary, addressFocused:false}) })));
+
+    const pharmacyPool = [
+      ['CVS Pharmacy #4821','1975 41st Ave, Capitola, CA 95010 · Fax (831) 462-1180'],
+      ['Walgreens #7734','1820 Ocean St, Santa Cruz, CA 95060 · Fax (831) 429-6621'],
+      ['Rite Aid #5590','2350 Mission St, Santa Cruz, CA 95060 · Fax (831) 423-9014'],
+      ['Santa Cruz Community Pharmacy','716 Water St, Santa Cruz, CA 95062 · Fax (831) 425-7710'],
+      ['Costco Pharmacy','220 Sylvania Ave, Santa Cruz, CA 95060 · Fax (831) 425-9932'],
+      ['Soquel Village Pharmacy','2990 Soquel Ave, Santa Cruz, CA 95062 · Fax (831) 479-0055'],
+    ];
+    const pq = (s.pharmacyQuery||'').trim().toLowerCase();
+    const pharmacySuggestions = (pq.length<1 ? [] : pharmacyPool
+      .filter(([n,d])=> (n+' '+d).toLowerCase().includes(pq))
+      .slice(0,4)
+      .map(([name,detail])=>({ name, detail, onPick:()=>this.setState({ pharmacyName:name, pharmacyDetail:detail, pharmacyQuery:name, pharmacyFocused:false }) })));
+
+    // step1 destinations / services / toggles
+    const dests = ['Home','ALF','Board & Care','Other'];
+    const destinations = dests.map(label=>({ label, style: btn(s.dischargeTo===label), onClick:()=>this.setState({dischargeTo:label, homeAddress:'', addressFocused:false}) }));
+    const svcDefs = [['sn','Skilled Nursing (RN/LVN)','Disease & medication management'],['pt','Physical Therapy (PT)','Safety/falls, strengthening, ambulation, balance, ROM, transfers'],['ot','Occupational Therapy (OT)','ADLs, energy conservation, orthotics, adaptive equipment'],['msw','Medical Social Worker (MSW)','Family support, counseling, in-home assistance'],['st','Speech Therapy (ST)','Cognition, swallowing, voice intelligibility, hearing'],['hha','Home Health Aide (HHA)','Personal hygiene, bathing, grooming assistance']];
+    const services = svcDefs.map(([id,name,desc])=>({ id,name,desc, checked:!!s.services[id], boxStyle: s.services[id]?rowOn:rowOff, showSub: id==='sn' && !!s.services[id], snInstructions:s.snInstructions, onSnInstructions:(e)=>this.setState({snInstructions:e.target.value}), onClick:()=>this.toggle('services',id) }));
+    const mkToggle = (val,setter)=>['Yes','No'].map(label=>({ label, style:btn(val===label), onClick:()=>setter(label) }));
+    const addlDefs = [['dme','DME ordered','Durable medical equipment arranged for delivery'],['lab','Lab orders for Home Health nurse','Labs to be drawn by the Home Health nurse']];
+    const addlOrders = addlDefs.map(([id,name,desc])=>({ id,name,desc, checked:!!s[id], box: s[id]?rowOn:rowOff, onClick:()=>this.setState({[id]:!s[id]}) }));
+
+    // step2
+    const repDefs = s.docList || [['Discharge Order','Discharge_Order.pdf','182 KB'],['Form 602','Form_602.pdf','88 KB'],['POLST Form','POLST_Form.pdf','120 KB'],['Face sheet','Face_sheet.pdf','120 KB'],['Rehab notes','Rehab_notes.pdf','124 KB'],['Medication list','Medication_list.pdf','98 KB'],['Wound care report','Wound_care_report.pdf','210 KB']];
+    const docSel = s.docSelected || {};
+    // Mandatory on the FIRST send: the Discharge Order always, and Form 602 when the
+    // destination is ALF (i.e. when the form applies). Locked checked until the packet has gone out once.
+    const mandatoryDoc = (n)=> n==='Discharge Order' || (n==='Form 602' && s.dischargeTo==='ALF');
+    // The lock is per recipient: it holds while any selected agency has not yet received the packet,
+    // so an agency added later still gets the mandatory documents.
+    const anyAgencyPending = Object.keys(s.agencies||{}).some(id => s.agencies[id] && !((s.faxLog||{})[id]));
+    const reports = repDefs.map(([name,file,size])=>{
+      const locked = mandatoryDoc(name) && anyAgencyPending;
+      const on = locked ? true : docSel[file] !== false;
+      return {
+      name, file, size, checked: on, locked, showLock: locked,
+      lockTitle: locked ? 'Required document — every agency must receive it' : '',
+      canUploadRow: ['Wound care report','Rehab notes','POLST Form','Face sheet'].indexOf(name) !== -1,
+      boxStyle: locked
+        ? 'width:16px;height:16px;border-radius:4px;border:1.5px solid #d79ebd;background:#d79ebd;color:#fff;display:flex;align-items:center;justify-content:center;cursor:not-allowed;flex:none;'
+        : on
+        ? 'width:16px;height:16px;border-radius:4px;border:1.5px solid #a8085a;background:#a8085a;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;'
+        : 'width:16px;height:16px;border-radius:4px;border:1.5px solid #cfd4db;background:#fff;color:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;',
+      nameStyle: 'display:flex; align-items:center; gap:8px; padding-right:8px; min-width:0; color:'+(on?'#374151':'#98a2b3')+'; font-weight:500;',
+      requiredStyle: locked
+        ? 'background:#fdecf5; color:#a8085a; border:1px solid #f4b8d8; font-size:13px; font-weight:600; line-height:1.2; padding:1px 6px; border-radius:4px; flex:none;'
+        : 'display:none;',
+      onToggle: ()=>{ if(locked) return; this.setState(st=>({ docSelected: Object.assign({}, st.docSelected, { [file]: (st.docSelected||{})[file] === false }) })); },
+      onView: ()=>this.setState({ viewDoc:{name,file,size} }),
+      onRename: ()=>this.setState({ editDoc:file, editName:name, editFile:file }),
+      onDelete: ()=>this.setState({ deleteDoc:{name,file} }),
+    };});
+    // System-generated documents (Discharge Order, Form 602) and out-of-scope report types are not uploadable.
+    const docTypeDefs = ['POLST Form','Face sheet','Rehab notes','Medication list','Wound care report'];
+    const canUpload = !!s.uploadFile && (s.uploadName||'').trim().length>0;
+    const agDefs = [['sunrise','Sunrise Home Health Services'],['comfort','Comfort Care Home Health'],['premier','Premier Health Partners'],['bayarea','Bay Area Home Health']];
+    const agencies = agDefs.map(([id,name])=>({ id,name, selected:!!s.agencies[id], style:chip(!!s.agencies[id]), onClick:()=>this.toggle('agencies',id) }));
+    const agCount = Object.values(s.agencies).filter(Boolean).length;
+
+    const faxStatusExpanded = !!s.faxStatusExpanded;
+
+    // fax delivery status
+    const faxLog = s.faxLog;
+    const faxAgIds = agDefs.filter(([id])=>s.agencies[id]).map(([id])=>id).filter(id=>faxLog && faxLog[id]);
+    const activeFaxTab = (faxLog && faxLog[s.faxTab]) ? s.faxTab : (faxAgIds[0] || '');
+    const faxPill = (status)=>{
+      const c = status==='Delivered' ? ['#eafaf0','#bfe8cd','#0f5f33']
+        : status==='Failed' ? ['#fdecec','#f6cccc','#a4142b']
+        : status==='Sending' ? ['#eaf1fb','#cfe0f7','#1a49b8']
+        : ['#f6f7f9','#e5e7eb','#475467'];
+      return 'display:inline-flex; align-items:center; gap:6px; background:'+c[0]+'; border:1px solid '+c[1]+'; color:'+c[2]+'; border-radius:20px; padding:3px 10px; font-size:13px; font-weight:600;';
+    };
+    const faxIcon = (status)=> status==='Delivered' ? 'check-circle-2' : status==='Failed' ? 'alert-triangle' : status==='Sending' ? 'circle-dashed' : 'square';
+    const faxTabs = agDefs.filter(([id])=>faxAgIds.indexOf(id)>=0).map(([id,name])=>{
+      const rows = (faxLog && faxLog[id]) || [];
+      const failed = rows.filter(r=>r.status==='Failed').length;
+      const on = id===activeFaxTab;
+      return { id, name, failed, hasFailed: failed>0, failedLabel: failed+' failed',
+        style: 'display:flex; align-items:center; gap:7px; background:'+(on?'#fdf2f8':'#fff')+'; border:1px solid '+(on?'#f4b8d8':'#e5e7eb')+'; color:'+(on?'#a8085a':'#475467')+'; border-radius:9px; padding:8px 13px; font-size:14px; font-weight:600; cursor:pointer;',
+        onClick:()=>this.setState({faxTab:id}) };
+    });
+    const activeFaxRows = ((faxLog && faxLog[activeFaxTab]) || []).map(r=>({
+      name:r.name, status:r.status, ts: r.ts || '—', pill: faxPill(r.status), icon: faxIcon(r.status),
+      canRetry: r.status==='Failed' || r.status==='Queued',
+      retryStyle: 'background:#fff; border:1px solid #e5e7eb; color:'+((r.status==='Failed'||r.status==='Queued')?'#a8085a':'#c3c9d2')+'; border-radius:7px; padding:5px 11px; font-size:13px; font-weight:600; display:inline-flex; align-items:center; gap:5px; cursor:'+((r.status==='Failed'||r.status==='Queued')?'pointer':'default')+';',
+      onRetry:()=>{ if(r.status==='Failed'||r.status==='Queued') this.retryFax(activeFaxTab, r.name); }
+    }));
+    const activeFaxName = (agDefs.filter(([id])=>id===activeFaxTab)[0]||['',''])[1];
+    const faxFailedTotal = Object.keys(faxLog||{}).reduce((n,k)=>n+faxLog[k].filter(r=>r.status==='Failed').length,0);
+    const faxVals = {
+      showFaxStatus: !!faxLog && faxAgIds.length>0,
+      faxTabs, activeFaxRows, activeFaxName,
+      faxAgencyRows: agDefs.filter(([id])=>faxAgIds.indexOf(id)>=0).map(([id,name])=>{
+        const rows = (faxLog && faxLog[id]) || [];
+        const failed = rows.filter(r=>r.status==='Failed').length;
+        const sending = rows.some(r=>r.status==='Sending' || r.status==='Queued');
+        const status = failed>0 ? 'Failed' : (sending ? 'Sending' : 'Delivered');
+        const ts = rows.map(r=>r.ts).filter(Boolean).slice(-1)[0] || '—';
+        const bad = failed>0;
+        return { id, name, ts,
+          status: bad ? failed+' of '+rows.length+' failed' : status,
+          pill: faxPill(status), icon: faxIcon(status),
+          actionLabel: bad ? 'Retry' : 'Resend', actionIcon: bad ? 'refresh-cw' : 'send',
+          actionStyle: 'background:'+(bad?'#fdf2f8':'#fff')+'; border:1px solid '+(bad?'#f4b8d8':'#e5e7eb')+'; color:'+(bad?'#a8085a':'#4b5563')+'; border-radius:7px; padding:5px 11px; font-size:13px; font-weight:600; display:inline-flex; align-items:center; gap:5px; cursor:pointer;',
+          onAction: ()=>this.retryFax(id, null) };
+      }),
+      faxStatusExpanded,
+      faxChevron: faxStatusExpanded ? 'chevron-down' : 'chevron-right',
+      toggleFaxStatus: ()=>this.setState(st=>({ faxStatusExpanded: !st.faxStatusExpanded })),
+      faxSummary: faxFailedTotal>0 ? faxFailedTotal+' document(s) failed to deliver' : 'All documents delivered',
+      faxSummaryStyle: 'font-size:13px; font-weight:600; color:'+(faxFailedTotal>0?'#a4142b':'#0f5f33')+';',
+      retryAgency: ()=>this.retryFax(activeFaxTab, null),
+      retryAll: ()=>this.retryFax('*', null),
+    };
+
+    const pendingAgIds = agDefs.filter(([id])=>s.agencies[id] && !(faxLog && faxLog[id])).map(([id])=>id);
+    const pendingCount = pendingAgIds.length;
+    const step2PrimaryLabel = pendingCount>0
+      ? (Object.keys(faxLog||{}).length>0
+          ? 'Send to '+pendingCount+' New '+(pendingCount===1?'Agency':'Agencies')
+          : 'Send Documents to '+pendingCount+' '+(pendingCount===1?'Agency':'Agencies'))
+      : 'Continue to Planning Meeting';
+
+    const dischargeDateVal = s.dischargeDate || '08/04/2026';
+    // step3
+    const aiSummary = [
+      'Resident will be discharged home on ' + dischargeDateVal + '.',
+      'Spouse and daughter will assist at home.',
+      'Medications will be picked up by daughter on discharge day.',
+      'Follow-up with Anderson on 03/18/2026 at 10:00 EDT.',
+      'Home health services arranged through Sunrise Home Health.',
+      'No additional concerns raised; no caregiver training required.',
+    ];
+
+    const transcriptLines = [
+      '[00:02] Care Team: Thanks everyone for joining. Today we\'re finalizing Margaret\'s discharge plan.',
+      '[01:14] Daughter: I can pick up the medications and stay the first few nights.',
+      '[03:40] Care Team: Transportation is booked for the 13th at 10 AM.',
+      '[05:12] Physician: No caregiver training needed — resident is independent with ADLs.',
+    ];
+
+    // step4
+    const medOrderToggle = ['Yes','No'].map(label=>({label, style:btn(s.medOrdered===label), onClick:()=>this.setState({medOrdered:label})}));
+    const addressKnown = s.dischargeTo === 'Home';
+    const pharmDefs = ['Redwood Grove Pharmacy — Santa Cruz','CVS Pharmacy — Santa Cruz','Walgreens — Soquel Ave','MedCare Specialty Pharmacy — San Jose','Rite Aid — Capitola','Costco Pharmacy — Santa Cruz','Safeway Pharmacy — Watsonville'];
+    const pharmRow = (name)=>({ name, selected:s.pharmacy===name,
+      style: `display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border-radius:9px;border:1px solid ${s.pharmacy===name?PINK:'#e5e7eb'};background:${s.pharmacy===name?'#fdecf5':'#fff'};color:#374151;font-size:13px;font-weight:500;cursor:pointer;`,
+      onClick:()=>this.setState({pharmacy:name}) });
+    const pharmQuery = s.pharmSearch.trim().toLowerCase();
+    const filteredPharm = pharmDefs.filter(n=>n.toLowerCase().includes(pharmQuery));
+    const pharmacies = filteredPharm.map(pharmRow);
+    const noPharmMatch = filteredPharm.length===0;
+    const faxReady = s.pharmacy && s.signed.medlist;
+    const pharmacyFaxBtnStyle = s.pharmacySent
+      ? `background:#eafaf0;color:#0f5f33;border:1px solid #bfe8cd;border-radius:9px;padding:10px 18px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px;cursor:default;`
+      : faxReady
+        ? `background:#a8085a;color:#fff;border:none;border-radius:9px;padding:10px 18px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px;cursor:pointer;box-shadow:0 4px 12px rgba(230,17,125,0.25);`
+        : `background:#f1f3f5;color:#98a2b3;border:none;border-radius:9px;padding:10px 18px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px;cursor:not-allowed;`;
+    const pharmacyFaxLabel = s.pharmacySent ? 'Faxed to pharmacy' : !s.signed.medlist ? 'Send Fax (needs signed list)' : !s.pharmacy ? 'Select a pharmacy' : 'Send Fax to Pharmacy';
+
+    // step5 checklists
+    const docDefs = [['orders','Physician Orders Signed'],['form602','Form 602 Signed'],['referral','Referral Sent to Agency'],['medlist','Discharge Medication List Signed']];
+    const docChecklist = docDefs.map(([id,label])=>{
+      const checked = id==='orders'? s.signed.hho : id==='referral'? s.sentToAgency : id==='medlist'? s.signed.medlist : !!s.docChecks[id];
+      return { id,label, checked, box: checked?rowOn:rowOff, onClick:()=> (id==='form602') && this.toggle('docChecks',id) };
+    });
+    const prepDefs = [['transport','Transportation Confirmed'],['caregiver','Caregiver Training Completed'],['followup','Follow-up Appointment Scheduled']];
+    const prepChecklist = prepDefs.map(([id,label])=>({ id,label, checked:!!s.prepChecks[id], box: s.prepChecks[id]?rowOn:rowOff, onClick:()=>this.toggle('prepChecks',id) }));
+    const dmeStatusOptions = ['Delivered','Pending','Loaned','Not required'].map(label=>({ label, style:btn(s.dmeStatus===label), onClick:()=>this.setState({dmeStatus:label}) }));
+    const acceptedAgencyList = agDefs.filter(([id])=>s.agencies[id]).map(([id,name])=>({ name, style:btn(s.acceptedAgency===name), onClick:()=>this.setState({acceptedAgency:name}) }));
+    const multiAgency = agCount>1;
+    const referralSummary = [
+      {k:'Resident', v:s.residentName, sub:'MRN: MRN123456'},
+      {k:'Agency', v:'Sunrise Home Health', sub:'(555) 345-6789'},
+      {k:'Discharge Date', v:'07/25/2025', sub:'10:00 EDT'},
+      {k:'Destination', v:this.destText(s.dischargeTo), sub:'123 Maple St, Springfield IL'},
+      {k:'Transportation', v:'Medical Transport', sub:'Springfield Medical'},
+      {k:'Primary Caregiver', v:'Mary Smith', sub:'(555) 123-4567'},
+    ];
+    const pharmacyPending = !s.pharmacySent;
+
+    // physician pending signs (derived)
+    const pending = [];
+    if (s.step1Sent) pending.push({ id:'hho', type:'Discharge Order', icon:'clipboard-list', resident:s.residentName, sentBy:'Admin (SNF)', date:'03/31/2026 at 11:00 EDT' });
+    if (s.medSent) pending.push({ id:'medlist', type:'Discharge Medication List', icon:'pill', resident:s.residentName, sentBy:'Admin (SNF)', date:'03/31/2026 at 11:00 EDT' });
+    const unsignedCount = pending.filter(p=>!s.signed[p.id]).length;
+    const pendingSigns = pending.map(p=>({ ...p, signed:!!s.signed[p.id], opacity:s.signed[p.id]?0.6:1, onClick:()=>this.openSign(p.id) }));
+
+    const sel = pending.find(p=>p.id===s.physSel);
+    const medRows = [
+      {name:'Flomax',dose:'0.4 mg',freq:'Once Daily'},{name:'Lisinopril',dose:'10 mg',freq:'Once Daily'},
+      {name:'Metformin',dose:'500 mg',freq:'Twice Daily'},{name:'Atorvastatin',dose:'20 mg',freq:'At bedtime'},
+      {name:'Aspirin',dose:'81 mg',freq:'Once Daily'},{name:'Vitamin D3',dose:'1000 units',freq:'Once Daily'},
+    ];
+    const physSelSigned = sel ? !!s.signed[sel.id] : false;
+    // Readmission risk — captured by the physician on the Discharge Order only. None selected by default.
+    const riskChip = (v)=> v==='High' ? 'background:#fdecec;color:#a4142b;border:1px solid #f7d3d4;'
+      : v==='Moderate' ? 'background:#fff6e5;color:#7a4a06;border:1px solid #f6e3c0;'
+      : v==='Low' ? 'background:#eafaf0;color:#0f5f33;border:1px solid #cdeed9;'
+      : 'background:#f4f5f7;color:#6b7280;border:1px solid #e3e5e9;';
+    const showRiskInput = !!sel && sel.id === 'hho';
+    const riskOptions = ['Low','Moderate','High'].map(label=>{
+      const selected = s.residentRisk === label;
+      return {
+        label, selected, disabled: physSelSigned,
+        onSelect: ()=>{ if(!physSelSigned) this.setState({ residentRisk: label }); },
+        rowStyle: 'display:flex; align-items:center; gap:10px; padding:9px 10px; border-radius:9px; min-height:44px; box-sizing:border-box; cursor:'+(physSelSigned?'default':'pointer')+'; background:'+(selected?'#fdf3f8':'transparent')+'; border:1px solid '+(selected?'#f4b8d8':'transparent')+';',
+        inputStyle: 'width:17px; height:17px; accent-color:#a8085a; flex:none; margin:0; cursor:'+(physSelSigned?'default':'pointer')+';',
+        labelStyle: 'font-size:14px; font-weight:'+(selected?600:500)+'; color:'+(selected?'#a8085a':'#374151')+';',
+        chipStyle: riskChip(label)+'margin-left:auto; font-size:13px; font-weight:700; line-height:1.2; padding:2px 6px; border-radius:4px;',
+        chipText: label,
+      };
+    });
+    const addSignStyle = physSelSigned
+      ? `background:#eafaf0;color:#0f5f33;border:1px solid #bfe8cd;border-radius:12px;padding:14px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;cursor:default;`
+      : `background:#8a5a2b;color:#fff;border:none;border-radius:12px;padding:14px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;`;
+    const submitStyle = physSelSigned
+      ? `background:#4a9d6b;color:#fff;border:none;border-radius:12px;padding:14px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;`
+      : `background:#cdd2d8;color:#fff;border:none;border-radius:12px;padding:14px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;cursor:not-allowed;`;
+
+    const physTabs = [
+      {label:'Home',icon:'home',active:false},{label:'Messages',icon:'message-square',active:false},
+      {label:'Pending Sign',icon:'file-signature',active:true,dot:true},{label:'Profile',icon:'user',active:false},
+    ].map(t=>({ ...t, color:t.active?PINK:'#475467', weight:t.active?700:500, dot:t.dot?true:'' }));
+
+    // primary action label per step
+    const primaryLabels = ['Send to Physician for Signature','Send All Documents to Agency','Continue','Continue','Complete Discharge'];
+
+    // ===== LIC 602 A — full form structure (State of California, CDSS) =====
+    const f6 = s.form602Vals || {};
+    const f6yn = s.form602YN || {};
+    const f6ch = s.form602Chk || {};
+    const f6set = (key)=>(e)=>{ const v=e.target.value; this.setState(st=>({ form602Vals: Object.assign({}, st.form602Vals, { [key]: v }) })); };
+    const f6setYN = (key, val)=>()=>this.setState(st=>({ form602YN: Object.assign({}, st.form602YN, { [key]: val }) }));
+    const f6toggle = (key)=>()=>this.setState(st=>({ form602Chk: Object.assign({}, st.form602Chk, { [key]: !(st.form602Chk||{})[key] }) }));
+    const addrParts = String(s.homeAddress||'').split(',').map(x=>x.trim());
+    const facName = addrParts.length>1 ? addrParts[0] : '';
+    const facCity = addrParts.length>2 ? addrParts[2] : '';
+    const facStreet = addrParts.length>1 ? addrParts[1] : '';
+    const facZip = (String(s.homeAddress||'').match(/\b\d{5}\b/)||[''])[0];
+    const f6missing = [];
+    const tf = (label, prefill, opt)=>{
+      const o = opt || {};
+      const value = f6[label] !== undefined ? f6[label] : (prefill || '');
+      const filled = !!String(value).trim();
+      if (!filled) f6missing.push(label);
+      return {
+        label, value, placeholder: 'Not available — enter', onChange: f6set(label),
+        isMulti: !!o.multi, isSingle: !o.multi,
+        rows: Math.max(2, String(value).split('\n').length),
+        inputStyle: 'width:100%; box-sizing:border-box; font-family:Georgia,\'Times New Roman\',serif; font-size:13px; line-height:1.45; color:#111827; border:1px solid '+(filled?'transparent':'#f0c9a8')+'; background:'+(filled?'transparent':'#fff8f1')+'; border-radius:6px; padding:3px 6px; margin:-3px -6px; resize:vertical; outline:none;',
+        cellStyle: 'padding:9px 12px; border-right:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb;'+(o.span?' grid-column:1 / -1;':''),
+      };
+    };
+    const pill = (on)=>on
+      ? 'background:#a8085a; color:#fff; border:1px solid #a8085a; border-radius:20px; padding:4px 13px; font-size:13px; font-weight:600; cursor:pointer; font-family:Helvetica,Arial,sans-serif;'
+      : 'background:#fff; color:#475467; border:1px solid #8792a5; border-radius:20px; padding:4px 13px; font-size:13px; font-weight:600; cursor:pointer; font-family:Helvetica,Arial,sans-serif;';
+    const choice = (label, key, opts)=>({ label, opts: opts.map(o=>({ label:o, style: pill(f6yn[key]===o), onClick: f6setYN(key,o) })) });
+    const ynBtn = (on, kind)=>on
+      ? (kind==='yes'
+        ? 'background:#eafaf0; color:#0f5f33; border:1px solid #bfe8cd; border-radius:6px; padding:3px 0; font-size:13px; font-weight:700; cursor:pointer; font-family:Helvetica,Arial,sans-serif;'
+        : 'background:#fdeceb; color:#a4142b; border:1px solid #f4cfcb; border-radius:6px; padding:3px 0; font-size:13px; font-weight:700; cursor:pointer; font-family:Helvetica,Arial,sans-serif;')
+      : 'background:#fff; color:#475467; border:1px solid #e5e7eb; border-radius:6px; padding:3px 0; font-size:13px; font-weight:600; cursor:pointer; font-family:Helvetica,Arial,sans-serif;';
+    const cellInput = (hidden)=>'width:100%; box-sizing:border-box; font-size:13px; color:#374151; border:1px solid #eef0f3; border-radius:6px; padding:4px 7px; outline:none; background:#fcfdfe; font-family:Helvetica,Arial,sans-serif;'+(hidden?' display:none;':'');
+    const ynBlock = (title, labels, hasDevice, note)=>{
+      const cols = hasDevice ? 'minmax(150px,1.2fr) 44px 44px minmax(120px,1fr) minmax(180px,1.5fr)' : 'minmax(170px,1.3fr) 44px 44px 0px minmax(200px,1.9fr)';
+      return {
+        title, note: note||'', isYN: true, deviceHead: hasDevice ? 'Assistive Device' : '',
+        headStyle: 'display:grid; grid-template-columns:'+cols+'; gap:8px; align-items:center; padding:7px 11px; background:#f9fafb; border-bottom:1px solid #e5e7eb; font-size:14px; letter-spacing:0.05em;  color:#475467;',
+        rows: labels.map((label,i)=>({
+          label,
+          rowStyle: 'display:grid; grid-template-columns:'+cols+'; gap:8px; align-items:center; padding:6px 11px;'+(i<labels.length-1?' border-bottom:1px solid #f2f4f6;':''),
+          yesStyle: ynBtn(f6yn[title+'|'+label]==='Yes','yes'), noStyle: ynBtn(f6yn[title+'|'+label]==='No','no'),
+          onYes: f6setYN(title+'|'+label,'Yes'), onNo: f6setYN(title+'|'+label,'No'),
+          device: f6[title+'|dev|'+label] || '', onDevice: f6set(title+'|dev|'+label), deviceStyle: cellInput(!hasDevice),
+          explain: f6[title+'|exp|'+label] || '', onExplain: f6set(title+'|exp|'+label), explainStyle: cellInput(false),
+        })),
+      };
+    };
+    const fieldsBlock = (title, fields, extra)=>Object.assign({ title, isFields:true, fields }, extra||{});
+
+    const form602Blocks = [
+      fieldsBlock('I. Facility Information (completed by licensee / designee)', [
+        tf('1. Name of Facility', facName),
+        tf('2. Telephone', ''),
+        tf('3. Address', facStreet),
+        tf('City', facCity),
+        tf('Zip Code', facZip),
+        tf("4. Licensee's Name", ''),
+        tf('5. Telephone', ''),
+        tf('6. Facility License Number', ''),
+      ]),
+      fieldsBlock("II. Resident / Patient Information (completed by resident or responsible person)", [
+        tf('1. Name', s.residentName),
+        tf('2. Birth Date', '04/18/1948'),
+        tf('3. Age', '78'),
+      ]),
+      fieldsBlock('III. Authorization for Release of Medical Information', [
+        tf("1. Signature of Resident and/or Resident's Legal Representative", ''),
+        tf('2. Address', ''),
+        tf('3. Date', ''),
+      ], { note: 'I hereby authorize release of medical information in this report to the facility named above.' }),
+      fieldsBlock("IV. Patient's Diagnosis — Examination (completed by the physician)", [
+        tf('1. Date of Exam', ''),
+        tf('2. Sex', 'Female'),
+        tf('3. Height', ''),
+        tf('4. Weight', ''),
+        tf('5. Blood Pressure', ''),
+      ], { note: 'NOTE TO PHYSICIAN: The person named above is a resident or prospective resident of a residential care facility for the elderly licensed by the Department of Social Services. These facilities provide primarily non-medical care and supervision and DO NOT PROVIDE SKILLED NURSING CARE. It is important that all questions be answered.' }),
+      Object.assign(fieldsBlock('6. Tuberculosis (TB) Test', [
+        tf('a. Date TB Test Given', '03/02/2026'),
+        tf('b. Date TB Test Read', '03/04/2026'),
+        tf('c. Type of TB Test', 'PPD (Mantoux)'),
+        tf('e. Results (mm)', '0 mm'),
+        tf('f. Action Taken (if positive)', ''),
+        tf('g. Chest X-ray Results', '', { span:true }),
+      ]), { isChoice:true, choices:[
+        choice('d. TB test is:', 'tb.result', ['Negative','Positive']),
+        choice('h. Check one of the following:', 'tb.status', ['Active TB Disease','Latent TB Infection','No Evidence of TB Infection or Disease']),
+      ]}),
+      Object.assign(fieldsBlock('7. Primary Diagnosis', [
+        tf('7. Primary Diagnosis', 'CHF exacerbation (I50.9)', { span:true, multi:true }),
+        tf('7a. Treatment / medication (type and dosage) / equipment', 'Furosemide 40mg PO daily; low-sodium diet; daily weights', { span:true, multi:true }),
+        tf('7c. If not, what type of medical supervision is needed?', '', { span:true, multi:true }),
+      ]), { isChoice:true, choices:[ choice('7b. Can patient manage own treatment / medication / equipment?', 'dx1.manage', ['Yes','No']) ]}),
+      Object.assign(fieldsBlock('8. Secondary Diagnosis(es)', [
+        tf('8. Secondary Diagnosis(es)', 'Type 2 diabetes mellitus (E11.9)\nEssential hypertension (I10)', { span:true, multi:true }),
+        tf('8a. Treatment / medication (type and dosage) / equipment', 'Metformin 500mg PO BID; Lisinopril 10mg PO daily; glucose monitoring BID', { span:true, multi:true }),
+        tf('8c. If not, what type of medical supervision is needed?', '', { span:true, multi:true }),
+      ]), { isChoice:true, choices:[ choice('8b. Can patient manage own treatment / medication / equipment?', 'dx2.manage', ['Yes','No']) ]}),
+      { title: '9. Check if Applicable to 7 or 8 Above', isChecks:true, checks:[
+        { label:'Mild Cognitive Impairment', desc:'Cognitive abilities in a conditional state between normal aging and dementia.', checked:!!f6ch.mci, boxStyle: (f6ch.mci?boxOn:boxOff), onClick:f6toggle('mci') },
+        { label:'Dementia', desc:'Loss of intellectual function sufficient to interfere with activities of daily living or social/occupational activities.', checked:!!f6ch.dementia, boxStyle: (f6ch.dementia?boxOn:boxOff), onClick:f6toggle('dementia') },
+      ]},
+      Object.assign(fieldsBlock('10. Contagious / Infectious Disease', [
+        tf('10. Contagious / Infectious Disease', 'None', { span:true, multi:true }),
+        tf('10a. Treatment / medication (type and dosage) / equipment', '', { span:true, multi:true }),
+        tf('10c. If not, what type of medical supervision is needed?', '', { span:true, multi:true }),
+      ]), { isChoice:true, choices:[ choice('10b. Can patient manage own treatment / medication / equipment?', 'cid.manage', ['Yes','No']) ]}),
+      Object.assign(fieldsBlock('11. Allergies', [
+        tf('11. Allergies', 'Penicillin — rash', { span:true, multi:true }),
+        tf('11a. Treatment / medication (type and dosage) / equipment', 'Avoid penicillin-class antibiotics', { span:true, multi:true }),
+        tf('11c. If not, what type of medical supervision is needed?', '', { span:true, multi:true }),
+      ]), { isChoice:true, choices:[ choice('11b. Can patient manage own treatment / medication / equipment?', 'alg.manage', ['Yes','No']) ]}),
+      Object.assign(fieldsBlock('12. Other Conditions', [
+        tf('12. Other Conditions', '', { span:true, multi:true }),
+        tf('12a. Treatment / medication (type and dosage) / equipment', '', { span:true, multi:true }),
+        tf('12c. If not, what type of medical supervision is needed?', '', { span:true, multi:true }),
+      ]), { isChoice:true, choices:[ choice('12b. Can patient manage own treatment / medication / equipment?', 'oth.manage', ['Yes','No']) ]}),
+      ynBlock('13. Physical Health Status', ['a. Auditory Impairment','b. Visual Impairment','c. Wears Dentures','d. Wears Prosthesis','e. Special Diet','f. Substance Abuse Problem','g. Use of Alcohol','h. Use of Cigarettes','i. Bowel Impairment','j. Bladder Impairment','k. Motor Impairment / Paralysis','l. Requires Continuous Bed Care','m. History of Skin Condition or Breakdown'], true),
+      ynBlock('14. Mental Condition', ['a. Confused / Disoriented','b. Inappropriate Behavior','c. Aggressive Behavior','d. Wandering Behavior','e. Sundowning Behavior','f. Able to Follow Instructions','g. Depressed','h. Suicidal / Self-Abuse','i. Able to Communicate Needs','j. At Risk if Allowed Direct Access to Personal Grooming and Hygiene Items','k. Able to Leave Facility Unassisted'], false),
+      ynBlock('15. Capacity for Self-Care', ['a. Able to Bathe Self','b. Able to Dress / Groom Self','c. Able to Feed Self','d. Able to Care for Own Toileting Needs','e. Able to Manage Own Cash Resources'], false),
+      ynBlock('16. Medication Management', ['a. Able to Administer Own Prescription Medications','b. Able to Administer Own Injections','c. Able to Perform Own Glucose Testing','d. Able to Administer Own PRN Medications','e. Able to Administer Own Oxygen','f. Able to Store Own Medications'], false),
+      Object.assign(fieldsBlock('17. Ambulatory Status', [
+        tf('c. If bedridden — Illness', '', { span:true }),
+        tf('c. If bedridden — Recovery from Surgery', ''),
+        tf('c. If bedridden — Other', ''),
+        tf('d1. Bedridden status expected to persist (number of days)', ''),
+        tf('d2. Estimated date illness or recovery is expected to end', ''),
+        tf('d3. If illness or recovery is permanent, please explain', '', { span:true, multi:true }),
+        tf('e. If receiving hospice care, specify the terminal illness', '', { span:true }),
+      ]), { isChoice:true, note:'Nonambulatory: unable to leave a building unassisted under emergency conditions, including a person who depends on mechanical aids such as crutches, walkers, and wheelchairs. Bedridden: requires assistance with turning or repositioning in bed. An illness or recovery is considered temporary if it will last 14 days or less.', choices:[
+        choice('a1. Able to independently transfer to and from bed:', 'amb.transfer', ['Yes','No']),
+        choice('a2. For purposes of a fire clearance, this person is considered:', 'amb.fire', ['Ambulatory','Nonambulatory','Bedridden']),
+        choice('b. If nonambulatory, this status is based upon:', 'amb.basis', ['Physical Condition','Mental Condition','Both Physical and Mental Condition']),
+        choice('e. Is resident receiving hospice care?', 'amb.hospice', ['No','Yes']),
+      ]}),
+      { title: '18. Physical Health Status', isChoice:true, choices:[ choice('Overall physical health status:', 'overall.health', ['Good','Fair','Poor']) ]},
+      fieldsBlock('19. Comments', [ tf('19. Comments', 'Discharging from SNF to RCFE with home health services; see attached discharge plan and medication list.', { span:true, multi:true }) ]),
+      fieldsBlock('20–24. Physician', [
+        tf("20. Physician's Name and Address (print)", s.physicianName),
+        tf('21. Telephone', ''),
+        tf('22. Length of Time Resident Has Been Your Patient', ''),
+        tf("23. Physician's Signature", ''),
+        tf('24. Date', ''),
+      ]),
+    ];
+    const form602MissingCount = f6missing.length;
+    return {
+      // routing
+      isDesktop, isResidents: isDesktop && s.view==='residents', isDischarge: isDesktop && s.view==='discharge',
+      isPhysician: s.role==='physician',
+      isStep1:s.step===1, isStep2:s.step===2, isStep3:s.step===3, isStep4:s.step===4, isStep5:s.step===5,
+      // shell
+      gridFilters,
+      anyGridFilter: !!s.fPhysician,
+      clearGridFilters: ()=>this.setState({fPhysician:''}),
+      gridWide: !(this.state.vw && this.state.vw < 1280),
+      gridNarrow: !!(this.state.vw && this.state.vw < 1280),
+      gridCols: (this.state.vw && this.state.vw < 1280)
+        ? "minmax(0,2.8fr) minmax(0,1.05fr) minmax(0,1fr) minmax(0,1fr) 64px"
+        : "minmax(0,1.75fr) minmax(0,1.05fr) minmax(0,0.65fr) minmax(0,0.9fr) minmax(0,1fr) minmax(0,0.8fr) 64px",
+      nav, dischargeMenuLabel, filters:['All Status','Payer Source','Type of Admission'], residents, pickerResidents,
+      residentName:s.residentName, physicianName:s.physicianName,
+      residentLastName:s.residentName.split(' ').slice(-1)[0],
+      goResidents: this.exitPlan,
+      planSavedAt: s.planSavedAt || '',
+      savePlan: this.savePlan,
+      exitConfirmOpen: !!s.exitConfirm,
+      cancelExit: ()=>this.setState({exitConfirm:false}),
+      confirmExit: this.confirmExitPlan,
+      pharmacyQuery: s.pharmacyQuery || '',
+      pharmacyName: s.pharmacyName || '', pharmacyDetail: s.pharmacyDetail || '',
+      pharmacyChosen: !!s.pharmacyName,
+      onPharmacyInput: (e)=>this.setState({ pharmacyQuery:e.target.value, pharmacyFocused:true }),
+      onPharmacyFocus: ()=>this.setState({ pharmacyFocused:true }),
+      clearPharmacy: ()=>this.setState({ pharmacyName:'', pharmacyDetail:'', pharmacyQuery:'' }),
+      showPharmacySuggestions: !s.pharmacyNotRequired && !!s.pharmacyFocused && (s.pharmacyQuery||'').trim().length>0 && pharmacySuggestions.length>0,
+      pharmacySuggestions,
+      faxToPharmacy: ()=>{ if(s.pharmacyNotRequired) return; this.setState({ pharmacySent:true }); },
+      faxPharmacyLabel: s.pharmacyNotRequired ? 'Pharmacy fax not required' : s.pharmacySent ? 'Faxed to Pharmacy' : 'Fax to Pharmacy',
+      faxPharmacyBtnStyle: s.pharmacyNotRequired
+        ? 'display:flex;align-items:center;gap:7px;background:#f1f3f5;border:none;color:#98a2b3;border-radius:9px;padding:9px 16px;font-size:14px;font-weight:600;cursor:not-allowed;'
+        : s.pharmacySent
+        ? 'display:flex;align-items:center;gap:7px;background:#eafaf0;border:1px solid #cdeed9;color:#0f5f33;border-radius:9px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;'
+        : 'display:flex;align-items:center;gap:7px;background:#a8085a;border:none;color:#fff;border-radius:9px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;',
+      meetingWhere: s.meetingWhere || '',
+      onMeetingWhereChange: (e)=>this.setState({ meetingWhere: e.target.value }),
+      timeOptions: (()=>{ const out=[]; for(let m=9*60; m<=21*60; m+=15){ const h=Math.floor(m/60), mm=m%60; const h12=h%12===0?12:h%12; out.push(h12+':'+String(mm).padStart(2,'0')+' '+(h<12?'AM':'PM')); } return out; })(),
+      meetingTime: s.meetingTime || '',
+      onMeetingTimeChange: (e)=>this.setState({ meetingTime: e.target.value }),
+      dischargeDateISO: (()=>{ const p=(dischargeDateVal||'').split('/'); return p.length===3 ? p[2]+'-'+p[0]+'-'+p[1] : ''; })(),
+      dischargeDateText: dischargeDateVal,
+      onDischargeDateText: (e)=>this.setState({ dischargeDate: e.target.value }),
+      onDischargeDateChange: (e)=>{ const v=e.target.value; if(!v) return; const [y,m,d]=v.split('-'); this.setState({ dischargeDate: m+'/'+d+'/'+y }); },
+      meetingDateISO: s.meetingDateISO || '',
+      meetingDateText: (()=>{ const v=s.meetingDateISO||''; if(!/^\d{4}-\d{2}-\d{2}$/.test(v)) return v; const [y,m,d]=v.split('-'); return m+'/'+d+'/'+y; })(),
+      onMeetingDateText: (e)=>{ const v=e.target.value; const mm=v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/); this.setState({ meetingDateISO: mm ? mm[3]+'-'+mm[1]+'-'+mm[2] : v }); },
+      onMeetingDateChange: (e)=>this.setState({ meetingDateISO: e.target.value }),
+      planRiskLabel: s.residentRisk ? s.residentRisk + ' risk' : 'Risk not available',
+      planRiskStyle: riskChip(s.residentRisk) + 'font-size:13px; font-weight:700; line-height:1.2; padding:2px 7px; border-radius:4px; white-space:nowrap;',
+      showRiskInput, riskOptions,
+      showRiskClear: showRiskInput && !!s.residentRisk && !physSelSigned,
+      clearRisk: ()=>this.setState({ residentRisk: '' }),
+      ...(()=>{
+        const mk = (key, label)=>{
+          const on = sortKey === key;
+          return {
+            [key+'SortLabel']: label,
+            [key+'SortIcon']: on ? (s.sortDir==='desc' ? 'arrow-down' : 'arrow-up') : 'chevrons-up-down',
+            [key+'SortStyle']: 'display:flex; align-items:center; gap:5px; cursor:pointer; user-select:none;'+(on?'color:#a8085a;':''),
+            [key+'SortIconStyle']: 'width:13px; height:13px; flex:none; opacity:'+(on?'1':'0.4')+';',
+            [key+'SortTitle']: 'Sort by '+label.toLowerCase(),
+            ['sortBy'+key]: ()=>this.setState(st=>({
+              sortKey: key,
+              sortDir: (st.sortKey||'discharge') === key ? ((st.sortDir==='desc') ? 'asc' : 'desc') : 'asc',
+            })),
+          };
+        };
+        return Object.assign({}, mk('resident','Resident / Risk'), mk('discharge','Discharge Date'),
+          mk('stay','Length of Stay'), mk('payer','Payer Source'), mk('physician','Physician'), mk('progress','Progress'));
+      })(),
+      dischargeDate: dischargeDateVal,
+      pickerOpen:!!s.pickerOpen,
+      openPicker:()=>this.setState({pickerOpen:true}),
+      closePicker:()=>this.setState({pickerOpen:false}),
+      overallStatusLabel: c5 ? 'Complete' : 'In progress',
+      destLabel:this.destText(s.dischargeTo), progressPct,
+      stepper,
+      // step1
+      destinations, showForm602: s.dischargeTo==='ALF',
+      form602Open: !!s.form602Open,
+      form602Missing: form602MissingCount || '',
+      openForm602: ()=>this.setState({form602Open:true}),
+      closeForm602: ()=>this.setState({form602Open:false}),
+      printForm602: ()=>{ window.print(); },
+      form602Saved: s.form602Status || '',
+      saveForm602Draft: ()=>this.setState({ form602Status:'Draft saved '+new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}) }),
+      form602FaxOpen: !!s.form602FaxOpen,
+      faxForm602: ()=>this.setState({ form602FaxOpen:true, form602Status:'' }),
+      cancelForm602Fax: ()=>this.setState({ form602FaxOpen:false }),
+      form602FaxNumber: s.form602FaxNumber !== undefined ? s.form602FaxNumber : '(555) 987-6543',
+      onForm602FaxNumber: (e)=>this.setState({ form602FaxNumber:e.target.value }),
+      form602FaxRecipient: s.form602FaxRecipient !== undefined ? s.form602FaxRecipient : (String(s.homeAddress||'').split(',')[0] || ''),
+      onForm602FaxRecipient: (e)=>this.setState({ form602FaxRecipient:e.target.value }),
+      sendForm602Fax: ()=>this.setState(st=>({ form602FaxOpen:false, form602Status:'Faxed to '+(st.form602FaxNumber!==undefined?st.form602FaxNumber:'(555) 987-6543') })),
+      form602Blocks,
+      addressHint: (s.dischargeTo==='ALF' || s.dischargeTo==='Board & Care') ? '— start typing a facility name' : '',
+      showHomeAddress: true, homeAddress:s.homeAddress, onHomeAddress:(e)=>this.setState({homeAddress:e.target.value, addressFocused:true}),
+      onAddressFocus:()=>this.setState({addressFocused:true}),
+      onAddressBlur:()=>this.setState({addressFocused:false}),
+      showSuggestions: !!s.addressFocused && addressSuggestions.length>0,
+      addressSuggestions,
+      mapsUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s.homeAddress || 'Springfield IL'),
+      snInstructions:s.snInstructions, onSnInstructions:(e)=>this.setState({snInstructions:e.target.value}),
+      services, addlOrders,
+      notes:s.notes, onNotes:(e)=>this.setState({notes:e.target.value}),
+      // step2
+      reports, reportsUploadedLabel: reports.length+' uploaded', agencies,
+      editDocOpen: !!s.editDoc,
+      editName: s.editName, editFile: s.editFile,
+      onEditName: (e)=>this.setState({editName:e.target.value}),
+      onEditFile: (e)=>this.setState({editFile:e.target.value}),
+      cancelEdit: ()=>this.setState({editDoc:null}),
+      commitEdit: ()=>this.setState({ docList: repDefs.map(r=> r[1]===s.editDoc ? [(s.editName||'').trim()||r[0], (s.editFile||'').trim()||r[1], r[2]] : r), editDoc:null }),
+      // upload
+      uploadOpen: !!s.uploadOpen,
+      openUpload: ()=>this.setState({uploadOpen:true, uploadType:'', uploadName:'', uploadFile:null}),
+      closeUpload: ()=>this.setState({uploadOpen:false}),
+      uploadTypes: docTypeDefs.map(t=>({ label:t, style: chip(s.uploadName===t), onClick:()=>this.setState({uploadType:t, uploadName:t}) })),
+      uploadName: s.uploadName,
+      onUploadName: (e)=>this.setState({uploadName:e.target.value}),
+      onUploadFile: (e)=>{
+        const f = e.target.files && e.target.files[0]; if(!f) return;
+        // Default the document name to the file's own name (extension stripped, separators to spaces).
+        const base = f.name.replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' ').trim();
+        const pretty = base ? base.charAt(0).toUpperCase()+base.slice(1) : f.name;
+        this.setState({ uploadFile:{ file:f.name, size: Math.max(1, Math.round(f.size/1024))+' KB' }, uploadName: pretty });
+      },
+      uploadFileLabel: s.uploadFile ? s.uploadFile.file+' · '+s.uploadFile.size : 'No file chosen',
+      uploadHasFile: !!s.uploadFile,
+      uploadReady: canUpload,
+      uploadBtnStyle: canUpload
+        ? 'background:#a8085a; color:#fff; border:none; border-radius:9px; padding:9px 17px; font-size:14px; font-weight:600; display:flex; align-items:center; gap:7px; cursor:pointer;'
+        : 'background:#f1f3f5; color:#98a2b3; border:none; border-radius:9px; padding:9px 17px; font-size:14px; font-weight:600; display:flex; align-items:center; gap:7px; cursor:not-allowed;',
+      confirmUpload: ()=>{ if(!canUpload) return; this.setState({ docList: repDefs.concat([[s.uploadName.trim(), s.uploadFile.file, s.uploadFile.size]]), uploadOpen:false }); },
+      docViewerOpen: !!s.viewDoc,
+      viewDocName: s.viewDoc ? s.viewDoc.name : '',
+      viewDocFile: s.viewDoc ? s.viewDoc.file : '',
+      viewDocSize: s.viewDoc ? s.viewDoc.size : '',
+      closeDocViewer: ()=>this.setState({viewDoc:null}),
+      planDeleteOpen: !!s.deletePlan,
+      planDeleteName: s.deletePlan ? s.deletePlan.name : '',
+      planDeleteRoom: s.deletePlan ? s.deletePlan.room : '',
+      cancelPlanDelete: ()=>this.setState({deletePlan:null}),
+      confirmPlanDelete: ()=>this.setState(st=>({ deletedPlans:(st.deletedPlans||[]).concat(st.deletePlan?[st.deletePlan.name]:[]), deletePlan:null })),
+      deleteConfirmOpen: !!s.deleteDoc,
+      deleteDocName: s.deleteDoc ? s.deleteDoc.name : '',
+      deleteDocFile: s.deleteDoc ? s.deleteDoc.file : '',
+      cancelDelete: ()=>this.setState({deleteDoc:null}),
+      confirmDelete: ()=>this.setState({ docList: repDefs.filter(r=>r[1]!==s.deleteDoc.file), deleteDoc:null }),
+      sentToAgency:s.sentToAgency, agencyCountLabel: agCount+' '+(agCount===1?'agency':'agencies'),
+      ...faxVals,
+      // step3
+      familyOptions: [['james','James Johnson','Son'],['linda','Linda Johnson','Daughter'],['robert','Robert Johnson','Spouse'],['maria','Maria Lopez','Niece']].map(([id,name,rel])=>({ id, name, rel, selected: !!(s.meetFamily||{})[id], boxStyle: ((s.meetFamily||{})[id]?'width:16px;height:16px;border-radius:4px;background:#a8085a;border:1px solid #a8085a;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;':'width:16px;height:16px;border-radius:4px;border:1.5px solid #d7dbe1;flex:none;'), onClick: ()=>this.setState(st=>({ meetFamily: Object.assign({}, st.meetFamily, { [id]: !(st.meetFamily||{})[id] }), familyOpen:false })) })),
+      familyChips: [['james','James Johnson'],['linda','Linda Johnson'],['robert','Robert Johnson'],['maria','Maria Lopez']].filter(([id])=>!!(s.meetFamily||{})[id]).map(([id,name])=>({id,name})),
+      familyEmpty: Object.values(s.meetFamily||{}).filter(Boolean).length===0,
+      familyOpen: !!s.familyOpen,
+      toggleFamilyList: ()=>this.setState(st=>({ familyOpen: !st.familyOpen, staffOpen:false })),
+      closeFamilyList: ()=>this.setState({ familyOpen:false }),
+      staffOptions: [['sarah','Sarah Williams','Social Worker'],['mitchell','Sarah Mitchell','Attending Physician'],['angela','Angela Reyes','DON'],['tom','Tom Baker','Physical Therapy'],['priya','Priya Nair','Case Manager']].map(([id,name,rel])=>({ id, name, rel, selected: !!(s.meetStaff||{})[id], boxStyle: ((s.meetStaff||{})[id]?'width:16px;height:16px;border-radius:4px;background:#4f46e5;border:1px solid #4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;':'width:16px;height:16px;border-radius:4px;border:1.5px solid #d7dbe1;flex:none;'), onClick: ()=>this.setState(st=>({ meetStaff: Object.assign({}, st.meetStaff, { [id]: !(st.meetStaff||{})[id] }) })) })),
+      ...(()=>{
+        // Care team can grow; show the first few and roll the rest into a +n chip.
+        const MAX = 2;
+        const picked = [['sarah','Sarah Williams'],['mitchell','Sarah Mitchell'],['angela','Angela Reyes'],['tom','Tom Baker'],['priya','Priya Nair']]
+          .filter(([id])=>!!(s.meetStaff||{})[id]).map(([id,name])=>({id,name}));
+        const hidden = picked.slice(MAX);
+        return {
+          staffChips: picked.slice(0, MAX),
+          staffOverflow: hidden.length ? '+'+hidden.length : '',
+          staffOverflowTitle: hidden.map(h=>h.name).join(', '),
+        };
+      })(),
+      staffEmpty: Object.values(s.meetStaff||{}).filter(Boolean).length===0,
+      staffOpen: !!s.staffOpen,
+      toggleStaffList: ()=>this.setState(st=>({ staffOpen: !st.staffOpen, familyOpen:false })),
+      closeDropdowns: ()=>this.setState({ staffOpen:false, familyOpen:false }),
+      anyDropdownOpen: !!(s.staffOpen || s.familyOpen),
+      meetingCompleted: !!s.meetingCompleted, meetingPending: !s.meetingCompleted,
+      markMeetingComplete: ()=>this.setState({meetingCompleted:true}),
+      meetingSummary: s.meetingSummary ?? aiSummary.join('\n'),
+      onMeetingSummary:(e)=>this.setState({meetingSummary:e.target.value}),
+      agendaText: s.agendaText ?? '', onAgendaText:(e)=>this.setState({agendaText:e.target.value}),
+      meetingStatusLabel: s.meetingScheduled?'Scheduled':'Not scheduled',
+      meetingBadgeStyle: s.meetingScheduled
+        ? `display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:#0f5f33;background:#eafaf0;padding:5px 11px;border-radius:8px;`
+        : `display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:#7a4a06;background:#fff8ed;padding:5px 11px;border-radius:8px;`,
+      scheduleBtnLabel: s.meetingScheduled?'Reschedule':'Schedule Meeting',
+      scheduleBtnStyle: s.meetingCompleted
+        ? `background:#f1f3f5;color:#98a2b3;border:none;border-radius:8px;padding:8px 16px;font-size:14px;font-weight:600;cursor:not-allowed;`
+        : `background:${PINK};color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer;`,
+      meetDuration: s.meetDuration || '',
+      onMeetDurationChange: (e)=>this.setState({ meetDuration: e.target.value }),
+      errStaff: (s.meetErrors||{}).staff || '',
+      staffBoxStyle: 'border:1px solid '+((s.meetErrors||{}).staff ? '#e3a3a3' : '#e5e7eb')+'; border-radius:8px; min-height:40px; box-sizing:border-box; padding:7px 10px; display:flex; align-items:center; gap:5px; cursor:pointer; overflow:hidden;',
+      errDate: (s.meetErrors||{}).date || '',
+      errTime: (s.meetErrors||{}).time || '',
+      errDuration: (s.meetErrors||{}).duration || '',
+      minMeetingDate: (()=>{ const d=new Date(); d.setDate(d.getDate()+1); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); })(),
+      scheduleMeeting:()=>{
+        if(s.meetingCompleted) return;
+        const errs = this.validateMeeting();
+        if(Object.keys(errs).length) this.setState({ meetErrors: errs });
+        else this.setState({ meetErrors: {}, meetingScheduled: true });
+      },
+      showTranscript:s.showTranscript, transcriptChevron:s.showTranscript?'chevron-up':'chevron-down',
+      toggleTranscript:()=>this.setState(st=>({showTranscript:!st.showTranscript})),
+      transcriptText: transcriptLines.join('\n'),
+      downloadTranscript:(e)=>{ if(e&&e.stopPropagation) e.stopPropagation(); const blob=new Blob([transcriptLines.join('\n')],{type:'text/plain'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='Discharge_Meeting_Transcript.txt'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); },
+      // step4
+      medReviewed:s.medReviewed, medReviewedBox: s.medReviewed?boxOn:boxOff, toggleMedReviewed:()=>this.setState(st=>({medReviewed:!st.medReviewed})),
+      medSigned: !!s.signed.medlist,
+      sendMedForSign:()=>this.setState({medSent:true}),
+      sendMedLabel: s.signed.medlist?'Approved by Physician': s.medSent?'Sent — awaiting signature':'Send to Physician for Signature',
+      sendMedIcon: s.signed.medlist?'check-circle-2': s.medSent?'clock':'send',
+      sendMedBtnStyle: s.signed.medlist
+        ? `background:#eafaf0;color:#0f5f33;border:1px solid #bfe8cd;border-radius:9px;padding:9px 16px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:7px;cursor:default;`
+        : s.medSent
+          ? `background:#fff8ed;color:#7a4a06;border:1px solid #f6e3bf;border-radius:9px;padding:9px 16px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:7px;cursor:pointer;`
+          : `background:#a8085a;color:#fff;border:none;border-radius:9px;padding:9px 16px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:7px;cursor:pointer;`,
+      medOrderToggle,
+      addressKnown, addressUnknown: !addressKnown,
+      pharmSearch:s.pharmSearch, onPharmSearch:(e)=>this.setState({pharmSearch:e.target.value}), noPharmMatch,
+      downloadMedList:()=>{ const lines=['DISCHARGE MEDICATION LIST — '+s.residentName,'Generated '+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'numeric'}),'','1. Lisinopril 10mg — once daily','2. Metformin 500mg — twice daily','3. Atorvastatin 20mg — nightly','4. Aspirin 81mg — once daily']; const blob=new Blob([lines.join('\n')],{type:'text/plain'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='Med_List_'+(s.residentName||'Resident').replace(/\s+/g,'_')+'.txt'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); },
+      pharmacies, pharmacySent:s.pharmacySent, pharmacyFaxBtnStyle, pharmacyFaxLabel,
+      sendPharmacyFax:()=>{ if(faxReady && !s.pharmacySent) this.setState({pharmacySent:true}); },
+      pharmacySentBox: s.pharmacySent?rowOn:rowOff,
+      togglePharmacySent:()=>this.setState(st=>({pharmacySent:!st.pharmacySent})),
+      // step5
+      docChecklist, prepChecklist, referralSummary,
+      dmeStatusOptions, acceptedAgencyList, multiAgency,
+      pharmacyNotRequired:s.pharmacyNotRequired, pharmacyNotReqBox: s.pharmacyNotRequired?rowOn:rowOff,
+      // Turning "Not required" on clears any pharmacy selection and locks the search.
+      togglePharmacyNotRequired:()=>this.setState(st=>(st.pharmacyNotRequired
+        ? { pharmacyNotRequired:false }
+        : { pharmacyNotRequired:true, pharmacy:'', pharmacyName:'', pharmacyDetail:'', pharmacyQuery:'', pharmacyFocused:false, pharmacySent:false })),
+      pharmacySearchLabelStyle: 'font-size:13px; font-weight:600; margin:14px 0 7px; color:'+(s.pharmacyNotRequired?'#98a2b3':'#475467')+';',
+      pharmacySearchBoxStyle: 'display:flex; align-items:center; gap:9px; border:1px solid #e5e7eb; border-radius:9px; padding:9px 12px; background:'+(s.pharmacyNotRequired?'#f4f5f7':'#fff')+';',
+      pharmacySearchInputStyle: 'flex:1 1 auto; border:none; outline:none; font-size:14px; font-family:inherit; background:transparent; color:'+(s.pharmacyNotRequired?'#98a2b3':'#374151')+'; cursor:'+(s.pharmacyNotRequired?'not-allowed':'text')+';',
+      pharmacySearchPlaceholder: s.pharmacyNotRequired ? 'Not required — handled through another system' : 'Search pharmacy by name, city or ZIP', showPharmSelect: !s.pharmacyNotRequired, pharmSelectStyle: s.pharmacyNotRequired?'display:none':'',
+      pharmacyPending: !s.pharmacySent && s.role==='staff',
+      dischargeComplete:s.dischargeDone,
+      // action bar
+      printDischargeOrder: ()=>{ window.print(); },
+      primaryAction:this.primary, primaryActionLabel: (s.step===2) ? step2PrimaryLabel : primaryLabels[s.step-1],
+      // physician
+      physIsQueue: s.physView==='queue', physIsDetail: s.physView==='detail',
+      pendingSigns, noPending: pending.length===0,
+      physDetailResident: sel?sel.resident:'', physDetailType: sel?sel.type:'',
+      physDetailSigned: physSelSigned,
+      medRows, physTabs,
+      physBack:this.physBack,
+      physAddSign:()=>{ if(sel && !s.signed[sel.id]) this.setState(st=>({signed:{...st.signed,[sel.id]:'preview'}})); },
+      addSignLabel: physSelSigned?'Signed':'Add Sign', addSignStyle, submitStyle,
+      physSubmit:()=>{ if(sel) this.setState(st=>({signed:{...st.signed,[sel.id]:true}, physView:'queue', physSel:null})); },
+      // role switch
+      setStaff:()=>this.setState({role:'staff'}), setPhysician:()=>this.setState({role:'physician'}),
+      physBadge: unsignedCount>0 ? String(unsignedCount) : '',
+      staffTabStyle: `display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:24px;border:none;font-size:14px;font-weight:600;cursor:pointer;color:${s.role==='staff'?'#14171c':'#8b929e'};background:${s.role==='staff'?'#fff':'transparent'};`,
+      physTabStyle: `display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:24px;border:none;font-size:14px;font-weight:600;cursor:pointer;color:${s.role==='physician'?'#14171c':'#8b929e'};background:${s.role==='physician'?'#fff':'transparent'};`,
+    };
+  }
+
+  destText(d){ return d==='Home'?'Home': d==='ALF'?'Assisted Living (ALF)': d==='Board & Care'?'Board & Care': d==='Other'?'Other': d; }
+}
+</script>
+</body>
+</html>

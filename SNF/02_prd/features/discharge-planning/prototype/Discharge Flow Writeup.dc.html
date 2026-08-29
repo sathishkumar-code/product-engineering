@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  a { color: #c2185b; text-decoration: none; }
+  a:hover { color: #8e1044; text-decoration: underline; }
+  ::selection { background: #fbdce8; }
+</style>
+</helmet>
+<div style="min-height:100vh; background:#f4f2ef; font-family:Inter, sans-serif; color:#26221f; padding:56px 24px; -webkit-font-smoothing:antialiased;">
+  <article style="max-width:820px; margin:0 auto; background:#fffdfb; border:1px solid #e7e2db; border-radius:6px; box-shadow:0 1px 3px rgba(0,0,0,0.04); padding:64px 72px 80px;">
+
+    <!-- MASTHEAD -->
+    <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding-bottom:20px; border-bottom:2px solid #26221f;">
+      <div style="font-family:Inter; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#c2185b;">Shashi.ai · Senior Living</div>
+      <div style="font-family:Inter; font-size:11px; font-weight:500; letter-spacing:0.06em; color:#9c948a;">Flow Write-up · Draft for Review</div>
+    </div>
+
+    <h1 style="font-family:Newsreader, serif; font-weight:500; font-size:38px; line-height:1.12; letter-spacing:-0.01em; margin:32px 0 12px;">Safe Discharge Plan for SNF Residents</h1>
+    <p style="font-family:Newsreader, serif; font-size:19px; line-height:1.5; color:#5c554d; margin:0 0 8px; max-width:60ch; text-wrap:pretty;">A guided, five-step workflow that helps a Skilled Nursing Facility methodically move a resident from “ready for discharge” to “safely home,” with the right orders signed, documents sent, meeting held, medications approved, and every checklist item confirmed.</p>
+    <p style="font-size:13px; color:#9c948a; margin:16px 0 0;">This document describes my understanding of the flow from your team's screens and process notes. Mark it up and I'll fold in corrections before we touch the designs and build the click-through demo.</p>
+
+    <!-- FLOW AT A GLANCE -->
+    <section style="margin-top:44px;">
+      <div style="font-family:Inter; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#c2185b; margin-bottom:18px;">The flow at a glance</div>
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <div style="display:flex; gap:16px; align-items:flex-start; padding:14px 0; border-bottom:1px solid #efeae3;">
+          <div style="flex:0 0 28px; height:28px; border-radius:50%; background:#c2185b; color:#fff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;">{{ s.n }}</div>
+          <div style="flex:1 1 auto;">
+            <div style="font-size:15px; font-weight:600; color:#26221f;">{{ s.title }}</div>
+            <div style="font-size:13.5px; color:#6b645b; line-height:1.5; margin-top:2px;">{{ s.blurb }}</div>
+          </div>
+          <div style="flex:0 0 auto; font-size:11px; font-weight:600; letter-spacing:0.04em; color:#b7ada2; padding-top:3px;">{{ s.actor }}</div>
+        </div>
+      </sc-for>
+    </section>
+
+    <!-- STEP DETAILS -->
+    <sc-for list="{{ detail }}" as="d" hint-placeholder-count="5">
+      <section style="margin-top:52px;">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:6px;">
+          <div style="font-family:Newsreader, serif; font-size:15px; font-weight:600; color:#c2185b;">Step {{ d.n }}</div>
+          <div style="height:1px; flex:1; background:#e7e2db;"></div>
+        </div>
+        <h2 style="font-family:Newsreader, serif; font-weight:500; font-size:27px; line-height:1.2; margin:0 0 4px;">{{ d.title }}</h2>
+        <p style="font-size:14.5px; color:#6b645b; line-height:1.55; margin:0 0 20px; max-width:62ch; text-wrap:pretty;">{{ d.intro }}</p>
+
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#8e857a; margin:0 0 10px;">What happens on this screen</div>
+        <ul style="margin:0 0 22px; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:9px;">
+          <sc-for list="{{ d.points }}" as="p" hint-placeholder-count="4">
+            <li style="display:flex; gap:11px; font-size:14.5px; line-height:1.5; color:#3a352f;">
+              <span style="flex:0 0 auto; width:6px; height:6px; border-radius:50%; background:#c2185b; margin-top:8px;"></span>
+              <span style="flex:1;">{{ p }}</span>
+            </li>
+          </sc-for>
+        </ul>
+
+        <sc-if value="{{ d.hasGate }}" hint-placeholder-val="{{ true }}">
+          <div style="background:#fdf0f5; border:1px solid #f6cfe0; border-radius:5px; padding:14px 18px; margin-bottom:18px;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#c2185b; margin-bottom:4px;">Advances when</div>
+            <div style="font-size:14px; color:#4a443d; line-height:1.5;">{{ d.gate }}</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ d.hasQ }}" hint-placeholder-val="{{ true }}">
+          <div style="background:#f7f4f0; border-left:3px solid #d8a900; border-radius:0 4px 4px 0; padding:12px 18px;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#a58200; margin-bottom:6px;">Open questions for you</div>
+            <ul style="margin:0; padding-left:18px; display:flex; flex-direction:column; gap:5px;">
+              <sc-for list="{{ d.questions }}" as="q" hint-placeholder-count="2">
+                <li style="font-size:13.5px; color:#5c554d; line-height:1.45;">{{ q }}</li>
+              </sc-for>
+            </ul>
+          </div>
+        </sc-if>
+      </section>
+    </sc-for>
+
+    <!-- PHYSICIAN MOBILE -->
+    <section style="margin-top:56px; background:#faf7f3; border:1px solid #ece6de; border-radius:6px; padding:32px 36px;">
+      <div style="font-family:Inter; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#c2185b; margin-bottom:8px;">Runs alongside · Physician mobile app</div>
+      <h2 style="font-family:Newsreader, serif; font-weight:500; font-size:24px; margin:0 0 10px;">Pending Sign — physician signature loop</h2>
+      <p style="font-size:14.5px; color:#5c554d; line-height:1.55; margin:0 0 16px; max-width:62ch; text-wrap:pretty;">Steps 1 and 4 both send documents out to the attending physician for signature. On the physician's phone these land in a <strong>Pending Sign</strong> queue — each item tagged by type (e.g. Advanced Care Directive, Medication List) and sender. Opening one shows the full document; the physician taps <strong>Add Sign</strong>, then <strong>Submit</strong>. The signed status flows back into the SNF workflow, unblocking the relevant step.</p>
+      <ul style="margin:0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:8px;">
+        <li style="display:flex; gap:11px; font-size:14px; color:#3a352f; line-height:1.5;"><span style="flex:0 0 auto; width:6px; height:6px; border-radius:50%; background:#c2185b; margin-top:7px;"></span><span>Queue view: list of documents awaiting this physician's signature, with resident name, document type, and requested date.</span></li>
+        <li style="display:flex; gap:11px; font-size:14px; color:#3a352f; line-height:1.5;"><span style="flex:0 0 auto; width:6px; height:6px; border-radius:50%; background:#c2185b; margin-top:7px;"></span><span>Detail view: renders the document (medication summary, order form) and offers Add Sign + Submit.</span></li>
+        <li style="display:flex; gap:11px; font-size:14px; color:#3a352f; line-height:1.5;"><span style="flex:0 0 auto; width:6px; height:6px; border-radius:50%; background:#c2185b; margin-top:7px;"></span><span>On submit, the item is marked signed and the SNF sees the updated status (e.g. “Approved by Physician”).</span></li>
+      </ul>
+    </section>
+
+    <!-- CROSS-CUTTING -->
+    <section style="margin-top:52px;">
+      <div style="font-family:Inter; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#c2185b; margin-bottom:16px;">Things that run across every step</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+        <sc-for list="{{ crosscut }}" as="c" hint-placeholder-count="4">
+          <div style="border:1px solid #e7e2db; border-radius:5px; padding:16px 18px; background:#fffdfb;">
+            <div style="font-size:14px; font-weight:600; color:#26221f; margin-bottom:4px;">{{ c.t }}</div>
+            <div style="font-size:13px; color:#6b645b; line-height:1.5;">{{ c.d }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- OPEN QUESTIONS SUMMARY -->
+    <section style="margin-top:52px; border-top:2px solid #26221f; padding-top:28px;">
+      <h2 style="font-family:Newsreader, serif; font-weight:500; font-size:24px; margin:0 0 14px;">What I need from you to finalize</h2>
+      <ol style="margin:0; padding-left:20px; display:flex; flex-direction:column; gap:10px;">
+        <sc-for list="{{ asks }}" as="a" hint-placeholder-count="5">
+          <li style="font-size:14.5px; color:#3a352f; line-height:1.5; padding-left:4px;">{{ a }}</li>
+        </sc-for>
+      </ol>
+      <p style="font-size:13px; color:#9c948a; margin:26px 0 0; line-height:1.5;">Next step after your review: apply corrections here, then rebuild the five screens + physician mobile app as a connected, click-through demo.</p>
+    </section>
+
+  </article>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      steps: [
+        { n: 1, title: "Home Health Order", blurb: "Capture the resident, the services needed, DME and labs, then send the order to the physician for signature.", actor: "SNF STAFF" },
+        { n: 2, title: "Referral & Documents", blurb: "Assemble the required reports and send the full referral packet to one or more home health agencies.", actor: "SNF STAFF" },
+        { n: 3, title: "Discharge Planning Meeting", blurb: "Schedule and hold the meeting; capture home support, meds pickup, transport, follow-ups and caregiver training.", actor: "CARE TEAM" },
+        { n: 4, title: "Medication & Approval", blurb: "Get the medication list signed by the physician and confirm a month of medication is ordered.", actor: "SNF + MD" },
+        { n: 5, title: "Final Discharge Checklist", blurb: "Verify every documentation and resident-prep item, set delivery status, and complete the discharge.", actor: "SNF STAFF" },
+      ],
+      detail: [
+        {
+          n: 1, title: "Home Health Order", hasGate: true, hasQ: true,
+          intro: "The starting point. Staff confirm who is being discharged and what home services and equipment they'll need, then route the order to the attending physician for signature.",
+          points: [
+            "Resident Information — name, date of birth, attending physician, order date (prefilled from the resident record where possible).",
+            "Discharge Details — where the resident is being discharged to and the discharge date.",
+            "Required Home Services — check any of: Skilled Nursing (RN/LVN), Physical Therapy, Occupational Therapy, Medical Social Worker, Speech Therapy, Home Health Aide.",
+            "Additional Orders & Follow-up — has any DME been ordered? Are there lab orders for the home health nurse to complete?",
+            "Additional notes free-text field, then Save or Send Referral to Physician for Signature.",
+          ],
+          gate: "The Home Health Order form is completed and sent to the physician for signature. (For an ALF this is Form 602, signed by physician.)",
+          questions: [
+            "Confirm the ALF vs SNF distinction — is Form 602 a separate template selected by facility type, or a variant of the same order form?",
+            "Should DME details be captured here as a list, or just a yes/no flag with detail entered later?",
+          ],
+        },
+        {
+          n: 2, title: "Referral & Documents", hasGate: true, hasQ: false,
+          intro: "Staff gather the documents the home health agency needs and transmit the whole packet. The signed Home Health Order from Step 1 travels with it.",
+          points: [
+            "Required Reports checklist (shows N of N uploaded): Face sheet, Rehab status, Rehab notes, Medication list, Wound care report — each with view / replace / delete actions.",
+            "Additional Documents — drag-and-drop upload area for any extra files (PDF/JPG/PNG).",
+            "Send to Home Health Agency — select one or more agencies and send all documents at once; changes auto-save.",
+          ],
+          gate: "All required reports are uploaded and the packet has been sent to the selected agency (or agencies).",
+        },
+        {
+          n: 3, title: "Discharge Planning Meeting", hasGate: true, hasQ: true,
+          intro: "The care team schedules and runs the discharge planning meeting, aligning family, staff, and logistics before the resident goes home.",
+          points: [
+            "Schedule form — meeting type, resident, family members, care team, date, time, estimated duration, location (in-person / call), optional agenda, and meeting status.",
+            "Meeting focus areas surfaced as prompts: who helps at home, where medications will be picked up, transport arrangements, follow-up appointments, and whether caregiver training is required.",
+            "After the meeting: an auto-generated AI Summary of decisions (discharge date, who assists, meds pickup, follow-up appointments, services arranged) plus the full transcript.",
+          ],
+          gate: "The meeting is scheduled/held and its outcomes (summary) are captured.",
+          questions: [
+            "The AI Summary and Transcript imply the meeting audio is recorded and transcribed — confirm this is in scope for the demo, or should it be mocked with sample content?",
+          ],
+        },
+        {
+          n: 4, title: "Medication & Approval", hasGate: true, hasQ: true,
+          intro: "The medication list is reviewed, signed by the physician, and confirmed ordered. This step uses the same physician signature loop as Step 1.",
+          points: [
+            "Medication List document — view, then mark Medication List Reviewed and Send Medication List to Physician for Signature.",
+            "Once signed, the document shows an 'Approved by Physician' status.",
+            "One Month Medication — confirm whether a month of medication has been ordered (yes/no) and record the date ordered.",
+          ],
+          gate: "The medication list is signed by the physician and a month of medication is confirmed ordered.",
+          questions: [
+            "Your notes ask: upon signing, the list is faxed to the pharmacy — who sends the fax, and from where? Is this an automated send from the app or a manual staff action we just log?",
+          ],
+        },
+        {
+          n: 5, title: "Final Discharge Checklist", hasGate: true, hasQ: false,
+          intro: "The final gate. Everything from the prior steps is verified, delivery details are set, and the discharge is marked complete.",
+          points: [
+            "Documentation Checklist — Physician Orders Signed, Referral Sent to Agency, All Required Documents Uploaded, Medication List Signed.",
+            "Resident Preparation Checklist — DME Delivered to Home, Transportation Confirmed, Home Address Verified, Caregiver Training Completed, Follow-up Appointment Scheduled.",
+            "Final Notes, plus Delivery Status (status, discharge date, discharge time).",
+            "Referral Summary — resident, agency, discharge date, destination (name + address, prefilled from PCC), transportation, and primary caregiver.",
+          ],
+          gate: "All checklist items are confirmed and delivery status is set to Completed — discharge is done.",
+        },
+      ],
+      crosscut: [
+        { t: "Persistent stepper", d: "A 5-step progress bar sits at the top of every screen showing Complete / In Progress / Pending, so staff always know where they are." },
+        { t: "Resident context bar", d: "Resident name, discharge date, destination, overall progress %, and draft/status are shown throughout." },
+        { t: "Facility header", d: "Redwood Grove facility name, address, phone, fax, and email appear on each step for the outgoing paperwork." },
+        { t: "Auto-save + draft state", d: "Work saves as a draft as staff go; Cancel / Save / Continue actions anchor the bottom of each screen." },
+      ],
+      asks: [
+        "ALF vs SNF: is Form 602 handled as a separate order template, and how is the facility type chosen?",
+        "Medication fax to pharmacy — who sends it and from where; automated or manual-and-logged?",
+        "Discharge planning meeting recording/transcription + AI summary — real or mocked for the demo?",
+        "Which fields are prefilled from PCC beyond the home address, and is PCC integration mocked for now?",
+        "Roles for the demo: which steps are done by SNF staff vs care team vs physician, and do we need a login/role switch?",
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
