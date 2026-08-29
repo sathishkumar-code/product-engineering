@@ -6,24 +6,38 @@ folder, and template involved so this doubles as an index.
 
 ## The agents
 
-Four Cowork-hosted personas run the Plan/Design portion of this pipeline; three
-Hermes-hosted personas (one instance each per code repo) extend it into
-Build/Test/Deploy — see Stages 11-14 below and `_reference/team-structure.md`.
+One Cowork-hosted persona — Process Architect — maintains this pipeline. Six
+Hermes-hosted personas run everything else: Product Manager, System Architect,
+and Project Manager (one shared instance each, moved from Cowork 2026-08-29)
+cover Plan/Design; Developer, QA Engineer, and DevOps Engineer (one instance
+each per code repo) extend it into Build/Test/Deploy — see Stages 11-14 below
+and `_reference/team-structure.md`.
 
 | Agent | Host | Context | Writes to |
 |---|---|---|---|
-| **Product Manager** | Cowork | Drive-synced `shashi-care-docs/` only | PRDs, Bug Reports, Enhancement Requests, Epics/Stories, test scenarios/cases, roadmap, release plans |
-| **System Architect** | Cowork | Drive-synced folder **plus** local checkouts of all three GitLab repos (Shashi-Care-Core-docs, SAL-docs, SNF-docs) | Review-comments files, Technical Designs, technical debt register, compliance register — Drive only, **never** commits into the GitLab checkouts |
-| **Project Manager** | Cowork | Drive-synced folder, plus ClickUp | ClickUp Epics/Stories/Tasks, sprint docs, the two sync logs (mapping-log.md, promotion-log.md) |
+| **Product Manager** | Hermes (shared instance) | `product-engineering/`'s manually-synced mirror of `shashi-care-docs/` | PRDs, Bug Reports, Enhancement Requests, Epics/Stories, test scenarios/cases, roadmap, release plans |
+| **System Architect** | Hermes (shared instance) | `product-engineering/`'s mirror of `shashi-care-docs/` **plus** local checkouts of all three GitLab repos (Shashi-Care-Core-docs, SAL-docs, SNF-docs) | Review-comments files, Technical Designs, technical debt register, compliance register — the mirror only, **never** commits into the GitLab checkouts |
+| **Project Manager** | Hermes (shared instance) | `product-engineering/`'s mirror of `shashi-care-docs/`, plus ClickUp | ClickUp Epics/Stories/Tasks, sprint docs, the two sync logs (mapping-log.md, promotion-log.md) |
 | **Process Architect** | Cowork | Drive-synced folder | `_agent-instructions/`, `templates/`, `_reference/` — sole author for both Cowork and Hermes; accepts proposals but not edits from either |
 | **Developer** | Hermes (per code repo) | Its assigned code repo, plus read access to that slug's tech-spec/spec.md/epics-stories.md | Code, `implementation-note-<slug>.md`; its own tracker item's status only |
 | **QA Engineer** | Hermes (per code repo) | Its assigned code repo, plus read access to that slug's test-scenarios/test-cases | `qa-execution-report-<slug>.md`, Bug Reports (via Product Manager's template); its own tracker item's status only |
 | **DevOps Engineer** | Hermes (per code repo) | Its assigned code repo, plus the release plan | `deployment-record-<release-slug>.md` in `01_releases/`; executes production promotion |
 
-All seven read from the same shared `shashi-care-docs` files — Cowork through
-pasted Instructions, Hermes by reading the files directly (same content, not a
-copy). All product-facing personas read the same three product folders:
+All seven read from the same underlying content, but not identically: Process
+Architect (Cowork) and Developer/QA/DevOps (Hermes) all read `shashi-care-docs`
+directly — same content, not a copy, zero drift risk. Product Manager, System
+Architect, and Project Manager (Hermes) instead read a manually-synced mirror of
+`shashi-care-docs` kept in `product-engineering/` — a deliberate exception made
+2026-08-29 when these three moved off Cowork, accepted in exchange for a
+required manual sync step; see "Hermes copy sync convention" in
+`shashi-care-process-architect-config.md` for the drift risk and its mitigation.
+All product-facing personas read the same three product folders:
 `shashi-care-core/`, `SAL/`, `SNF/`.
+
+**Note on the diagram below**: node labels like "PM agent" and "SA agent"
+describe responsibilities, not hosting — as of 2026-08-29 these run as
+Hermes-hosted Claude Code CLI sessions rather than Cowork chat. The flow,
+gates, and document handoffs are unchanged.
 
 ```mermaid
 flowchart TD
@@ -199,7 +213,7 @@ technically-unreviewed document.
 
 - Manual requirement grooming meeting with the dev team, using the promoted PRD,
   prototype (if one exists), Technical Design, and the Spec/Tech-Spec pair.
-- Questions arrive outside any Cowork session — chat, email, the grooming
+- Questions arrive outside any PM/SA working session — chat, email, the grooming
   discussion itself, or **Notion** (the team's preferred way to read and comment
   on a PRD or TD — they own and manage this copy entirely, ad hoc, no fixed
   cadence, no agent involvement). Sathish picks them up, edits the **Drive** PRD
@@ -536,5 +550,6 @@ anything; sign-off stays with System Architect and Sathish as always.
 | `skill-qa-discipline.md` / `shashi-care-qa-config.md` | QA Engineer agent instructions (Hermes, one instance per code repo) |
 | `skill-devops-discipline.md` / `shashi-care-devops-config.md` | DevOps Engineer agent instructions (Hermes, one instance per code repo) |
 | `templates/*.md`, `templates/*.xlsx` | All document templates referenced above, including `implementation-note-template.md`, `qa-execution-report-template.md`, `deployment-record-template.md` |
-| `cowork-instructions-{PM,SA,PjM,ProcessArchitect}.md` | Paste-ready, pre-concatenated Instructions for each Cowork project |
+| `cowork-instructions-ProcessArchitect.md` | Paste-ready, pre-concatenated Instructions for the one remaining Cowork project |
+| `cowork-instructions-{PM,SA,PjM}.md` | Frozen as of 2026-08-29 when these three moved to Hermes — dormant-fallback artifacts only, not part of the active rebuild convention; would need a manual rebuild + re-paste before that fallback could be reactivated |
 | `hipaa-compliance-check-skill.zip` | Installable Cowork Skill (account-level, not Instructions) — cross-cutting HIPAA checks across all sessions |

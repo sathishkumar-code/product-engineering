@@ -1,6 +1,7 @@
 # Skill: Shared Doc Tree Template
 
-Generic folder shape for a three-persona (PM / SA / PjM) Cowork setup. Copy and
+Generic folder shape for a three-persona (PM / SA / PjM) setup, regardless of
+hosting (Cowork, Hermes, or otherwise). Copy and
 instantiate per project — fill in product/team names, don't edit this file directly.
 
 ```

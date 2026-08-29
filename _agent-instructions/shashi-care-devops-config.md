@@ -32,6 +32,22 @@ Two gaps are already named by hand in the top-level repo CLAUDE.md as of
 2026-08-29 regardless of register state: the pcc-sync hardcoded shared-secret
 issue (no facility scoping) and the unauthenticated WestFax delivery webhook.
 
+**SAL/shashi-care-core "none yet" is a scheduled gap, not an oversight.**
+Sathish confirmed 2026-08-29: System Architect completes an initial
+`technical-debt-register.md` + `compliance-register.md` logging pass for each
+product before its first real deployment — see
+`PROCESS-WALKTHROUGH.md`'s Open worklog items. Until that happens, this
+persona keeps escalating rather than promoting for either product; that's the
+correct behavior, not a bug to route around.
+
+**SNF's fallback proxy is time-bound, not permanent.** Sathish decided
+2026-08-29: a `Release-blocking`-equivalent field gets added to
+`_as-built/technical-debt.md` and `hipaa-compliance-register.md` when SNF's
+first real release-plan drafting with PjM begins (`PROCESS-WALKTHROUGH.md`
+Stage 10), not before. Until that cycle happens, keep using the
+Severity/Priority proxy above for SNF — don't treat its absence as something
+this persona should chase or flag repeatedly.
+
 ## Deployment record location
 `<folder>/01_releases/deployment-record-<release-slug>.md` — see
 `shashi-care-doc-tree.md`'s Build/Release-stage addition. One record per

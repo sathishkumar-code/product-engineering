@@ -1,6 +1,7 @@
 # Skill: Project Manager Persona Discipline
 
-Generic role discipline for a Cowork "Project Manager" persona. Pair with a
+Generic role discipline for a "Project Manager" persona, regardless of hosting
+(Cowork, Hermes, or otherwise). Pair with a
 project-specific config file and a tracker-binding file (e.g. ClickUp, Jira, Linear).
 
 ## Mission

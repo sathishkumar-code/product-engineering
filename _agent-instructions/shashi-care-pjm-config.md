@@ -21,7 +21,22 @@ doc-tree folders one-to-one (see the binding file for the mapping and shared-sco
 policy).
 
 ## Doc root
-`{DRIVE_ROOT}/shashi-care-docs/` (same Google Drive–synced folder as PM/SA).
+**As of 2026-08-29, hosted in Hermes.** `{PRODUCT_ENG_ROOT}/product-engineering/`'s
+manually-synced mirror of `shashi-care-docs/` (same mirror as PM/SA) — **not** a
+live read of the Google-Drive-synced folder Process Architect and
+Developer/QA/DevOps use. This mirror only reflects a Process Architect edit
+once Sathish has manually copied the changed file(s) over; see "Hermes copy
+sync convention" in `shashi-care-process-architect-config.md`. If something
+here looks stale, that's the first thing to check, not a reason to assume the
+source document changed.
+
+## Access (Hermes) — not yet configured
+This persona's ClickUp access (its exclusive tracker-write ownership — see
+`shashi-care-clickup-binding.md`) is **not yet confirmed reachable from the
+Hermes/WSL Claude Code CLI environment as of the 2026-08-29 move**. Until
+Sathish confirms ClickUp is reachable, treat any tracker-write task as blocked
+and escalate rather than assuming access exists or silently deferring the
+write.
 
 ## Storage paths (relative to doc root, per folder)
 - Release plans: `SAL/01_releases/SAL-release-plan.xlsx`,

@@ -20,9 +20,9 @@ directly" section for the general method this follows.
 > mechanical phase to split off. No per-task decision needed here.
 
 ## Context (four folders, not one)
-This Cowork project's Context includes the Drive-synced `shashi-care-docs/` **plus
-local checkouts of all three GitLab docs repos**: Shashi-Care-Core-docs, SAL-docs,
-SNF-docs. The GitLab checkouts exist specifically to review team-submitted
+This persona's Hermes session context includes the manually-synced
+`product-engineering/` mirror of `shashi-care-docs/` **plus local checkouts of
+all three GitLab docs repos**: Shashi-Care-Core-docs, SAL-docs, SNF-docs. The GitLab checkouts exist specifically to review team-submitted
 Technical Designs in each repo's `architecture-submissions/` folder — **read-only**,
 this persona never commits into any checkout; all output (verdicts, comments)
 goes to that slug's Drive-side SA-comments-<slug>.md regardless of which repo the
@@ -36,7 +36,22 @@ that mismatch rather than letting a Core-labeled doc quietly encode SNF-only
 reality.
 
 ## Doc root
-`{DRIVE_ROOT}/shashi-care-docs/` (same Google Drive–synced folder as PM/PjM).
+**As of 2026-08-29, hosted in Hermes.** `{PRODUCT_ENG_ROOT}/product-engineering/`'s
+manually-synced mirror of `shashi-care-docs/` (same mirror as PM/PjM) — **not**
+a live read of the Google-Drive-synced folder Process Architect and
+Developer/QA/DevOps use. This mirror only reflects a Process Architect edit
+once Sathish has manually copied the changed file(s) over; see "Hermes copy
+sync convention" in `shashi-care-process-architect-config.md`. If something
+here looks stale, that's the first thing to check, not a reason to assume the
+source document changed.
+
+## Access (Hermes) — not yet configured
+This persona's GitLab checkouts (Shashi-Care-Core-docs, SAL-docs, SNF-docs, for
+reviewing submitted Technical Designs) are separate from the Google Drive/GitLab
+*promotion* binding Product Manager and Project Manager also reference. **As of
+the 2026-08-29 move to Hermes, reachability of both is not yet confirmed** from
+the Hermes/WSL Claude Code CLI environment — escalate to Sathish rather than
+assume either works.
 
 ## Ground truth
 `SNF/02_prd/_as-built/` and `SNF/03_architecture/_as-built/` are the real ground

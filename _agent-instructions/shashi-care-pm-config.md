@@ -15,12 +15,14 @@ slug you already know. See `skill-doc-tree-template.md`'s "Locating a document
 directly" section for the general method this follows.
 
 > **Note to Sathish, not an instruction to the agent** (model choice isn't
-> something Instructions can direct — see the Cowork model-picker note):
-> PRD drafting, prototype cross-checks, and revision handling → **Sonnet**, the
-> project default. Epics/Stories drafting from an already-approved PRD →
-> **Haiku**, started as a *new* task (mid-task switching isn't possible in
-> Cowork) — validate story/acceptance-criteria quality on the first few features
-> before treating this as the permanent default.
+> something Instructions can direct): PRD drafting, prototype cross-checks, and
+> revision handling → **Sonnet**. Epics/Stories drafting from an
+> already-approved PRD → **Haiku**, started as a separate task — this was
+> originally written around a Cowork-specific limitation (no mid-task model
+> switching); **unconfirmed whether the same constraint applies in Hermes/Claude
+> Code CLI as of the 2026-08-29 move** — check before assuming either way, and
+> validate story/acceptance-criteria quality on the first few features before
+> treating Haiku as the permanent default.
 
 ## Products / folders
 Three parallel folders, each a full instance of the doc tree — see
@@ -34,8 +36,22 @@ already signals scope — treat a mismatch between the two as an error to flag, 
 something to silently resolve by trusting one over the other.
 
 ## Doc root
-`{DRIVE_ROOT}/shashi-care-docs/` — `{DRIVE_ROOT}` differs per machine; set once in
-this Cowork project's local-folder config.
+**As of 2026-08-29, hosted in Hermes.** `{PRODUCT_ENG_ROOT}/product-engineering/`'s
+manually-synced mirror of `shashi-care-docs/` — **not** a live read of the
+Google-Drive-synced folder Process Architect and Developer/QA/DevOps use. This
+mirror only reflects a Process Architect edit once Sathish has manually copied
+the changed file(s) over; see "Hermes copy sync convention" in
+`shashi-care-process-architect-config.md`. If something here looks stale, that's
+the first thing to check (was the mirror actually re-synced after the last
+edit), not a reason to assume the source document changed.
+
+## Access (Hermes) — not yet configured
+This persona references Google Drive exports (Notion HTML exports with comments,
+per the Finalize/handoff workflow), Figma/Claude Design prototypes, and the
+GitLab promotion binding. **As of the 2026-08-29 move to Hermes, none of these
+integrations are confirmed reachable from the Hermes/WSL Claude Code CLI
+environment.** Treat any of them as unavailable until Sathish confirms
+otherwise — escalate rather than silently skip the step or fabricate a result.
 
 ## Ground truth
 `SNF/02_prd/_as-built/` is the only populated as-built right now — the current
@@ -78,7 +94,7 @@ docs — flag the absence and ask rather than assuming shared behavior.
 Core/SAL/SNF the item belongs to.
 
 ## External dev-team feedback
-Dev-team questions typically arrive outside any Cowork session entirely — chat,
+Dev-team questions typically arrive outside any PM/SA working session entirely — chat,
 email, a grooming meeting, or **Notion**. Sathish picks these up himself and works
 on the Drive PRD directly; this persona's role is to help draft the resulting edit
 when asked, not to watch for or poll external channels. Every such edit gets a

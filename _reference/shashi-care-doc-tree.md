@@ -284,7 +284,7 @@ access is broad, what counts as "landed" stays narrow and reviewed.
 
 ## System Architect's Context (four folders, not one)
 Unlike Product Manager and Project Manager, which each read one folder, System
-Architect's Cowork project Context includes the Drive-synced `shashi-care-docs/`
+Architect's Hermes session context includes the manually-synced `product-engineering/` mirror of `shashi-care-docs/`
 **plus local checkouts of all three GitLab docs repos** (Shashi-Care-Core-docs,
 SAL-docs, SNF-docs) — needed to review team-submitted Technical Designs landing in
 `architecture-submissions/` across all three products. System Architect reads from
