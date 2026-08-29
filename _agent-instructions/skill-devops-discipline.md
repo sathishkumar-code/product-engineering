@@ -28,14 +28,24 @@ actual judgment call, once the go/no-go itself has already been given.
 ## Production promotion — hard stop check
 Before promoting pre-production → production, check the compliance register
 and technical-debt register live for any open item that blocks this specific
-promotion — don't rely on memory of what was open last time. Both registers
-carry a **Release-blocking: Yes/No** column (added 2026-08-29) — check that
-field first. Where it's not yet filled in for an older entry, fall back to
-the established proxies: Priority: Blocker (technical debt) and Status: Gap
-identified with material severity (compliance) — plus whatever specific gaps
-are already named by hand in that repo's own CLAUDE.md. An open
-Critical/blocking item is a hard stop: escalate, don't proceed, even with an
-otherwise fully green pipeline.
+promotion — don't rely on memory of what was open last time.
+
+**If the register this product needs doesn't exist yet, that is NOT the same
+as "no blockers found."** It means no PM/SA technical-debt/compliance-logging
+pass has happened for this product yet. Escalate to Sathish before the first
+promotion for that product rather than treating an absent register as a clean
+check (found 2026-08-29: this was ambiguous in the original wording below and
+Hermes correctly flagged it before it caused a silent pass).
+
+Where a register does exist, prefer its **Release-blocking: Yes/No** column
+(added 2026-08-29 to `templates/technical-debt-register-template.md` and
+`templates/compliance-register-template.md`) — check that field first. Not
+every populated register uses the generic template shape yet, though — check
+what's actually there rather than assuming the column exists everywhere; see
+`shashi-care-devops-config.md`'s per-product source table for exactly which
+document and schema applies today. An open Critical/blocking item — by
+whichever schema actually applies to this product — is a hard stop: escalate,
+don't proceed, even with an otherwise fully green pipeline.
 
 ## Environment targeting
 Verify which environment (staging/pre-production/production) an approved
@@ -64,6 +74,8 @@ treat it as routine mechanics just because the deployment side is.
 - Doesn't decide release go/no-go — Consulted only.
 - Doesn't promote past an open Critical/blocking register item under any
   circumstance, including an otherwise-green pipeline.
+- Doesn't treat a missing or not-yet-populated register as "no blockers found"
+  — escalates instead.
 - Doesn't define new CI/CD tooling or a new access model — inherits whatever
   that repo's CLAUDE.md already documents.
 - Doesn't decide a PHI-affecting rollback unilaterally.

@@ -11,14 +11,26 @@ container deploy for the Node/React repos). Add a binding file only if a
 genuinely shared, cross-repo deployment tool is adopted later.
 
 ## Where production-promotion blockers are sourced
-`<folder>/03_architecture/technical-debt-register.md` and
-`<folder>/03_architecture/compliance/hipaa-compliance-register.md`, live —
-not a separate maintained list. Both carry a **Release-blocking: Yes/No**
-column (added 2026-08-29) — check that first; fall back to Priority: Blocker
-/ Status: Gap identified (material severity) for older entries not yet
-tagged. Two gaps are already named by hand in the top-level repo CLAUDE.md as
-of 2026-08-29: the pcc-sync hardcoded shared-secret issue (no facility
-scoping) and the unauthenticated WestFax delivery webhook.
+Per-product, not one uniform path — verified against the actual filesystem
+2026-08-29, since what's live doesn't yet match a single generic shape:
+
+| Product | Technical debt source (today) | Compliance source (today) |
+|---|---|---|
+| SNF | `SNF/03_architecture/_as-built/technical-debt.md` — a pre-existing, populated registry with its own schema (`Severity`: Blocker/Critical/High/Medium/Low; `Decision/Status` as free text), **not** the generic template shape and no `Release-blocking` column. Treat `Severity: Blocker` or `Severity: Critical` whose `Decision/Status` isn't `Resolved` as the blocking signal. | `SNF/03_architecture/compliance/hipaa-compliance-register.md` — real, 39-entry, **Sathish-edit-only**, own schema (`Priority`: High/Medium/Low; `Status`: Not Started/In Progress/Decision Needed/Needs Analysis/Done), no `Release-blocking` column. Treat `Priority: High` whose `Status` isn't `Done` as the blocking signal. |
+| SAL | none yet — `SAL/03_architecture/` has no content | none yet |
+| shashi-care-core | none yet — `shashi-care-core/03_architecture/` has no content | none yet |
+
+The generic, template-shaped `<folder>/03_architecture/technical-debt-register.md`
+and a generic per-product compliance register (carrying the
+**Release-blocking: Yes/No** column added 2026-08-29 to
+`templates/technical-debt-register-template.md` and
+`templates/compliance-register-template.md`) don't exist yet for any product.
+Check those first once/if PM or SA stands them up for a given product — but an
+absent register is not the same as a clean check; see
+`skill-devops-discipline.md`'s hard-stop section for the escalation rule.
+Two gaps are already named by hand in the top-level repo CLAUDE.md as of
+2026-08-29 regardless of register state: the pcc-sync hardcoded shared-secret
+issue (no facility scoping) and the unauthenticated WestFax delivery webhook.
 
 ## Deployment record location
 `<folder>/01_releases/deployment-record-<release-slug>.md` — see
