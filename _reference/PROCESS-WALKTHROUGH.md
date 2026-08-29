@@ -285,6 +285,14 @@ get drafted, removing the old rework risk where SA feedback used to arrive
   mirrored between the local doc and ClickUp.
 - Progress reviewed from **live ClickUp status**, not stale local docs.
 - Retrospectives: `templates/sprint-retro-template.md`.
+- **First real release-plan drafting for a product is the trigger** to add a
+  `Release-blocking`-equivalent field to that product's compliance/technical-debt
+  documents, if they don't already carry one (Sathish's decision, 2026-08-29) —
+  not before, and not automatically. For SNF specifically, this means
+  `_as-built/technical-debt.md` and `hipaa-compliance-register.md` keep using
+  DevOps's fallback Severity/Priority proxy (see `skill-devops-discipline.md`)
+  until the first real SNF release plan is drafted here, at which point Sathish
+  reconciles the field into those two documents as part of that cycle.
 
 ## Stage 11 — Development execution
 
@@ -331,11 +339,16 @@ get drafted, removing the old rework risk where SA feedback used to arrive
   `_reference/team-structure.md`'s RACI row 13.
 - DevOps Engineer instance (hosted in Hermes, one per code repo) executes the
   production promotion once go/no-go clears.
-- **Hard-stop check before promotion**: DevOps checks the "Release-blocking"
-  column (added 2026-08-29) in `templates/compliance-register-template.md` and
-  `templates/technical-debt-register-template.md` for every slug/story included
-  in the deployment. An open `Release-blocking: Yes` item blocks promotion
-  without Sathish's explicit override — see `skill-devops-discipline.md`.
+- **Hard-stop check before promotion**: DevOps checks whatever technical-debt
+  and compliance source is actually live for that product today — not every
+  product has the generic, `Release-blocking`-column-carrying register yet
+  (found 2026-08-29: SNF's real sources are `_as-built/technical-debt.md` and
+  `hipaa-compliance-register.md`, each with its own schema; SAL and
+  shashi-care-core have no populated source at all yet). A missing register
+  escalates rather than reading as "no blockers"; an open Critical/blocking
+  item under whichever schema applies is a hard stop without Sathish's
+  explicit override — see `skill-devops-discipline.md` and
+  `shashi-care-devops-config.md` for the current per-product detail.
 - Writes `deployment-record-<release-slug>.md` in `01_releases/` (not
   `07_build/` — a deployment can span multiple slugs) via
   `templates/deployment-record-template.md`.
@@ -481,7 +494,23 @@ anything; sign-off stays with System Architect and Sathish as always.
 
 ## Open worklog items (carried forward)
 1. Sprint-boundary status snapshots — not yet designed.
-2. ~~Architecture-side folder structure~~ — resolved 2026-08-29: `03_architecture`
+2. **Technical-debt/compliance initial logging pass — SAL and shashi-care-core**
+   (added 2026-08-29). Neither product has any `03_architecture/` content yet,
+   so DevOps's production-promotion hard-stop check (Stage 14) will escalate on
+   every attempt for either product until this is done. Sathish confirmed
+   2026-08-29: System Architect completes an initial
+   `technical-debt-register.md` and `compliance-register.md` pass (generic
+   template shape, including the `Release-blocking` column) for each product
+   before its first real deployment. Not yet scheduled or started as of this
+   note.
+3. **Release-blocking field for SNF's real documents** (added 2026-08-29).
+   `_as-built/technical-debt.md` and `hipaa-compliance-register.md` predate the
+   generic `Release-blocking` column and use their own schemas. Sathish decided
+   2026-08-29: add the field only when SNF's first real release-plan drafting
+   with PjM begins (Stage 10) — not pre-emptively. Until then, DevOps continues
+   using the Severity/Priority fallback proxy documented in
+   `skill-devops-discipline.md`.
+4. ~~Architecture-side folder structure~~ — resolved 2026-08-29: `03_architecture`
    now splits by category and slug the same way `02_prd` does, with slug-suffixed
    filenames too, same rationale as `02_prd`'s `prd-<slug>.md`
    (`03_architecture/{features,enhancements,bugs}/<slug>/{TD-<slug>.md,
