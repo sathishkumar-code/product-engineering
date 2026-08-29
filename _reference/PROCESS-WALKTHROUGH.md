@@ -4,15 +4,26 @@ Reference document for the full pipeline as it stands after setup. Written to be
 read end to end once, then used as a lookup — every stage names the exact file,
 folder, and template involved so this doubles as an index.
 
-## The three agents
+## The agents
 
-| Agent | Cowork Context | Writes to |
-|---|---|---|
-| **Product Manager** | Drive-synced `shashi-care-docs/` only | PRDs, Bug Reports, Enhancement Requests, Epics/Stories, test scenarios/cases, roadmap, release plans |
-| **System Architect** | Drive-synced folder **plus** local checkouts of all three GitLab repos (Shashi-Care-Core-docs, SAL-docs, SNF-docs) | Review-comments files, Technical Designs, technical debt register, compliance register — Drive only, **never** commits into the GitLab checkouts |
-| **Project Manager** | Drive-synced folder, plus ClickUp | ClickUp Epics/Stories/Tasks, sprint docs, the two sync logs (mapping-log.md, promotion-log.md) |
+Four Cowork-hosted personas run the Plan/Design portion of this pipeline; three
+Hermes-hosted personas (one instance each per code repo) extend it into
+Build/Test/Deploy — see Stages 11-14 below and `_reference/team-structure.md`.
 
-All three read the same three product folders: `shashi-care-core/`, `SAL/`, `SNF/`.
+| Agent | Host | Context | Writes to |
+|---|---|---|---|
+| **Product Manager** | Cowork | Drive-synced `shashi-care-docs/` only | PRDs, Bug Reports, Enhancement Requests, Epics/Stories, test scenarios/cases, roadmap, release plans |
+| **System Architect** | Cowork | Drive-synced folder **plus** local checkouts of all three GitLab repos (Shashi-Care-Core-docs, SAL-docs, SNF-docs) | Review-comments files, Technical Designs, technical debt register, compliance register — Drive only, **never** commits into the GitLab checkouts |
+| **Project Manager** | Cowork | Drive-synced folder, plus ClickUp | ClickUp Epics/Stories/Tasks, sprint docs, the two sync logs (mapping-log.md, promotion-log.md) |
+| **Process Architect** | Cowork | Drive-synced folder | `_agent-instructions/`, `templates/`, `_reference/` — sole author for both Cowork and Hermes; accepts proposals but not edits from either |
+| **Developer** | Hermes (per code repo) | Its assigned code repo, plus read access to that slug's tech-spec/spec.md/epics-stories.md | Code, `implementation-note-<slug>.md`; its own tracker item's status only |
+| **QA Engineer** | Hermes (per code repo) | Its assigned code repo, plus read access to that slug's test-scenarios/test-cases | `qa-execution-report-<slug>.md`, Bug Reports (via Product Manager's template); its own tracker item's status only |
+| **DevOps Engineer** | Hermes (per code repo) | Its assigned code repo, plus the release plan | `deployment-record-<release-slug>.md` in `01_releases/`; executes production promotion |
+
+All seven read from the same shared `shashi-care-docs` files — Cowork through
+pasted Instructions, Hermes by reading the files directly (same content, not a
+copy). All product-facing personas read the same three product folders:
+`shashi-care-core/`, `SAL/`, `SNF/`.
 
 ```mermaid
 flowchart TD
@@ -41,8 +52,14 @@ flowchart TD
     M --> N[PjM creates ClickUp items, tracker_id link-back]
     N --> O[PjM deletes Drive prototype/, confirmed + logged]
     N --> P[Sprint planning, execution, retro]
-    P --> Q[Development complete]
+    P --> U1[Developer: implementation, writes implementation-note-<slug>.md]
+    U1 --> U2[QA Engineer: test execution, writes qa-execution-report-<slug>.md]
+    U2 -->|defect found| U1
+    U2 -->|all stories Done| Q[Development complete confirmed]
     Q --> R[PjM deletes GitLab prototypes/, confirmed + logged]
+    R --> U3[Release plan drafted, go/no-go: Sathish accountable]
+    U3 --> U4[DevOps: blocker check, production promotion, deployment-record]
+    U4 -->|monitoring surfaces a gap| Z
 ```
 
 ---
@@ -269,7 +286,36 @@ get drafted, removing the old rework risk where SA feedback used to arrive
 - Progress reviewed from **live ClickUp status**, not stale local docs.
 - Retrospectives: `templates/sprint-retro-template.md`.
 
-## Stage 11 — Development complete
+## Stage 11 — Development execution
+
+- Developer instance (hosted in Hermes, one per code repo) implements against the
+  tech-spec, `spec.md` Business Rules by ID, `epics-stories.md` acceptance
+  criteria, and its assigned tracker task.
+- Moves its own assigned tracker item's status (Development → Review) — the one
+  narrow status-only exception to Project Manager's tracker-write exclusivity;
+  see `skill-pjm-discipline.md`'s "Tracker-write exception" section.
+- Writes `implementation-note-<slug>.md` in
+  `07_build/{features,enhancements,bugs}/<slug>/` as the handoff artifact to QA.
+- A behavior, data-model, or API-surface deviation from the tech-spec routes back
+  to System Architect; a scope change routes back to Product Manager as a new
+  `intent.md` — see `skill-developer-discipline.md`'s "Deviation/return path".
+
+## Stage 12 — QA execution
+
+- QA Engineer instance (hosted in Hermes, one per code repo) executes the
+  Product-Manager-authored test scenarios/cases against the implementation.
+- Moves its own assigned tracker item's status (Review → QA → UAT/Done, or
+  Blocked) — same narrow exception as Development execution above.
+- Writes `qa-execution-report-<slug>.md` in the same `07_build/` slug folder,
+  recording pass/fail per case and any defects filed.
+- Defects are filed as Bug Reports using Product Manager's existing template —
+  never a home-grown format.
+- QA cannot waive a failing test or decide a defect is non-blocking on its own —
+  it records a recommendation only; release go/no-go for gaps found here belongs
+  to Sathish per `_reference/team-structure.md`'s RACI. A PHI or compliance
+  defect escalates immediately regardless of severity label.
+
+## Stage 13 — Development complete confirmation
 
 - PjM confirms via ClickUp status (all stories under the epic reaching Done, not
   assumed from elapsed time).
@@ -277,6 +323,27 @@ get drafted, removing the old rework risk where SA feedback used to arrive
   in `promotion-log.md`. Again, the archived export only — the live Claude Design
   project, if Sathish or Product Manager still use it for demos, keeps existing
   independent of this.
+
+## Stage 14 — Release and deploy
+
+- PM drafts the release plan (Stage 10); PjM/SA/Development/QA/DevOps are
+  Consulted, Sathish is Accountable for release go/no-go — see
+  `_reference/team-structure.md`'s RACI row 13.
+- DevOps Engineer instance (hosted in Hermes, one per code repo) executes the
+  production promotion once go/no-go clears.
+- **Hard-stop check before promotion**: DevOps checks the "Release-blocking"
+  column (added 2026-08-29) in `templates/compliance-register-template.md` and
+  `templates/technical-debt-register-template.md` for every slug/story included
+  in the deployment. An open `Release-blocking: Yes` item blocks promotion
+  without Sathish's explicit override — see `skill-devops-discipline.md`.
+- Writes `deployment-record-<release-slug>.md` in `01_releases/` (not
+  `07_build/` — a deployment can span multiple slugs) via
+  `templates/deployment-record-template.md`.
+- A PHI-affecting rollback requires Sathish's approval before executing.
+- Post-deploy monitoring findings that surface a scope, behavior, or design gap
+  route back to Product Manager (new `intent.md`) or System Architect — the same
+  return-path shape used at every other stage, not yet fully autonomous, but no
+  longer the dead end the original design left it as.
 
 ## On-demand: Finalize a document (PRD / ER / TD)
 
@@ -333,6 +400,21 @@ same document. See `skill-finalize-document-discipline.md` /
   prototype deletes at development-complete time. Both are the *archived export*
   only — the live Claude Design project (used for demos, kept current via
   `templates/claude-design-update-prompt-template.md`) is separate and unaffected.
+- **Tracker-write exception**: Project Manager holds exclusive, unconditional
+  ownership of tracker item creation, deletion, tagging, re-parenting, and the
+  mapping log. Developer and QA Engineer (Hermes) each have one narrow,
+  additive exception: moving their own assigned tracker item's *status* only.
+  See `skill-pjm-discipline.md`'s "Tracker-write exception" section.
+- **Build/Test/Deploy location**: `implementation-note-<slug>.md` and
+  `qa-execution-report-<slug>.md` live in
+  `07_build/{features,enhancements,bugs}/<slug>/`;
+  `deployment-record-<release-slug>.md` lives in `01_releases/` instead, since a
+  deployment can span multiple slugs.
+- **As-built precedence**: `_as-built/` in Drive is a documentation snapshot of
+  the codebase, not the codebase itself. Where it diverges from what the code
+  repo actually shows — as Developer/QA/DevOps instances now observe directly at
+  Stages 11-14 — the live repo wins; `_as-built/` is stale until someone updates
+  it, not an independent source of truth.
 - **Promotion**: PRD, Technical Design, and Release Plan promote on `approved` and
   stay permanently. Prototype promotes on its own schedule and is deleted later —
   the one promoted artifact that isn't permanent.
@@ -353,19 +435,22 @@ autonomous monitoring that writes a fresh `intent.md`).
   design into one artifact. We keep PRD and Technical Design separate — that
   split is what the two-pass SA review, the escalation threshold, and the PM/SA
   authorship boundary all depend on.
-- **The boundary, settled explicitly**: this system covers Plan and Design —
-  everything through Epics/Stories reaching `ready` and the ClickUp handoff.
-  Build/Test/Deploy/Maintain (Claude Code plan mode, `plan.md`, hooks, CI/CD,
-  evals, production monitoring) belong to the development team from that handoff
-  point onward — not authored, tracked, or maintained by any of this system's
-  four agents. This includes the code repo's own `CLAUDE.md` and any Claude Code
-  skills (including a code-side HIPAA check) — real needs, deliberately left for
-  the dev team/Sathish to build separately, not drafted here.
-- **No return path from Build is built yet, on purpose.** If implementation
-  surfaces something that should change a PRD or Technical Design, for now that's
-  just another instance of the existing dev-team feedback channel (chat, email,
-  Notion) — no new mechanism. A formal handoff back from Claude Code isn't built
-  until an actual need for one shows up — not designed preemptively.
+- **The boundary, settled explicitly (updated 2026-08-29)**: this system
+  originally covered only Plan and Design — everything through Epics/Stories
+  reaching `ready` and the ClickUp handoff, with Build/Test/Deploy/Maintain left
+  entirely to the dev team. That boundary has since moved: three new personas —
+  Developer, QA Engineer, DevOps Engineer, all hosted in Hermes rather than
+  Cowork — now extend this system into Build (Stage 11), Test execution
+  (Stage 12), and Deploy (Stage 14), one instance per code repo. Maintain
+  (production monitoring feeding a fresh `intent.md`) is partially covered —
+  DevOps's monitoring return-path — but not fully autonomous yet. A code repo's
+  own `CLAUDE.md` and Claude Code skills (including any code-side HIPAA check)
+  remain the dev team's own tooling, not authored here.
+- **A real return path now exists where none did before.** A Developer/QA/DevOps
+  instance that surfaces a scope, behavior, or design gap writes back to Product
+  Manager or System Architect per its own discipline file's "Deviation/return
+  path" section, rather than relying solely on the informal dev-team feedback
+  channel (chat, email, Notion) this note originally described.
 - **Adopted, differently**: the playbook's "skills as institutional knowledge"
   concept — but only for genuinely cross-cutting policy, never for
   persona-defining behavior. See the HIPAA compliance skill below for why the
@@ -417,6 +502,10 @@ anything; sign-off stays with System Architect and Sathish as always.
 | `shashi-care-clickup-binding.md` | ClickUp hierarchy, tags, statuses |
 | `shashi-care-gitlab-binding.md` | GitLab promotion rules, repos, access model |
 | `shashi-care-design-standards.md` | Prototype-authoring standards for the team |
-| `templates/*.md`, `templates/*.xlsx` | All document templates referenced above |
-| `cowork-instructions-{PM,SA,PjM}.md` | Paste-ready, pre-concatenated Instructions for each Cowork project |
+| `_reference/team-structure.md` | Real, filled roster + RACI for all 7 personas across both hosting systems |
+| `skill-developer-discipline.md` / `shashi-care-developer-config.md` | Developer agent instructions (Hermes, one instance per code repo) |
+| `skill-qa-discipline.md` / `shashi-care-qa-config.md` | QA Engineer agent instructions (Hermes, one instance per code repo) |
+| `skill-devops-discipline.md` / `shashi-care-devops-config.md` | DevOps Engineer agent instructions (Hermes, one instance per code repo) |
+| `templates/*.md`, `templates/*.xlsx` | All document templates referenced above, including `implementation-note-template.md`, `qa-execution-report-template.md`, `deployment-record-template.md` |
+| `cowork-instructions-{PM,SA,PjM,ProcessArchitect}.md` | Paste-ready, pre-concatenated Instructions for each Cowork project |
 | `hipaa-compliance-check-skill.zip` | Installable Cowork Skill (account-level, not Instructions) — cross-cutting HIPAA checks across all sessions |

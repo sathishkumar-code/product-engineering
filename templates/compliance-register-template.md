@@ -11,9 +11,9 @@ regulatory control instead of a code quality bar.
 ```markdown
 # <Framework> Compliance Register — <Product/Entity>
 
-| ID | Requirement/Control | Description | Gap (if any) | Status | Owner | Priority | Related PRD/Epic/TD | Logged | Target date | Resolved |
-|---|---|---|---|---|---|---|---|---|---|---|
-| C-01 | | | | Not yet assessed / Compliant / Gap identified / Remediation planned / Remediation in progress / Closed | | | | <date> | | |
+| ID | Requirement/Control | Description | Gap (if any) | Status | Release-blocking | Owner | Priority | Related PRD/Epic/TD | Logged | Target date | Resolved |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| C-01 | | | | Not yet assessed / Compliant / Gap identified / Remediation planned / Remediation in progress / Closed | Yes / No | | | | <date> | | |
 ```
 
 **Requirement/Control** — cite the specific clause or control ID from the actual

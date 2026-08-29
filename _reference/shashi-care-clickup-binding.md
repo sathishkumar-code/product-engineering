@@ -60,3 +60,15 @@ one or the other.
 
 ## Mapping log
 One per folder: `<folder>/05_clickup-sync/mapping-log.md`. Format per the template.
+## Access
+Project Manager (PjM) holds exclusive, unconditional ownership of creation,
+deletion, tagging, re-parenting, and the mapping log for every tracker item in
+this workspace — see `skill-pjm-discipline.md`. There is one narrow, explicit
+exception: Developer and QA Engineer (both hosted in Hermes) may move the
+*status* of their own assigned tracker item only (e.g. "In Progress" →
+"Ready for QA", "In QA" → "Done"/"Blocked"). This mirrors the existing
+`tracker_id` write-back precedent and never extends to creation, deletion,
+tagging, re-parenting, or the mapping log — those stay exclusively PjM's, with
+Developer/QA writing back to PjM if any of them is needed. See
+"Tracker-write exception (Developer, QA Engineer)" in `skill-pjm-discipline.md`
+for the full rule.

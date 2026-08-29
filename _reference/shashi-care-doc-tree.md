@@ -43,8 +43,12 @@ shashi-care-docs/
 │   ├── 04_handovers/
 │   ├── 05_clickup-sync/
 │   │   └── mapping-log.md
-│   └── 06_gitlab-sync/
-│       └── promotion-log.md
+│   ├── 06_gitlab-sync/
+│   │   └── promotion-log.md
+│   └── 07_build/
+│       ├── features/
+│       ├── enhancements/
+│       └── bugs/
 ├── SAL/
 │   ├── 01_releases/
 │   │   └── SAL-release-plan.xlsx    # tab per release, stacked sections
@@ -62,8 +66,12 @@ shashi-care-docs/
 │   ├── 04_handovers/
 │   ├── 05_clickup-sync/
 │   │   └── mapping-log.md
-│   └── 06_gitlab-sync/
-│       └── promotion-log.md
+│   ├── 06_gitlab-sync/
+│   │   └── promotion-log.md
+│   └── 07_build/
+│       ├── features/
+│       ├── enhancements/
+│       └── bugs/
 └── SNF/
     ├── 01_releases/
     │   └── SNF-release-plan.xlsx
@@ -92,8 +100,12 @@ shashi-care-docs/
     ├── 04_handovers/
     ├── 05_clickup-sync/
     │   └── mapping-log.md
-    └── 06_gitlab-sync/
-        └── promotion-log.md
+    ├── 06_gitlab-sync/
+    │   └── promotion-log.md
+    └── 07_build/
+        ├── features/
+        ├── enhancements/
+        └── bugs/
 ```
 
 ## Per-slug folder shape (Drive) — not visible in the tree above
@@ -168,6 +180,25 @@ open folders, exactly like `02_prd/`'s top-level document. `_as-built/`,
 `compliance/` sit outside this per-slug shape entirely — they're per-product or
 platform-level, not
 tied to any one slug, and are untouched by this restructure.
+
+## Per-slug folder shape (Drive, Build stage)
+As of the `07_build/` addition (2026-08-29), Developer and QA Engineer instances
+(hosted in Hermes) write two per-slug artifacts here, mirroring the shape used by
+`02_prd/` and `03_architecture/` above:
+```
+07_build/features/<slug>/
+├── implementation-note-<slug>.md   # mirrors templates/implementation-note-template.md
+└── qa-execution-report-<slug>.md   # mirrors templates/qa-execution-report-template.md
+
+07_build/enhancements/<slug>/
+└── (same two files)
+
+07_build/bugs/<slug>/
+└── (same two files)
+```
+Deployment records do NOT live here — a deployment can span multiple slugs, so
+`deployment-record-<release-slug>.md` lives in `01_releases/` instead, alongside
+the release plan workbook. See `templates/deployment-record-template.md`.
 
 ## GitLab — exact resulting structure (three repos)
 
@@ -335,9 +366,10 @@ Release Plan) additionally carry `repo_status: not-promoted | promoted` and
   per product folder, plus `<folder>/03_architecture/technical-debt/<TD-ID>.md` for
   detailed write-ups of significant items. Uses
   `templates/technical-debt-register-template.md`.
-- **Team structure**: `_reference/team-structure.md` (moved here from a loose root
-  file — see the root tree above) — one shared reference for all three personas,
-  not duplicated per folder and not owned/edited by any single persona. Uses
+- **Team structure**: `_reference/team-structure.md` — the real, filled roster and
+  RACI for all 7 personas across both hosting systems (Cowork and Hermes), not
+  duplicated per folder and not owned/edited by any single persona other than the
+  Process Architect, who authors it on the team's behalf. Instantiated from
   `templates/team-structure-template.md`.
 - **Sprint docs** (`sprint-plan.md`, `retro.md`, already in the tree above) now use
   `templates/sprint-plan-status-template.md` and `templates/sprint-retro-template.md`
@@ -356,6 +388,14 @@ Release Plan) additionally carry `repo_status: not-promoted | promoted` and
   review structure with `review_round` tracking and the 3-round escalation rule,
   plus the Technical Design Review section, all in one running file per slug. See
   `skill-sa-discipline.md`.
+- **Build-stage artifacts**: `implementation-note-<slug>.md` and
+  `qa-execution-report-<slug>.md`, both in
+  `07_build/{features,enhancements,bugs}/<slug>/` — see "Per-slug folder shape
+  (Drive, Build stage)" above. Uses `templates/implementation-note-template.md`
+  and `templates/qa-execution-report-template.md` respectively.
+- **Deployment record**: `<folder>/01_releases/deployment-record-<release-slug>.md`
+  — one per deployment event, not per slug, since a deployment can span several.
+  Uses `templates/deployment-record-template.md`.
 - **Intent**: `<slug>/intent.md`, uses `templates/intent-template.md` — see the
   AI-Native SDLC alignment note below.
 
@@ -378,15 +418,21 @@ gated documents — this isn't an oversight, it's what the two-pass SA review, t
 escalation threshold, and the PM/SA authorship boundary all depend on. Merging
 them would remove the structure those were built to provide.
 
-**The boundary, settled explicitly**: this system covers Plan and Design —
-everything through Epics/Stories reaching `ready` and the ClickUp handoff.
-Build/Test/Deploy/Maintain (Claude Code plan mode, `plan.md`, hooks, CI/CD,
-evals, production monitoring) belong to the development team from that handoff
-point onward — not authored, tracked, or maintained by any of this system's four
-agents. This includes the code repo's own `CLAUDE.md` and any Claude Code skills
-(including a code-side HIPAA check) — real needs, deliberately left for the dev
-team/Sathish to build separately, not drafted here. No return path from Build is
-built yet, on purpose — if implementation surfaces something that should change
-a PRD or Technical Design, that's just another instance of the existing dev-team
-feedback channel (chat, email, Notion), not a new mechanism, until an actual need
-for one shows up.
+**The boundary, settled explicitly (updated 2026-08-29)**: this system originally
+covered only Plan and Design — everything through Epics/Stories reaching `ready`
+and the ClickUp handoff, with Build/Test/Deploy/Maintain left entirely to the dev
+team. That boundary has since moved: three new personas — Developer, QA Engineer,
+DevOps Engineer, all hosted in Hermes rather than Cowork — now extend this system
+into Build (`skill-developer-discipline.md`), Test execution
+(`skill-qa-discipline.md`), and Deploy (`skill-devops-discipline.md`), one instance
+per code repo. Maintain (production monitoring feeding a fresh `intent.md`) is
+partially covered — DevOps's monitoring return-path — but not fully autonomous yet.
+This still isn't the playbook's `plan.md`/hooks/CI-eval loop verbatim: PRD and
+Technical Design remain two separate, separately gated documents (see above), and
+a code repo's own `CLAUDE.md` and Claude Code skills (including any code-side
+HIPAA check) remain the dev team's own tooling, not authored here. A real return
+path now exists where none did before: a Developer/QA/DevOps instance that
+surfaces a scope, behavior, or design gap writes back to PM or SA per its own
+discipline file's "Deviation/return path" section, rather than relying solely on
+the informal dev-team feedback channel (chat, email, Notion) this note originally
+described.

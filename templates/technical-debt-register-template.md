@@ -10,9 +10,9 @@ replacing it.
 ```markdown
 # Technical Debt Register — <Product: Core / SAL / SNF>
 
-| ID | Description | Location/component | Type | Impact if unaddressed | Effort | Priority | Status | Related PRD/Epic/TD | Logged | Resolved |
-|---|---|---|---|---|---|---|---|---|---|---|
-| TD-01 | | | Architecture / Code quality / Missing tests / Outdated dependency / Manual process | | S/M/L | Blocker/High/Medium/Low | Open / Planned / In progress / Resolved / Won't fix | | <date> | |
+| ID | Description | Location/component | Type | Impact if unaddressed | Effort | Priority | Release-blocking | Status | Related PRD/Epic/TD | Logged | Resolved |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| TD-01 | | | Architecture / Code quality / Missing tests / Outdated dependency / Manual process | | S/M/L | Blocker/High/Medium/Low | Yes / No | Open / Planned / In progress / Resolved / Won't fix | | <date> | |
 ```
 
 **Type** — pick the closest fit; add new categories sparingly and keep them
