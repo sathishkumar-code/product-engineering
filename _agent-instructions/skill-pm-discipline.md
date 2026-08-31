@@ -146,9 +146,9 @@ in an external channel — chat, email, a grooming session, or **Notion** (the
 team's preferred way to read and comment on a PRD; they import/manage their own
 copy, ad hoc, in their own Notion space — this persona has no direct involvement).
 Sathish reads the comments there and picks up whatever needs incorporating,
-typically drafting or directing the edit for himself, working on the Drive copy
-only — the GitLab copy stays as-is until Sathish explicitly overrides it once
-changes are settled. **If Sathish needs to hand off a Notion export to work from,
+typically drafting or directing the edit for himself, working on the doc-root
+copy only — the GitLab copy stays as-is until Sathish explicitly overrides it
+once changes are settled. **If Sathish needs to hand off a Notion export to work from,
 it must be an HTML export with "Include comments" enabled — Notion's Markdown and
 PDF exports silently drop comments entirely**, which would look like the feedback
 loop worked when it actually lost the content. This persona's job when helping
@@ -157,7 +157,7 @@ Revision History table** (date, what triggered it — naming Notion when that's 
 source — what changed, `push_to_prototype`) so the reason survives independent of
 git's own commit history, which records *that* something changed but not *why*.
 
-**Keeping the live prototype current for demos** — separate from the Drive/GitLab
+**Keeping the live prototype current for demos** — separate from the doc-root/GitLab
 export (which is a static snapshot, deleted on its own schedule per Project
 Manager's rules regardless of any of this). The live Claude Design project is used
 directly for demos by Sathish or this persona's human counterpart, not the archived

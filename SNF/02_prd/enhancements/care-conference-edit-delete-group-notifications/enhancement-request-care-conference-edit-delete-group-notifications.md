@@ -1,14 +1,15 @@
 # Enhancement: Care Conference — Popup Edit/Delete Parity & Facility Group Notifications
 
-| Field | Value |
-|---|---|
-| Product | SNF |
-| Status | Ready for review |
-| Base feature | `SNF/02_prd/_as-built/modules/care-coordination.md` (§3A Care conferences, CARE-FR-20, CARE-FR-21, CARE-FR-24 through CARE-FR-26); `SNF/02_prd/_as-built/_codebase-analysis/client-admin-web.md` §2.11 (checkpoint pass to `pre-production` HEAD `f5b461c6`, 2026-08-27/28); `SNF/02_prd/_as-built/modules/messaging-chat.md` MSG-FR-36; `SNF/02_prd/_as-built/modules/transportation.md` TRN-FR-19c, TRN-FR-26 (the patterns this enhancement mirrors) |
-| Requested by | Sathish |
-| Business goal | Bring Care Conference up to the same standard Transportation already meets: one reusable edit/delete surface shared between list and calendar (`TRN-FR-19c`), and automated facility-group notifications on lifecycle events (`TRN-FR-26`) — consistency across modules, not a one-off request. |
+| Field         | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product       | SNF                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Status        | Approved                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Base feature  | `SNF/02_prd/_as-built/modules/care-coordination.md` (§3A Care conferences, CARE-FR-20, CARE-FR-21, CARE-FR-24 through CARE-FR-26); `SNF/02_prd/_as-built/_codebase-analysis/client-admin-web.md` §2.11 (checkpoint pass to `pre-production` HEAD `f5b461c6`, 2026-08-27/28); `SNF/02_prd/_as-built/modules/messaging-chat.md` MSG-FR-36; `SNF/02_prd/_as-built/modules/transportation.md` TRN-FR-19c, TRN-FR-26 (the patterns this enhancement mirrors) |
+| Requested by  | Sathish                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Business goal | Bring Care Conference up to the same standard Transportation already meets: one reusable edit/delete surface shared between list and calendar (`TRN-FR-19c`), and automated facility-group notifications on lifecycle events (`TRN-FR-26`) — consistency across modules, not a one-off request.                                                                                                                                                                  |
 
 ## 1. Current behavior
+
 Per `care-coordination.md` CARE-FR-20/21/24/26, `client-admin-web.md` §2.11,
 and Sathish's direct confirmation:
 
@@ -47,8 +48,10 @@ and Sathish's direct confirmation:
   Transportation (TRN-FR-26) and is the mechanism this ER reuses.
 
 ## 2. Proposed change
+
 1. **Status decides which of two popup modes opens** on row-click (List) or
    event-click (Calendar), used identically from both surfaces:
+
    - **`SCHEDULED`:** opens **in edit mode by default**, pre-filled with the
      conference's current data (residents, care team, family members,
      date/time, duration, where, location, notes/agenda), with two buttons —
@@ -64,10 +67,10 @@ and Sathish's direct confirmation:
      answer in this ER's history that had `IN_PROGRESS` as editable — the
      final rule is `SCHEDULED`-only for both actions, matching today's
      existing `DELETE` gating exactly).
-   Net effect: **no loosening of any existing status gating is needed** for
-   Delete. For Update, see Notes to SA — if `PUT` is currently unrestricted
-   by status, this ER requires *adding* a new restriction so Update only
-   works from `SCHEDULED` (a tightening, not a loosening).
+     Net effect: **no loosening of any existing status gating is needed** for
+     Delete. For Update, see Notes to SA — if `PUT` is currently unrestricted
+     by status, this ER requires *adding* a new restriction so Update only
+     works from `SCHEDULED` (a tightening, not a loosening).
 2. **One shared component pair** — a read-only detail view (the Calendar's
    existing card, reused as-is) and an edit-mode form (new, matching
    Transport's `useScheduleTransportModal` pattern) — used identically from
@@ -95,7 +98,9 @@ and Sathish's direct confirmation:
    never blocking the calling API response). Independent of items 1–3.
 
 ## 3. Scope
+
 ### 3.1 In scope
+
 - Status-gated popup mode: edit-mode form (Update + Delete) for `SCHEDULED`
   only; read-only detail (reusing the existing Calendar card) for every other
   status.
@@ -114,6 +119,7 @@ and Sathish's direct confirmation:
   below).
 
 ### 3.2 Out of scope
+
 - **Building an admin-facing UI/API to create `ChatSystemUser` identities or
   manage `moduleMessageBindings`** — per Sathish, this ER uses **manual
   provisioning only** (the same manual DB-write mechanism Transportation
@@ -131,6 +137,7 @@ and Sathish's direct confirmation:
   companion enhancement `care-conference-calendar-click-to-create`.
 
 ## 4. Impact
+
 - **Existing stories/tests:** new coverage needed for the status-gated popup
   mode (edit-mode only for `SCHEDULED`; read-only card for everything else,
   including `IN_PROGRESS` — a change from this ER's own earlier draft, which
@@ -153,6 +160,7 @@ and Sathish's direct confirmation:
   Conference; this ER stands alone against the as-built ground truth.
 
 ## 5. Notes to System Architect
+
 - Confirm whether `CareConferenceReports.tsx` and `CareConferenceCalendar.tsx`
   can converge on shared read-only-card and edit-mode-form components, or
   whether current divergence makes this a non-trivial refactor.
@@ -172,12 +180,13 @@ and Sathish's direct confirmation:
   not-yet-scheduled future enhancement.
 
 ## 6. Open questions
+
 All open questions from this ER's review have been resolved by Sathish:
 
-| ID | Area | Resolution |
-|---|---|---|
-| EQ-01 | As-built accuracy | Calendar popup has no buttons today; as-built's contrary claim is inaccurate, flagged for correction. |
-| EQ-02 | UX | Non-`SCHEDULED` statuses show read-only detail — the existing Calendar "Event detail popup" card, reused as-is. |
-| EQ-03 | UX | Editing is not allowed on an `IN_PROGRESS` conference — Update, like Delete, is `SCHEDULED`-only. |
-| EQ-04 | Compliance | Chat message content is restricted to patient (resident) name, date, and time only. |
-| EQ-05 | Platform | Manual provisioning only for `ChatSystemUser`/`moduleMessageBindings`; a self-service admin UI is a candidate future enhancement, not part of this ER. |
+| ID    | Area              | Resolution                                                                                                                                                |
+| ----- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| EQ-01 | As-built accuracy | Calendar popup has no buttons today; as-built's contrary claim is inaccurate, flagged for correction.                                                     |
+| EQ-02 | UX                | Non-`SCHEDULED` statuses show read-only detail — the existing Calendar "Event detail popup" card, reused as-is.                                        |
+| EQ-03 | UX                | Editing is not allowed on an`IN_PROGRESS` conference — Update, like Delete, is `SCHEDULED`-only.                                                     |
+| EQ-04 | Compliance        | Chat message content is restricted to patient (resident) name, date, and time only.                                                                       |
+| EQ-05 | Platform          | Manual provisioning only for`ChatSystemUser`/`moduleMessageBindings`; a self-service admin UI is a candidate future enhancement, not part of this ER. |

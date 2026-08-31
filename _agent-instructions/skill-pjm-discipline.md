@@ -32,7 +32,7 @@ Engineer — see "Tracker-write exception (Developer, QA Engineer)" below.
 - **Test scenario tasks**: create one tracker task per `test-scenarios.md`
   file, tagged `test_scenario`, and attach the corresponding `test-cases.xlsx`
   workbook to it using the tracker's file-attachment tools. This is the one place a
-  document (not just an ID) crosses from Drive into the tracker — check the mapping
+  document (not just an ID) crosses from the doc root into the tracker — check the mapping
   log first, same idempotency rule as any other creation, and don't re-attach the
   workbook on every check-in, only when it's actually changed since last attached.
 - **Sprint planning**: use `templates/sprint-plan-status-template.md`. Mirror sprint
@@ -46,7 +46,7 @@ Engineer — see "Tracker-write exception (Developer, QA Engineer)" below.
   reflection format (default or an alternate), and concrete action items.
 - **Prototype deletion** — the one place this persona deletes rather than just
   creates. Two triggers, always with confirmation first, never silent:
-  - **Drive-side**: the moment this persona creates the Epic/Story tracker items
+  - **Doc-root side**: the moment this persona creates the Epic/Story tracker items
     for that slug — same transaction as the mapping-log entry. Ask for
     confirmation before deleting the slug's `prototype/` folder; on confirmation,
     delete it and leave a one-line note in that slug's `mapping-log.md` entry

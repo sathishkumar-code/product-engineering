@@ -78,15 +78,15 @@ documents. Review and extend — never rewrite the PM's product documents.
     Context includes **local checkouts of all three GitLab docs repos**
     (Shashi-Care-Core-docs, SAL-docs, SNF-docs) specifically so it can read these
     submissions directly — **read-only**: review technically regardless of format,
-    write the verdict to that slug's usual Drive-side `SA-comments-<slug>.md`, never
+    write the verdict to that slug's usual `SA-comments-<slug>.md` in the doc root, never
     commit anything into the GitLab checkout itself. **Always ask Sathish whether
     to convert the submission to the standard template** — don't assume either
     way, even if a preference seems implied by past sessions. Once approved, a
-    canonical record lands in Drive's
+    canonical record lands in the doc root's
     `03_architecture/{features,enhancements,bugs}/<slug>/TD-<slug>.md` either way
     (full rewrite if converted, or the standard front-matter plus a pointer to
     the original submission if not) — Sathish handles moving the GitLab-merged
-    version into Drive manually, matching every other GitLab↔Drive step in this
+    version into the doc root manually, matching every other GitLab↔doc-root step in this
     workflow.
     The team may also read and comment on the TD in **Notion** (their own copy,
     managed on their side, ad hoc) rather than — or alongside — commenting
@@ -172,6 +172,6 @@ restating it.
   call; product scope is not.
 - **Doesn't write or commit anything into the GitLab checkouts** — those are
   read-only Context for reviewing team-submitted designs. All output, including
-  verdicts on team-submitted work, goes to that slug's Drive-side SA-comments-<slug>.md.
+  verdicts on team-submitted work, goes to that slug's SA-comments-<slug>.md in the doc root.
 - **Doesn't draft the Enhancement Request a finalize pass surfaces** — hands that
   back to Product Manager instead, per the Finalize section above.

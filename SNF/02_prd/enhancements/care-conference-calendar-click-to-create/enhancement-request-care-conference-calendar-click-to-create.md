@@ -1,14 +1,15 @@
 # Enhancement: Care Conference Calendar — Click-to-Create
 
-| Field | Value |
-|---|---|
-| Product | SNF |
-| Status | Ready for review |
-| Base feature | `SNF/02_prd/_as-built/_codebase-analysis/client-admin-web.md` §2.11 (checkpoint pass to `pre-production` HEAD `f5b461c6`, 2026-08-27/28 — documents `CareConferenceCalendar.tsx`); `SNF/02_prd/_as-built/modules/care-coordination.md` CARE-FR-20, CARE-FR-25a; `SNF/02_prd/_as-built/modules/transportation.md` TRN-FR-19c (the calendar pattern this enhancement partially mirrors) |
-| Requested by | Sathish |
-| Business goal | Bring Care Conference's calendar up to the same standard Transport's calendar already meets — a scheduling entry point, not just a browse/edit/delete view (`TransportCalendar.tsx`, TRN-FR-19c). |
+| Field         | Value                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product       | SNF                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Status        | Approved                                                                                                                                                                                                                                                                                                                                                                                            |
+| Base feature  | `SNF/02_prd/_as-built/_codebase-analysis/client-admin-web.md` §2.11 (checkpoint pass to `pre-production` HEAD `f5b461c6`, 2026-08-27/28 — documents `CareConferenceCalendar.tsx`); `SNF/02_prd/_as-built/modules/care-coordination.md` CARE-FR-20, CARE-FR-25a; `SNF/02_prd/_as-built/modules/transportation.md` TRN-FR-19c (the calendar pattern this enhancement partially mirrors) |
+| Requested by  | Sathish                                                                                                                                                                                                                                                                                                                                                                                             |
+| Business goal | Bring Care Conference's calendar up to the same standard Transport's calendar already meets — a scheduling entry point, not just a browse/edit/delete view (`TransportCalendar.tsx`, TRN-FR-19c).                                                                                                                                                                                                |
 
 ## 1. Current behavior
+
 Per `client-admin-web.md` §2.11 (as-built, checkpoint to `pre-production` HEAD
 `f5b461c6`):
 
@@ -30,13 +31,13 @@ Per `client-admin-web.md` §2.11 (as-built, checkpoint to `pre-production` HEAD
   still scheduled from 'Schedule Care Conference.'"*
 - New-conference creation goes through the existing scheduling form:
   residents* multi-select, care team* multi-select, family members
-  auto-derived, meeting type (`Care Conference` / `Family Meeting` / `Family
-  Care Conference`), date* + time*, duration (15/30/40/45/60/90 min, >40 min
+  auto-derived, meeting type (`Care Conference` / `Family Meeting` / `Family Care Conference`), date* + time*, duration (15/30/40/45/60/90 min, >40 min
   Zoom-limitation warning), where (`In Person` / `Virtual`), location, notes
   (CARE-FR-20) — subject to the existing schedule-conflict check
   (CARE-FR-25a).
 
 ## 2. Proposed change
+
 Per Sathish's direct specification (resolves the prior EQ-01):
 
 - **Day view:** clicking any **empty time slot** opens the new-conference
@@ -60,7 +61,9 @@ separate view-switcher control), so repurposing the day-click for
 click-to-create has no side effect on how users reach Day view.
 
 ## 3. Scope
+
 ### 3.1 In scope
+
 - Click-to-open-create-dialog from an empty hour slot (Day/Week) or empty date
   cell (Month), per the exact pre-fill/default spec above.
 - Defaults: 15-minute duration, Virtual, Care Conference meeting type — user
@@ -69,6 +72,7 @@ click-to-create has no side effect on how users reach Day view.
   Zoom-limitation warning, and schedule-conflict check (CARE-FR-25a) unchanged.
 
 ### 3.2 Out of scope
+
 - Content/actions of the popup that opens when clicking an **existing**
   conference — covered by the companion enhancement
   `care-conference-edit-delete-group-notifications`.
@@ -82,6 +86,7 @@ click-to-create has no side effect on how users reach Day view.
   `client-admin-web.md`, not a deliverable of this ER.
 
 ## 4. Impact
+
 - **Existing stories/tests:** new test coverage needed for the click-to-create
   interaction per view; no existing navigation behavior is being removed
   (per the correction above), so no regression risk there.
@@ -96,6 +101,7 @@ click-to-create has no side effect on how users reach Day view.
   conference created this way — no additional notification wiring needed here.
 
 ## 5. Notes to System Architect
+
 - Confirm Day/Week's hour-slot click target is granular enough (distinct
   clickable regions per hour) to reliably distinguish "empty slot clicked"
   from "existing event clicked," given the overlap-safe event layout already
@@ -105,7 +111,8 @@ click-to-create has no side effect on how users reach Day view.
   work may rely on that section.
 
 ## 6. Open questions
-| ID | Area | Question and current position | Priority |
-|---|---|---|---|
-| EQ-01 | UX | ~~Month view day-click conflict~~ — **resolved**: click-to-create applies to empty dates/slots in all three views per §2; existing conferences still open their own popup. | Resolved |
-| EQ-02 | UX | ~~Month-view navigation trade-off~~ — **resolved, no conflict**: view switching is handled by a separate control, not the day-click; nothing to preserve or replace. | Resolved |
+
+| ID    | Area | Question and current position                                                                                                                                                       | Priority |
+| ----- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| EQ-01 | UX   | ~~Month view day-click conflict~~ — **resolved**: click-to-create applies to empty dates/slots in all three views per §2; existing conferences still open their own popup. | Resolved |
+| EQ-02 | UX   | ~~Month-view navigation trade-off~~ — **resolved, no conflict**: view switching is handled by a separate control, not the day-click; nothing to preserve or replace.        | Resolved |

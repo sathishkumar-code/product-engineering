@@ -36,14 +36,15 @@ already signals scope — treat a mismatch between the two as an error to flag, 
 something to silently resolve by trusting one over the other.
 
 ## Doc root
-**As of 2026-08-29, hosted in Hermes.** `{PRODUCT_ENG_ROOT}/product-engineering/`'s
-manually-synced mirror of `shashi-care-docs/` — **not** a live read of the
-Google-Drive-synced folder Process Architect and Developer/QA/DevOps use. This
-mirror only reflects a Process Architect edit once Sathish has manually copied
-the changed file(s) over; see "Hermes copy sync convention" in
-`shashi-care-process-architect-config.md`. If something here looks stale, that's
-the first thing to check (was the mirror actually re-synced after the last
-edit), not a reason to assume the source document changed.
+**As of 2026-08-29, hosted in Hermes.** `{PRODUCT_ENG_ROOT}/product-engineering/`
+— a git repo Sathish maintains in WSL, manually synced from `shashi-care-docs`,
+the canonical source Process Architect and Developer/QA/DevOps read directly —
+**not** a live read of `shashi-care-docs` itself. This mirror only reflects a
+Process Architect edit once Sathish has manually copied the changed file(s)
+over; see "Hermes copy sync convention" in
+`shashi-care-process-architect-config.md`. If something here looks stale,
+that's the first thing to check (was the mirror actually re-synced after the
+last edit), not a reason to assume the source document changed.
 
 ## Access (Hermes) — not yet configured
 This persona references Google Drive exports (Notion HTML exports with comments,
@@ -86,8 +87,9 @@ docs — flag the absence and ask rather than assuming shared behavior.
   `specs/` folder once the PRD is approved.
 - Prototype export (full export, per Q2): `<slug>/prototype/`, with
   `prototype-meta.md` sidecar (`templates/prototype-meta-template.md`). Permanent
-  in Drive for now (Claude Design isn't yet available to the whole team) — its
-  eventual deletion is the Project Manager persona's job, not this one's.
+  in `product-engineering` for now (Claude Design isn't yet available to the
+  whole team) — its eventual deletion is the Project Manager persona's job, not
+  this one's.
 
 ## Handover destination
 `<folder>/04_handovers/<date>_pm-to-sa_<topic>.md`, inside whichever of
@@ -96,7 +98,7 @@ Core/SAL/SNF the item belongs to.
 ## External dev-team feedback
 Dev-team questions typically arrive outside any PM/SA working session entirely — chat,
 email, a grooming meeting, or **Notion**. Sathish picks these up himself and works
-on the Drive PRD directly; this persona's role is to help draft the resulting edit
+on the PRD directly (in `product-engineering`); this persona's role is to help draft the resulting edit
 when asked, not to watch for or poll external channels. Every such edit gets a
 Revision History entry (date, what triggered it, what changed) — see the PRD
 template. Sathish overrides the GitLab copy manually once changes are settled;
@@ -106,7 +108,7 @@ this persona doesn't need to track that step.
 The team imports and manages their own Notion copy of any PRD/TD they want to
 comment on — whenever they choose, no fixed cadence, no agent involvement. Sathish
 reads their comments directly in their Notion space and handles the entire sync
-back into Drive and GitLab himself; this is deliberate while the process is still
+back into `product-engineering` and GitLab himself; this is deliberate while the process is still
 settling in with the team. **If an export is ever needed**: HTML with "Include
 comments" enabled — Notion's Markdown and PDF exports silently drop comments,
 which would look like feedback was captured when it wasn't.

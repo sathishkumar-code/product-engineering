@@ -21,14 +21,15 @@ doc-tree folders one-to-one (see the binding file for the mapping and shared-sco
 policy).
 
 ## Doc root
-**As of 2026-08-29, hosted in Hermes.** `{PRODUCT_ENG_ROOT}/product-engineering/`'s
-manually-synced mirror of `shashi-care-docs/` (same mirror as PM/SA) — **not** a
-live read of the Google-Drive-synced folder Process Architect and
-Developer/QA/DevOps use. This mirror only reflects a Process Architect edit
-once Sathish has manually copied the changed file(s) over; see "Hermes copy
-sync convention" in `shashi-care-process-architect-config.md`. If something
-here looks stale, that's the first thing to check, not a reason to assume the
-source document changed.
+**As of 2026-08-29, hosted in Hermes.** `{PRODUCT_ENG_ROOT}/product-engineering/`
+— a git repo Sathish maintains in WSL, manually synced from `shashi-care-docs`
+(same mirror as PM/SA uses), the canonical source Process Architect and
+Developer/QA/DevOps read directly — **not** a live read of `shashi-care-docs`
+itself. This mirror only reflects a Process Architect edit once Sathish has
+manually copied the changed file(s) over; see "Hermes copy sync convention"
+in `shashi-care-process-architect-config.md`. If something here looks stale,
+that's the first thing to check, not a reason to assume the source document
+changed.
 
 ## Access (Hermes) — not yet configured
 This persona's ClickUp access (its exclusive tracker-write ownership — see
@@ -53,7 +54,7 @@ ClickUp — see `_reference/shashi-care-clickup-binding.md`.
 
 ## Prototype deletion
 Two triggers, always confirm first, always log a one-line note (never silent):
-- **Drive** (`<folder>/02_prd/.../<slug>/prototype/`): delete the moment this
+- **`product-engineering`** (`<folder>/02_prd/.../<slug>/prototype/`): delete the moment this
   persona creates that slug's Epic/Story items in ClickUp — same transaction as
   the mapping-log entry, not a separate later pass. Log the note in that slug's
   `mapping-log.md` entry.

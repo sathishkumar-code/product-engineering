@@ -18,6 +18,7 @@ Companion to `HIPAA_Compliance_Reference.docx` (requirements & citations) and `S
 | Status | Decision Needed | Requires a product/security policy decision, not just engineering. |
 | Status | Needs Analysis | Problem is confirmed but no defined fix yet — requires design/research before it becomes an engineering task. |
 | Status | Done | Verified complete — update Notes with verification method/date. |
+| Status | Accepted | Risk/exposure reviewed and knowingly accepted as-is — no further action or gating required. Notes must record who accepted and why. |
 
 ## Summary (quick-scan status tracking)
 
@@ -62,6 +63,7 @@ Companion to `HIPAA_Compliance_Reference.docx` (requirements & citations) and `S
 | 38 | Identity & Access | High | Not Started | — |
 | 39 | Session Management | Medium | Not Started | — |
 | 40 | Consent & Family Access | Medium | Not Started | — |
+| 41 | Consent & Family Access | Medium | Accepted | Sathish |
 
 ## Full detail
 
@@ -816,5 +818,25 @@ Companion to `HIPAA_Compliance_Reference.docx` (requirements & citations) and `S
 **Recommended fix**: Confirm and document explicitly how the consent/acknowledgment flow (rows 18–19) integrates with the sign-in sequence described here, so the two aren't maintained as separate, potentially inconsistent designs.
 
 **Notes**: Confirmation/documentation item, not a new technical gap.
+
+---
+
+### 41. Consent & Family Access — Care Conference facility-group chat notifications
+
+| Field | Value |
+|---|---|
+| Priority | Medium |
+| Status | Accepted |
+| Owner | Sathish |
+| HIPAA / Standard reference | 45 CFR §164.502(g); §164.510(b); Minimum Necessary Standard (§164.502(b)) |
+| Created | 2026-08-31 |
+
+**Current state**: Care Conference visibility today is scoped to the conference's host and care team only (`CARE-FR-26`). The `care-conference-edit-delete-group-notifications` enhancement (see `TD-care-conference-edit-delete-group-notifications.md` §7, §9.1) adds automated chat notifications on schedule/edit/cancel, posted into a facility-wide group chat via the existing `ChatSystemUser`/`sendModuleMessage()` mechanism (the same pattern Transportation already uses, `MSG-FR-36`).
+
+**Gap / risk**: This is a genuinely new PHI exposure surface relative to today's host/care-team-scoped visibility — resident name + conference date + time will be visible to everyone in the bound facility group chat, not just the host/care team. Content is deliberately minimized (name + date + time only — no notes, agenda, location, or attendee list, per the enhancement's BR-08 minimum-necessary determination), but the broadened *audience* itself is the new exposure, independent of how minimal the content is.
+
+**Recommended fix**: N/A — risk reviewed and accepted, no fix required.
+
+**Notes**: Reviewed and accepted by Sathish 2026-08-31: content is minimal (name/date/time only, no clinical notes, agenda, or attendee list) and the audience (the facility group chat bound to `Config.chat.moduleMessageBindings['CARE_CONFERENCE']`) is primarily the resident's care team, consistent with the operational-coordination purpose of the notification. Accepted as an appropriate minimum-necessary disclosure. Feature is opt-in per facility — no facility gets this exposure by default. GA rollout is **not** gated on this entry (superseding the TD's original recommendation in `TD-care-conference-edit-delete-group-notifications.md` §9.1/TD-R-02/TD-OQ-03, now resolved by this acceptance).
 
 ---
