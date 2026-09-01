@@ -475,7 +475,9 @@ get drafted, removing the old rework risk where SA feedback used to arrive
   `07_build/{features,enhancements,bugs}/<slug>/` as the handoff artifact to QA.
 - A behavior, data-model, or API-surface deviation from the tech-spec routes back
   to System Architect; a scope change routes back to Product Manager as a new
-  `intent.md` — see `skill-developer-discipline.md`'s "Deviation/return path".
+  `intent.md` — see `skill-developer-discipline.md`'s "Deviation/return path", and
+  "Change requests to an in-flight (not yet released) feature" below for how that
+  change is then dispositioned.
 
 ## Stage 12 — QA execution
 
@@ -541,11 +543,54 @@ front-matter, and the companion review-comments/changeset files are never touche
 (See "Open Question lifecycle and the development-readiness gate" below for how
 those ultimately get dispositioned — Finalize itself never dispositions them.) A
 resolution that reads as expanding scope beyond what the document itself recorded —
-even for the same feature — is never folded in or dropped silently; it's escalated to
-Sathish, who decides whether it becomes a new Enhancement Request (drafted by Product
-Manager, never by System Architect) or an explicit, logged scope expansion of the
-same document. See `skill-finalize-document-discipline.md` /
+even for the same feature — is never folded in or dropped silently; it's escalated to Sathish per "Change requests to an in-flight (not yet
+released) feature" below, which now covers this decision generally, not just
+when it surfaces here. See `skill-finalize-document-discipline.md` /
 `shashi-care-finalize-config.md`.
+
+## Change requests to an in-flight (not yet released) feature
+
+Cross-cutting policy, not a new stage — applies whenever a customer- or
+business-driven input changes a requirement for a feature that hasn't yet
+reached Stage 14 (Release and deploy), at any point from PRD/ER drafted
+through Stage 13 (Development complete confirmation). The Stage 11
+Developer-deviation path above and the Finalize-document scope-expansion
+check above are specific discovery points that both feed into this same
+general rule, not separate rules of their own.
+
+- **Entry point**: always captured first as a new `intent.md`
+  (`templates/intent-template.md`, the same Stage 0 front door everything
+  else uses), referencing the in-flight document(s) it affects. No change
+  bypasses intake capture, even when the PRD/ER/TD it touches already exists
+  and is mid-pipeline.
+- **Default disposition — amend in place**: because nothing has shipped yet,
+  the default is to log the change as an explicit, in-place revision to the
+  existing PRD/ER/TD (and its tech-spec/spec, once drafted) rather than a new
+  Enhancement Request. The document re-enters Stage 2 (Sathish finalizes) for
+  re-approval of the revised `status`; whichever later stage already ran
+  against the prior version (SA review, grooming, epics/stories, tracker
+  items) gets re-checked for consistency by the agent that owns it — never
+  silently assumed still valid, the same re-verification discipline as
+  "Orchestration and verification" above.
+- **Escalation to a new Enhancement Request**: only when Sathish judges the
+  change reads as expanding scope beyond what the document originally
+  recorded does it become a new Enhancement Request instead — drafted by
+  Product Manager, never System Architect, via the normal Direct intake
+  pathway (Stage 1). This is Sathish's call every time, never inferred
+  automatically from the size or wording of the change.
+- **Stage 11's Developer-deviation path is a special case of this rule**: a
+  scope change a Developer notices mid-coding still routes back to Product
+  Manager as a new `intent.md` per Stage 11 above; what happens to it next
+  follows the default-amend / escalate-to-ER logic here, rather than being
+  decided ad hoc at that stage.
+- **Finalize-document's scope-expansion check is also a special case**: "On-
+  demand: Finalize a document" above triggers the identical decision when a
+  review-round resolution reads as expanding scope — see that section for
+  the Finalize-specific detail (SA's handover-not-draft boundary, the
+  Revision History row), this section for the general rule.
+
+See `skill-pm-discipline.md`'s "Change requests to an in-flight (not yet
+released) feature" for the Product Manager procedure this drives.
 
 ## Open Question lifecycle and the development-readiness gate
 
@@ -905,6 +950,12 @@ separate mechanism.
   every promotable document. `review_round` on the SA comments file.
 - **Escalation**: 3 PRD/Epics-Stories review rounds without a settled verdict →
   Sathish decides directly.
+- **Change requests to in-flight features**: any customer/business-driven change
+  to a not-yet-released PRD/ER/TD is captured first as a new `intent.md`, then
+  defaults to an in-place amendment of the existing document (re-approval at
+  Stage 2) unless Sathish judges it's genuine scope expansion, in which case it
+  becomes a new Enhancement Request instead — see "Change requests to an
+  in-flight (not yet released) feature."
 - **Open Question disposition**: `status: approved` on a PRD/ER/TD carries
   forward whatever Open Questions are still open — it doesn't resolve them.
   The one point that does require closure is `tech-spec-<slug>.md`'s own

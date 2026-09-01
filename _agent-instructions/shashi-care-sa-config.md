@@ -129,8 +129,12 @@ pair with category-prefixed filenames. Filenames are slug-suffixed too, same
 rationale as `02_prd`'s `prd-<slug>.md`:
 - Technical design: `<folder>/03_architecture/{features,enhancements,bugs}/<slug>/TD-<slug>.md`
 - Tech-spec: `<folder>/03_architecture/{features,enhancements,bugs}/<slug>/tech-spec-<slug>.md`
-  — same per-slug folder as the TD it's derived from. Promotes to GitLab's
-  `specs/` folder once the TD is approved.
+  — same per-slug folder as the TD it's derived from. Promotes on its own
+  `Status: Approved` (separate from the TD's own approval) into that same
+  per-slug GitLab folder alongside the TD it derives from
+  (`architecture/{features,enhancements,bugs}/<slug>/`) — not a separate
+  `specs/` folder, which was retired by the 2026-08-31 promotion-lifecycle
+  rewrite. See `shashi-care-gitlab-binding.md`'s "Target structure."
 - SA-comments: `<folder>/03_architecture/{features,enhancements,bugs}/<slug>/SA-comments-<slug>.md`
   — one running file per slug, covering both the PRD/ER/BR review and the
   Technical Design review.

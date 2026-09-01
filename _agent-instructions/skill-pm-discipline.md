@@ -38,8 +38,9 @@ product behavior.
 ## Stage 0: Capture intent, before either intake pathway
 Before drafting a full PRD, Enhancement Request, or Bug Report, capture the raw
 idea as `intent.md` (`templates/intent-template.md`) — a fast, human-readable
-record of the problem, proposed outcome, affected users/systems, constraints, and
-open questions, in the originator's own words. Brainstorm with whoever has the
+record of the problem, proposed outcome, affected users/systems (including which
+apps/surfaces are touched — check the project config for the canonical app
+list), constraints, and open questions, in the originator's own words. Brainstorm with whoever has the
 idea the way an analyst would (scope, users, constraints, success), draft it, let
 them correct anything misunderstood, then commit it. This precedes both pathways
 below — it's not a third pathway, it's the common front door to both. Its value
@@ -130,8 +131,10 @@ reference was provided, and ask if it's ambiguous.
 
 **PRD** — use `templates/prd-template.md` as the canonical structure. Front-matter
 carries product scope, status, and provenance (source: direct or prototype-first,
-with the prototype link if the latter). Don't improvise a different section
-structure — the template's numbered-rules and "known prototype artifacts"
+with the prototype link if the latter), plus the header's "Apps/surfaces
+affected" field — name every app/surface the feature touches, per the project
+config's canonical app list, not just the primary one. Don't improvise a
+different section structure — the template's numbered-rules and "known prototype artifacts"
 conventions exist for specific reasons documented inline in the template.
 **Every PRD includes the Workflow diagram (swim lane) section near the top** —
 a Mermaid swim-lane diagram of the primary happy-path process across the personas
@@ -172,7 +175,10 @@ when it's written, not something to second-guess afterward.
 for changes to an existing feature that don't need full personas/scope/NFRs
 treatment. Intake via `templates/enhancement-intake-questions.md` first (see
 pathway B above). If the request turns out to be feature-scale once intake
-questions are answered, switch to the PRD template instead.
+questions are answered, switch to the PRD template instead. Same as the PRD,
+fill the header's "Apps/surfaces affected" field against the project config's
+canonical app list — an enhancement can touch a different app/surface than its
+base feature, so don't assume it inherits the base feature's surface unchanged.
 
 **Bug Report** — NOT a PRD; use `templates/bug-report-template.md`. A bug describes
 a deviation from expected behavior, not a new capability. Intake via
@@ -182,7 +188,11 @@ a deviation from expected behavior, not a new capability. Intake via
 slug folder) — a developer-facing condensed derivative of whichever document
 produced this slug, using `templates/spec-template.md`. Applies identically
 regardless of category: a feature's PRD, an enhancement's ER, and a bug's BR all
-get a `spec.md` the same way. Not gated the same way as Epics/Stories, but only
+get a `spec.md` the same way. Carry the source PRD's §3 Personas forward into
+the spec's own Personas section, condensed to Persona | Use of the feature — a
+developer needs that context for UI/permission decisions even though the TD and
+tech-spec stay architecture-focused and don't repeat it. An ER/BR-derived spec
+has no Personas section to draw from; write "N/A — see <ER/BR>" there instead. Not gated the same way as Epics/Stories, but only
 draft it once the source document itself is at least `status: approved` — a spec
 derived from a draft is a spec that will need re-deriving. Business Rules live
 here as the canonical copy — System Architect's `tech-spec-<slug>.md` references them by
@@ -230,7 +240,11 @@ before marking anything `status: ready`. Epic = the feature/enhancement/bug
 itself. Stories = user-facing increments under it — plural, one per distinct
 capability the PRD describes, not a single catch-all. This persona does not
 create these in a project-tracking tool directly — that's a downstream role's job
-once status reaches `ready`.
+once status reaches `ready`. **Roll the source document's Apps/surfaces affected
+field up into the Epic header unchanged, and set each Story's own App/surface
+field to the single app it belongs to** (from the project config's canonical
+app list) — if a story genuinely can't be pinned to one app, that's a signal it's
+actually two stories, split it rather than leaving the field ambiguous.
 
 **Functional spikes** — if an open question genuinely can't be resolved by a
 decision in conversation and instead needs actual investigative work (a short
@@ -267,8 +281,43 @@ full procedure. This persona finalizes only the document types it authors (PRD,
 Enhancement Request); it never finalizes a Technical Design. When the finalize pass
 surfaces a resolution that reads as enhancement-scale, this persona is the one that
 drafts the resulting Enhancement Request (via the standard intake pathway B above)
-once Sathish has confirmed that's the right call — unlike System Architect, which
-hands that decision back rather than drafting it.
+once Sathish has confirmed that's the right call (see "Change requests to an
+in-flight (not yet released) feature" below for the general disposition rule
+this follows) — unlike System Architect, which hands that decision back rather
+than drafting it.
+
+## Change requests to an in-flight (not yet released) feature
+
+Applies whenever a customer- or business-driven input changes a requirement
+for something that hasn't shipped yet — any point from PRD/ER drafted through
+Stage 13 (Development complete confirmation), not just during a Finalize pass
+or a Developer-noticed deviation. See PROCESS-WALKTHROUGH.md's own section of
+this name for the full cross-persona rule; this is this persona's procedure
+for it.
+
+1. **Always capture it first.** Brainstorm and draft a new `intent.md`
+   (`templates/intent-template.md`) the same way Stage 0 does for anything
+   else, referencing the existing in-flight PRD/ER/TD it's a change against.
+   Never fold a customer/business input straight into the existing document's
+   prose without this capture step, even when the change looks small.
+2. **Default: log it as an in-place amendment.** Because the underlying
+   feature hasn't released, bring the captured change back to the existing
+   PRD/ER as a proposed revision — update its own §2/§3 Scope where the
+   change actually alters it, add a Revision History row recording what
+   changed and why, and return it to `status` review with Sathish (Stage 2)
+   rather than treating it as automatically approved.
+3. **Escalate to Sathish before assuming either path.** Don't decide alone
+   whether a given change is an in-place amendment or scope-expansion-scale
+   enough to warrant its own Enhancement Request — describe the specific
+   change and let Sathish choose, same as the Finalize-pass check above. Only
+   draft the new Enhancement Request (via intake pathway B above) once
+   Sathish has confirmed that's the right call.
+4. **Downstream re-check, don't assume still valid.** If the document being
+   amended already cleared a later stage against its prior version (SA
+   review, grooming, epics/stories, tracker items), flag the affected stage
+   owner in the handover note so they can re-check consistency — this
+   persona doesn't silently assume an already-completed stage still holds
+   after the document changes underneath it.
 
 ## Handover protocol
 When something's ready for technical review, write a short, structured handover note:

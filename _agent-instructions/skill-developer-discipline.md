@@ -64,7 +64,10 @@ it back to System Architect rather than silently resolving it in code:
   design correction): a new `intent.md` candidate, handed to Product Manager —
   same "PM owns product requirements" boundary System Architect itself
   follows; this persona doesn't invent product requirements any more than SA
-  does.
+  does. What happens to it next (in-place amendment of the existing PRD/ER vs.
+  a new Enhancement Request) is Product Manager's and Sathish's call, not this
+  persona's — see PROCESS-WALKTHROUGH.md's "Change requests to an in-flight
+  (not yet released) feature."
 Never resolve either case silently in code alone and call it done.
 
 ## Tracker status

@@ -35,6 +35,29 @@ Front-matter still carries `product: Core | SAL | SNF` even though the folder
 already signals scope — treat a mismatch between the two as an error to flag, not
 something to silently resolve by trusting one over the other.
 
+## Apps/surfaces (canonical list)
+Use these exact names when filling a document's "Apps/surfaces affected"
+field or an `intent.md`'s "Affected users and systems" section — don't
+invent a different label for the same app. **Keep this list in sync with
+`_agent-instructions/shashi-care-developer-config.md`'s repo table** — that
+config is the actual source of truth for which repo backs which app; if the
+two ever disagree, flag it rather than picking one silently.
+- **Web** (admin dashboard) — `senior_living_admin`, shared across SAL/SNF.
+- **Staff app** — `senior_living_staffapp`, SNF only.
+- **Resident app** — `senior_living_reactnative`, SAL's assisted-living
+  resident app.
+- **Resident/family app** — `senior_living_skillednursing_resident`, SNF's
+  resident/family app. Distinct from the SAL "Resident app" above even
+  though both serve residents — name the specific one, not just "resident
+  app", when a feature is SNF-only.
+- **TV app** — `senior_living_tvapp`, SAL only.
+- **Backend** — `senior_living_backend`. Not a UI surface; list it only when
+  the change is API/data-layer only with no UI-facing app touched, or when an
+  API change is itself worth calling out alongside the UI apps it serves.
+
+A feature can (and often does) touch more than one of these — list every one
+it touches, not just the primary app a reviewer would think of first.
+
 ## Doc root
 **As of 2026-08-29, hosted in Hermes.** `{PRODUCT_ENG_ROOT}/product-engineering/`
 — a git repo Sathish maintains in WSL, manually synced from `shashi-care-docs`,
@@ -82,9 +105,21 @@ docs — flag the absence and ask rather than assuming shared behavior.
 - Intent: `<slug>/intent.md`, using `templates/intent-template.md` — precedes the
   PRD/ER/BR in the same slug folder, adapted from the AI-Native SDLC playbook's
   concept. Doesn't promote to GitLab; superseded once the PRD/ER/BR exists.
+- Change-request intent (a customer/business-driven change to an in-flight
+  document, per PROCESS-WALKTHROUGH.md's "Change requests to an in-flight (not
+  yet released) feature"): `<slug>/intent-change-<n>.md` (sequential per slug,
+  starting at 1), same `templates/intent-template.md` shape as the original —
+  filed alongside the already-superseded original `intent.md`, never overwriting
+  it. This filename shape is this persona's own inference to avoid colliding
+  with the original `intent.md`, not literally confirmed word-for-word by
+  Sathish — flag it for correction if he wants a different naming convention.
 - Spec: `<slug>/spec.md`, using `templates/spec-template.md` — sits alongside
-  `prd-<slug>.md` (or the enhancement/bug equivalent). Promotes to GitLab's
-  `specs/` folder once the PRD is approved.
+  `prd-<slug>.md` (or the enhancement/bug equivalent). Promotes on its own
+  `Status: Approved` (separate from the PRD's own approval) into that same
+  per-slug GitLab folder alongside the PRD/ER it derives from
+  (`prd/{features,enhancements,bugs}/<slug>/`) — not a separate `specs/`
+  folder, which was retired by the 2026-08-31 promotion-lifecycle rewrite. See
+  `shashi-care-gitlab-binding.md`'s "Target structure."
 - Prototype export (full export, per Q2): `<slug>/prototype/`, with
   `prototype-meta.md` sidecar (`templates/prototype-meta-template.md`). Permanent
   in `product-engineering` for now (Claude Design isn't yet available to the

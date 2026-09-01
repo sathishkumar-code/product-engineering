@@ -83,6 +83,13 @@ makes the table shorter. When in doubt, consolidate rather than delete, and say 
 your summary to Sathish which rows you merged and why.
 
 ## Detecting a resolution that's actually an enhancement
+
+This is one specific trigger into the general "Change requests to an in-flight
+(not yet released) feature" rule (see PROCESS-WALKTHROUGH.md and
+`skill-pm-discipline.md`) — a review-round resolution surfacing the same kind of
+scope question a customer input or a Developer-noticed deviation would. The
+decision procedure below is that same rule, applied at this discovery point.
+
 For every resolved item you're about to fold into the document's prose, check it
 against that document's own recorded scope boundary — PRD/ER's §2/§3 In scope vs. Out
 of scope, or TD's §2 Goals vs. Non-goals. This check applies even when the resolution
