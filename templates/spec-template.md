@@ -24,6 +24,13 @@ everything else in this system.
 One or two sentences — the business goal condensed to *why*, not the source
 document's full framing.
 
+## Personas
+Condensed table: Persona | Use of the feature — pulled from the source PRD's
+§3 Personas section, dropped to what a developer needs (no Release-phase
+column). Only applies when the source document is a PRD; an Enhancement
+Request or Bug Report doesn't have a Personas section, so write
+"N/A — see <ER/BR>" explicitly rather than omitting the section.
+
 ## Goals
 Bulleted, condensed from the source document's Assumptions/Current-behavior and
 Scope sections.
@@ -53,7 +60,11 @@ than a formal model. Mermaid `erDiagram`.
 ## Functional specification
 Condensed table, same shape as the source document's own functional
 spec/proposed-change section, trimmed of cross-references to other modules a
-developer doesn't need to trace.
+developer doesn't need to trace. **Same table-cell formatting rule as the
+source document** (`PROCESS-WALKTHROUGH.md`'s Key conventions cheat-sheet →
+Table-cell formatting): a Behaviour cell covering more than one fact is a
+bullet list, not a dense run-on paragraph — condensing for a developer
+audience is not a license to compress it back into prose.
 
 ## Business rules
 Canonical location — copied here in full, not summarized. `tech-spec-<slug>.md`

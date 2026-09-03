@@ -97,7 +97,11 @@ documents. Review and extend — never rewrite the PM's product documents.
   Both pathways: context/problem, goals and non-goals, proposed design,
   alternatives considered (with why rejected, not just the chosen approach), data
   model and API changes, non-functional considerations, testing strategy,
-  rollout/migration, risks, open questions.
+  rollout/migration, risks, open questions. **Carry the source PRD/ER's
+  Apps/surfaces affected field into the TD's own header field unchanged** —
+  don't re-derive it from scratch; if the design work itself reveals the
+  PRD/ER's field was incomplete or wrong, flag that back to Product Manager
+  rather than silently correcting it here.
 - **Tech-spec** (`tech-spec-<slug>.md`, alongside the TD in that same per-slug
   `03_architecture/{features,enhancements,bugs}/<slug>/` folder) — a
   developer-facing condensed derivative of the TD, using
@@ -109,6 +113,11 @@ documents. Review and extend — never rewrite the PM's product documents.
   omission isn't. Re-derive whenever the source TD is revised. Informally called
   the **Impl Spec** by the team (that's the heading used inside the actual
   document) even though `tech-spec-<slug>.md` stays the canonical filename.
+  **Carry the TD's Apps/surfaces affected field into the tech-spec's own header
+  field, and tag the Endpoints/Core logic/Notifications/UI components sections
+  by app whenever the tech-spec spans more than one** — see the template's own
+  per-section guidance. This is what lets a Developer working in a single repo
+  find their own rows without reading the whole document.
 - **Revisions after approval** — like the PRD, a TD can be revised after it
   reaches `status: approved`, most often triggered by grooming feedback (same
   trigger as PRD revisions — see `skill-pm-discipline.md`). Log each one in the

@@ -21,6 +21,7 @@ the canonical filename.
 | Status | Draft / Ready for review / Approved |
 | repo_status | not-promoted / promoted |
 | last_promoted_revision | Timestamp/version last pushed to the code repo, if promoted |
+| Apps/surfaces affected | Carried forward from the TD's own field — every app/surface this tech-spec's work touches, not just the repo the reader happens to be in |
 
 ## Overview
 One or two sentences — what this builds, condensed from the TD's context/problem
@@ -38,20 +39,30 @@ If the TD's schema has a field, it belongs here too, even if the explanation for
 
 ## Endpoints
 Condensed API table — purpose per endpoint, including any deprecated/
-transitional endpoint a developer needs to know is being phased out.
+transitional endpoint a developer needs to know is being phased out. When
+this tech-spec covers more than one app/surface, add an **App(s)** column
+naming which app(s) call or own each endpoint, so a developer working in a
+single repo can filter to their own rows without reading the whole table.
 
 ## Core logic
 Condensed pseudocode for anything genuinely non-trivial (a precedence rule, a
 caching strategy, a state resolution function) — trimmed of alternatives
-discussion, accurate to what the TD specifies.
+discussion, accurate to what the TD specifies. Prefix each block with which
+app/surface it lives in (e.g. `[Staff app]`) whenever this tech-spec spans
+more than one; omit the tag only for logic that's genuinely shared/backend
+and not owned by one specific app.
 
 ## Notifications / integration behavior
 Condensed from the TD — delivery mechanism, triggers, and explicit non-triggers
-carried forward as clearly as what does fire.
+carried forward as clearly as what does fire. Name which app/surface triggers
+each notification and which app/surface(s) receive it — the two are often
+different apps (e.g. staff app action notifying the resident/family app).
 
 ## UI components
 Condensed list of components/hooks named in the TD, enough to know what to
-build vs. reuse.
+build vs. reuse. Prefix each with its owning app/surface (e.g. `[Resident
+app]`) whenever this tech-spec spans more than one — this is usually the
+clearest signal of which repo a given component actually belongs in.
 
 ## Business rules
 Not reproduced here — reference by ID (e.g. "See `spec.md` BR1–BR6"). Add only
@@ -62,6 +73,9 @@ Mandatory, not optional. Carry forward every unresolved TD open question in
 full, especially anything marked High priority or tied to a high-impact risk —
 those are exactly what a developer must not discover by building the wrong
 thing first. If every question is resolved, write "None — see TD" explicitly.
+Carries the TD's own table-cell formatting forward too — a "Current position"
+covering more than one fact stays a bullet list here, not a paragraph (see
+`PROCESS-WALKTHROUGH.md`'s Key conventions cheat-sheet → Table-cell formatting).
 
 ## Testing checklist
 Condensed by category (Unit/Integration/Performance/E2E) — but preserve any

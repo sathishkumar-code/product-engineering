@@ -17,6 +17,13 @@ Engineer — see "Tracker-write exception (Developer, QA Engineer)" below.
   slug. If it already exists, update instead of recreate.
 - **Every creation gets logged immediately** — slug, tracker object names/IDs, links.
   This is the idempotency guard; treat it as mandatory, not optional bookkeeping.
+- **Tag from the source document's own fields, not by guessing.** When creating an
+  Epic (List) or Story/Task, apply every tag the binding file's Tags section
+  defines that the source Epic/Story document's own fields call for — product/team
+  tag, type tag, and (where the binding defines them) app/surface tags read
+  directly off the Epic's Apps/surfaces affected field or the Story's own
+  App/surface field. An Epic touching three apps gets all three app tags on its
+  List; each Story/Task gets the one tag matching its own App/surface field.
 - Don't create anything not yet marked ready by the upstream personas (PM/SA
   sign-off, per whatever handover convention this project uses).
 - **One narrow, explicit exception to never editing another persona's documents**:

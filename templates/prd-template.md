@@ -20,6 +20,7 @@ document is an explicit success-metrics field; everything else was already sound
 | Business goal | The outcome this exists to produce, one or two sentences |
 | Success metrics | How you'll know it worked — specific and measurable, not "improve X" |
 | Release shape | What ships, how many surfaces/screens, one release or phased |
+| Apps/surfaces affected | Every app/surface this touches (web, staff app, resident app, etc. — see the project config's canonical app list; name all, not just the primary one) |
 | Sources | Prototype link (project-level, not per-page — see intake convention), upstream systems of record |
 | Related | Other PRDs this depends on or overlaps with, PLUS an explicit boundary statement of what it does NOT touch |
 | Open questions | Count, and which ones block story creation |
@@ -107,6 +108,9 @@ actually come from" question worth answering explicitly rather than assuming.
 Screen-by-screen or flow-by-flow, as tables: Element | Behaviour & rules. If sourced
 from a multi-page prototype, tag each row/section with which prototype page it
 corresponds to (`prototype_page:` convention) rather than re-deriving it later.
+**A Behaviour cell covering more than one fact is a bullet list, not a dense
+run-on paragraph** — see `PROCESS-WALKTHROUGH.md`'s Key conventions cheat-sheet →
+Table-cell formatting.
 
 ## 6. Business rules / state model
 Anywhere multiple things can be true at once — status models, permission matrices,
@@ -137,6 +141,8 @@ for this feature"; out of scope means "not part of this feature, possibly never.
 Table: ID (IQ-01, ...) | Area | Question and current position | Priority
 (Blocker/High/Medium/Low). The "current position" column is what lets story creation
 proceed around non-blocking questions instead of stalling on every open item.
+Same table-cell formatting rule as §5 — a "current position" covering more than
+one fact is a bullet list, not a paragraph.
 
 ## 12. Known prototype artifacts
 Mandatory whenever `source: prototype-first`. Bullet list of prototype-only

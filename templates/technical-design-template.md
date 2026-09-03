@@ -18,6 +18,7 @@ wrong."
 | Status | Draft / Ready for review / Approved |
 | Reviewers | |
 | Product | Core / SAL / SNF |
+| Apps/surfaces affected | Carried forward from the source PRD/ER's own field — don't re-derive from scratch; flag it to Product Manager if the design work reveals the PRD/ER's field was incomplete or wrong |
 
 ## Revision history
 Populated once a TD is revised after `status: approved` — most often triggered by
@@ -53,7 +54,9 @@ relationship is easier to see than to read.
 
 Include at least one alternative even if the chosen approach seems obvious — the
 rejected options are what let a future reader know the tradeoff was actually
-considered, not assumed.
+considered, not assumed. A "Why rejected" cell stacking more than one distinct
+reason is a bullet list, not a run-on paragraph — see `PROCESS-WALKTHROUGH.md`'s
+Key conventions cheat-sheet → Table-cell formatting.
 
 ## 5. Data model changes
 Schema changes, migrations required, backward-compatibility considerations for
@@ -104,7 +107,15 @@ a "was X notified?" question would still be answerable without it.
 | Risk | Likelihood/Impact | Mitigation |
 |---|---|---|
 
+A "Mitigation" (or "Likelihood/Impact") cell covering more than one distinct
+point is a bullet list, not a dense paragraph — same table-cell formatting rule
+as §4, see `PROCESS-WALKTHROUGH.md`'s Key conventions cheat-sheet →
+Table-cell formatting.
+
 ## 11. Open questions
 | ID | Question | Current position | Priority |
 |---|---|---|---|
+
+Same table-cell formatting rule as §4 and §10 — a "Current position" covering
+more than one fact is a bullet list, not a paragraph.
 ```

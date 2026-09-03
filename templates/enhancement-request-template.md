@@ -13,6 +13,7 @@ never a bare `ER.md`.
 | Field | Value |
 |---|---|
 | Product | SAL / SNF / SAL+SNF |
+| Apps/surfaces affected | Every app/surface this touches (web, staff app, resident app, etc. — see the project config's canonical app list; name all, not just the primary one) |
 | Status | Draft / Ready for review / Approved |
 | Base feature | Path/link to the existing PRD or as-built doc this enhances |
 | Requested by | |
@@ -40,8 +41,10 @@ The specific technical question(s), if any.
 
 ## 6. Open questions
 Same table format as the PRD template (ID | Area | Question and current position |
-Priority) if there are any; omit the section entirely if there are none — don't
-leave an empty table.
+Priority), including its table-cell formatting rule (a multi-fact "current
+position" is a bullet list, not a paragraph — see `PROCESS-WALKTHROUGH.md`'s Key
+conventions cheat-sheet → Table-cell formatting) if there are any; omit the
+section entirely if there are none — don't leave an empty table.
 
 ## Revision history
 Populated once this document is revised after `status: approved` — most often

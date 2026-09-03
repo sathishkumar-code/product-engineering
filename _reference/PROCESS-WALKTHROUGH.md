@@ -1015,6 +1015,21 @@ separate mechanism.
   as every other promotion — see "Document promotion" above. If an export is
   ever needed: **HTML with "Include comments" enabled** — Markdown and PDF
   exports from Notion silently drop comments.
+- **Table-cell formatting**: any table column meant to carry more than one
+  distinct fact about the same row — multiple rules, states, conditions, or
+  reasons packed into one "Behaviour"/"Value"/"Mitigation"/"Why rejected"/
+  "Current position" cell — is written as a bullet list inside the cell
+  (`<br>- ` before each point), never one dense run-on paragraph. A short lead
+  sentence before the first `<br>-` is fine when the cell needs one; a cell
+  that only ever states a single plain fact stays plain text — bullets aren't
+  forced where there's nothing to separate. Applies wherever this table shape
+  recurs: the PRD's §5 Functional specification / Screen specifications and
+  §11 Open questions, `spec.md`'s own Functional specification, the Technical
+  Design's §4 Alternatives considered and §10 Risks and mitigations and §11
+  Open questions, the Enhancement Request's §6 Open questions, and
+  `tech-spec-<slug>.md`'s carried-forward Open questions. Governs documents
+  drafted or re-derived from here on — not a retroactive sweep of documents
+  already approved before this convention existed.
 
 ## AI-Native SDLC alignment (Anthropic's playbook)
 Checked against Anthropic's "AI-Native SDLC playbook"
