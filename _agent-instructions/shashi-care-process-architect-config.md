@@ -61,25 +61,41 @@ there is no drift risk for this group.
 ## Hermes as primary host (Product Manager, System Architect, Project Manager)
 As of 2026-08-29, these three personas moved from Cowork to Hermes and now run
 as single shared Claude Code CLI instances (not per-repo). Unlike
-Developer/QA/DevOps, they do **not** read `shashi-care-docs` directly — they
-read a manually-synced mirror of it that Sathish maintains in the
-`product-engineering/` folder in WSL (already fully mirrored as of the cutover).
+Developer/QA/DevOps, they do **not** read `shashi-care-docs` directly for
+their own config/skill files — they read a manually-synced mirror of
+`_agent-instructions/`, `templates/`, and `_reference/` that Sathish maintains
+in the `product-engineering/` folder in WSL. That part is unchanged by the
+2026-09-04 amendment below.
+
+**As of 2026-09-04**, the *document* side of `product-engineering` (its
+SNF/, SAL/, and shashi-care-core/ trees — PRD, spec, TD, tech-spec, and
+related content) is frozen and no longer read or written by any of these
+three personas: PM, SA, and PjM now author those documents directly in each
+product's GitLab `-docs` repo instead — see
+`_reference/shashi-care-gitlab-binding.md`. Only the config/skill/reference
+mirror below still needs the manual copy step; document content no longer
+does.
+
 This is a **deliberate, acknowledged departure** from the zero-copy principle
 used for Developer/QA/DevOps, chosen by Sathish specifically so the manual-sync
-burden is accepted in exchange for this being the primary folder Hermes already
-works from. The drift risk this creates — the mirror going stale relative to
-this canonical `shashi-care-docs` — is mitigated only by the "Hermes copy sync
+burden (now scoped to config/skill/reference files only) is accepted in
+exchange for this being where Hermes already loads its instructions from. The
+drift risk this creates — the config mirror going stale relative to this
+canonical `shashi-care-docs` — is mitigated only by the "Hermes copy sync
 convention" below; there is no automatic sync. The existing Cowork projects for
 these three personas are kept as a dormant fallback (not deleted) but are no
 longer part of the active rebuild convention.
 
 **Open items from this cutover, not yet resolved:**
-- **Tool bindings** (ClickUp for Project Manager; Google Drive export, Figma,
-  and the GitLab promotion binding for Product Manager/System Architect) are
-  **not yet configured** for reachability from the Hermes/WSL environment. Each
-  persona's own config now carries an "Access (Hermes)" section flagging this —
-  treat missing tool access as something to escalate to Sathish, never silently
-  work around or fabricate.
+- **Tool bindings** (ClickUp for Project Manager; Google Drive export and
+  Figma for Product Manager) are **not yet configured** for reachability from
+  the Hermes/WSL environment. Each persona's own config now carries an
+  "Access (Hermes)" section flagging this — treat missing tool access as
+  something to escalate to Sathish, never silently work around or fabricate.
+  **GitLab checkout write access** (needed as of 2026-09-04 for PM's and SA's
+  direct-authoring work) is confirmed for SA (2026-08-31, though that check
+  predates SA writing there — only read was verified) but not separately
+  confirmed for PM at all — same escalate-don't-assume rule.
 - **The HIPAA compliance check Skill** is currently an account-level, installed
   Cowork Skill (see the "Cross-cutting policy" section below) that auto-invokes
   inside Cowork sessions. Hermes is a different runtime — this mechanism does
@@ -125,6 +141,13 @@ current; state it plainly every time, the same discipline as the Cowork
 re-paste rule below. Do not attempt to perform this copy directly — this
 persona's own file access is the Drive-synced `shashi-care-docs/` folder only,
 not the Hermes-side `product-engineering/` folder.
+
+**As of 2026-09-04, this convention covers config/skill/template/reference
+files only** — it no longer covers document content (PRD, spec, TD,
+tech-spec, and related), since that content has no `product-engineering`
+copy at all any more; it's authored directly in each product's GitLab
+`-docs` repo. Don't tell Sathish to copy a document into
+`product-engineering` — that folder's document trees are frozen.
 
 `cowork-instructions-ProcessArchitect.md` is this persona's own paste-ready file:
 `cat skill-process-architect-discipline.md shashi-care-process-architect-config.md

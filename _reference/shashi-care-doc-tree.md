@@ -1,16 +1,47 @@
 # Doc Tree — Shashi Care
 
+**As of 2026-09-04 — read this before the tree below.** PRD, spec.md,
+Technical Design, tech-spec, Release Plan, prototype, as-built architecture
+docs, compliance register, integration docs, and tracker-sync material are
+now authored directly in each product's GitLab `-docs` repo, not in
+`product-engineering` — see `shashi-care-gitlab-binding.md`'s "Target
+structure" for the current, live shape of that content, and
+`PROCESS-WALKTHROUGH.md`'s "Document commit" section for the mechanics.
+`product-engineering` is frozen: its SNF/, SAL/, and shashi-care-core/ trees
+below are now a **historical snapshot only**, kept for reference, not
+read or written by any persona going forward. The governance layer this
+file's own folder lives in — `_agent-instructions/`, `templates/`,
+`_reference/` in `shashi-care-docs/` — is unaffected and still the live
+source Process Architect maintains and Hermes personas read (via the
+manually-synced `product-engineering` config mirror, narrower in scope than
+before — see `shashi-care-process-architect-config.md`'s "Hermes copy sync
+convention").
+
+The tree diagrams below (both "Canonical structure" and "GitLab — exact
+resulting structure") describe the pre-2026-09-04 shape. They're being kept
+as-is for now rather than rewritten line-by-line in this pass — treat
+`shashi-care-gitlab-binding.md` as authoritative for anything the two
+disagree on; this file's `02_prd/`/`03_architecture/`-based canonical tree
+in particular no longer reflects where PRD/spec/TD/tech-spec content
+actually lives.
+
+---
+
 Instantiated from `skill-doc-tree-template.md` (canonical side — Google Drive's
 `shashi-care-docs/`, unchanged internal shape, three parallel copies;
 `product-engineering/`, Product Manager/System Architect/Project Manager's
-Hermes-side working root, is a git repo kept manually synced to this exact
-same shape — see `PROCESS-WALKTHROUGH.md`'s "The agents" section) plus
+former Hermes-side working root, was a git repo kept manually synced to this
+exact same shape — see `PROCESS-WALKTHROUGH.md`'s "The agents" section; as of
+2026-09-04 its document trees are frozen, per the note above) plus
 `skill-gitlab-promotion-template.md` (GitLab side — as of the 2026-08-31
 restructure, nested by category and slug to mirror the canonical shape
 instead of flattened by document type; see `shashi-care-gitlab-binding.md`'s
-"Target structure"). Shown together here because the two are related by
+"Target structure", now substantially expanded and updated by the 2026-09-04
+amendment). Shown together here because the two used to be related by
 promotion — the only real shape divergence left is the repo-name `-docs`
-suffix (see "GitLab — exact resulting structure" below).
+suffix (see "GitLab — exact resulting structure" below), though as of
+2026-09-04 GitLab is the primary/only copy for the document types listed
+above, not a promoted copy of a `product-engineering` original.
 
 ## Canonical structure (Google Drive / `product-engineering`) — full working structure
 

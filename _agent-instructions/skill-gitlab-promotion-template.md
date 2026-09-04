@@ -4,6 +4,16 @@ A generic pattern for promoting an approved document out of a fluid drafting
 workspace (Drive, a wiki, etc.) into a version-controlled repo developers actually
 work in. Copy this template per project and fill in the placeholders.
 
+**Flagged 2026-09-04**: Shashi Care's own `shashi-care-gitlab-binding.md` no
+longer instantiates this template — as of that date it moved to authoring
+documents directly in the version-controlled repo from the start (no separate
+drafting workspace, no promotion event), which this template doesn't describe.
+This template stays here as the reusable pattern for a project that still
+wants the promote-on-approval shape; whether Shashi Care's new model is itself
+worth generalizing into a second reusable template hasn't been decided —
+flagging that as an open question rather than doing it unprompted, per the
+generic-skill-vs-project-config split this persona maintains.
+
 ## Trigger
 Promote a document the moment its `status` field reaches `<PROMOTION_STATUS>`
 (typically the fully-approved state, not draft or in-review). Nothing promotes

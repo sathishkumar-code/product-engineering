@@ -51,21 +51,17 @@ Engineer — see "Tracker-write exception (Developer, QA Engineer)" below.
   that may be stale.
 - **Retrospectives**: use `templates/sprint-retro-template.md` — metrics, a
   reflection format (default or an alternate), and concrete action items.
-- **Prototype deletion** — the one place this persona deletes rather than just
-  creates. Two triggers, always with confirmation first, never silent:
-  - **Doc-root side**: the moment this persona creates the Epic/Story tracker items
-    for that slug — same transaction as the mapping-log entry. Ask for
-    confirmation before deleting the slug's `prototype/` folder; on confirmation,
-    delete it and leave a one-line note in that slug's `mapping-log.md` entry
-    (e.g. "Prototype deleted <date> — superseded by tracker Epic/Story creation
-    above").
-  - **GitLab-side**: once development is actually complete (check tracker status
-    rather than assuming — e.g. all stories under the epic reaching Done). Ask for
-    confirmation before deleting the slug's `prototypes/<category>-<slug>/` folder
-    in the relevant GitLab checkout; on confirmation, delete it and leave a
-    one-line note in that slug's `promotion-log.md` entry.
-  Neither deletion is reversible-by-default in this workflow (no soft-delete
-  mechanism assumed) — confirmation isn't a formality, it's the only safeguard.
+- **Prototype deletion** — whether this persona ever deletes a prototype
+  export, and on what trigger, is a project-config decision, not a default
+  this skill assumes. Some projects run scheduled cleanup (e.g. deleting a
+  staging copy once tracker items exist, and/or an archived copy once
+  development completes); others retain every prototype export permanently
+  and never delete at all — check the project's own config before assuming
+  either way. Where a project's config does define a deletion trigger:
+  always confirm before deleting, never silently; delete only on that
+  confirmation; leave a one-line note in the relevant log entry naming what
+  was deleted and why. No soft-delete mechanism should be assumed present —
+  confirmation is the only safeguard, not a formality.
 
 ## Tracker-write exception (Developer, QA Engineer)
 Two other personas — Developer and QA Engineer, both hosted in Hermes — have a

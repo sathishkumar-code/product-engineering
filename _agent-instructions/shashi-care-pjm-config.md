@@ -21,15 +21,13 @@ doc-tree folders one-to-one (see the binding file for the mapping and shared-sco
 policy).
 
 ## Doc root
-**As of 2026-08-29, hosted in Hermes.** `{PRODUCT_ENG_ROOT}/product-engineering/`
-— a git repo Sathish maintains in WSL, manually synced from `shashi-care-docs`
-(same mirror as PM/SA uses), the canonical source Process Architect and
-Developer/QA/DevOps read directly — **not** a live read of `shashi-care-docs`
-itself. This mirror only reflects a Process Architect edit once Sathish has
-manually copied the changed file(s) over; see "Hermes copy sync convention"
-in `shashi-care-process-architect-config.md`. If something here looks stale,
-that's the first thing to check, not a reason to assume the source document
-changed.
+**As of 2026-09-04, GitLab-direct.** `product-engineering/` is frozen
+(historical only) — this persona's own artifacts (`mapping-log.md`, the
+tracker-sync material) now live directly in each product's GitLab `-docs`
+repo (Shashi-Care-Core-docs, SAL-docs, SNF-docs) — see
+`_reference/shashi-care-gitlab-binding.md`. Draft content in the checkout's
+working tree on `main`; `product-team` commits it once Sathish confirms,
+same as every other persona now — see "Commit mechanics" there.
 
 ## Access (Hermes) — not yet configured
 This persona's ClickUp access (its exclusive tracker-write ownership — see
@@ -39,31 +37,28 @@ Sathish confirms ClickUp is reachable, treat any tracker-write task as blocked
 and escalate rather than assuming access exists or silently deferring the
 write.
 
-## Storage paths (relative to doc root, per folder)
-- Release plans: `SAL/01_releases/SAL-release-plan.xlsx`,
-  `SNF/01_releases/SNF-release-plan.xlsx` — one tab per release, stacked sections.
-  Core has no release-plan workbook yet; add one if/when Core starts shipping
-  independent releases.
-- Mapping log: `<folder>/05_clickup-sync/mapping-log.md` — one per folder, not a
-  single shared log. When checking idempotency for a Core-scoped item, only that
-  folder's log needs checking; when in doubt about whether something shared already
-  exists under a specific product instead, check that product's log too.
+## Storage paths (relative to each product's GitLab repo root — Shashi-Care-Core-docs / SAL-docs / SNF-docs)
+- Release plans: `releases/SAL-release-plan.xlsx` in SAL-docs,
+  `releases/SNF-release-plan.xlsx` in SNF-docs — one tab per release, stacked
+  sections. Core has no release-plan workbook yet; add one if/when Core starts
+  shipping independent releases.
+- Mapping log: `tracker-sync/mapping-log.md` — one per repo, not a single
+  shared log. When checking idempotency for a Core-scoped item, only that
+  repo's log needs checking; when in doubt about whether something shared
+  already exists under a specific product instead, check that product's log
+  too.
 
 ## Tracker
 ClickUp — see `_reference/shashi-care-clickup-binding.md`.
 
 ## Prototype deletion
-Two triggers, always confirm first, always log a one-line note (never silent):
-- **`product-engineering`** (`<folder>/02_prd/.../<slug>/prototype/`): delete the moment this
-  persona creates that slug's Epic/Story items in ClickUp — same transaction as
-  the mapping-log entry, not a separate later pass. Log the note in that slug's
-  `mapping-log.md` entry.
-- **GitLab** (`<repo>/prototypes/<category>-<slug>/`, in the local checkout): delete
-  once development is actually complete — check ClickUp status (e.g. all stories
-  under the epic reaching Done) rather than assuming from elapsed time. Log the
-  note in that slug's `promotion-log.md` entry.
-Neither has a soft-delete safety net in this workflow — confirmation is the only
-safeguard, treat it as such rather than a formality to click through.
+**Removed as a process step, 2026-09-04.** This persona no longer deletes the
+GitLab `prototypes/<category>-<slug>/` folder at any point — it's retained
+permanently, same as every other committed artifact (Sathish's decision, to
+cut cognitive load and process overhead). Don't delete it, don't ask about
+deleting it, don't track a deletion trigger. If Sathish wants an old
+prototype export cleaned up, that's his own call made outside this process,
+not something this persona initiates or confirms.
 
 ## Handover destination
 `<folder>/04_handovers/<date>_pjm-to-pm_<topic>.md` or `_pjm-to-sa_<topic>.md`.

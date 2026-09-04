@@ -15,9 +15,9 @@ and `_reference/team-structure.md`.
 
 | Agent | Host | Context | Writes to |
 |---|---|---|---|
-| **Product Manager** | Hermes (shared instance) | `product-engineering/` — PM/SA/PjM's working doc root (see below) | PRDs, Bug Reports, Enhancement Requests, Epics/Stories, test scenarios/cases, roadmap, release plans |
-| **System Architect** | Hermes (shared instance) | `product-engineering/` — the working doc root (see below) **plus** local checkouts of all three GitLab repos (Shashi-Care-Core-docs, SAL-docs, SNF-docs) **plus** local checkouts of the application source code under `senior-living/` (see `shashi-care-sa-config.md`'s "Source-code checkouts") | Review-comments files, Technical Designs, technical debt register, compliance register — the working doc root only, **never** commits into the GitLab checkouts or source-code checkouts |
-| **Project Manager** | Hermes (shared instance) | `product-engineering/` — the working doc root (see below), plus ClickUp | ClickUp Epics/Stories/Tasks, sprint docs, `mapping-log.md` — `promotion-log.md` is `product-team`'s, see "Document promotion" below |
+| **Product Manager** | Hermes (shared instance) | Local checkouts of all three GitLab `-docs` repos (Shashi-Care-Core-docs, SAL-docs, SNF-docs), read-write on `main`'s working tree — **as of 2026-09-04**, `product-engineering/` is frozen and no longer read for document work (see the paragraph below the table) | PRDs, Bug Reports, Enhancement Requests, Epics/Stories, test scenarios/cases, roadmap, release plans — drafts content only, **never** runs `git commit` itself (see "Document commit" below) |
+| **System Architect** | Hermes (shared instance) | Local checkouts of all three GitLab `-docs` repos, read-write on `main`'s working tree for its own authoring **plus** local checkouts of the application source code under `senior-living/` (see `shashi-care-sa-config.md`'s "Source-code checkouts") | Review-comments files, Technical Designs, tech-spec, technical debt register, compliance register, as-built architecture docs — drafts content only, **never** runs `git commit` itself, and never edits a team-submitted TD sitting in `architecture-submissions/` (see "Document commit" below) |
+| **Project Manager** | Hermes (shared instance) | Local checkouts of all three GitLab `-docs` repos, read-write on `main`'s working tree, plus ClickUp | ClickUp Epics/Stories/Tasks, sprint docs, `mapping-log.md` (now in `tracker-sync/` in each repo) — drafts content only, **never** runs `git commit` itself |
 | **Process Architect** | Cowork | Drive-synced folder | `_agent-instructions/`, `templates/`, `_reference/` — sole author for both Cowork and Hermes; accepts proposals but not edits from either |
 | **Developer** | Hermes (per code repo) | Its assigned code repo, plus read access to that slug's tech-spec/spec.md/epics-stories.md | Code, `implementation-note-<slug>.md`; its own tracker item's status only |
 | **QA Engineer** | Hermes (per code repo) | Its assigned code repo, plus read access to that slug's test-scenarios/test-cases | `qa-execution-report-<slug>.md`, Bug Reports (via Product Manager's template); its own tracker item's status only |
@@ -25,14 +25,22 @@ and `_reference/team-structure.md`.
 
 All seven read from the same underlying content, but not identically: Process
 Architect (Cowork) and Developer/QA/DevOps (Hermes) all read `shashi-care-docs`
-directly — same content, not a copy, zero drift risk. Product Manager, System
-Architect, and Project Manager (Hermes) instead work out of `product-engineering/`
-— their actual working doc root, a git repo kept manually synced with
+directly — same content, not a copy, zero drift risk. **As of 2026-09-04**,
+Product Manager, System Architect, and Project Manager (Hermes) author their
+documents directly in each product's GitLab `-docs` repo — see
+`_reference/shashi-care-gitlab-binding.md` — rather than staging them in
+`product-engineering/` first. `product-engineering/` is now frozen for
+document content; it still holds the manually-synced config/skill/reference
+mirror these three personas read their instructions from, kept manually synced with
 `shashi-care-docs` — a deliberate exception made 2026-08-29 when these three
 moved off Cowork, accepted in exchange for a required manual sync step; see
 "Hermes copy sync convention" in `shashi-care-process-architect-config.md` for
-the drift risk and its mitigation. All product-facing personas read the same
-three product folders: `shashi-care-core/`, `SAL/`, `SNF/`.
+the drift risk and its mitigation, as narrowed by the 2026-09-04 amendment
+(config/skill/reference files only, not document content). Process Architect
+and Developer/QA/DevOps still read the same three product folders in
+`shashi-care-docs`/each code repo as before; Product Manager, System
+Architect, and Project Manager instead read the three product folders
+(`prd/`, `architecture/`, etc.) inside each GitLab `-docs` repo.
 
 **Note on the diagram below**: node labels like "PM agent" and "SA agent"
 describe responsibilities, not hosting — as of 2026-08-29 these run as
@@ -57,8 +65,8 @@ flowchart TD
     B --> C[Sathish signs off: status approved]
     A2 --> C
     C --> V1{{product-team verifies status: approved}}
-    V1 --> D[product-team promotes PRD + prototype to GitLab]
-    D --> D2[PM agent drafts spec.md v1]
+    V1 --> D[product-team commits PRD + prototype to GitLab main]
+    D --> D2[PM agent drafts spec.md v1 in the GitLab checkout - commits independently on its own approval, see Document commit]
     D2 --> G[SA Round 1: reviews PRD, recommends technical stories/spikes]
     G --> H{Settled verdict?}
     H -->|no, and rounds < 3| F2[Sathish/PM revise PRD]
@@ -66,7 +74,7 @@ flowchart TD
     H -->|3 rounds, unsettled| I[Escalate to Sathish]
     H -->|yes| V2{{product-team verifies settled verdict}}
     V2 --> J[Technical Design v1: SA-authored]
-    J --> J2[SA drafts tech-spec-<slug>.md v1]
+    J --> J2[SA drafts tech-spec-<slug>.md v1 in the GitLab checkout - commits independently on its own approval, see Document commit]
     J2 --> V3{{product-team verifies TD status: approved + tech-spec exists/valid}}
     V3 --> E[Grooming meeting w/ dev team]
     E -->|questions via chat/email/Notion| F[Sathish edits PRD and/or TD + Revision History]
@@ -74,7 +82,7 @@ flowchart TD
     F -->|push_to_prototype: Yes, rare| S[Sathish updates live Claude Design project for demos]
     E --> K{PRD settled AND TD ready?}
     K -->|no, more grooming/revision needed| F
-    K -->|yes| V4{{product-team verifies PRD/TD state, re-promotes changed docs}}
+    K -->|yes| V4{{product-team verifies PRD/TD state, re-commits changed docs}}
     V4 --> L[PM drafts Epics/Stories, incl. SA's Round 1 recs]
     L --> M[SA Round 2: reviews Epics/Stories]
     M --> V5{{product-team verifies Round 2 verdict}}
@@ -87,8 +95,7 @@ flowchart TD
     U2 -->|defect found| U1
     U2 -->|all stories Done| V8{{product-team verifies qa-execution-report + tracker status}}
     V8 --> Q[Development complete confirmed]
-    Q --> R[PjM deletes GitLab prototypes/, confirmed + logged]
-    R --> U3[Release plan drafted, go/no-go: Sathish accountable]
+    Q --> U3[Release plan drafted, go/no-go: Sathish accountable]
     U3 --> V9{{product-team verifies go/no-go + hard-stop check}}
     V9 --> U4[DevOps: production promotion, writes deployment-record]
     U4 -->|monitoring surfaces a gap| Z
@@ -107,8 +114,8 @@ flowchart TD
 ## Orchestration and verification (applies at every stage transition)
 
 Cross-cutting policy, like the Open Question lifecycle and Document
-promotion sections further down — not a new stage, and not specific to
-promotion. Applies at every agent-to-agent handoff in Stages 0 through 14,
+commit sections further down — not a new stage, and not specific to
+committing. Applies at every agent-to-agent handoff in Stages 0 through 14,
 not just the ones that happen to move a document into GitLab.
 
 **The pattern, every time:**
@@ -144,7 +151,7 @@ completes: an agent reporting work done is not itself the trigger.
 TD's `status` field, the ClickUp items and `mapping-log.md` entry,
 `implementation-note-<slug>.md`, `qa-execution-report-<slug>.md` and the
 tracker status — is what actually advances the workflow. This is the same
-discipline "Document promotion" below already applies to promotable
+discipline "Document commit" below already applies to promotable
 documents; this section states that same rule once, for every handoff, not
 only the ones that promote to GitLab.
 
@@ -169,8 +176,8 @@ only the ones that promote to GitLab.
   release stage closed.
 
 **A failed or ambiguous verification is a workflow blocker**, escalated to
-Sathish directly — the same rule "Document promotion" below already states
-for promotion specifically, generalized here to every stage transition.
+Sathish directly — the same rule "Document commit" below already states
+for committing specifically, generalized here to every stage transition.
 `product-team` never advances on a specialist's say-so alone, and never
 retries or bypasses a verification failure silently.
 
@@ -190,8 +197,9 @@ Report, PM agent captures the raw idea as `intent.md`
 users/systems, constraints, open questions, in the originator's own words.
 Common front door to both intake pathways below, not a third pathway. Cheap and
 fast on purpose: lets a "worth pursuing?" call happen before committing to fuller
-work. Doesn't promote to GitLab; marked `Superseded by PRD` once the fuller
-document exists.
+work. Lives in the repo from the start (as of 2026-09-04, no separate
+`product-engineering` staging step); marked `Superseded by PRD` once the
+fuller document exists.
 
 ## Stage 1 — Origin: prototype and PRD
 
@@ -209,9 +217,10 @@ document exists.
 - Tags each requirement/story with its `prototype_page`. Distinguishes example
   values from actual rules (the "would swapping this value change the behavior"
   test).
-- Files the full prototype export at `<slug>/prototype/`, with
-  `prototype-meta.md` (`templates/prototype-meta-template.md`) tracking its own
-  promotion status independently of the PRD's.
+- Files the full prototype export directly at
+  `prototypes/<category>-<slug>/` in the GitLab repo, with `prototype-meta.md`
+  (`templates/prototype-meta-template.md`) tracking its own commit status
+  independently of the PRD's.
 
 **Skipping the prototype for a feature.** Design-prototype-first is the default
 for new features, not a mandatory step for every one of them. Whether a given
@@ -231,7 +240,8 @@ the PM agent.
 
 ## Stage 2 — Sathish finalizes with the PM agent
 
-Iterate until `status: approved` on the PRD/ER/BR. This is the promotion trigger.
+Iterate until `status: approved` on the PRD/ER/BR. This is the trigger for
+`product-team` to commit it — see "Document commit" below.
 
 **Approval carries Open Questions forward, it doesn't resolve them.**
 `status: approved` means Sathish accepts the document as ready to promote — not
@@ -242,31 +252,24 @@ eventually `tech-spec-<slug>.md`), not silently resolved or dropped. See "Open
 Question lifecycle and the development-readiness gate" below for where this
 ultimately has to close out.
 
-## Stage 3 — Promotion to GitLab and the first Spec
+## Stage 3 — spec.md drafted, first developer-facing artifact
 
-- PRD and prototype (each independently) promote to the matching GitLab repo —
-  `Shashi-Care-Core-docs`, `SAL-docs`, or `SNF-docs`. The PRD promotes nested by
-  category and slug, mirroring the doc root's own shape:
-  `prd/{features,enhancements,bugs}/<slug>/prd-<slug>.md`. The prototype stays
-  flat, category-and-slug in the folder name:
-  `prototypes/<category>-<slug>/` — see
-  `_reference/shashi-care-gitlab-binding.md`'s Target structure for both.
+- The PRD and prototype already live in the GitLab repo from Stage 1/2 — there
+  is no separate promotion step any more (see "Document commit" below for how
+  the commit itself works, triggered by `status: approved`).
 - PM agent drafts `spec.md` — a condensed, developer-facing derivative of the
-  approved PRD — right away, using `templates/spec-template.md`. This is the
-  Spec's **first version**; it exists specifically so it's ready for the
-  grooming meeting (Stage 6), not something drafted only after the fact.
-- **`spec.md` promotes on its own approval, separate from the PRD's.** Once PM
+  approved PRD — right away, using `templates/spec-template.md`, in the same
+  `prd/{features,enhancements,bugs}/<slug>/` folder as the PRD it derives from.
+  This is the Spec's **first version**; it exists specifically so it's ready
+  for the grooming meeting (Stage 6), not something drafted only after the
+  fact.
+- **`spec.md` commits on its own approval, separate from the PRD's.** Once PM
   agent's `spec.md` reaches its own `Status` field of `Approved` (only
-  reachable once the source PRD is at least approved — `templates/spec-template.md`),
-  it promotes to `prd/{features,enhancements,bugs}/<slug>/spec.md` — the same
-  per-slug folder as the PRD it derives from,
-  `_reference/shashi-care-gitlab-binding.md`'s already-defined destination.
-  See "Document promotion" below for who does what and the
-  verification/escalation rules that apply; the same section covers
-  re-promotion whenever the source PRD is later revised.
-- **`product-team` performs this promotion mechanically**, once it has
-  verified Sathish's approval — see "Document promotion" below. Sathish's
-  role is the approval itself, not the Git operations.
+  reachable once the source PRD is at least approved —
+  `templates/spec-template.md`), `product-team` commits it — see "Document
+  commit" below for who does what and the verification/escalation rules that
+  apply; the same section covers re-commits whenever the source PRD is later
+  revised.
 - **Grooming doesn't happen yet at this point.** SA reviews the PRD first
   (Stage 4), then a Technical Design and its own developer-facing Tech-Spec get
   a first pass (Stage 5) — only then does the team see it, in Stage 6, with a
@@ -276,7 +279,8 @@ ultimately has to close out.
 
 - SA agent reviews the PRD, writes findings to that slug's
   `SA-comments-<slug>.md` (`templates/sa-review-comments-template.md`,
-  `03_architecture/{features,enhancements,bugs}/<slug>/`), **PRD Review**
+  `architecture/{features,enhancements,bugs}/<slug>/` in the GitLab repo),
+  **PRD Review**
   section.
 - Recommends technical epics/stories/spikes *now*, before Epics/Stories formally
   exist — saves a round trip later.
@@ -302,16 +306,19 @@ ultimately has to close out.
   - Single permanent branch (`main`) per repo; per-submission branches are
     short-lived. Developers have write access (branches/MRs); Sathish or a team
     lead gates the actual merge.
-  - SA agent reads the submission from its **read-only** GitLab checkout Context,
-    writes the verdict to the **Technical Design Review** section of the same
-    comments file — never edits the submission, never commits into the checkout.
+  - SA agent reads the submission (never edits it, even though its checkout is
+    now read-write for its own authoring elsewhere), writes the verdict to the
+    **Technical Design Review** section of the same comments file — never
+    commits into the checkout itself (that stays `product-team`'s job, per
+    "Document commit" below).
   - SA agent **always asks** whether to convert to the standard template — never
     assumes.
-  - Once approved and merged in GitLab, `product-team` promotes it — the same
-    mechanical, orchestrator-owned step described in "Document promotion"
-    below, run in reverse — into the doc root's (and `product-engineering`'s)
-    `03_architecture/{features,enhancements,bugs}/<slug>/TD-<slug>.md`.
-    Sathish/the team lead's role is the MR-merge approval, not the copy.
+  - Once approved and merged in GitLab, **SA agent itself** writes the
+    reviewed TD onto `main` at
+    `architecture/{features,enhancements,bugs}/<slug>/TD-<slug>.md` — content
+    only; `product-team` still runs the actual commit once Sathish confirms,
+    same as any other authoring (see "Document commit" below). Sathish/the
+    team lead's role is the MR-merge approval, not the TD content itself.
   - The team may also comment on the TD in their own **Notion** copy, ad hoc,
     alongside or instead of commenting directly on the GitLab MR — either is a
     legitimate channel, relayed to SA the same way as any external feedback.
@@ -327,15 +334,11 @@ ultimately has to close out.
   development-readiness gate described in "Open Question lifecycle and the
   development-readiness gate" below. This is the
   Tech-Spec's **first version**, ready alongside `spec.md` for the grooming
-  meeting (Stage 6). **Promotes on its own approval**, separate from the TD's:
-  once `tech-spec-<slug>.md`'s own `Status` field reaches `Approved`, it
-  promotes to `architecture/{features,enhancements,bugs}/<slug>/tech-spec-<slug>.md`
-  — the same per-slug folder as the TD it derives from,
-  `_reference/shashi-care-gitlab-binding.md`'s already-defined destination.
-  See "Document promotion" below for who does what and the
-  verification/escalation rules that apply (`product-team` performs the
-  promotion mechanically once approval is verified — Sathish's role stops at
-  approval); the same section covers re-promotion whenever the source TD is
+  meeting (Stage 6). **Commits on its own approval**, separate from the TD's:
+  once `tech-spec-<slug>.md`'s own `Status` field reaches `Approved`,
+  `product-team` commits it — see "Document commit" below for who does what
+  and the verification/escalation rules that apply (Sathish's role stops at
+  approval); the same section covers re-commits whenever the source TD is
   later revised.
 - **Revisions after approval**: like the PRD, a TD can be revised after it
   reaches `status: approved` — most often triggered by grooming feedback
@@ -360,7 +363,7 @@ technically-unreviewed document.
   discussion itself, or **Notion** (the team's preferred way to read and comment
   on a PRD or TD — they own and manage this copy entirely, ad hoc, no fixed
   cadence, no agent involvement). Sathish picks them up, edits the PRD and/or
-  Technical Design directly in `product-engineering` (with PM/SA agent help if wanted), and
+  Technical Design directly in its GitLab checkout (with PM/SA agent help if wanted), and
   **populates that document's own Revision History table** (date, what triggered
   it, what changed, `push_to_prototype` on the PRD's) — this is what survives
   independent of git's commit history, which only says *that* something changed,
@@ -373,20 +376,20 @@ technically-unreviewed document.
 - If grooming feedback reopens something SA already signed off on, Sathish
   decides whether that warrants another SA round — governed by the same
   3-round escalation threshold as Stage 4.
-- Once settled, `product-team` re-promotes whichever documents changed — the
-  same "Document promotion" mechanics below, triggered again by the new
+- Once settled, `product-team` re-commits whichever documents changed — the
+  same "Document commit" mechanics below, triggered again by the new
   Revision History entry. Sathish's role stays the content edit and its
-  approval, not the GitLab copy.
+  approval, not the git operation.
 - **If a Notion export is ever needed**: HTML with "Include comments" enabled —
   Markdown and PDF exports from Notion silently drop comments entirely.
 
 **Keeping the prototype current for demos — a separate, optional track.** Once a
 PRD is approved, the PRD is the reference going forward; the prototype's only
 ongoing job is demos, done live in Claude Design by Sathish or Product Manager —
-never from the archived `product-engineering`/GitLab export —
-`product-engineering`'s copy is retained permanently (no scheduled deletion;
-see the cheat-sheet), and the GitLab copy stays a static snapshot until its
-Stage 13 deletion — regardless of any of this. Most revisions
+never from the archived GitLab export, which stays a static snapshot (retained
+permanently — no deletion step in this process, see the cheat-sheet's
+"Deletion" entry).
+Most revisions
 (`push_to_prototype: No`, the default) have no visual counterpart and need nothing
 further. For the ones that do: PM agent generates the update prompt on request
 using `templates/claude-design-update-prompt-template.md`, built by quoting the
@@ -432,19 +435,18 @@ get drafted, removing the old rework risk where SA feedback used to arrive
 - One `test_scenario`-tagged task per scenario, with `test-cases.xlsx` attached
   directly to it.
 - Logs the creation in `mapping-log.md`.
-- **`product-engineering`'s `<slug>/prototype/` folder is retained, not
-  deleted, at this stage** — Claude Design isn't yet available to the whole
-  team, so the archived export stays in place; revisit deleting it once that
-  changes. (The GitLab prototype export, promoted separately, still deletes
-  at development-complete — see Stage 13.) The live Claude Design project (if
-  still used for demos) is untouched either way.
+- **The GitLab `prototypes/<category>-<slug>/` copy is retained permanently
+  at this stage, same as every other committed artifact** — as of 2026-09-04,
+  prototype cleanup is no longer a process step at all (see the "Deletion"
+  entry in the cheat-sheet); nothing here deletes it. The live Claude Design
+  project (if still used for demos) is untouched either way.
 
 ## Stage 10 — Release planning and sprints
 
-- PM agent drafts the Release Plan (`templates/release-plan-template.md`,
-  `<Product>-release-plan.xlsx`) — same Draft→Approved flow as a PRD, promoted
-  by `product-team` to GitLab's `releases/` folder on approval (see "Document
-  promotion" below).
+- PM agent drafts the Release Plan directly in the GitLab repo
+  (`templates/release-plan-template.md`, `releases/<Product>-release-plan.xlsx`)
+  — same Draft→Approved flow as a PRD; `product-team` commits it on approval
+  (see "Document commit" below).
 - PjM breaks it into sprints — `templates/sprint-plan-status-template.md`,
   mirrored between the local doc and ClickUp.
 - Progress reviewed from **live ClickUp status**, not stale local docs.
@@ -498,12 +500,13 @@ get drafted, removing the old rework risk where SA feedback used to arrive
 
 - PjM confirms via ClickUp status (all stories under the epic reaching Done, not
   assumed from elapsed time).
-- **Deletes the GitLab `prototypes/<category>-<slug>/` folder** — confirmed by
-  PjM first; `product-team` verifies the deletion and logs it in
-  `promotion-log.md`, the same way it logs every other promotion-log entry
-  (see "Document promotion" below). Again, the archived export only — the
-  live Claude Design project, if Sathish or Product Manager still use it for
-  demos, keeps existing independent of this.
+- **No prototype deletion step here (as of 2026-09-04).** The GitLab
+  `prototypes/<category>-<slug>/` folder stays in the repo — cleanup, if
+  Sathish wants it at all, is his own call, made whenever, outside this
+  process (see the cheat-sheet's "Deletion" entry). This used to be a PjM
+  step gated on development-complete; removed entirely to cut process
+  overhead, not just relocated. The live Claude Design project, if Sathish or
+  Product Manager still use it for demos, is unaffected either way.
 
 ## Stage 14 — Release and deploy
 
@@ -531,15 +534,19 @@ get drafted, removing the old rework risk where SA feedback used to arrive
   return-path shape used at every other stage, not yet fully autonomous, but no
   longer the dead end the original design left it as.
 
-## On-demand: Finalize a document (PRD / ER / TD)
+## On-demand: Finalize a document (PRD / ER / spec.md / TD)
 
-On request, at any point in a PRD/ER/TD's lifecycle — not gated to a specific stage
-or to `status: approved` — cleans up the review-round narration a document
-accumulates from PM↔SA (and Sathish) back-and-forth into a first-time-reader-ready
-version, in place. Product Manager finalizes PRDs and Enhancement Requests; System
-Architect finalizes Technical Designs — each only its own document type, same
-authorship boundary as the rest of this system. Open Questions, explicit deferrals,
-front-matter, and the companion review-comments/changeset files are never touched.
+On request, at any point in a PRD/ER/spec.md/TD's lifecycle — not gated to a
+specific stage or to `status: approved` — cleans up the review-round narration a
+document accumulates from PM↔SA (and Sathish) back-and-forth into a
+first-time-reader-ready version, in place. Product Manager finalizes PRDs,
+Enhancement Requests, and the `spec.md` derived from either; System Architect
+finalizes Technical Designs — each only its own document type, same authorship
+boundary as the rest of this system. `tech-spec-<slug>.md` is deliberately not yet
+in scope, even though it's SA's structural counterpart to `spec.md` — see
+`skill-finalize-document-discipline.md`'s scope note (2026-09-04). Open Questions,
+explicit deferrals, front-matter (or, for `spec.md`, its equivalent header table),
+and the companion review-comments/changeset files are never touched.
 (See "Open Question lifecycle and the development-readiness gate" below for how
 those ultimately get dispositioned — Finalize itself never dispositions them.) A
 resolution that reads as expanding scope beyond what the document itself recorded —
@@ -646,7 +653,7 @@ front-matter):**
   (answered, no further tracked item needed) / **Accepted as-is** (the current
   behavior stands, explicitly) / **Enhancement** (tracked as a new Enhancement
   Request) / **Technical Debt** (logged to
-  `03_architecture/technical-debt-register.md`) / **Deferred** (postponed by a
+  `_as-built/architecture/technical-debt.md`) / **Deferred** (postponed by a
   conscious decision, not resolved — always requires its own durable tracking
   reference, exactly like Enhancement or Technical Debt; see "Tracking the
   result, not just closing the row" below for which one), or another
@@ -704,7 +711,7 @@ reference the actual resulting item, not just say "closed":
   (`templates/enhancement-request-template.md`); the Open Question row is
   updated to point at its slug.
 - **Technical Debt** → logged as its own entry in
-  `03_architecture/technical-debt-register.md`
+  `_as-built/architecture/technical-debt.md`
   (`templates/technical-debt-register-template.md`); the Open Question row
   references that entry.
 - **Deferred** → never its own dead end. A Deferred disposition still routes
@@ -713,7 +720,7 @@ reference the actual resulting item, not just say "closed":
   - **Default: Technical Debt.** When the deferred item is known
     technical/product work being consciously postponed — the common case —
     it's logged exactly like a Technical Debt disposition: its own entry in
-    `03_architecture/technical-debt-register.md`
+    `_as-built/architecture/technical-debt.md`
     (`templates/technical-debt-register-template.md`), referenced from the
     Open Question row.
   - **Enhancement**, when the deferred item is actually a product capability
@@ -784,70 +791,79 @@ pipeline where those two collapse into the same requirement.
   same as an Enhancement or Technical Debt disposition with no reference
   would be.
 
-## Document promotion: PRD, spec.md, Technical Design, tech-spec-<slug>.md, Release Plan
+## Document commit: PRD, spec.md, Technical Design, tech-spec-<slug>.md, Release Plan
 
-Cross-cutting policy, not a new stage — applies at Stage 3 (PRD, prototype,
+Cross-cutting policy, not a new stage — applies at Stage 2/3 (PRD, prototype,
 `spec.md`), Stage 5 (Technical Design, `tech-spec-<slug>.md`), Stage 6
-(re-promotion after grooming edits), and Stage 10 (Release Plan) — every
-point in the pipeline where a document reaches its own approval and needs to
-move from its working location in the doc root into the destination
-`_reference/shashi-care-gitlab-binding.md` already defines for it. Written
-explicitly because "the specialist says it's done," "the document is
-approved," and "the artifact has actually been promoted to its authoritative
-location" are three different events, not one — the same discipline the Open
-Question lifecycle section above applies to disposition, and the same
-discipline "Orchestration and verification" above applies to every other
-stage transition. This section is that general rule applied specifically to
-promotion, the one family of stage transitions with an actual mechanical Git
-operation attached to it.
+(re-commit after grooming edits), and Stage 10 (Release Plan) — every point
+in the pipeline where a document reaches its own approval and needs to land
+as a real commit on `main`, in the location
+`_reference/shashi-care-gitlab-binding.md` already defines for it. **As of
+2026-09-04**, this replaces the old "promotion" model (draft in
+`product-engineering`, then copy to GitLab on approval) — PM/SA now draft
+directly in the GitLab checkout, so there's no longer a copy between two
+locations, only a commit of content already sitting in the working tree.
+Written explicitly because "the specialist says it's done," "the document is
+approved," and "the artifact has actually been committed" are three
+different events, not one — the same discipline the Open Question lifecycle
+section above applies to disposition, and the same discipline "Orchestration
+and verification" above applies to every other stage transition. This
+section is that general rule applied specifically to committing, the one
+family of stage transitions with an actual mechanical Git operation attached
+to it.
 
 **The steps, kept separate:**
 
 ```text
 Specialist
-  → creates/updates the document
+  → drafts/updates the document, directly in its GitLab checkout's working tree
 
 Human
   → approves the document
 
 Orchestrator
-  → promotes the approved artifact to its authoritative product-doc location
+  → commits the approved content to main
 
 Orchestrator
-  → verifies the promotion
+  → verifies the commit
 
 Workflow
   → proceeds to the next stage
 ```
 
-- **Specialist** — PM agent authors and revises the PRD, `spec.md` (Stage 3),
-  and the Release Plan (Stage 10); SA agent authors and revises the Technical
-  Design and `tech-spec-<slug>.md` (Stage 5); the prototype export itself is
-  produced during Stage 1 (PM agent, from the Claude-Design export Sathish
-  hands off). Authorship stops there in every case: drafting or revising a
-  document, or producing an export, is specialist work; promoting it into
-  GitLab is not — same authorship boundary this document uses everywhere
-  else, including the Agents table's "never commits into the GitLab
-  checkouts" for System Architect.
+- **Specialist** — PM agent authors and revises the PRD, `spec.md` (Stage
+  2/3), and the Release Plan (Stage 10); SA agent authors and revises the
+  Technical Design and `tech-spec-<slug>.md` (Stage 5); the prototype export
+  itself is produced during Stage 1 (PM agent, from the Claude-Design export
+  Sathish hands off), written directly into `prototypes/<category>-<slug>/`.
+  Authorship stops there in every case: drafting or revising a document, or
+  producing an export, is specialist work; committing it is not — same
+  authorship boundary this document uses everywhere else, including the
+  Agents table's "never runs `git commit` itself" for Product Manager and
+  System Architect.
 - **Human** — Sathish, the same approval authority as every other document in
-  this system. Every promotable document carries its own approval field —
+  this system. Every approval-gated document carries its own approval field —
   `status`/`Status` on the PRD, Technical Design, Release Plan, `spec.md`, and
   `tech-spec-<slug>.md`; `prototype-meta.md`'s own `repo_status` for the
   prototype — and only Sathish setting that field to `approved`/`Approved` (or
   the prototype's equivalent) constitutes approval. A specialist reporting a
   document finished, or Sathish discussing it approvingly in conversation, is
   not the same as the field itself reading approved — this boundary doesn't
-  move for any of these documents.
+  move for any of these documents. Non-gated ongoing reference material
+  (SA-comments, as-built docs, compliance, integrations, mapping-log) has no
+  status field — Sathish's explicit confirmation that a given update is ready
+  is the equivalent go-ahead there, never inferred from the specialist simply
+  finishing its output.
 - **Orchestrator** — `product-team`, the Hermes profile that drives this
   pipeline (see "Orchestration and verification" above). A document is never
-  promoted merely because a specialist reports it complete, and never
-  promoted by Sathish running the Git operations by hand — `product-team` is
-  the sole mechanical actor for every promotion in this system, whether the
-  document is moving into GitLab or (for a team-submitted Technical Design)
-  back into the doc root. Once, and only once, the document's own approval
-  field reads approved, `product-team` promotes it to the destination
-  `_reference/shashi-care-gitlab-binding.md`'s target structure already
-  assigns:
+  committed merely because a specialist reports it complete, and never
+  committed by Sathish running the Git operations by hand — `product-team` is
+  the sole mechanical actor that runs `git add`/`commit`/`push` for every
+  document in this system, whether it's PM/SA's own authoring or (for a
+  team-submitted Technical Design SA has just written onto `main`) that
+  content. Once, and only once, the approval signal is verified,
+  `product-team` commits straight onto `main`'s working tree — no feature
+  branch for this pathway, content is already sitting where it needs to be:
   - PRD → `prd/{features,enhancements,bugs}/<slug>/prd-<slug>.md`
   - `spec.md` → `prd/{features,enhancements,bugs}/<slug>/spec.md` — same
     per-slug folder as its PRD
@@ -857,93 +873,103 @@ Workflow
   - Release Plan → `releases/<release-slug>.xlsx`
   - Prototype (full export) → `prototypes/<category>-<slug>/`
 
-  in the matching GitLab repo (`Shashi-Care-Core-docs` / `SAL-docs` /
-  `SNF-docs`) — never a new or invented location.
+  each already in the matching GitLab repo (`Shashi-Care-Core-docs` /
+  `SAL-docs` / `SNF-docs`) — never a new or invented location. (Team-submitted
+  TDs keep their own branch+MR into `architecture-submissions/`, unchanged —
+  see `shashi-care-gitlab-binding.md`'s "Team-submitted Technical Designs.")
 - **Workflow** — proceeds on the pipeline's existing gates exactly as already
-  defined, not on promotion itself. Stage 7's Epics/Stories gate (PRD settled
+  defined, not on the commit itself. Stage 7's Epics/Stories gate (PRD settled
   + TD ready) and Stage 11's development-readiness gate (`tech-spec-<slug>.md`
   at `Status: Approved` with every significant Open Question dispositioned)
-  already key off each document's own approval status — not whether its
-  GitLab copy has landed yet. Promotion completing is not itself a new gate on
+  already key off each document's own approval status — not whether the
+  commit has landed yet. The commit completing is not itself a new gate on
   top of those.
 
-**Promotion rules:**
+**Commit rules:**
 
-1. A document is never promoted on a specialist's say-so alone — reporting a
+1. A document is never committed on a specialist's say-so alone — reporting a
    document drafted, revised, or "ready" is not a trigger. Only the document's
-   own `Status` field reading `Approved` triggers promotion.
-2. Before promoting, the orchestrator verifies that `Status` field directly —
-   never infers approval from stage completion, chat discussion, or a
+   own `Status` field reading `Approved` (or, for non-gated reference
+   material, Sathish's explicit confirmation) triggers a commit.
+2. Before committing, the orchestrator verifies that approval signal directly
+   — never infers approval from stage completion, chat discussion, or a
    specialist's own claim.
 3. The destination is whichever path `_reference/shashi-care-gitlab-binding.md`'s
    target structure already assigns to that document type (see the bulleted
-   list above) — never a new or ad hoc destination invented for this.
-4. Promotion preserves the approved document's content and its existing
+   list above) — never a new or ad hoc destination invented for this. Since
+   content is drafted directly at that path, this rule now mostly guards
+   against a specialist having drafted in the wrong place to begin with.
+4. The commit preserves the approved document's content and its existing
    front-matter conventions (`product`, `status`, `repo_status`,
    `last_promoted_revision`, per this document's own "Key conventions
-   cheat-sheet" below) exactly as approved — no re-authoring during the copy.
-5. After promoting, the orchestrator independently verifies the artifact
-   actually landed at that destination — matching source content, correct
-   filename and path — before treating promotion as complete. Verification is
-   not optional, and is not satisfied merely by the promotion step having run
-   without error.
-6. A failed or ambiguous promotion (destination unreachable, content mismatch,
-   unclear which revision was promoted) is a workflow blocker, escalated to
-   Sathish directly — never silently retried, bypassed, or left unresolved.
+   cheat-sheet" below) exactly as approved — no re-authoring during the
+   commit.
+5. After committing, the orchestrator independently verifies the commit
+   actually landed — via `git log` or an equivalent check — before treating
+   the step as complete. Verification is not optional, and is not satisfied
+   merely by the commit step having run without error.
+6. A failed or ambiguous commit (working tree dirty in an unexpected way,
+   merge conflict, unclear which revision is live) is a workflow blocker,
+   escalated to Sathish directly — never silently retried, bypassed, or left
+   unresolved.
 7. Specialists remain responsible only for authoring and revising their own
    document type — PM agent for the PRD, `spec.md`, and Release Plan; SA agent
-   for the Technical Design and `tech-spec-<slug>.md`. Promotion is a
+   for the Technical Design and `tech-spec-<slug>.md`. Committing is a
    lifecycle/orchestration operation performed by `product-team` after
    approval, not specialist work, and never blurs into it — and never
    Sathish's own Git operations either, per the ownership boundary in the
    Agents table above.
 
-**Re-promotion.** Exactly as `_reference/shashi-care-gitlab-binding.md`
-already states: the PRD, Technical Design, and Release Plan re-promote on any
-edit after their own approval; `spec.md` and `tech-spec-<slug>.md` also
-re-derive first (from the PRD or TD they came from) whenever their source
-document is revised, then re-promote — the same sequence above, run again in
-full each time, not skipped because a prior version was already promoted
-once. Stage 6's grooming-triggered re-promotion is this same rule, not a
-separate mechanism.
+**Re-commits.** Exactly as `_reference/shashi-care-gitlab-binding.md` already
+states: the PRD, Technical Design, and Release Plan re-commit on any edit
+after their own approval; `spec.md` and `tech-spec-<slug>.md` also re-derive
+first (from the PRD or TD they came from) whenever their source document is
+revised, then re-commit — the same sequence above, run again in full each
+time, not skipped because a prior version was already committed once. Stage
+6's grooming-triggered re-commit is this same rule, not a separate mechanism.
 
 ## Ongoing, not tied to one feature's lifecycle
 
 - **Technical debt**: surfaced during any SA review, logged to
-  `03_architecture/technical-debt-register.md`
+  `_as-built/architecture/technical-debt.md`
   (`templates/technical-debt-register-template.md`) rather than left as a comment
-  on one feature's review.
+  on one feature's review. Lives in each product's GitLab repo as of
+  2026-09-04 (previously `product-engineering`-only).
 - **Deferred Open Questions**: the fallback tracker for a Deferred Open
   Question disposition that's genuinely neither Technical Debt nor an
   Enhancement (see "Open Question lifecycle and the development-readiness
-  gate" above) — logged to `<folder>/deferred-open-questions-register.md`,
-  one running file per product folder, same pattern as the technical-debt
+  gate" above) — logged to `deferred-open-questions-register.md` at each
+  repo's root, one running file per repo, same pattern as the technical-debt
   register. Most Deferred items still route to Technical Debt or Enhancement;
   this register exists only for the remainder.
-- **Compliance**: `03_architecture/compliance/hipaa-compliance-register.md` —
-  converted from the team's Excel worklog (2026-08-28), 39 entries, full
-  narrative fidelity per entry. Only Sathish edits this document.
-- **Roadmap**: `00_roadmap/product-roadmap.xlsx`, theme-based Now/Next/Later,
-  tabs for Shashi-Care-Core / SAL / SNF, kept updated in place by PM.
-- **Architecture, API contracts, partner agreements**: `03_architecture/_as-built/`,
-  `integrations/pcc/{api-contracts,agreements}/` — all genuinely platform-level,
-  temporarily filed under `SNF/` pending real Core separation. SA checks
-  `agreements/` before designing against any PCC endpoint — technically reachable
-  isn't the same as contractually approved.
+- **Compliance**: `compliance/hipaa-compliance-register.md` — converted from
+  the team's Excel worklog (2026-08-28), 39 entries, full narrative fidelity
+  per entry. Only Sathish edits this document. Lives in each product's
+  GitLab repo as of 2026-09-04.
+- **Roadmap**: **resolved 2026-09-04** — split per product, one file per
+  repo: `00_roadmap/<product>-roadmap.xlsx` in each of Shashi-Care-Core-docs,
+  SAL-docs, and SNF-docs. Replaces the old single `product-roadmap.xlsx`
+  (tabs Shashi-Care-Core/SAL/SNF) that lived at `00_roadmap/` in the now-
+  frozen shared `product-engineering` root. Still theme-based Now/Next/Later,
+  kept updated in place by PM.
+- **Architecture, API contracts, partner agreements**: `_as-built/architecture/`,
+  `integrations/pcc/{api-contracts,agreements}/` — all genuinely
+  platform-level, currently only populated for SNF-docs pending real Core
+  separation. SA checks `agreements/` before designing against any PCC
+  endpoint — technically reachable isn't the same as contractually approved.
 
 ---
 
 ## Key conventions cheat-sheet
 
 - **Slugs**: unique within their own product folder only, not globally.
-- **`category`**: `feature` / `enhancement` / `bug` — lives in the *path* on
-  both sides now: the doc root's (`02_prd/{features,enhancements,bugs}/`,
-  `03_architecture/{features,enhancements,bugs}/`) and, matching it, GitLab's
-  own `prd/{features,enhancements,bugs}/` and
+- **`category`**: `feature` / `enhancement` / `bug` — lives in the *path*,
+  in GitLab's own `prd/{features,enhancements,bugs}/` and
   `architecture/{features,enhancements,bugs}/` — see
   `_reference/shashi-care-gitlab-binding.md`'s Target structure. GitLab's
   `releases/` and `prototypes/` stay flat, category-in-folder-name, as
-  before.
+  before. (`product-engineering`'s equivalent `02_prd/`/`03_architecture/`
+  paths are frozen, historical only, as of 2026-09-04.)
 - **`-docs` suffix**: GitLab repo names only (`SAL-docs`, not `SAL`) — avoids
   collision with the existing code repo of the same name. Nowhere else.
 - **Front-matter**: `product`, `status`, `repo_status`, `last_promoted_revision` on
@@ -972,15 +998,20 @@ separate mechanism.
   dead end. An undispositioned question, or a Deferred one with no recorded
   reference, is a development-readiness blocker, escalated to Sathish. See
   "Open Question lifecycle and the development-readiness gate."
-- **Deletion**: never automatic, and not symmetric between the two copies.
-  `product-engineering`'s prototype/ is retained permanently for now (Claude
-  Design isn't yet available to the whole team — revisit once it is); only
-  the GitLab prototype export deletes, at development-complete time, PjM
-  confirming first and always logging a one-line note in `promotion-log.md`.
-  Both are the *archived export*
-  only — the live Claude Design project (used for demos, kept current via
-  `templates/claude-design-update-prompt-template.md`) is separate and
-  unaffected either way.
+- **Deletion**: **removed as a process step, 2026-09-04.** The prototype
+  export in `prototypes/<category>-<slug>/` is now retained permanently, same
+  as every other committed artifact — no persona deletes it, no stage checks
+  for or triggers its deletion, and PjM carries no deletion duty. (This
+  replaces the old two-copy/two-trigger model — a `product-engineering`
+  staging copy deleted early, a GitLab copy deleted late — which stopped
+  making sense once `product-engineering` froze down to one copy; rather than
+  pick a new trigger, Sathish chose to drop the deletion step entirely, to
+  cut cognitive load and process overhead.) Sathish may still clean up old
+  prototype exports by hand whenever he wants, but that's outside this
+  process, not a workflow stage. The archived export is always separate from
+  the live Claude Design project (used for demos, kept current via
+  `templates/claude-design-update-prompt-template.md`), which is unaffected
+  either way.
 - **Tracker-write exception**: Project Manager holds exclusive, unconditional
   ownership of tracker item creation, deletion, tagging, re-parenting, and the
   mapping log. Developer and QA Engineer (Hermes) each have one narrow,
@@ -991,30 +1022,33 @@ separate mechanism.
   `07_build/{features,enhancements,bugs}/<slug>/`;
   `deployment-record-<release-slug>.md` lives in `01_releases/` instead, since a
   deployment can span multiple slugs.
-- **As-built precedence**: `_as-built/` in `product-engineering` is a
-  documentation snapshot of the codebase, not the codebase itself. Where it diverges from what the code
-  repo actually shows — as Developer/QA/DevOps instances now observe directly at
-  Stages 11-14 — the live repo wins; `_as-built/` is stale until someone updates
-  it, not an independent source of truth.
-- **Promotion**: PRD, Technical Design, and Release Plan promote on `approved`
-  and stay permanently, each into its own per-slug folder
-  (`prd/{features,enhancements,bugs}/<slug>/`,
+- **As-built precedence**: `_as-built/` in each product's GitLab repo (as of
+  2026-09-04; previously `product-engineering`) is a documentation snapshot
+  of the codebase, not the codebase itself. Where it diverges from what the
+  code repo actually shows — as Developer/QA/DevOps instances now observe
+  directly at Stages 11-14 — the live repo wins; `_as-built/` is stale until
+  someone updates it, not an independent source of truth.
+- **Commit** (was "Promotion" before 2026-09-04): PRD, Technical Design, and
+  Release Plan commit on `approved` and stay permanently, each in its own
+  per-slug folder (`prd/{features,enhancements,bugs}/<slug>/`,
   `architecture/{features,enhancements,bugs}/<slug>/`) or, for the Release
-  Plan, `releases/`. `spec.md` and `tech-spec-<slug>.md` each promote on their
-  own `Status: Approved` (separate from their source PRD/TD's approval) into
-  that same per-slug folder alongside the PRD or TD they derive from, and also
-  stay permanently once promoted. `product-team` performs every one of these
-  promotions mechanically, once Sathish's approval is verified — see
-  "Document promotion" above for the Specialist/Human/Orchestrator split and
-  verification rules. Prototype promotes on its own schedule (flat,
-  `prototypes/<category>-<slug>/`) and is deleted later — the one promoted
-  artifact that isn't permanent.
+  Plan, `releases/` — drafted there directly, not copied from elsewhere.
+  `spec.md` and `tech-spec-<slug>.md` each commit on their own
+  `Status: Approved` (separate from their source PRD/TD's approval) into that
+  same per-slug folder alongside the PRD or TD they derive from, and also
+  stay permanently once committed. `product-team` performs every one of these
+  commits mechanically, once Sathish's approval is verified — see "Document
+  commit" above for the Specialist/Human/Orchestrator split and verification
+  rules. Prototype commits on its own schedule (flat,
+  `prototypes/<category>-<slug>/`) and, as of 2026-09-04, also stays
+  permanently — no deletion step in the process at all, see "Deletion"
+  above.
 - **Notion**: team-owned, ad hoc, both PRD and TD — no agent touches it. Sathish
-  reads their comments and edits the PRD/TD accordingly (Stage 6); the
-  resulting re-promotion into GitLab is `product-team`'s mechanical job, same
-  as every other promotion — see "Document promotion" above. If an export is
-  ever needed: **HTML with "Include comments" enabled** — Markdown and PDF
-  exports from Notion silently drop comments.
+  reads their comments and edits the PRD/TD accordingly, directly in its
+  GitLab checkout (Stage 6); the resulting re-commit is `product-team`'s
+  mechanical job, same as every other commit — see "Document commit" above.
+  If an export is ever needed: **HTML with "Include comments" enabled** —
+  Markdown and PDF exports from Notion silently drop comments.
 - **Table-cell formatting**: any table column meant to carry more than one
   distinct fact about the same row — multiple rules, states, conditions, or
   reasons packed into one "Behaviour"/"Value"/"Mitigation"/"Why rejected"/
@@ -1122,7 +1156,7 @@ anything; sign-off stays with System Architect and Sathish as always.
 | `skill-sa-discipline.md` / `shashi-care-sa-config.md` | System Architect agent instructions |
 | `skill-pjm-discipline.md` / `shashi-care-pjm-config.md` | Project Manager agent instructions |
 | `skill-finalize-document-discipline.md` / `shashi-care-finalize-config.md` | Shared Finalize procedure Product Manager and System Architect each reference for their own document types |
-| `shashi-care-doc-tree.md` | Full canonical (Google Drive / `product-engineering`) + GitLab folder structure |
+| `shashi-care-doc-tree.md` | Full canonical (Google Drive governance layer) + GitLab folder structure (GitLab is now the working copy for PRD/spec/TD/tech-spec/release-plan/as-built/compliance/integrations/tracker-sync, as of 2026-09-04; `product-engineering`'s document trees are frozen/historical) |
 | `shashi-care-clickup-binding.md` | ClickUp hierarchy, tags, statuses |
 | `shashi-care-gitlab-binding.md` | GitLab promotion rules, repos, access model |
 | `shashi-care-design-standards.md` | Prototype-authoring standards for the team |

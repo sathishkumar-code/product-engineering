@@ -59,31 +59,42 @@ A feature can (and often does) touch more than one of these — list every one
 it touches, not just the primary app a reviewer would think of first.
 
 ## Doc root
-**As of 2026-08-29, hosted in Hermes.** `{PRODUCT_ENG_ROOT}/product-engineering/`
-— a git repo Sathish maintains in WSL, manually synced from `shashi-care-docs`,
-the canonical source Process Architect and Developer/QA/DevOps read directly —
-**not** a live read of `shashi-care-docs` itself. This mirror only reflects a
-Process Architect edit once Sathish has manually copied the changed file(s)
-over; see "Hermes copy sync convention" in
-`shashi-care-process-architect-config.md`. If something here looks stale,
-that's the first thing to check (was the mirror actually re-synced after the
-last edit), not a reason to assume the source document changed.
+**As of 2026-09-04, GitLab-direct.** This persona's own document work
+(intent.md, PRD/ER/BR, spec.md) is authored directly in the local checkout of
+each product's GitLab `-docs` repo (Shashi-Care-Core-docs, SAL-docs,
+SNF-docs) — see `_reference/shashi-care-gitlab-binding.md`. There is no
+`product-engineering` staging step and no separate promotion any more:
+`product-engineering` is frozen (historical only, not read or written by this
+persona). Draft content in the checkout's working tree on `main`; commit
+happens only when `product-team` runs it, per the "Commit mechanics" in
+`shashi-care-gitlab-binding.md`, never on this persona's own initiative.
 
-## Access (Hermes) — not yet configured
-This persona references Google Drive exports (Notion HTML exports with comments,
-per the Finalize/handoff workflow), Figma/Claude Design prototypes, and the
-GitLab promotion binding. **As of the 2026-08-29 move to Hermes, none of these
-integrations are confirmed reachable from the Hermes/WSL Claude Code CLI
-environment.** Treat any of them as unavailable until Sathish confirms
-otherwise — escalate rather than silently skip the step or fabricate a result.
+## Access (Hermes)
+No Google Drive, Figma, or Claude Design access is required from the
+Hermes/WSL environment:
+- **Google Drive** — not required. Documents live in each product's GitLab
+  `<product>-docs` repo (see `_reference/shashi-care-gitlab-binding.md`), not
+  in Drive.
+- **Figma** — not required. There's no plan to connect this persona to Figma
+  directly.
+- **Claude Design prototypes** — not required either. Sathish exports the
+  prototype himself and copies it into the repo's
+  `prototypes/<category>-<slug>/` folder; this persona never reaches into
+  Claude Design to pull it.
+
+**GitLab checkouts (Shashi-Care-Core-docs, SAL-docs, SNF-docs) — access not
+yet confirmed specifically for this persona.** System Architect's checkouts
+were confirmed reachable 2026-08-31, but that check was run for SA's session,
+not PM's — don't assume PM's Hermes session reaches the same paths without
+its own confirmation. Escalate to Sathish rather than assuming access exists.
 
 ## Ground truth
-`SNF/02_prd/_as-built/` is the only populated as-built right now — the current
+`SNF-docs/_as-built/prd/` is the only populated as-built right now — the current
 codebase is SAL's original code pivoted to SNF and combined, so it's SNF's ground
-truth that's real today. `SAL/02_prd/_as-built/` and `shashi-care-core/02_prd/
-_as-built/` stay empty until SAL restarts from a clean base and Core is properly
-separated out. Don't infer SAL-specific as-built behavior from the SNF as-built
-docs — flag the absence and ask rather than assuming shared behavior.
+truth that's real today. SAL-docs's and Shashi-Care-Core-docs's `_as-built/prd/`
+stay empty until SAL restarts from a clean base and Core is properly separated
+out. Don't infer SAL-specific as-built behavior from the SNF as-built docs —
+flag the absence and ask rather than assuming shared behavior.
 
 ## Intake pathway mapping (this project)
 - **New features → Design-prototype-first pathway.** Starting point: a finalized,
@@ -94,37 +105,41 @@ docs — flag the absence and ask rather than assuming shared behavior.
 - **Enhancements and bugs → Direct intake pathway.** Run the intake question sets
   before drafting, per the skill.
 
-## Storage paths (relative to doc root, per folder)
-- Roadmap (shared, not per-folder): `00_roadmap/product-roadmap.xlsx` — tabs
-  Shashi-Care-Core / SAL / SNF, theme-based Now/Next/Later.
-- Release plan (per product, not Core for now): `SAL/01_releases/
-  SAL-release-plan.xlsx`, `SNF/01_releases/SNF-release-plan.xlsx` — one tab per
+## Storage paths (relative to each product's GitLab repo root — Shashi-Care-Core-docs / SAL-docs / SNF-docs)
+- Roadmap (per product, resolved 2026-09-04 — split from the old single
+  shared file): `00_roadmap/<product>-roadmap.xlsx` in each product's own
+  GitLab repo — e.g. `00_roadmap/SAL-roadmap.xlsx` in SAL-docs,
+  `00_roadmap/SNF-roadmap.xlsx` in SNF-docs — same per-repo split as the
+  Release Plan bullet above. Replaces the old single `product-roadmap.xlsx`
+  (tabs Shashi-Care-Core/SAL/SNF) that lived at `00_roadmap/` in the now-
+  frozen shared `product-engineering` root; still theme-based Now/Next/Later,
+  kept updated in place by PM.
+- Release plan (per product, not Core for now): `releases/SAL-release-plan.xlsx`
+  in SAL-docs, `releases/SNF-release-plan.xlsx` in SNF-docs — one tab per
   release, stacked sections.
-- Features/enhancements/bugs: `<folder>/02_prd/{features,enhancements,bugs}/<slug>/...`
-  — slugs only need to be unique within their own folder, not globally.
-- Intent: `<slug>/intent.md`, using `templates/intent-template.md` — precedes the
-  PRD/ER/BR in the same slug folder, adapted from the AI-Native SDLC playbook's
-  concept. Doesn't promote to GitLab; superseded once the PRD/ER/BR exists.
-- Change-request intent (a customer/business-driven change to an in-flight
-  document, per PROCESS-WALKTHROUGH.md's "Change requests to an in-flight (not
-  yet released) feature"): `<slug>/intent-change-<n>.md` (sequential per slug,
-  starting at 1), same `templates/intent-template.md` shape as the original —
-  filed alongside the already-superseded original `intent.md`, never overwriting
-  it. This filename shape is this persona's own inference to avoid colliding
-  with the original `intent.md`, not literally confirmed word-for-word by
-  Sathish — flag it for correction if he wants a different naming convention.
-- Spec: `<slug>/spec.md`, using `templates/spec-template.md` — sits alongside
-  `prd-<slug>.md` (or the enhancement/bug equivalent). Promotes on its own
-  `Status: Approved` (separate from the PRD's own approval) into that same
-  per-slug GitLab folder alongside the PRD/ER it derives from
-  (`prd/{features,enhancements,bugs}/<slug>/`) — not a separate `specs/`
-  folder, which was retired by the 2026-08-31 promotion-lifecycle rewrite. See
-  `shashi-care-gitlab-binding.md`'s "Target structure."
-- Prototype export (full export, per Q2): `<slug>/prototype/`, with
-  `prototype-meta.md` sidecar (`templates/prototype-meta-template.md`). Permanent
-  in `product-engineering` for now (Claude Design isn't yet available to the
-  whole team) — its eventual deletion is the Project Manager persona's job, not
-  this one's.
+- Features/enhancements/bugs: `prd/{features,enhancements,bugs}/<slug>/...` —
+  slugs only need to be unique within their own repo, not globally.
+- Intent: `prd/{features,enhancements,bugs}/<slug>/intent.md`, using
+  `templates/intent-template.md` — precedes the PRD/ER/BR in the same slug
+  folder. Lives in the repo from the start, same as every other document now —
+  no separate "doesn't promote" note needed, since there's no promotion step.
+  Superseded once the PRD/ER/BR exists.
+- Change-request intent: `prd/{features,enhancements,bugs}/<slug>/intent-change-<n>.md`
+  (sequential per slug, starting at 1) — filed alongside the already-superseded
+  original `intent.md`, never overwriting it. Filename shape is this persona's
+  own inference, not confirmed word-for-word — flag for correction if Sathish
+  wants different naming.
+- Spec: `prd/{features,enhancements,bugs}/<slug>/spec.md`, using
+  `templates/spec-template.md` — sits alongside `prd-<slug>.md` (or the
+  enhancement/bug equivalent) in the same folder, from the start. Commits on
+  its own `Status: Approved` (separate from the PRD's own approval) — see
+  `shashi-care-gitlab-binding.md`'s "Commit mechanics."
+- Prototype export (full export, per Q2): `prototypes/<category>-<slug>/`, with
+  `prototype-meta.md` sidecar (`templates/prototype-meta-template.md`) — the
+  repo's own `prototypes/` folder is now the only copy (the old
+  `product-engineering`-only staging copy this bullet used to describe no
+  longer has a home). Retained permanently — no deletion step in this process
+  (2026-09-04); this persona never deletes it.
 
 ## Handover destination
 `<folder>/04_handovers/<date>_pm-to-sa_<topic>.md`, inside whichever of
@@ -133,20 +148,22 @@ Core/SAL/SNF the item belongs to.
 ## External dev-team feedback
 Dev-team questions typically arrive outside any PM/SA working session entirely — chat,
 email, a grooming meeting, or **Notion**. Sathish picks these up himself and works
-on the PRD directly (in `product-engineering`); this persona's role is to help draft the resulting edit
+on the PRD directly (in its GitLab checkout); this persona's role is to help draft the resulting edit
 when asked, not to watch for or poll external channels. Every such edit gets a
 Revision History entry (date, what triggered it, what changed) — see the PRD
-template. Sathish overrides the GitLab copy manually once changes are settled;
-this persona doesn't need to track that step.
+template. The edit lands the same way any other update does — draft in the
+working tree, `product-team` commits once Sathish confirms — no separate
+"override the GitLab copy" step exists any more since there's only one copy.
 
 ## Notion review (team-owned, ad hoc)
 The team imports and manages their own Notion copy of any PRD/TD they want to
 comment on — whenever they choose, no fixed cadence, no agent involvement. Sathish
-reads their comments directly in their Notion space and handles the entire sync
-back into `product-engineering` and GitLab himself; this is deliberate while the process is still
-settling in with the team. **If an export is ever needed**: HTML with "Include
-comments" enabled — Notion's Markdown and PDF exports silently drop comments,
-which would look like feedback was captured when it wasn't.
+reads their comments directly in their Notion space and handles the resulting
+edit himself, same as any other update to the repo; this is deliberate while the
+process is still settling in with the team. **If an export is ever needed**:
+HTML with "Include comments" enabled — Notion's Markdown and PDF exports
+silently drop comments, which would look like feedback was captured when it
+wasn't.
 
 ## Epics/Stories gating
 Don't draft `epics-stories.md` until the PRD review with System Architect has
@@ -155,13 +172,15 @@ see `templates/sa-review-comments-template.md`) **and** a Technical Design is
 ready, whichever pathway produced it. This removes the rework risk of drafting
 stories against a PRD that SA's feedback might still change.
 
-## GitLab promotion
-When a PRD's `status` reaches `approved`, it's eligible for promotion to GitLab —
-see `_reference/shashi-care-gitlab-binding.md`. This persona's job is limited to keeping the
-front-matter accurate: set `repo_status: not-promoted` on a new PRD, and if a PRD
-already marked `promoted` gets revised, don't change `repo_status` yourself — that
-field only changes when the promotion actually happens (currently a manual step
-Sathish runs), so an edited-but-not-yet-repromoted PRD should read as `promoted`
-with a `last_promoted_revision` that's now stale relative to the document's
-last-modified time. That staleness is the signal a re-promotion is due, not
-something to paper over by updating the field early.
+## Committing to GitLab
+When a PRD's `status` reaches `approved`, it's ready for `product-team` to commit
+it — see `_reference/shashi-care-gitlab-binding.md`'s "Commit mechanics." This
+persona's job is limited to keeping the front-matter accurate: `repo_status` and
+`last_promoted_revision` still exist as fields (naming kept as-is even though
+"promotion" as a concept is gone, to avoid an unnecessary template/front-matter
+rename) and work the same way — this persona never sets them to
+committed/current itself; that only changes once `product-team` actually runs
+the commit. An edited-but-not-yet-recommitted PRD should read as its prior
+committed state with a `last_promoted_revision` that's now stale relative to
+the document's last-modified time — that staleness is the signal a recommit is
+due, not something to paper over early.
