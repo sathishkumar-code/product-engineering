@@ -7,7 +7,7 @@ status: Draft
 
 # Deployment Record — <release-slug>
 
-> Instantiated from `templates/deployment-record-template.md`. Authored by the DevOps Engineer persona to record a production (or other environment) promotion event. A deployment can span multiple stories/slugs, so this record lives at `<folder>/01_releases/deployment-record-<release-slug>.md` — alongside the release plan workbook, NOT under `07_build/`, which is organized per-slug.
+> Instantiated from `templates/deployment-record-template.md`. Authored by the DevOps Engineer persona to record a production (or other environment) promotion event. A deployment can span multiple stories/slugs, so this record lives at `releases/deployment-record-<release-slug>.md` — alongside the release plan workbook (`releases/<product>-release-plan.xlsx`), NOT under `build/`, which is organized per-slug.
 
 | Field | Value |
 |---|---|

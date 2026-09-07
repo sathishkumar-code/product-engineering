@@ -13,10 +13,11 @@ conflate two different things.
 | claude_design_link | <project-level link — provenance only> |
 | repo_status | not-promoted / promoted |
 | last_promoted_revision | <timestamp/version last pushed to the GitLab prototypes/ folder> |
-| retention | Drive copy: deleted once ClickUp Epic/Story items are created (Project Manager persona, with confirmation). GitLab copy: deleted once development is complete (same persona, same confirmation rule). |
+| retention | Permanent — no deletion step in this process (as of 2026-09-04; see `shashi-care-gitlab-binding.md` and `PROCESS-WALKTHROUGH.md`'s cheat-sheet "Deletion" entry). |
 ```
 
-Deletion is never automatic — see `skill-pjm-discipline.md`. When deletion happens,
-a one-line note is left in the relevant log (`mapping-log.md` for the Drive-side
-deletion, `promotion-log.md` for the GitLab-side deletion) rather than removed
-without a trace.
+Deletion is never automatic, and per this project's current config, doesn't
+happen as part of the process at all — see `skill-pjm-discipline.md`'s
+"Prototype deletion" (a project-config decision, generically) and
+`shashi-care-pjm-config.md`'s "Prototype deletion" (this project: removed
+entirely).

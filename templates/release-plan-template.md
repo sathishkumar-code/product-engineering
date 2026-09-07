@@ -9,8 +9,6 @@
 | Scope (SAL / SNF / Shared) | |
 | Objective / theme | The one or two things this release is actually for — tie back to the roadmap theme it serves |
 | Status | Draft / Ready for review / Approved / In progress / Shipped |
-| repo_status | not-promoted / promoted — same convention as the PRD template |
-| last_promoted_revision | Timestamp/version last pushed to the code repo, if promoted |
 
 ## 1. Included
 Features, enhancements, and bugs going into this release — by slug/path, not
@@ -42,6 +40,9 @@ What happens if something in this release needs to be pulled after ship. Not
 optional for anything touching clinical data or signed/immutable records.
 
 ## 7. Sprints
-Link to `sprints/<sprint-slug>/sprint-plan.md` for each sprint under this release —
-the Project Manager persona owns sprint breakdown from this plan, not the reverse.
+The Project Manager persona owns sprint breakdown from this plan, not the
+reverse. Each sprint's planning/status (`templates/sprint-plan-status-template.md`)
+and retrospective (`templates/sprint-retro-template.md`) are mirrored between
+the local sprint-planning process and ClickUp — see `skill-pjm-discipline.md`
+for how the two are kept in sync.
 ```
