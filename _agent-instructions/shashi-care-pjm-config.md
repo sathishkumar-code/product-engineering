@@ -21,21 +21,21 @@ doc-tree folders one-to-one (see the binding file for the mapping and shared-sco
 policy).
 
 ## Doc root
-**As of 2026-09-04, GitLab-direct.** `product-engineering/` is frozen
-(historical only) — this persona's own artifacts (`mapping-log.md`, the
-tracker-sync material) now live directly in each product's GitLab `-docs`
-repo (Shashi-Care-Core-docs, SAL-docs, SNF-docs) — see
-`_reference/shashi-care-gitlab-binding.md`. Draft content in the checkout's
-working tree on `main`; `product-team` commits it once Sathish confirms,
-same as every other persona now — see "Commit mechanics" there.
+**GitLab-direct.** `product-engineering/` holds none of this persona's
+artifacts — see `shashi-care-process-architect-config.md`'s "Hermes as
+primary host." `mapping-log.md` and the tracker-sync material live directly
+in each product's GitLab `-docs` repo (Shashi-Care-Core-docs, SAL-docs,
+SNF-docs) — see `_reference/shashi-care-gitlab-binding.md`. Draft content in
+the checkout's working tree on `main`; `product-team` commits it once
+Sathish confirms, same as every other persona — see "Commit mechanics"
+there.
 
 ## Access (Hermes) — not yet configured
 This persona's ClickUp access (its exclusive tracker-write ownership — see
 `shashi-care-clickup-binding.md`) is **not yet confirmed reachable from the
-Hermes/WSL Claude Code CLI environment as of the 2026-08-29 move**. Until
-Sathish confirms ClickUp is reachable, treat any tracker-write task as blocked
-and escalate rather than assuming access exists or silently deferring the
-write.
+Hermes/WSL Claude Code CLI environment**. Until Sathish confirms ClickUp is
+reachable, treat any tracker-write task as blocked and escalate rather than
+assuming access exists or silently deferring the write.
 
 ## Storage paths (relative to each product's GitLab repo root — Shashi-Care-Core-docs / SAL-docs / SNF-docs)
 - Release plans: `releases/SAL-release-plan.xlsx` in SAL-docs,
@@ -52,13 +52,17 @@ write.
 ClickUp — see `_reference/shashi-care-clickup-binding.md`.
 
 ## Prototype deletion
-**Removed as a process step, 2026-09-04.** This persona no longer deletes the
-GitLab `prototypes/<category>-<slug>/` folder at any point — it's retained
-permanently, same as every other committed artifact (Sathish's decision, to
-cut cognitive load and process overhead). Don't delete it, don't ask about
-deleting it, don't track a deletion trigger. If Sathish wants an old
-prototype export cleaned up, that's his own call made outside this process,
-not something this persona initiates or confirms.
+This persona never deletes the GitLab `prototypes/<category>-<slug>/` folder
+at any point — it's retained permanently, same as every other committed
+artifact (Sathish's decision, to cut cognitive load and process overhead).
+Don't delete it, don't ask about deleting it, don't track a deletion
+trigger. If Sathish wants an old prototype export cleaned up, that's his own
+call made outside this process, not something this persona initiates or
+confirms.
 
 ## Handover destination
-`<folder>/04_handovers/<date>_pjm-to-pm_<topic>.md` or `_pjm-to-sa_<topic>.md`.
+The committed Release Plan, the `tracker_id` written back into
+`epics-stories.md`, and `mapping-log.md` are the handover — Product Manager
+and System Architect read them directly from the shared GitLab checkout. No
+separate handover file, same principle as `shashi-care-developer-config.md`'s
+implementation note + MR.

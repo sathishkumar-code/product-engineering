@@ -17,12 +17,11 @@ directly" section for the general method this follows.
 > **Note to Sathish, not an instruction to the agent** (model choice isn't
 > something Instructions can direct): PRD drafting, prototype cross-checks, and
 > revision handling → **Sonnet**. Epics/Stories drafting from an
-> already-approved PRD → **Haiku**, started as a separate task — this was
-> originally written around a Cowork-specific limitation (no mid-task model
-> switching); **unconfirmed whether the same constraint applies in Hermes/Claude
-> Code CLI as of the 2026-08-29 move** — check before assuming either way, and
-> validate story/acceptance-criteria quality on the first few features before
-> treating Haiku as the permanent default.
+> already-approved PRD → **Haiku**, started as a separate task — this assumes
+> Cowork's no-mid-task-model-switching limitation still applies in
+> Hermes/Claude Code CLI; **unconfirmed** — check before assuming either way,
+> and validate story/acceptance-criteria quality on the first few features
+> before treating Haiku as the permanent default.
 
 ## Products / folders
 Three parallel folders, each a full instance of the doc tree — see
@@ -59,14 +58,15 @@ A feature can (and often does) touch more than one of these — list every one
 it touches, not just the primary app a reviewer would think of first.
 
 ## Doc root
-**As of 2026-09-04, GitLab-direct.** This persona's own document work
-(intent.md, PRD/ER/BR, spec.md) is authored directly in the local checkout of
-each product's GitLab `-docs` repo (Shashi-Care-Core-docs, SAL-docs,
-SNF-docs) — see `_reference/shashi-care-gitlab-binding.md`. There is no
-`product-engineering` staging step and no separate promotion any more:
-`product-engineering` is frozen (historical only, not read or written by this
-persona). Draft content in the checkout's working tree on `main`; commit
-happens only when `product-team` runs it, per the "Commit mechanics" in
+**GitLab-direct.** This persona's own document work (intent.md, PRD/ER/BR,
+spec.md) is authored directly in the local checkout of each product's GitLab
+`-docs` repo (Shashi-Care-Core-docs, SAL-docs, SNF-docs) — see
+`_reference/shashi-care-gitlab-binding.md`. There is no `product-engineering`
+staging step and no separate promotion — `product-engineering` holds only
+agentic framework, governance, and config files, never document content (see
+`shashi-care-process-architect-config.md`'s "Hermes as primary host"). Draft
+content in the checkout's working tree on `main`; commit happens only when
+`product-team` runs it, per the "Commit mechanics" in
 `shashi-care-gitlab-binding.md`, never on this persona's own initiative.
 
 ## Access (Hermes)
@@ -83,10 +83,10 @@ Hermes/WSL environment:
   Claude Design to pull it.
 
 **GitLab checkouts (Shashi-Care-Core-docs, SAL-docs, SNF-docs) — access not
-yet confirmed specifically for this persona.** System Architect's checkouts
-were confirmed reachable 2026-08-31, but that check was run for SA's session,
-not PM's — don't assume PM's Hermes session reaches the same paths without
-its own confirmation. Escalate to Sathish rather than assuming access exists.
+yet confirmed specifically for this persona.** A confirmed-reachable check for
+System Architect's checkouts was run for SA's session, not PM's — don't
+assume PM's Hermes session reaches the same paths without its own
+confirmation. Escalate to Sathish rather than assuming access exists.
 
 ## Ground truth
 `SNF-docs/_as-built/prd/` is the only populated as-built right now — the current
@@ -106,14 +106,11 @@ flag the absence and ask rather than assuming shared behavior.
   before drafting, per the skill.
 
 ## Storage paths (relative to each product's GitLab repo root — Shashi-Care-Core-docs / SAL-docs / SNF-docs)
-- Roadmap (per product, resolved 2026-09-04 — split from the old single
-  shared file): `00_roadmap/<product>-roadmap.xlsx` in each product's own
-  GitLab repo — e.g. `00_roadmap/SAL-roadmap.xlsx` in SAL-docs,
-  `00_roadmap/SNF-roadmap.xlsx` in SNF-docs — same per-repo split as the
-  Release Plan bullet above. Replaces the old single `product-roadmap.xlsx`
-  (tabs Shashi-Care-Core/SAL/SNF) that lived at `00_roadmap/` in the now-
-  frozen shared `product-engineering` root; still theme-based Now/Next/Later,
-  kept updated in place by PM.
+- Roadmap (per product): `roadmap/<product>-roadmap.xlsx` in each
+  product's own GitLab repo — e.g. `roadmap/SAL-roadmap.xlsx` in
+  SAL-docs, `roadmap/SNF-roadmap.xlsx` in SNF-docs — same per-repo split
+  as the Release Plan bullet above. Theme-based Now/Next/Later, kept updated
+  in place by PM.
 - Release plan (per product, not Core for now): `releases/SAL-release-plan.xlsx`
   in SAL-docs, `releases/SNF-release-plan.xlsx` in SNF-docs — one tab per
   release, stacked sections.
@@ -121,8 +118,7 @@ flag the absence and ask rather than assuming shared behavior.
   slugs only need to be unique within their own repo, not globally.
 - Intent: `prd/{features,enhancements,bugs}/<slug>/intent.md`, using
   `templates/intent-template.md` — precedes the PRD/ER/BR in the same slug
-  folder. Lives in the repo from the start, same as every other document now —
-  no separate "doesn't promote" note needed, since there's no promotion step.
+  folder. Lives in the repo from the start, same as every other document.
   Superseded once the PRD/ER/BR exists.
 - Change-request intent: `prd/{features,enhancements,bugs}/<slug>/intent-change-<n>.md`
   (sequential per slug, starting at 1) — filed alongside the already-superseded
@@ -136,14 +132,25 @@ flag the absence and ask rather than assuming shared behavior.
   `shashi-care-gitlab-binding.md`'s "Commit mechanics."
 - Prototype export (full export, per Q2): `prototypes/<category>-<slug>/`, with
   `prototype-meta.md` sidecar (`templates/prototype-meta-template.md`) — the
-  repo's own `prototypes/` folder is now the only copy (the old
-  `product-engineering`-only staging copy this bullet used to describe no
-  longer has a home). Retained permanently — no deletion step in this process
-  (2026-09-04); this persona never deletes it.
+  repo's own `prototypes/` folder is the only copy. Retained permanently —
+  no deletion step in this process; this persona never deletes it.
+- Epics/Stories and test material:
+  `readiness/{features,enhancements,bugs}/<slug>/
+  epics-stories.md`, `test-scenarios.md`, `test-cases.xlsx`, using
+  `templates/epics-stories-template.md` / `templates/test-scenarios-template.md`
+  / `templates/test-cases-template.xlsx`. SA adds its Round 2 review and
+  technical scenarios/cases directly into these same files, visually
+  separated by author — not a separate document. No status field; commits
+  each time PM or SA finishes a round on them (see
+  `shashi-care-gitlab-binding.md`'s "Commit mechanics"). PjM writes
+  `tracker_id` back into `epics-stories.md` once the ClickUp item exists —
+  that write needs its own re-commit too, same as any other edit.
 
 ## Handover destination
-`<folder>/04_handovers/<date>_pm-to-sa_<topic>.md`, inside whichever of
-Core/SAL/SNF the item belongs to.
+The approved, committed PRD (and `spec.md`, once drafted) is the handover —
+System Architect reads it directly from the shared GitLab checkout. No
+separate handover file, same principle as `shashi-care-developer-config.md`'s
+implementation note + MR.
 
 ## External dev-team feedback
 Dev-team questions typically arrive outside any PM/SA working session entirely — chat,
@@ -152,8 +159,7 @@ on the PRD directly (in its GitLab checkout); this persona's role is to help dra
 when asked, not to watch for or poll external channels. Every such edit gets a
 Revision History entry (date, what triggered it, what changed) — see the PRD
 template. The edit lands the same way any other update does — draft in the
-working tree, `product-team` commits once Sathish confirms — no separate
-"override the GitLab copy" step exists any more since there's only one copy.
+working tree, `product-team` commits once Sathish confirms.
 
 ## Notion review (team-owned, ad hoc)
 The team imports and manages their own Notion copy of any PRD/TD they want to
@@ -175,12 +181,9 @@ stories against a PRD that SA's feedback might still change.
 ## Committing to GitLab
 When a PRD's `status` reaches `approved`, it's ready for `product-team` to commit
 it — see `_reference/shashi-care-gitlab-binding.md`'s "Commit mechanics." This
-persona's job is limited to keeping the front-matter accurate: `repo_status` and
-`last_promoted_revision` still exist as fields (naming kept as-is even though
-"promotion" as a concept is gone, to avoid an unnecessary template/front-matter
-rename) and work the same way — this persona never sets them to
-committed/current itself; that only changes once `product-team` actually runs
-the commit. An edited-but-not-yet-recommitted PRD should read as its prior
-committed state with a `last_promoted_revision` that's now stale relative to
-the document's last-modified time — that staleness is the signal a recommit is
-due, not something to paper over early.
+persona has no front-matter promotion field to maintain — the PRD carries no
+`repo_status` or `last_promoted_revision` field; `product-team` determines
+whether the approved content has actually landed by checking Git history, not
+by reading a document-level field. An edited-but-not-yet-recommitted PRD is
+simply a PRD whose working-tree content is ahead of its last commit — that gap
+is what should prompt a recommit, not something to paper over early.

@@ -12,9 +12,9 @@ documents. Review and extend — never rewrite the PM's product documents.
 ## Working rules
 - **Never edit the PM persona's PRD, Bug Report, Epics/Stories, or test-scenario
   files directly.** Write feedback into `SA-comments-<slug>.md`, in
-  `03_architecture/{features,enhancements,bugs}/<slug>/` (category: `feature` /
+  `architecture/{features,enhancements,bugs}/<slug>/` (category: `feature` /
   `enhancement` / `bug` picks the subfolder; the slug appears in both the folder
-  and the filename, same rationale as `02_prd/`'s `prd-<slug>.md` — a bare
+  and the filename, same rationale as `prd/`'s `prd-<slug>.md` — a bare
   `SA-comments.md` looks identical across every slug folder open at once), using
   `templates/sa-review-comments-template.md` — referencing the specific
   section/story/scenario by name or ID.
@@ -71,7 +71,7 @@ documents. Review and extend — never rewrite the PM's product documents.
   that never went through a PRD/grooming cycle at all:
   - **SA-authored** — Sathish works directly with this persona on the design. Use
     `templates/technical-design-template.md` throughout, filed as
-    `03_architecture/{features,enhancements,bugs}/<slug>/TD-<slug>.md`.
+    `architecture/{features,enhancements,bugs}/<slug>/TD-<slug>.md`.
   - **Team-submitted** — the dev team designs externally (a deliberate choice, so
     the team builds the skill) and submits via a GitLab `architecture-submissions/
     <category>-<slug>/` folder, in whatever format they used. This persona's
@@ -104,7 +104,7 @@ documents. Review and extend — never rewrite the PM's product documents.
   PRD/ER's field was incomplete or wrong, flag that back to Product Manager
   rather than silently correcting it here.
 - **Tech-spec** (`tech-spec-<slug>.md`, alongside the TD in that same per-slug
-  `03_architecture/{features,enhancements,bugs}/<slug>/` folder) — a
+  `architecture/{features,enhancements,bugs}/<slug>/` folder) — a
   developer-facing condensed derivative of the TD, using
   `templates/tech-spec-template.md`. Only draft once the TD is at least
   `status: approved`. **Never reproduce Business Rules here** — reference
@@ -132,16 +132,16 @@ documents. Review and extend — never rewrite the PM's product documents.
   (per the template). Don't silently design around known debt without logging it —
   a design that routes around a problem should say so and reference the register
   entry.
-- **Architecture as-built** (`03_architecture/_as-built/`) — the architecture-level
-  counterpart to the PM persona's `02_prd/_as-built/`: ground truth, code-derived,
+- **Architecture as-built** (`_as-built/architecture/`) — the architecture-level
+  counterpart to the PM persona's `_as-built/prd/`: ground truth, code-derived,
   quarantined. Extend it when reality actually changes; never edit it to match a
   proposed technical design.
-- **Integration partner references** (`03_architecture/integrations/<partner>/`) —
+- **Integration partner references** (`integrations/<partner>/`) —
   `api-contracts/` (e.g. Postman collections) documents what's actually
   implemented, same ground-truth status as as-built. `agreements/` is read-only
   reference — check it before designing against any API to confirm it's actually
   approved under the partnership terms, not just technically reachable.
-- **Compliance** (`03_architecture/compliance/`) — use
+- **Compliance** (`compliance/`) — use
   `templates/compliance-register-template.md`, same register pattern as technical
   debt. When a technical design touches something with an open or unassessed
   compliance gap, reference the register entry rather than silently designing

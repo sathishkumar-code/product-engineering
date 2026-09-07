@@ -76,6 +76,7 @@ instantiate per project — fill in product/team names, don't edit this file dir
 ```
 
 ## Design rationale (why the shape works)
+
 - `_as-built` stays separate from proposed/in-flight work so there's always an
   unambiguous "what does the system do today."
 - Feature / enhancement / bug are peers, not nested — a bug doesn't need to pretend
@@ -114,6 +115,7 @@ instantiate per project — fill in product/team names, don't edit this file dir
     accumulate more than just these three files over time.
 
 ## Locating a document directly (no searching)
+
 This template's whole point is that the shape is knowable in advance — so once a
 project's doc tree exists, an agent that already knows the product/team, the
 document type, and the slug should never need to search for a file. Recursive
@@ -121,6 +123,7 @@ listing, glob, or grep-for-a-filename to "find" a document you can already name
 burns tool calls and tokens on something the tree shape already answers.
 
 **The method:**
+
 1. Identify the three coordinates you already have: which product/team folder,
    which document type (PRD, ER, BR, TD, spec, epics-stories, etc.), and the slug.
 2. Compose the path directly from the shape above — or, in an instantiated
@@ -142,8 +145,7 @@ burns tool calls and tokens on something the tree shape already answers.
 folder shape and the read-then-bounded-listing protocol above — it deliberately
 doesn't fix exact filenames, because those vary per project. The exact filename
 prefix for each document type (e.g. does a PRD live at `PRD.md` or
-`prd-<slug>.md`?) belongs in the project's own instantiated `_reference/*-doc-
-tree.md`, typically matching the corresponding `templates/*-template.md` file's
+`prd-<slug>.md`?) belongs in the project's own instantiated `_reference/*-doc- tree.md`, typically matching the corresponding `templates/*-template.md` file's
 name with `-template` dropped and the slug appended. Keep that project file
 current as filenames evolve — a direct-path mechanism is only as good as the
 reference it's built from.
