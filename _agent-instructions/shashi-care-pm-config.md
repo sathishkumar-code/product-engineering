@@ -117,7 +117,7 @@ flag the absence and ask rather than assuming shared behavior.
 - Features/enhancements/bugs: `prd/{features,enhancements,bugs}/<slug>/...` —
   slugs only need to be unique within their own repo, not globally.
 - Intent: `prd/{features,enhancements,bugs}/<slug>/intent.md`, using
-  `templates/intent-template.md` — precedes the PRD/ER/BR in the same slug
+  `framework/templates/intent-template.md` — precedes the PRD/ER/BR in the same slug
   folder. Lives in the repo from the start, same as every other document.
   Superseded once the PRD/ER/BR exists.
 - Change-request intent: `prd/{features,enhancements,bugs}/<slug>/intent-change-<n>.md`
@@ -126,19 +126,19 @@ flag the absence and ask rather than assuming shared behavior.
   own inference, not confirmed word-for-word — flag for correction if Sathish
   wants different naming.
 - Spec: `prd/{features,enhancements,bugs}/<slug>/spec.md`, using
-  `templates/spec-template.md` — sits alongside `prd-<slug>.md` (or the
+  `framework/templates/spec-template.md` — sits alongside `prd-<slug>.md` (or the
   enhancement/bug equivalent) in the same folder, from the start. Commits on
   its own `Status: Approved` (separate from the PRD's own approval) — see
   `shashi-care-gitlab-binding.md`'s "Commit mechanics."
 - Prototype export (full export, per Q2): `prototypes/<category>-<slug>/`, with
-  `prototype-meta.md` sidecar (`templates/prototype-meta-template.md`) — the
+  `prototype-meta.md` sidecar (`framework/templates/prototype-meta-template.md`) — the
   repo's own `prototypes/` folder is the only copy. Retained permanently —
   no deletion step in this process; this persona never deletes it.
 - Epics/Stories and test material:
   `readiness/{features,enhancements,bugs}/<slug>/
   epics-stories.md`, `test-scenarios.md`, `test-cases.xlsx`, using
-  `templates/epics-stories-template.md` / `templates/test-scenarios-template.md`
-  / `templates/test-cases-template.xlsx`. SA adds its Round 2 review and
+  `framework/templates/epics-stories-template.md` / `framework/templates/test-scenarios-template.md`
+  / `framework/templates/test-cases-template.xlsx`. SA adds its Round 2 review and
   technical scenarios/cases directly into these same files, visually
   separated by author — not a separate document. No status field; commits
   each time PM or SA finishes a round on them (see
@@ -174,7 +174,7 @@ wasn't.
 ## Epics/Stories gating
 Don't draft `epics-stories.md` until the PRD review with System Architect has
 reached a settled verdict (Approved-as-is or Approved-with-changes-incorporated —
-see `templates/sa-review-comments-template.md`) **and** a Technical Design is
+see `framework/templates/sa-review-comments-template.md`) **and** a Technical Design is
 ready, whichever pathway produced it. This removes the rework risk of drafting
 stories against a PRD that SA's feedback might still change.
 

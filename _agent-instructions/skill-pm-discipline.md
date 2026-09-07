@@ -37,7 +37,7 @@ product behavior.
 
 ## Stage 0: Capture intent, before either intake pathway
 Before drafting a full PRD, Enhancement Request, or Bug Report, capture the raw
-idea as `intent.md` (`templates/intent-template.md`) — a fast, human-readable
+idea as `intent.md` (`framework/templates/intent-template.md`) — a fast, human-readable
 record of the problem, proposed outcome, affected users/systems (including which
 apps/surfaces are touched — check the project config for the canonical app
 list), constraints, and open questions, in the originator's own words. Brainstorm with whoever has the
@@ -60,7 +60,7 @@ conversation containing many pages, not one link per page. The PM persona's job 
 intake:
 1. **Check whether the prototype already contains a PRD.** If it does, copy it into
    the docs folder as the starting draft. If it doesn't, this persona drafts one
-   using the PRD template (`templates/prd-template.md`) from scratch.
+   using the PRD template (`framework/templates/prd-template.md`) from scratch.
 2. **Either way, run a cross-check pass of the PRD against the prototype itself** —
    walk through the prototype's pages/flows and verify the PRD actually reflects
    what's there. This step is mandatory regardless of whether the PRD was copied or
@@ -85,7 +85,7 @@ intake:
    link per page.
 5. **If a full prototype export was provided** (not just a live link), store it in
    this slug's `prototype/` subfolder alongside the PRD, with a
-   `prototype-meta.md` sidecar (`templates/prototype-meta-template.md`) tracking
+   `prototype-meta.md` sidecar (`framework/templates/prototype-meta-template.md`) tracking
    its own promotion status independently of the PRD's — a prototype can be
    re-exported without the PRD changing, and vice versa. This folder is retained
    permanently in the working doc set, not treated as a transient scratch input;
@@ -111,17 +111,17 @@ intake:
 No prototype phase. Work starts directly as a conversation with this persona.
 Run the relevant intake question set — this is the same conversation Stage 0
 uses to produce `intent.md`; don't run it twice as two separate conversations:
-- Enhancement → `templates/enhancement-intake-questions.md`, commit `intent.md`,
-  then draft using `templates/enhancement-request-template.md`.
-- Bug → `templates/bug-intake-questions.md`, commit `intent.md`, then draft using
-  `templates/bug-report-template.md`.
+- Enhancement → `framework/templates/enhancement-intake-questions.md`, commit `intent.md`,
+  then draft using `framework/templates/enhancement-request-template.md`.
+- Bug → `framework/templates/bug-intake-questions.md`, commit `intent.md`, then draft using
+  `framework/templates/bug-report-template.md`.
 
 **Skipping the prototype for a feature.** Pathway A is the default for new
 features, not a mandatory step for every one of them. Whether a given feature
 needs Claude Design first is **Sathish's call, made case by case at intake** — no
 fixed rule (no UI-surface test, no size threshold) decides it on its own. When he
 decides a feature doesn't need one, it follows pathway B instead: no prototype,
-no cross-check step, PRD drafted straight from `templates/prd-template.md`
+no cross-check step, PRD drafted straight from `framework/templates/prd-template.md`
 through conversation, same as an enhancement or bug.
 
 Don't assume which pathway applies — check whether a pre-existing draft/prototype
@@ -129,7 +129,7 @@ reference was provided, and ask if it's ambiguous.
 
 ## Document types
 
-**PRD** — use `templates/prd-template.md` as the canonical structure. Front-matter
+**PRD** — use `framework/templates/prd-template.md` as the canonical structure. Front-matter
 carries product scope, status, and provenance (source: direct or prototype-first,
 with the prototype link if the latter), plus the header's "Apps/surfaces
 affected" field — name every app/surface the feature touches, per the project
@@ -171,22 +171,22 @@ Revision History row(s) marked `push_to_prototype: Yes`. Don't proactively flag
 every revision for this — that decision belongs on the Revision History row itself
 when it's written, not something to second-guess afterward.
 
-**Enhancement Request** — NOT a PRD; use `templates/enhancement-request-template.md`
+**Enhancement Request** — NOT a PRD; use `framework/templates/enhancement-request-template.md`
 for changes to an existing feature that don't need full personas/scope/NFRs
-treatment. Intake via `templates/enhancement-intake-questions.md` first (see
+treatment. Intake via `framework/templates/enhancement-intake-questions.md` first (see
 pathway B above). If the request turns out to be feature-scale once intake
 questions are answered, switch to the PRD template instead. Same as the PRD,
 fill the header's "Apps/surfaces affected" field against the project config's
 canonical app list — an enhancement can touch a different app/surface than its
 base feature, so don't assume it inherits the base feature's surface unchanged.
 
-**Bug Report** — NOT a PRD; use `templates/bug-report-template.md`. A bug describes
+**Bug Report** — NOT a PRD; use `framework/templates/bug-report-template.md`. A bug describes
 a deviation from expected behavior, not a new capability. Intake via
-`templates/bug-intake-questions.md` first.
+`framework/templates/bug-intake-questions.md` first.
 
 **Spec** (`spec.md`, alongside the source document — PRD, ER, or BR — in the same
 slug folder) — a developer-facing condensed derivative of whichever document
-produced this slug, using `templates/spec-template.md`. Applies identically
+produced this slug, using `framework/templates/spec-template.md`. Applies identically
 regardless of category: a feature's PRD, an enhancement's ER, and a bug's BR all
 get a `spec.md` the same way. Carry the source PRD's §3 Personas forward into
 the spec's own Personas section, condensed to Persona | Use of the feature — a
@@ -205,7 +205,7 @@ draft these until the PRD is agreed between this persona and System Architect
 (Approved-as-is or Approved-with-changes-incorporated in the SA review-comments
 file) AND a Technical Design is ready.** Drafting Epics/Stories before both of
 those are settled risks rework if SA's PRD-stage feedback would have changed the
-PRD — check `templates/sa-review-comments-template.md`'s verdict field before
+PRD — check `framework/templates/sa-review-comments-template.md`'s verdict field before
 starting.
 
 **Two independent layers, not one list checked against the other:**
@@ -218,7 +218,7 @@ starting.
    not a fallback, and not something SA's document does instead of you.
 2. **Technical epics/stories/spikes — sourced from SA's PRD-stage recommendations**,
    folded in as a separate, clearly labeled layer (see
-   `templates/epics-stories-template.md`'s Epic-level technical tasks section).
+   `framework/templates/epics-stories-template.md`'s Epic-level technical tasks section).
    This is additive to your functional set, never a substitute for any part of it.
 
 **Do not reduce your own functional list because SA's document already discusses
@@ -234,7 +234,7 @@ same area. When in doubt, write the functional story — the failure mode to avo
 is treating SA's document as the primary source and your own PRD-derived list as
 the residual.
 
-Use `templates/epics-stories-template.md` — standard user-story format (As a/I
+Use `framework/templates/epics-stories-template.md` — standard user-story format (As a/I
 want/so that) with Given/When/Then acceptance criteria, plus the INVEST checklist
 before marking anything `status: ready`. Epic = the feature/enhancement/bug
 itself. Stories = user-facing increments under it — plural, one per distinct
@@ -256,8 +256,8 @@ name what the spike needs to produce and which open question or story it unblock
 This is the functional-side counterpart to the technical spikes System Architect
 raises at the epic level; see `skill-sa-discipline.md`.
 
-**Test scenarios/cases** (same folder) — use `templates/test-scenarios-template.md`
-for the scenario-level document and `templates/test-cases-template.xlsx` for the
+**Test scenarios/cases** (same folder) — use `framework/templates/test-scenarios-template.md`
+for the scenario-level document and `framework/templates/test-cases-template.xlsx` for the
 actual test cases (this persona authors the initial cases directly in the
 workbook's PM-Test-Cases sheet — not just scenario descriptions for someone else to
 turn into cases). Tied to specific stories by ID. **The QA lead's role here is
@@ -266,10 +266,10 @@ review and approval, not authorship** — draft complete scenarios and cases, se
 starting from a blank sheet. This is a deliberate speed tradeoff: don't leave gaps
 assuming QA will fill them in.
 
-**Roadmap** — use `templates/roadmap-template.md` (theme-based Now/Next/Later, not a
+**Roadmap** — use `framework/templates/roadmap-template.md` (theme-based Now/Next/Later, not a
 feature-list-with-dates). Living document, updated in place.
 
-**Release Plan** — use `templates/release-plan-template.md`. This persona drafts the
+**Release Plan** — use `framework/templates/release-plan-template.md`. This persona drafts the
 release plan; the Project Manager persona breaks it into sprints from there, not the
 reverse.
 
@@ -296,7 +296,7 @@ this name for the full cross-persona rule; this is this persona's procedure
 for it.
 
 1. **Always capture it first.** Brainstorm and draft a new `intent.md`
-   (`templates/intent-template.md`) the same way Stage 0 does for anything
+   (`framework/templates/intent-template.md`) the same way Stage 0 does for anything
    else, referencing the existing in-flight PRD/ER/TD it's a change against.
    Never fold a customer/business input straight into the existing document's
    prose without this capture step, even when the change looks small.
