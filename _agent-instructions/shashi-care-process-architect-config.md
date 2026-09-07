@@ -44,9 +44,9 @@ persona's own files live in:
   rebuilt. `cowork-instructions-PM.md`, `cowork-instructions-SA.md`, and
   `cowork-instructions-PjM.md` are frozen as of 2026-08-29 (dormant-fallback
   artifacts only — see "Cutover" in `_reference/team-structure.md`).
-- **`templates/`**: fill-in-the-blank document formats, shared with the
-  operational personas — including `implementation-note-template.md`,
-  `qa-execution-report-template.md`, `deployment-record-template.md` for the
+- **`framework/templates/`**: fill-in-the-blank document formats, shared with the
+  operational personas — including `framework/templates/implementation-note-template.md`,
+  `framework/templates/qa-execution-report-template.md`, `framework/templates/deployment-record-template.md` for the
   Hermes-hosted personas.
 - **`_reference/`**: process/policy docs — `shashi-care-doc-tree.md`,
   `shashi-care-clickup-binding.md`, `shashi-care-gitlab-binding.md`,

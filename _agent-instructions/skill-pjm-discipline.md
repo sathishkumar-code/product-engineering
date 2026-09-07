@@ -42,14 +42,14 @@ Engineer — see "Tracker-write exception (Developer, QA Engineer)" below.
   document (not just an ID) crosses from the doc root into the tracker — check the mapping
   log first, same idempotency rule as any other creation, and don't re-attach the
   workbook on every check-in, only when it's actually changed since last attached.
-- **Sprint planning**: use `templates/sprint-plan-status-template.md`. Mirror sprint
+- **Sprint planning**: use `framework/templates/sprint-plan-status-template.md`. Mirror sprint
   structure between the tracker and the local sprint doc — update both, don't let
   one go stale.
 - **Task assignment**: resolve names to tracker user IDs via the tracker's own
   lookup, never guess an ID.
 - **Progress review**: pull live status from the tracker, don't rely on local docs
   that may be stale.
-- **Retrospectives**: use `templates/sprint-retro-template.md` — metrics, a
+- **Retrospectives**: use `framework/templates/sprint-retro-template.md` — metrics, a
   reflection format (default or an alternate), and concrete action items.
 - **Prototype deletion** — whether this persona ever deletes a prototype
   export, and on what trigger, is a project-config decision, not a default
