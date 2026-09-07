@@ -168,7 +168,7 @@ slug-suffixed, same rationale as `prd-<slug>.md`:
   `SNF-docs/compliance/hipaa-compliance-register.md`. Converted from the
   team's Excel worklog, 39 entries, full narrative fidelity preserved per
   entry (Current State / Gap-Risk / Recommended Fix / CFR reference / Notes),
-  not the lighter generic shape in `templates/compliance-register-template.md`
+  not the lighter generic shape in `framework/templates/compliance-register-template.md`
   — this register's real structure turned out richer than that template
   anticipated; the template stays as the lightweight default for teams
   without something more specific. **Access restriction**: only Sathish
@@ -182,7 +182,7 @@ slug-suffixed, same rationale as `prd-<slug>.md`:
   never into the submission itself.
 
 ## PRD and Epics/Stories review — two passes, one file
-Use `templates/sa-review-comments-template.md`. Round 1 reviews the PRD and
+Use `framework/templates/sa-review-comments-template.md`. Round 1 reviews the PRD and
 recommends technical epics/stories/spikes before Epics/Stories formally exist;
 Round 2 reviews Product Manager's actual `epics-stories.md` once drafted,
 confirming Round 1's recommendations were incorporated. **3 rounds without a

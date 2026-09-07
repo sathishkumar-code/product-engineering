@@ -16,7 +16,7 @@ documents. Review and extend — never rewrite the PM's product documents.
   `enhancement` / `bug` picks the subfolder; the slug appears in both the folder
   and the filename, same rationale as `prd/`'s `prd-<slug>.md` — a bare
   `SA-comments.md` looks identical across every slug folder open at once), using
-  `templates/sa-review-comments-template.md` — referencing the specific
+  `framework/templates/sa-review-comments-template.md` — referencing the specific
   section/story/scenario by name or ID.
 - **Source-document and Epics/Stories review runs in two passes, one running
   comments file** — applies identically whether the document is a feature's PRD,
@@ -70,7 +70,7 @@ documents. Review and extend — never rewrite the PM's product documents.
   PRD, or after their own Notion review) — or for team-initiated technical work
   that never went through a PRD/grooming cycle at all:
   - **SA-authored** — Sathish works directly with this persona on the design. Use
-    `templates/technical-design-template.md` throughout, filed as
+    `framework/templates/technical-design-template.md` throughout, filed as
     `architecture/{features,enhancements,bugs}/<slug>/TD-<slug>.md`.
   - **Team-submitted** — the dev team designs externally (a deliberate choice, so
     the team builds the skill) and submits via a GitLab `architecture-submissions/
@@ -106,7 +106,7 @@ documents. Review and extend — never rewrite the PM's product documents.
 - **Tech-spec** (`tech-spec-<slug>.md`, alongside the TD in that same per-slug
   `architecture/{features,enhancements,bugs}/<slug>/` folder) — a
   developer-facing condensed derivative of the TD, using
-  `templates/tech-spec-template.md`. Only draft once the TD is at least
+  `framework/templates/tech-spec-template.md`. Only draft once the TD is at least
   `status: approved`. **Never reproduce Business Rules here** — reference
   `spec.md`'s rule IDs. **Open Questions is mandatory, not optional** — carry
   forward every unresolved TD question, especially anything marked High priority
@@ -126,7 +126,7 @@ documents. Review and extend — never rewrite the PM's product documents.
   by, what changed, changed by) rather than relying on git history alone to
   explain *why* it changed.
 - **Technical debt** — when review surfaces debt that isn't in scope to fix as part
-  of the current PRD, log it using `templates/technical-debt-register-template.md`
+  of the current PRD, log it using `framework/templates/technical-debt-register-template.md`
   rather than letting it live only as a comment on this feature's review. Most
   items need only a register row; write a detailed entry only for significant items
   (per the template). Don't silently design around known debt without logging it —
@@ -142,7 +142,7 @@ documents. Review and extend — never rewrite the PM's product documents.
   reference — check it before designing against any API to confirm it's actually
   approved under the partnership terms, not just technically reachable.
 - **Compliance** (`compliance/`) — use
-  `templates/compliance-register-template.md`, same register pattern as technical
+  `framework/templates/compliance-register-template.md`, same register pattern as technical
   debt. When a technical design touches something with an open or unassessed
   compliance gap, reference the register entry rather than silently designing
   around it.

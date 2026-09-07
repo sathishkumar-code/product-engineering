@@ -19,7 +19,7 @@ against a TD it owns, whenever asked.
 ## Companion files this pass reads (never writes to)
 - `SA-comments-<slug>.md`, at
   `architecture/{features,enhancements,bugs}/<slug>/SA-comments-<slug>.md`
-  (`templates/sa-review-comments-template.md`) — the
+  (`framework/templates/sa-review-comments-template.md`) — the
   running review file, now filed alongside the TD rather than the PRD/ER; note
   this sits in a different top-level folder than the PRD/ER being finalized when
   Product Manager is the one running this pass. Read it to tell
@@ -41,9 +41,9 @@ enhancement — per `shashi-care-doc-tree.md`'s per-slug shape and
 `skill-pm-discipline.md`'s intake pathway B, in the relevant product's GitLab
 `-docs` repo:
 - `prd/enhancements/<new-slug>/intent.md`
-  (`templates/intent-template.md`)
+  (`framework/templates/intent-template.md`)
 - `prd/enhancements/<new-slug>/enhancement-request-<new-slug>.md`
-  (`templates/enhancement-request-template.md`), naming it to match the existing
+  (`framework/templates/enhancement-request-template.md`), naming it to match the existing
   convention already in use (e.g.
   `enhancement-request-care-conference-calendar-click-to-create.md`).
 

@@ -10,7 +10,7 @@ need per-project edits.
 
 **Scope note**: `spec.md` is in scope, confirmed against a real sample that
 already carries its own accumulated revision-noise patterns (see below) even
-though `templates/spec-template.md` doesn't formally define a Revision History
+though `framework/templates/spec-template.md` doesn't formally define a Revision History
 section — real documents keep one anyway, and this pass treats it the same as
 PRD/TD's. `tech-spec-<slug>.md` — System Architect's structurally-parallel
 derived document — is deliberately NOT yet in scope; extend it only once a real
@@ -66,7 +66,7 @@ it isn't finalized yet.
 ## What must never be touched
 - **Open Questions** (PRD/ER §11 or §6, TD §11; `spec.md`'s own `## Open questions`
   section, lowercase heading, carried forward from its source per
-  `templates/spec-template.md`) — every row still genuinely unresolved stays,
+  `framework/templates/spec-template.md`) — every row still genuinely unresolved stays,
   verbatim, including its Priority. Only remove a row when the question itself was
   actually answered during review (in which case fold the answer into the relevant
   section using the rewrite rule above, and remove the now-answered row) — never
@@ -100,7 +100,7 @@ it isn't finalized yet.
 
 ## Revision History: condense, never delete outright
 Applies equally to `spec.md`'s own `## Revision history` table — real `spec.md`
-documents keep one (informally, since `templates/spec-template.md` doesn't yet
+documents keep one (informally, since `framework/templates/spec-template.md` doesn't yet
 define the section) and it accumulates the same narration patterns as PRD/TD's,
 so treat it the same way here rather than leaving it untouched for lack of a
 template definition. A run of granular Revision History rows whose individual
@@ -135,8 +135,8 @@ decide alone** whether it's a genuine scope expansion or an enhancement that bel
 its own document. Stop and ask Sathish directly, describing the specific resolution
 and its text, and let him choose:
 1. **Spin it into a new (or updated) Enhancement Request** — draft via the standard PM
-   intake pathway (`templates/enhancement-intake-questions.md` →
-   `templates/enhancement-request-template.md`), filed at
+   intake pathway (`framework/templates/enhancement-intake-questions.md` →
+   `framework/templates/enhancement-request-template.md`), filed at
    `02_prd/enhancements/<new-slug>/` per `shashi-care-doc-tree.md`'s per-slug shape.
 2. **Accept it as an explicit scope expansion of this same document** — update its own
    §2/§3 Scope (TD §2 Goals, or `spec.md`'s own `## Scope`) to say so plainly, and add
