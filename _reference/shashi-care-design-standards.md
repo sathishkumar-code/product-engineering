@@ -1,6 +1,6 @@
 # Design Standards — Shashi Care Prototypes
 
-Instantiated from `skill-prototype-authoring-standards.md`. Apply when starting any
+Instantiated from `framework/_agent-instructions/skill-prototype-authoring-standards.md`. Apply when starting any
 new Claude Design project intended to become a Shashi Care feature, enhancement, or
 bug PRD.
 

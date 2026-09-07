@@ -1,6 +1,6 @@
 # Config: Process Architect — Shashi Care
 
-Pairs with `skill-process-architect-discipline.md`. **When uncertain about
+Pairs with `framework/_agent-instructions/skill-process-architect-discipline.md`. **When uncertain about
 current process state, check `_reference/` and `_agent-instructions/` before
 proposing a change** — this persona's whole job depends on knowing what's already
 there, more than any operational persona's does.
@@ -16,9 +16,9 @@ or `SNF/` directly — those are the operational personas' territory. This
 persona's own files live in:
 
 - **`_agent-instructions/`** (this persona's primary working folder):
-  `skill-pm-discipline.md`, `shashi-care-pm-config.md`, `skill-sa-discipline.md`,
-  `shashi-care-sa-config.md`, `skill-pjm-discipline.md`,
-  `shashi-care-pjm-config.md`, `skill-process-architect-discipline.md`,
+  `framework/_agent-instructions/skill-pm-discipline.md`, `shashi-care-pm-config.md`, `framework/_agent-instructions/skill-sa-discipline.md`,
+  `shashi-care-sa-config.md`, `framework/_agent-instructions/skill-pjm-discipline.md`,
+  `shashi-care-pjm-config.md`, `framework/_agent-instructions/skill-process-architect-discipline.md`,
   `shashi-care-process-architect-config.md` (this persona's own source files,
   editable by itself with the same caution any structural change gets),
   plus `skill-developer-discipline.md` / `shashi-care-developer-config.md`,
@@ -33,13 +33,13 @@ persona's own files live in:
   Developer/QA/DevOps these three read a manually-synced *copy* in
   `product-engineering/`, not a live direct read of this folder; see "Hermes as
   primary host" below),
-  plus `skill-finalize-document-discipline.md` / `shashi-care-finalize-config.md`
+  plus `framework/_agent-instructions/skill-finalize-document-discipline.md` / `shashi-care-finalize-config.md`
   (the shared Finalize procedure both Product Manager and System Architect
   reference for their own document types — see the Finalize sections in
   `skill-pm-discipline.md` and `skill-sa-discipline.md`),
-  plus the generic reusable skill templates (`skill-doc-tree-template.md`,
-  `skill-clickup-binding-template.md`, `skill-code-repo-promotion-template.md`,
-  `skill-prototype-authoring-standards.md`), and the paste-ready build output
+  plus the generic reusable skill templates (`framework/_agent-instructions/skill-doc-tree-template.md`,
+  `framework/_agent-instructions/skill-clickup-binding-template.md`, `framework/_agent-instructions/skill-code-repo-promotion-template.md`,
+  `framework/_agent-instructions/skill-prototype-authoring-standards.md`), and the paste-ready build output
   `cowork-instructions-ProcessArchitect.md` — the only one still actively
   rebuilt. `cowork-instructions-PM.md`, `cowork-instructions-SA.md`, and
   `cowork-instructions-PjM.md` are frozen as of 2026-08-29 (dormant-fallback

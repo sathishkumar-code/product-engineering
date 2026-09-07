@@ -1,6 +1,6 @@
 # Binding: ClickUp — Shashi Care
 
-Filled instance of `skill-clickup-binding-template.md`.
+Filled instance of `framework/_agent-instructions/skill-clickup-binding-template.md`.
 
 ## Hierarchy mapping
 

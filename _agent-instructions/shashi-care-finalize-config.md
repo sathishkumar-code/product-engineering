@@ -1,6 +1,6 @@
 # Config: Finalize Document — Shashi Care
 
-Pairs with `skill-finalize-document-discipline.md`. Project-specific paths and
+Pairs with `framework/_agent-instructions/skill-finalize-document-discipline.md`. Project-specific paths and
 companion-file naming only — the finalize logic itself lives in the paired skill file
 and shouldn't need to change here.
 

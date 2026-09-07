@@ -14,10 +14,10 @@ last_updated: 2026-08-29
 | Role | Hosted in | Notes |
 |---|---|---|
 | Product Owner | — | Sathish. Final authority — see RACI below. |
-| Product Manager (PM) | Hermes | `skill-pm-discipline.md` + `shashi-care-pm-config.md`. One shared instance (not per-repo). Reads `shashi-care-docs` via the manually-synced `product-engineering/` mirror, not a live read. |
-| System Architect (SA) | Hermes | `skill-sa-discipline.md` + `shashi-care-sa-config.md`. One shared instance (not per-repo). Reads `shashi-care-docs` via the manually-synced `product-engineering/` mirror, not a live read. |
-| Project Manager (PjM) | Hermes | `skill-pjm-discipline.md` + `shashi-care-pjm-config.md`. One shared instance (not per-repo). Reads `shashi-care-docs` via the manually-synced `product-engineering/` mirror, not a live read. |
-| Process Architect (PA) | Cowork | `skill-process-architect-discipline.md` + `shashi-care-process-architect-config.md`. Sole author of `_agent-instructions/`, `templates/`, `_reference/` for both systems — see Section 10 / "Known incidents" in its config. The only persona hosted in Cowork. |
+| Product Manager (PM) | Hermes | `framework/_agent-instructions/skill-pm-discipline.md` + `shashi-care-pm-config.md`. One shared instance (not per-repo). Reads `shashi-care-docs` via the manually-synced `product-engineering/` mirror, not a live read. |
+| System Architect (SA) | Hermes | `framework/_agent-instructions/skill-sa-discipline.md` + `shashi-care-sa-config.md`. One shared instance (not per-repo). Reads `shashi-care-docs` via the manually-synced `product-engineering/` mirror, not a live read. |
+| Project Manager (PjM) | Hermes | `framework/_agent-instructions/skill-pjm-discipline.md` + `shashi-care-pjm-config.md`. One shared instance (not per-repo). Reads `shashi-care-docs` via the manually-synced `product-engineering/` mirror, not a live read. |
+| Process Architect (PA) | Cowork | `framework/_agent-instructions/skill-process-architect-discipline.md` + `shashi-care-process-architect-config.md`. Sole author of `_agent-instructions/`, `templates/`, `_reference/` for both systems — see Section 10 / "Known incidents" in its config. The only persona hosted in Cowork. |
 | Developer | Hermes (WSL) | `skill-developer-discipline.md` + `shashi-care-developer-config.md`. One instance per code repo. |
 | QA Engineer | Hermes (WSL) | `skill-qa-discipline.md` + `shashi-care-qa-config.md`. One instance per code repo. |
 | DevOps Engineer | Hermes (WSL) | `skill-devops-discipline.md` + `shashi-care-devops-config.md`. One instance per code repo. |

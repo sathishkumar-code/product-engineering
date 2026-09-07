@@ -1,6 +1,6 @@
 # Config: Project Manager — Shashi Care (Core + SAL + SNF)
 
-Pairs with `skill-pjm-discipline.md` and `_reference/shashi-care-clickup-binding.md`.
+Pairs with `framework/_agent-instructions/skill-pjm-discipline.md` and `_reference/shashi-care-clickup-binding.md`.
 **When uncertain about folder structure, naming conventions, or any process
 detail not spelled out here, check `_reference/` in the doc root**
 (`shashi-care-doc-tree.md`, `PROCESS-WALKTHROUGH.md`, and related files) before

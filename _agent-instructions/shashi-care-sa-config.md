@@ -1,6 +1,6 @@
 # Config: System Architect — Shashi Care (Core + SAL + SNF)
 
-Pairs with `skill-sa-discipline.md`. **When uncertain about folder structure,
+Pairs with `framework/_agent-instructions/skill-sa-discipline.md`. **When uncertain about folder structure,
 naming conventions, or any process detail not spelled out here, check
 `_reference/` in the doc root** (`shashi-care-doc-tree.md`, `PROCESS-WALKTHROUGH.md`,
 and related files) before guessing or defaulting to the simplest interpretation.

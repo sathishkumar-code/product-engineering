@@ -21,8 +21,8 @@ read via the `product-engineering` config mirror (see
 `shashi-care-docs` in that sense — the repo holding this governance layer —
 is distinct from the GitLab product-docs repos described below.
 
-Instantiated from `skill-doc-tree-template.md` and
-`skill-code-repo-promotion-template.md` (both generic, reusable templates for
+Instantiated from `framework/_agent-instructions/skill-doc-tree-template.md` and
+`framework/_agent-instructions/skill-code-repo-promotion-template.md` (both generic, reusable templates for
 other projects). Shashi Care's actual structure: GitLab-direct authoring, no
 promotion step, uniform across all three repos.
 

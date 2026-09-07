@@ -1,6 +1,6 @@
 # Binding: GitLab-Direct Authoring — Shashi Care
 
-Filled instance of `skill-code-repo-promotion-template.md`. PM, SA, and PjM
+Filled instance of `framework/_agent-instructions/skill-code-repo-promotion-template.md`. PM, SA, and PjM
 author PRD/spec/TD/tech-spec/release-plan/roadmap/prototype/as-built/
 compliance/integrations/tracker-sync/readiness/build content **directly in
 each product's GitLab `-docs` repo**, on the working tree of `main`, in a
