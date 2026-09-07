@@ -185,7 +185,7 @@ spelled out again in each stage's own text.
 Adapted from Anthropic's AI-Native SDLC playbook (see the alignment note near the
 end of this document). Before drafting a full PRD, Enhancement Request, or Bug
 Report, PM agent captures the raw idea as `intent.md`
-(`templates/intent-template.md`) — problem, proposed outcome, affected
+(`framework/templates/intent-template.md`) — problem, proposed outcome, affected
 users/systems, constraints, open questions, in the originator's own words.
 Common front door to both intake pathways below, not a third pathway. Cheap and
 fast on purpose: lets a "worth pursuing?" call happen before committing to fuller
@@ -200,7 +200,7 @@ fuller document exists.
 - Export the finalized prototype (full HTML/asset export, not just a link — token-
   cost reasons discussed separately) and hand both to the **PM agent**.
 - PM agent checks whether a PRD already exists in the export; uses it as the
-  starting draft if so, drafts fresh from `templates/prd-template.md` if not.
+  starting draft if so, drafts fresh from `framework/templates/prd-template.md` if not.
 - **Mandatory cross-check**: PM agent walks the prototype's actual pages against
   the PRD. Checks `// BUSINESS RULE:` and `// PROTOTYPE ONLY:` comments first if
   the team followed `shashi-care-design-standards.md` when building it; falls back
@@ -210,7 +210,7 @@ fuller document exists.
   test).
 - Files the full prototype export directly at
   `prototypes/<category>-<slug>/` in the GitLab repo, with `prototype-meta.md`
-  (`templates/prototype-meta-template.md`) tracking its own commit status
+  (`framework/templates/prototype-meta-template.md`) tracking its own commit status
   independently of the PRD's.
 
 **Skipping the prototype for a feature.** Design-prototype-first is the default
@@ -219,15 +219,15 @@ feature needs Claude Design first is **Sathish's call, made case by case at
 intake** — no fixed rule (no UI-surface test, no size threshold) decides it on
 its own. When he decides a feature doesn't need one, it follows the same Direct
 intake pathway below as an enhancement or bug: no prototype, no cross-check step,
-PRD drafted straight from `templates/prd-template.md` through conversation with
+PRD drafted straight from `framework/templates/prd-template.md` through conversation with
 the PM agent.
 
 **Enhancement or bug** (Direct intake pathway):
 - No prototype phase. Starts as a conversation with the PM agent.
-- Enhancement: `templates/enhancement-intake-questions.md` → drafts using
-  `templates/enhancement-request-template.md`.
-- Bug: `templates/bug-intake-questions.md` → drafts using
-  `templates/bug-report-template.md`.
+- Enhancement: `framework/templates/enhancement-intake-questions.md` → drafts using
+  `framework/templates/enhancement-request-template.md`.
+- Bug: `framework/templates/bug-intake-questions.md` → drafts using
+  `framework/templates/bug-report-template.md`.
 
 ## Stage 2 — Sathish finalizes with the PM agent
 
@@ -249,7 +249,7 @@ ultimately has to close out.
   "Document commit" below for how the commit itself works, triggered by
   `status: approved`).
 - PM agent drafts `spec.md` — a condensed, developer-facing derivative of the
-  approved PRD — right away, using `templates/spec-template.md`, in the same
+  approved PRD — right away, using `framework/templates/spec-template.md`, in the same
   `prd/{features,enhancements,bugs}/<slug>/` folder as the PRD it derives from.
   This is the Spec's **first version**; it exists specifically so it's ready
   for the grooming meeting (Stage 6), not something drafted only after the
@@ -257,7 +257,7 @@ ultimately has to close out.
 - **`spec.md` commits on its own approval, separate from the PRD's.** Once PM
   agent's `spec.md` reaches its own `Status` field of `Approved` (only
   reachable once the source PRD is at least approved —
-  `templates/spec-template.md`), `product-team` commits it — see "Document
+  `framework/templates/spec-template.md`), `product-team` commits it — see "Document
   commit" below for who does what and the verification/escalation rules that
   apply; the same section covers re-commits whenever the source PRD is later
   revised.
@@ -269,7 +269,7 @@ ultimately has to close out.
 ## Stage 4 — System Architect, Round 1: PRD review
 
 - SA agent reviews the PRD, writes findings to that slug's
-  `SA-comments-<slug>.md` (`templates/sa-review-comments-template.md`,
+  `SA-comments-<slug>.md` (`framework/templates/sa-review-comments-template.md`,
   `architecture/{features,enhancements,bugs}/<slug>/` in the GitLab repo),
   **PRD Review**
   section.
@@ -283,7 +283,7 @@ ultimately has to close out.
 ## Stage 5 — Technical Design and Tech-Spec (either TD pathway)
 
 - **Before grooming, the Technical Design is normally SA-authored**: Sathish
-  works directly with the SA agent, using `templates/technical-design-template.md`
+  works directly with the SA agent, using `framework/templates/technical-design-template.md`
   throughout. This is what makes a first-cut TD — and the Tech-Spec drafted from
   it — possible *before* the dev team has reviewed the requirement in a formal
   setting.
@@ -317,7 +317,7 @@ ultimately has to close out.
   condensed, developer-facing implementation reference, informally called the
   **Impl Spec** by the team (that's the heading used inside the actual document)
   even though `tech-spec-<slug>.md` stays the canonical filename — using
-  `templates/tech-spec-template.md`. References `spec.md`'s Business Rules by ID
+  `framework/templates/tech-spec-template.md`. References `spec.md`'s Business Rules by ID
   rather than reproducing them, and **must carry forward every unresolved TD open
   question**, especially anything the TD marked High priority. This first
   version doesn't need every question dispositioned yet — full disposition is
@@ -334,7 +334,7 @@ ultimately has to close out.
 - **Revisions after approval**: like the PRD, a TD can be revised after it
   reaches `status: approved` — most often triggered by grooming feedback
   (Stage 6). Log each one in the TD's own **Revision history** section (added to
-  `templates/technical-design-template.md`, mirroring the PRD's table: date,
+  `framework/templates/technical-design-template.md`, mirroring the PRD's table: date,
   triggered by, what changed, changed by). `tech-spec-<slug>.md` already knows
   to re-derive itself whenever its source TD picks up a new Revision History
   entry.
@@ -398,7 +398,7 @@ grooming's whole point is to settle exactly these two things before
 Epics/Stories get drafted, so SA feedback arrives before Epics/Stories are
 drafted rather than after, avoiding rework.
 
-- PM agent drafts using `templates/epics-stories-template.md`, folding in SA's
+- PM agent drafts using `framework/templates/epics-stories-template.md`, folding in SA's
   Round 1 recommendations directly, in
   `readiness/{features,enhancements,bugs}/<slug>/epics-stories.md` in the
   product's GitLab `-docs` repo; `product-team` commits once PM reports the
@@ -413,9 +413,9 @@ drafted rather than after, avoiding rework.
 
 ## Stage 8 — Test scenarios and cases
 
-- PM agent drafts `test-scenarios.md` (`templates/test-scenarios-template.md`) and
+- PM agent drafts `test-scenarios.md` (`framework/templates/test-scenarios-template.md`) and
   the initial cases directly in `test-cases.xlsx`
-  (`templates/test-cases-template.xlsx`), PM-Test-Cases sheet, both in
+  (`framework/templates/test-cases-template.xlsx`), PM-Test-Cases sheet, both in
   `readiness/{features,enhancements,bugs}/<slug>/` in the product's GitLab
   `-docs` repo (same commit rule as Stage 7's epics-stories.md).
 - SA agent adds technical scenarios/cases (performance, security, data integrity)
@@ -448,13 +448,13 @@ drafted rather than after, avoiding rework.
 ## Stage 10 — Release planning and sprints
 
 - PM agent drafts the Release Plan directly in the GitLab repo
-  (`templates/release-plan-template.md`, `releases/<product>-release-plan.xlsx`)
+  (`framework/templates/release-plan-template.md`, `releases/<product>-release-plan.xlsx`)
   — same Draft→Approved flow as a PRD; `product-team` commits it on approval
   (see "Document commit" below).
-- PjM breaks it into sprints — `templates/sprint-plan-status-template.md`,
+- PjM breaks it into sprints — `framework/templates/sprint-plan-status-template.md`,
   mirrored between the local doc and ClickUp.
 - Progress reviewed from **live ClickUp status**, not stale local docs.
-- Retrospectives: `templates/sprint-retro-template.md`.
+- Retrospectives: `framework/templates/sprint-retro-template.md`.
 - **First real release-plan drafting for a product is the trigger** to add a
   `Release-blocking`-equivalent field to that product's compliance/technical-debt
   documents, if they don't already carry one (Sathish's decision) — not
@@ -537,7 +537,7 @@ drafted rather than after, avoiding rework.
 - Writes `deployment-record-<release-slug>.md` in `releases/` (not `build/`
   — a deployment can span multiple slugs) in the product's GitLab `-docs`
   repo (`product-team` commits it once DevOps reports the record complete)
-  via `templates/deployment-record-template.md`.
+  via `framework/templates/deployment-record-template.md`.
 - A PHI-affecting rollback requires Sathish's approval before executing.
 - Post-deploy monitoring findings that surface a scope, behavior, or design gap
   route back to Product Manager (new `intent.md`) or System Architect — the same
@@ -575,7 +575,7 @@ check above are specific discovery points that both feed into this same
 general rule, not separate rules of their own.
 
 - **Entry point**: always captured first as a new `intent.md`
-  (`templates/intent-template.md`, the same Stage 0 front door everything
+  (`framework/templates/intent-template.md`, the same Stage 0 front door everything
   else uses), referencing the in-flight document(s) it affects. No change
   bypasses intake capture, even when the PRD/ER/TD it touches already exists
   and is mid-pipeline.
@@ -680,8 +680,8 @@ rather than assume it's minor enough to drop.
 **The carry-forward rule.** A significant Open Question survives its containing
 document's approval. It moves forward into whatever reads that document next —
 PRD/ER → SA Round 1 comments and the Technical Design → `spec.md` → TD →
-`tech-spec-<slug>.md` — the same way `templates/spec-template.md` and
-`templates/tech-spec-template.md` already require ("carry forward any open
+`tech-spec-<slug>.md` — the same way `framework/templates/spec-template.md` and
+`framework/templates/tech-spec-template.md` already require ("carry forward any open
 question ... still unresolved"). This section generalizes that existing rule
 into: carried forward *until dispositioned*, not until someone decides it's
 inconvenient to keep listing.
@@ -717,11 +717,11 @@ document decision in this system.
 Enhancement, Technical Debt, or Deferred, the Open Question row must
 reference the actual resulting item, not just say "closed":
 - **Enhancement** → Product Manager drafts a new Enhancement Request
-  (`templates/enhancement-request-template.md`); the Open Question row is
+  (`framework/templates/enhancement-request-template.md`); the Open Question row is
   updated to point at its slug.
 - **Technical Debt** → logged as its own entry in
   `_as-built/architecture/technical-debt.md`
-  (`templates/technical-debt-register-template.md`); the Open Question row
+  (`framework/templates/technical-debt-register-template.md`); the Open Question row
   references that entry.
 - **Deferred** → never its own dead end. A Deferred disposition still routes
   to whichever of the following actually fits the item, and the choice itself
@@ -730,7 +730,7 @@ reference the actual resulting item, not just say "closed":
     technical/product work being consciously postponed — the common case —
     it's logged exactly like a Technical Debt disposition: its own entry in
     `_as-built/architecture/technical-debt.md`
-    (`templates/technical-debt-register-template.md`), referenced from the
+    (`framework/templates/technical-debt-register-template.md`), referenced from the
     Open Question row.
   - **Enhancement**, when the deferred item is actually a product capability
     meant for later delivery rather than debt to carry — Product Manager
@@ -762,7 +762,7 @@ silently vanishing the moment its OQ row closes.
 the latest point in this pipeline at which every significant Open Question
 carried into it must already have an explicit disposition. Its own `Status`
 field reaching `Approved` (Stage 5) is where this is actually enforced:
-`templates/tech-spec-template.md`'s existing "None — see TD" convention already
+`framework/templates/tech-spec-template.md`'s existing "None — see TD" convention already
 covers the fully-resolved case; this generalizes it — every question still on
 the list at that point needs one of the named dispositions above, not a blank
 "current position" and not an implied one.
@@ -938,7 +938,7 @@ time, not skipped because a prior version was already committed once. Stage
 
 - **Technical debt**: surfaced during any SA review, logged to
   `_as-built/architecture/technical-debt.md`
-  (`templates/technical-debt-register-template.md`) rather than left as a comment
+  (`framework/templates/technical-debt-register-template.md`) rather than left as a comment
   on one feature's review. Lives in each product's GitLab repo.
 - **Deferred Open Questions**: the fallback tracker for a Deferred Open
   Question disposition that's genuinely neither Technical Debt nor an
