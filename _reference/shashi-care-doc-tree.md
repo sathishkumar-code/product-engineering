@@ -14,12 +14,12 @@ never product documents). This file, together with
 `shashi-care-gitlab-binding.md`, is the current authority.
 
 The governance layer this file's own folder lives in —
-`_agent-instructions/`, `templates/`, `_reference/` in `shashi-care-docs/` —
-is separate: the live source Process Architect maintains and Hermes personas
-read via the `product-engineering` config mirror (see
-`shashi-care-process-architect-config.md`'s "Hermes copy sync convention").
-`shashi-care-docs` in that sense — the repo holding this governance layer —
-is distinct from the GitLab product-docs repos described below.
+`_agent-instructions/`, `templates/`, `_reference/` in this repository
+(`product-engineering/`) — is separate: the live source Process Architect
+maintains and that Hermes personas read directly, with no separate mirror
+(see `shashi-care-process-architect-config.md`'s "Hermes as primary host" and
+"Rebuild reminder"). This governance layer is distinct from the GitLab
+product-docs repos described below.
 
 Instantiated from `framework/_agent-instructions/skill-doc-tree-template.md` and
 `framework/_agent-instructions/skill-code-repo-promotion-template.md` (both generic, reusable templates for

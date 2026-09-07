@@ -18,26 +18,22 @@ into Build/Test/Deploy — see Stages 11-14 below and
 | **Product Manager** | Hermes (shared instance) | Local checkouts of all three GitLab `-docs` repos (Shashi-Care-Core-docs, SAL-docs, SNF-docs), read-write on `main`'s working tree (see the paragraph below the table) | PRDs, Bug Reports, Enhancement Requests, Epics/Stories, test scenarios/cases, roadmap, release plans — drafts content only, **never** runs `git commit` itself (see "Document commit" below) |
 | **System Architect** | Hermes (shared instance) | Local checkouts of all three GitLab `-docs` repos, read-write on `main`'s working tree for its own authoring **plus** local checkouts of the application source code under `senior-living/` (see `shashi-care-sa-config.md`'s "Source-code checkouts") | Review-comments files, Technical Designs, tech-spec, technical debt register, compliance register, as-built architecture docs — drafts content only, **never** runs `git commit` itself, and never edits a team-submitted TD sitting in `architecture-submissions/` (see "Document commit" below) |
 | **Project Manager** | Hermes (shared instance) | Local checkouts of all three GitLab `-docs` repos, read-write on `main`'s working tree, plus ClickUp | ClickUp Epics/Stories/Tasks, sprint docs, `mapping-log.md` (in `tracker-sync/` in each repo) — drafts content only, **never** runs `git commit` itself |
-| **Process Architect** | Cowork | Drive-synced folder | `_agent-instructions/`, `templates/`, `_reference/` — sole author for both Cowork and Hermes; accepts proposals but not edits from either |
+| **Process Architect** | Cowork | This repository (`product-engineering/`) | `_agent-instructions/`, `templates/`, `_reference/` — sole author for both Cowork and Hermes; accepts proposals but not edits from either |
 | **Developer** | Hermes (per code repo) | Its assigned code repo, plus read-write on `main`'s working tree of that product's GitLab `-docs` repo for its own authoring, plus read access to that slug's tech-spec/spec.md/epics-stories.md | Code, `implementation-note-<slug>.md` (in `build/` in the GitLab `-docs` repo) — drafts content only, **never** runs `git commit` itself; its own tracker item's status only |
 | **QA Engineer** | Hermes (per code repo) | Its assigned code repo, plus read-write on `main`'s working tree of that product's GitLab `-docs` repo for its own authoring, plus read access to that slug's test-scenarios/test-cases | `qa-execution-report-<slug>.md` (in `build/` in the GitLab `-docs` repo) — drafts content only, **never** runs `git commit` itself; Bug Reports (via Product Manager's template); its own tracker item's status only |
 | **DevOps Engineer** | Hermes (per code repo) | Its assigned code repo, plus read-write on `main`'s working tree of that product's GitLab `-docs` repo for its own authoring, plus the release plan | `deployment-record-<release-slug>.md` in `releases/` in the GitLab `-docs` repo — drafts content only, **never** runs `git commit` itself; executes production promotion |
 
-All seven read from the same underlying content, but not identically: Process
-Architect (Cowork) and Developer/QA/DevOps (Hermes) all read `shashi-care-docs`
-directly — same content, not a copy, zero drift risk. Product Manager, System
-Architect, and Project Manager (Hermes) author their documents directly in
-each product's GitLab `-docs` repo — see
-`_reference/shashi-care-gitlab-binding.md`. `product-engineering/` holds only
-the agentic framework/governance/config files these three personas read their
-instructions from — the Hermes copy-sync mirror maintained by Process
-Architect, kept manually synced with `shashi-care-docs`; see "Hermes copy
-sync convention" in `shashi-care-process-architect-config.md` for the drift
-risk and its mitigation. Process Architect and Developer/QA/DevOps read the
-same three product folders in `shashi-care-docs`/each code repo; Product
-Manager, System Architect, and Project Manager instead read the three
-product folders (`prd/`, `architecture/`, etc.) inside each GitLab `-docs`
-repo.
+Process Architect (Cowork) and Developer/QA/DevOps (Hermes) all read this
+repository (`product-engineering/`) directly for their own config/skill
+files — same files, not a copy. Product Manager, System Architect, and
+Project Manager (Hermes) author their documents directly in each product's
+GitLab `-docs` repo — see `_reference/shashi-care-gitlab-binding.md` — and
+also read their own config/skill files directly from this repository, the
+same as Process Architect and Developer/QA/DevOps; see
+`shashi-care-process-architect-config.md` for the governance and rebuild
+details. `product-engineering/` holds only the agentic framework/governance/
+config files all seven personas' instructions come from — it does not hold
+product documents, which live in each product's GitLab `-docs` repo instead.
 
 **Note on the diagram below**: node labels like "PM agent" and "SA agent"
 describe responsibilities, not hosting — these run as Hermes-hosted Claude

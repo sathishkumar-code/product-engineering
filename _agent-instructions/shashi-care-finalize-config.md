@@ -51,12 +51,11 @@ Base feature field points back at the document being finalized when it's the sam
 underlying feature, per the template's own `Base feature` row.
 
 ## Rebuild note
-Product Manager and System Architect are Hermes-hosted and read this file (and
-`skill-finalize-document-discipline.md`) via the manually-synced
-`product-engineering/` mirror, not through a paste-ready file — any edit here
-needs both changed paths called out and copied into that mirror per the "Hermes
-copy sync convention" in `shashi-care-process-architect-config.md`. This file is
-also still one of the two finalize source files concatenated into the
-`cowork-instructions-PM.md` / `cowork-instructions-SA.md` dormant-fallback
-artifacts — those are not rebuilt on routine edits; see that same config's
-"Rebuild convention".
+Product Manager and System Architect are Hermes-hosted and read this file
+(and `skill-finalize-document-discipline.md`) directly from this repository
+(`product-engineering/`), not through a paste-ready file — edits here take
+effect for them directly, no copy step required; see the "Rebuild reminder"
+in `shashi-care-process-architect-config.md`. This file is also still one of
+the two finalize source files concatenated into the `cowork-instructions-PM.md`
+/ `cowork-instructions-SA.md` dormant-fallback artifacts — those are not
+rebuilt on routine edits; see that same config's "Rebuild convention".

@@ -7,16 +7,16 @@ last_updated: 2026-08-29
 
 # Team Structure — Product Engineering Team
 
-> Instantiated from `framework/templates/team-structure-template.md`. This is the real, filled roster and RACI for the Shashi Care product engineering team, covering all 7 personas across both hosting systems: the Cowork persona-chat pipeline (Process Architect only) and the Hermes WSL orchestrator (Product Manager, System Architect, Project Manager — one shared instance each; Developer, QA Engineer, DevOps Engineer — one instance per code repo). Product Manager, System Architect, and Project Manager read `shashi-care-docs` via the manually-synced mirror in `product-engineering/` — see `_agent-instructions/shashi-care-process-architect-config.md`'s "Hermes copy sync convention" for why and how that mirror is kept current. Developer/QA/DevOps read `shashi-care-docs` directly. See `_reference/PROCESS-WALKTHROUGH.md` for the full pipeline and that same config file for the governance boundary between the two systems.
+> Instantiated from `framework/templates/team-structure-template.md`. This is the real, filled roster and RACI for the Shashi Care product engineering team, covering all 7 personas across both hosting systems: the Cowork persona-chat pipeline (Process Architect only) and the Hermes WSL orchestrator (Product Manager, System Architect, Project Manager — one shared instance each; Developer, QA Engineer, DevOps Engineer — one instance per code repo). Product Manager, System Architect, Project Manager, Developer, QA Engineer, and DevOps Engineer all read `_agent-instructions/`, `templates/`, and `_reference/` directly from this repository (`product-engineering/`) — see `_agent-instructions/shashi-care-process-architect-config.md` for the governance and rebuild details. See `_reference/PROCESS-WALKTHROUGH.md` for the full pipeline and that same config file for the governance boundary between the two systems.
 
 ## Roster
 
 | Role | Hosted in | Notes |
 |---|---|---|
 | Product Owner | — | Sathish. Final authority — see RACI below. |
-| Product Manager (PM) | Hermes | `framework/_agent-instructions/skill-pm-discipline.md` + `shashi-care-pm-config.md`. One shared instance (not per-repo). Reads `shashi-care-docs` via the manually-synced `product-engineering/` mirror, not a live read. |
-| System Architect (SA) | Hermes | `framework/_agent-instructions/skill-sa-discipline.md` + `shashi-care-sa-config.md`. One shared instance (not per-repo). Reads `shashi-care-docs` via the manually-synced `product-engineering/` mirror, not a live read. |
-| Project Manager (PjM) | Hermes | `framework/_agent-instructions/skill-pjm-discipline.md` + `shashi-care-pjm-config.md`. One shared instance (not per-repo). Reads `shashi-care-docs` via the manually-synced `product-engineering/` mirror, not a live read. |
+| Product Manager (PM) | Hermes | `framework/_agent-instructions/skill-pm-discipline.md` + `shashi-care-pm-config.md`. One shared instance (not per-repo). Reads its config/skill files directly from this repository (`product-engineering/`). |
+| System Architect (SA) | Hermes | `framework/_agent-instructions/skill-sa-discipline.md` + `shashi-care-sa-config.md`. One shared instance (not per-repo). Reads its config/skill files directly from this repository (`product-engineering/`). |
+| Project Manager (PjM) | Hermes | `framework/_agent-instructions/skill-pjm-discipline.md` + `shashi-care-pjm-config.md`. One shared instance (not per-repo). Reads its config/skill files directly from this repository (`product-engineering/`). |
 | Process Architect (PA) | Cowork | `framework/_agent-instructions/skill-process-architect-discipline.md` + `shashi-care-process-architect-config.md`. Sole author of `_agent-instructions/`, `templates/`, `_reference/` for both systems — see Section 10 / "Known incidents" in its config. The only persona hosted in Cowork. |
 | Developer | Hermes (WSL) | `skill-developer-discipline.md` + `shashi-care-developer-config.md`. One instance per code repo. |
 | QA Engineer | Hermes (WSL) | `skill-qa-discipline.md` + `shashi-care-qa-config.md`. One instance per code repo. |
