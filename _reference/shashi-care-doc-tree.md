@@ -212,7 +212,7 @@ separation happens rather than treating today's arrangement as permanent.
 
 `intent.md` lives in the repo from the start, same as every other document —
 `prd/{features,enhancements,bugs}/<slug>/intent.md`, using
-`templates/intent-template.md`, preceding the PRD/ER/BR in the same slug
+`framework/templates/intent-template.md`, preceding the PRD/ER/BR in the same slug
 folder. Superseded (not deleted) once the PRD/ER/BR exists. A change-request
 intent (`intent-change-<n>.md`, sequential per slug) files alongside the
 already-superseded original, never overwriting it.
@@ -226,20 +226,20 @@ Now/Next/Later, kept updated in place by PM, no approval-gate field.
 
 `releases/deployment-record-<release-slug>.md`, one per deployment event
 (not per slug, since a deployment can span several) — uses
-`templates/deployment-record-template.md`, sits alongside the release plan
+`framework/templates/deployment-record-template.md`, sits alongside the release plan
 workbook. Authored by DevOps.
 
 ## Technical debt register and Deferred Open Questions register
 
 - Technical debt register: `_as-built/architecture/technical-debt.md`, plus
   a detailed write-up per significant item — uses
-  `templates/technical-debt-register-template.md`.
+  `framework/templates/technical-debt-register-template.md`.
 - Deferred Open Questions register: `deferred-open-questions-register.md` at
   the repo root — a fallback tracker only, for a disposition that's
   genuinely neither Technical Debt nor an Enhancement — see
   `PROCESS-WALKTHROUGH.md`'s "Open Question lifecycle and the
   development-readiness gate." Uses
-  `templates/deferred-open-questions-register-template.md`.
+  `framework/templates/deferred-open-questions-register-template.md`.
 
 ## Team structure
 
@@ -247,7 +247,7 @@ workbook. Authored by DevOps.
 personas across both hosting systems (Cowork and Hermes), not duplicated per
 repo and not owned/edited by any single persona other than Process
 Architect, who authors it on the team's behalf. Instantiated from
-`templates/team-structure-template.md`.
+`framework/templates/team-structure-template.md`.
 
 ## AI-Native SDLC alignment (Anthropic's playbook)
 
