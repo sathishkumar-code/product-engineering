@@ -22,7 +22,7 @@ read via the `product-engineering` config mirror (see
 is distinct from the GitLab product-docs repos described below.
 
 Instantiated from `skill-doc-tree-template.md` and
-`skill-gitlab-promotion-template.md` (both generic, reusable templates for
+`skill-code-repo-promotion-template.md` (both generic, reusable templates for
 other projects). Shashi Care's actual structure: GitLab-direct authoring, no
 promotion step, uniform across all three repos.
 

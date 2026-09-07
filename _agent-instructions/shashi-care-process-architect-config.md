@@ -38,7 +38,7 @@ persona's own files live in:
   reference for their own document types — see the Finalize sections in
   `skill-pm-discipline.md` and `skill-sa-discipline.md`),
   plus the generic reusable skill templates (`skill-doc-tree-template.md`,
-  `skill-clickup-binding-template.md`, `skill-gitlab-promotion-template.md`,
+  `skill-clickup-binding-template.md`, `skill-code-repo-promotion-template.md`,
   `skill-prototype-authoring-standards.md`), and the paste-ready build output
   `cowork-instructions-ProcessArchitect.md` — the only one still actively
   rebuilt. `cowork-instructions-PM.md`, `cowork-instructions-SA.md`, and
