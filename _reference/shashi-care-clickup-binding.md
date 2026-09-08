@@ -59,7 +59,7 @@ the relevant product Folder in addition to the Core Epic, rather than defaulting
 one or the other.
 
 ## Mapping log
-One per folder: `<folder>/05_clickup-sync/mapping-log.md`. Format per the template.
+One per product: `tracker-sync/mapping-log.md` in the product's GitLab `-docs` repo — see `_reference/shashi-care-doc-tree.md`. Format per the template.
 ## Access
 Project Manager (PjM) holds exclusive, unconditional ownership of creation,
 deletion, tagging, re-parenting, and the mapping log for every tracker item in
