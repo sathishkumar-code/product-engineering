@@ -1,6 +1,6 @@
 # Bug Report Template
 
-**Save as**: `bug-report-<slug>.md`, in `02_prd/bugs/<slug>/` — never a bare `BR.md`.
+**Save as**: `bug-report-<slug>.md`, in `prd/bugs/<slug>/` — never a bare `BR.md`.
 
 ```markdown
 # Bug: <short name>

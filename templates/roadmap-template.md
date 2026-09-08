@@ -50,5 +50,5 @@ and "Next" themes — don't put speculative dates on "Later" items.
 A feature-by-feature roadmap with dates answers "when does X ship" and is wrong the
 moment scope shifts. A theme-based roadmap answers "what are we trying to accomplish
 and in what order" and stays true even as the specific features under a theme
-change. Individual features live in `01_releases/` and `02_prd/` — the roadmap
+change. Individual features live in `releases/` and `prd/` — the roadmap
 should link to them, not restate their detail.

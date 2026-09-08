@@ -7,7 +7,7 @@ status: Draft
 
 # QA Execution Report — <slug>
 
-> Instantiated from `templates/qa-execution-report-template.md`. Authored by the QA Engineer persona as the record of test execution against an implementation. Save at `<folder>/07_build/{features,enhancements,bugs}/<slug>/qa-execution-report-<slug>.md`.
+> Instantiated from `templates/qa-execution-report-template.md`. Authored by the QA Engineer persona as the record of test execution against an implementation. Save at `build/{features,enhancements,bugs}/<slug>/qa-execution-report-<slug>.md`.
 
 | Field | Value |
 |---|---|

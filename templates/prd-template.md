@@ -6,7 +6,7 @@ practice. Keep the header table, the numbered assumptions/rules convention, and 
 and exist for specific reasons noted inline. The one gap filled versus the source
 document is an explicit success-metrics field; everything else was already sound.
 
-**Save as**: `prd-<slug>.md`, in `02_prd/features/<slug>/` — never a bare `PRD.md`.
+**Save as**: `prd-<slug>.md`, in `prd/features/<slug>/` — never a bare `PRD.md`.
 
 ```markdown
 # <Feature Name>

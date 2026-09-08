@@ -7,7 +7,7 @@ status: Draft
 
 # Implementation Note — <slug>
 
-> Instantiated from `templates/implementation-note-template.md`. Authored by the Developer persona as the handoff artifact from code implementation to QA execution. Save at `<folder>/07_build/{features,enhancements,bugs}/<slug>/implementation-note-<slug>.md`.
+> Instantiated from `templates/implementation-note-template.md`. Authored by the Developer persona as the handoff artifact from code implementation to QA execution. Save at `build/{features,enhancements,bugs}/<slug>/implementation-note-<slug>.md`.
 
 | Field | Value |
 |---|---|

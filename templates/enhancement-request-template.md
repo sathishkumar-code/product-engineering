@@ -4,7 +4,7 @@ For changes to an existing feature that don't warrant a full new PRD. If the cha
 is large enough to need its own personas/scope/NFRs section, it's a feature-scale
 PRD, not an enhancement — use the PRD template instead.
 
-**Save as**: `enhancement-request-<slug>.md`, in `02_prd/enhancements/<slug>/` —
+**Save as**: `enhancement-request-<slug>.md`, in `prd/enhancements/<slug>/` —
 never a bare `ER.md`.
 
 ```markdown

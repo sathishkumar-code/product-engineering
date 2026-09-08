@@ -8,7 +8,7 @@ it rather than creating separate files, so the full review history for a slug
 stays in one place.
 
 **Save as**: `SA-comments-<slug>.md`, in that same per-slug
-`03_architecture/{features,enhancements,bugs}/<slug>/` folder — covers the source
+`architecture/{features,enhancements,bugs}/<slug>/` folder — covers the source
 document review, the Epics/Stories review, and the Technical Design review below,
 all in this one file.
 

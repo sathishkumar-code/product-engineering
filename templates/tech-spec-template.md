@@ -5,7 +5,7 @@ stays authoritative for System Architect and QA. **System Architect writes this
 from its own approved TD** — same authorship boundary as everything else.
 
 **Save as**: `tech-spec-<slug>.md`, alongside the TD in that same per-slug
-`03_architecture/{features,enhancements,bugs}/<slug>/` folder. Informally called
+`architecture/{features,enhancements,bugs}/<slug>/` folder. Informally called
 the Impl Spec by the team — the document's own heading can say so, but this stays
 the canonical filename.
 

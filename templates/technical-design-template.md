@@ -6,7 +6,7 @@ alternatives and why they were rejected (not just the chosen approach), and
 separate "what we're building" from "how we'll know it worked" and "what could go
 wrong."
 
-**Save as**: `TD-<slug>.md`, in `03_architecture/{features,enhancements,bugs}/<slug>/`.
+**Save as**: `TD-<slug>.md`, in `architecture/{features,enhancements,bugs}/<slug>/`.
 
 ```markdown
 # Technical Design: <feature/enhancement/bug slug>
