@@ -736,9 +736,9 @@ reference the actual resulting item, not just say "closed":
     genuinely neither technical debt nor a future capability: a decision or a
     piece of evidence that's temporarily unavailable and needs revisiting
     later, not tracked work in its own right. Logged as its own entry in
-    `<folder>/deferred-open-questions-register.md` (one running file per
-    product folder, same pattern as the technical-debt register — see
-    "Ongoing, not tied to one feature's lifecycle" below) recording the
+    `deferred-open-questions-register.md` at each repo's root (one
+    running file per repo, same pattern as the technical-debt register —
+    see "Ongoing, not tied to one feature's lifecycle" below) recording the
     question, why it's deferred, what would trigger revisiting it, and who
     owns the eventual re-check. The Open Question row references that entry.
     Use this only when Technical Debt and Enhancement genuinely don't fit —
