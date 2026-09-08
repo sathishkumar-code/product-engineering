@@ -137,7 +137,7 @@ and its text, and let him choose:
 1. **Spin it into a new (or updated) Enhancement Request** — draft via the standard PM
    intake pathway (`framework/templates/enhancement-intake-questions.md` →
    `framework/templates/enhancement-request-template.md`), filed at
-   `02_prd/enhancements/<new-slug>/` per `shashi-care-doc-tree.md`'s per-slug shape.
+   `prd/enhancements/<new-slug>/` per `shashi-care-doc-tree.md`'s per-slug shape.
 2. **Accept it as an explicit scope expansion of this same document** — update its own
    §2/§3 Scope (TD §2 Goals, or `spec.md`'s own `## Scope`) to say so plainly, and add
    a Revision History row recording the expansion (this is the one case where a *new*
@@ -176,7 +176,7 @@ that's the right move — Product Manager already owns that document type.
    GitLab is the one this pass cleans up, whatever its instantiated filename is per
    the project's own doc tree (this project: `prd-<slug>.md` / `enhancement-request-
    <slug>.md` / `TD-<slug>.md` / `spec.md`, the last sitting alongside its source
-   PRD/ER in the same `02_prd/<slug>/` folder, not a new type of its own).
+   PRD/ER in the same `prd/<slug>/` folder, not a new type of its own).
 7. Summarize to Sathish what was rewritten, which Revision History rows were
    consolidated (and why), and list every enhancement-candidate escalation raised
    during the pass, even ones already resolved by his answer in this same
