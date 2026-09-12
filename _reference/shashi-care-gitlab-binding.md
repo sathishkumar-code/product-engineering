@@ -158,6 +158,16 @@ One per product, `-docs` suffix — **Shashi-Care-Core-docs**, **SAL-docs**,
 **SNF-docs**. The suffix distinguishes each docs repo from the code repo
 sharing the same product name; every other naming convention stays as-is.
 
+Repository identity (the GitLab remote each of these three names resolves
+to) is the primary binding and does not change. `product-team`'s currently
+verified local checkout root for all three is
+`/home/sathish/projects/shashi-care/` (each repo checked out under it by
+its own name, tracking `origin/main`). This records the current execution
+location, not a framework-level requirement — a checkout moving or being
+re-cloned elsewhere doesn't change repository identity or this binding, and
+`product-team` re-verifies the checkout path rather than assuming this one
+if execution ever moves.
+
 ## Team-submitted Technical Designs
 
 This pathway is the one place the actor is the dev team, not a Hermes
@@ -197,6 +207,10 @@ PjM's, Developer's, QA's, and DevOps's checkouts are all read-write for
 their own authoring, but committing is `product-team`'s job alone, in every
 case.
 
-GitLab checkout access is not yet confirmed for any persona specifically —
-each config's "Access (Hermes)" section flags this; escalate to Sathish
-rather than assuming access exists.
+`product-team`'s own GitLab checkout access (read, write, commit, push) has
+been confirmed for all three `-docs` repos — see
+`shashi-care-product-team-config.md`'s "Access" section for what was
+verified and how. Checkout access for other personas (PM, SA, PjM,
+Developer, QA, DevOps) is unaffected by this and remains whatever their own
+config's "Access (Hermes)" section states; escalate to Sathish rather than
+assuming access exists for a persona whose config doesn't confirm it.

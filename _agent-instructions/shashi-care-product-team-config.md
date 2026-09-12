@@ -237,18 +237,28 @@ Question lifecycle" section.
 ## Access
 
 `product-team`'s own read/write/commit access to the three GitLab `-docs`
-checkouts (Shashi-Care-Core-docs, SAL-docs, SNF-docs) has not been
-separately confirmed in the authoritative sources reviewed for this config
-— PM's and SA's configs each confirm read access for their own personas,
-and SA's config additionally confirms read-write for its own authoring, but
-none of the reviewed files state `product-team`'s own access status
-explicitly. Since `product-team` is the sole actor that runs `git
-add`/`commit`/`push` against these checkouts, it needs at least read
-access (to verify artifacts and status fields) and write/commit access (to
-perform the commit itself). Treat this as **unconfirmed** rather than
-assumed: if a `product-team` read or commit attempt against any of the
-three checkouts fails, escalate to Sathish as an access gap rather than
-assuming misconfiguration or working around it.
+checkouts (Shashi-Care-Core-docs, SAL-docs, SNF-docs) has been confirmed.
+Verification covered:
+
+- each checkout is a valid local Git repository on branch `main`, tracking
+  `origin/main`;
+- SSH authentication to the GitLab remote succeeded (`git@gitlab.com`, as
+  `@sathish55`);
+- repository read/history inspection succeeded against all three checkouts;
+- filesystem write capability was confirmed for the current OS user;
+- `git push --dry-run` succeeded against all three checkouts without
+  permission errors.
+
+This confirms read access (to verify artifacts and status fields) and
+write/commit/push access (to perform the commit itself), which is what
+`product-team`'s role as the sole actor running `git
+add`/`commit`/`push` against these checkouts requires. It does not confirm
+anything beyond what was tested — e.g. it is not a confirmation of
+unrestricted access, of access to any repository outside these three, or of
+GitLab-side permissions (branch protection, MR rules) beyond a dry-run push.
+If a `product-team` read or commit attempt against any of the three
+checkouts fails despite this, escalate to Sathish as a regression rather
+than assuming misconfiguration or working around it.
 
 ## Escalation and uncertainty
 
