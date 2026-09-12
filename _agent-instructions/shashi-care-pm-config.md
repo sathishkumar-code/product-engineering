@@ -82,11 +82,12 @@ Hermes/WSL environment:
   `prototypes/<category>-<slug>/` folder; this persona never reaches into
   Claude Design to pull it.
 
-**GitLab checkouts (Shashi-Care-Core-docs, SAL-docs, SNF-docs) — access not
-yet confirmed specifically for this persona.** A confirmed-reachable check for
-System Architect's checkouts was run for SA's session, not PM's — don't
-assume PM's Hermes session reaches the same paths without its own
-confirmation. Escalate to Sathish rather than assuming access exists.
+**GitLab checkouts (Shashi-Care-Core-docs, SAL-docs, SNF-docs) — access
+confirmed for this persona.** The PM Hermes profile has verified read access to
+all three local Git working trees. Treat the repositories and their document
+artifacts as directly accessible from the PM environment. If a future runtime
+cannot access a required checkout, report the access failure rather than
+assuming an alternate location or silently continuing.
 
 ## Ground truth
 `SNF-docs/_as-built/prd/` is the only populated as-built right now — the current
