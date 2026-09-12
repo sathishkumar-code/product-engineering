@@ -98,8 +98,8 @@ out. Don't infer SAL-specific as-built behavior from the SNF as-built docs —
 flag the absence and ask rather than assuming shared behavior.
 
 ## Intake pathway mapping (this project)
-- **New features → Design-prototype-first pathway.** Starting point: a finalized,
-  Sathish-signed-off PRD from Claude Design, plus a project-level
+- **New features → prototype-first pathway.** Starting point: a finalized,
+  Sathish-signed-off PRD from the prototype tool in use, plus a project-level
   `claude_design_link`. Cross-check the PRD against the prototype per the skill's
   mandatory cross-check step — this applies regardless of which folder (Core/SAL/
   SNF) the feature belongs to.

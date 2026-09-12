@@ -48,7 +48,7 @@ out that rule in full.
 flowchart TD
     ORCH[["product-team (orchestrator) — invokes pm / sa / pjm / developer / qa / devops below, verifies the resulting artifact or state, then advances. See 'Orchestration and verification' below."]]
     ORCH -->|invokes| Z
-    Z[PM agent: capture intent.md] --> A[PM: prototype + PRD in Claude Design]
+    Z[PM agent: capture intent.md] --> A[PM: prototype + PRD, prototype-first pathway]
     Z --> A2[PM: direct-intake PRD, no prototype — Sathish's case-by-case call]
     A --> B[PM agent: cross-check PRD vs prototype]
     B --> C[Sathish signs off: status approved]
@@ -68,7 +68,6 @@ flowchart TD
     V3 --> E[Grooming meeting w/ dev team]
     E -->|questions via chat/email/Notion| F[Sathish edits PRD and/or TD + Revision History]
     F --> E
-    F -->|push_to_prototype: Yes, rare| S[Sathish updates live Claude Design project for demos]
     E --> K{PRD settled AND TD ready?}
     K -->|no, more grooming/revision needed| F
     K -->|yes| V4{{product-team verifies PRD/TD state, re-commits changed docs}}
@@ -190,8 +189,8 @@ fuller document exists.
 
 ## Stage 1 — Origin: prototype and PRD
 
-**New feature** (Design-prototype-first pathway):
-- PM (human) designs the prototype in Claude Design, iterates, drafts a PRD there,
+**New feature** (prototype-first pathway):
+- PM (human) designs the prototype, iterates, drafts a PRD alongside it,
   signs off with the Product Manager (human).
 - Export the finalized prototype (full HTML/asset export, not just a link — token-
   cost reasons discussed separately) and hand both to the **PM agent**.
@@ -209,9 +208,9 @@ fuller document exists.
   (`framework/templates/prototype-meta-template.md`) tracking its own commit status
   independently of the PRD's.
 
-**Skipping the prototype for a feature.** Design-prototype-first is the default
+**Skipping the prototype for a feature.** The prototype-first pathway is the default
 for new features, not a mandatory step for every one of them. Whether a given
-feature needs Claude Design first is **Sathish's call, made case by case at
+feature needs a prototype first is **Sathish's call, made case by case at
 intake** — no fixed rule (no UI-surface test, no size threshold) decides it on
 its own. When he decides a feature doesn't need one, it follows the same Direct
 intake pathway below as an enhancement or bug: no prototype, no cross-check step,
@@ -352,7 +351,7 @@ technically-unreviewed document.
   cadence, no agent involvement). Sathish picks them up, edits the PRD and/or
   Technical Design directly in its GitLab checkout (with PM/SA agent help if wanted), and
   **populates that document's own Revision History table** (date, what triggered
-  it, what changed, `push_to_prototype` on the PRD's) — this is what survives
+  it, what changed) — this is what survives
   independent of git's commit history, which only says *that* something changed,
   not *why*.
 - `spec.md` and `tech-spec-<slug>.md` re-derive per their own standing rule
@@ -369,19 +368,6 @@ technically-unreviewed document.
   approval, not the git operation.
 - **If a Notion export is ever needed**: HTML with "Include comments" enabled —
   Markdown and PDF exports from Notion silently drop comments entirely.
-
-**Keeping the prototype current for demos — a separate, optional track.** Once a
-PRD is approved, the PRD is the reference going forward; the prototype's only
-ongoing job is demos, done live in Claude Design by Sathish or Product Manager —
-never from the archived GitLab export, which stays a static snapshot (retained
-permanently — no deletion step in this process, see the cheat-sheet's
-"Deletion" entry).
-Most revisions
-(`push_to_prototype: No`, the default) have no visual counterpart and need nothing
-further. For the ones that do: PM agent generates the update prompt on request
-using `templates/claude-design-update-prompt-template.md`, built by quoting the
-Revision History row's "What changed" text verbatim — Sathish pastes it into the
-live Claude Design session himself.
 
 ## Stage 7 — Epics/Stories generation (gated)
 
@@ -438,8 +424,7 @@ drafted rather than after, avoiding rework.
 - **The GitLab `prototypes/<category>-<slug>/` copy is retained permanently
   at this stage, same as every other committed artifact** — prototype
   cleanup is not a process step (see the "Deletion" entry in the
-  cheat-sheet); nothing here deletes it. The live Claude Design project (if
-  still used for demos) is untouched either way.
+  cheat-sheet); nothing here deletes it.
 
 ## Stage 10 — Release planning and sprints
 
@@ -509,9 +494,7 @@ drafted rather than after, avoiding rework.
 - **No prototype deletion step here.** The GitLab
   `prototypes/<category>-<slug>/` folder stays in the repo — cleanup, if
   Sathish wants it at all, is his own call, made whenever, outside this
-  process (see the cheat-sheet's "Deletion" entry). The live Claude Design
-  project, if Sathish or Product Manager still use it for demos, is
-  unaffected either way.
+  process (see the cheat-sheet's "Deletion" entry).
 
 ## Stage 14 — Release and deploy
 
@@ -837,7 +820,7 @@ Workflow
 - **Specialist** — PM agent authors and revises the PRD, `spec.md` (Stage
   2/3), and the Release Plan (Stage 10); SA agent authors and revises the
   Technical Design and `tech-spec-<slug>.md` (Stage 5); the prototype export
-  itself is produced during Stage 1 (PM agent, from the Claude-Design export
+  itself is produced during Stage 1 (PM agent, from the prototype export
   Sathish hands off), written directly into `prototypes/<category>-<slug>/`.
   Authorship stops there in every case: drafting or revising a document, or
   producing an export, is specialist work; committing it is not — same
@@ -1001,11 +984,7 @@ time, not skipped because a prior version was already committed once. Stage
   other committed artifact — no persona deletes it, no stage checks for or
   triggers its deletion, and PjM carries no deletion duty. Sathish may still
   clean up old prototype exports by hand whenever he wants, but that's
-  outside this process, not a workflow stage. The archived export is always
-  separate from
-  the live Claude Design project (used for demos, kept current via
-  `templates/claude-design-update-prompt-template.md`), which is unaffected
-  either way.
+  outside this process, not a workflow stage.
 - **Tracker-write exception**: Project Manager holds exclusive, unconditional
   ownership of tracker item creation, deletion, tagging, re-parenting, and the
   mapping log. Developer and QA Engineer (Hermes) each have one narrow,

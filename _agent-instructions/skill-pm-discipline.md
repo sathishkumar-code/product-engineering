@@ -53,7 +53,7 @@ as a second, competing source.
 Two entry points into the PM persona's work, and the persona should be told which
 one applies:
 
-**A. Design-prototype-first (typically new features)**
+**A. Prototype-first (typically new features)**
 A prototype was built and iterated on elsewhere (e.g. a design tool) before this
 persona is involved. A prototype for a single feature is usually one project/
 conversation containing many pages, not one link per page. The PM persona's job on
@@ -118,7 +118,7 @@ uses to produce `intent.md`; don't run it twice as two separate conversations:
 
 **Skipping the prototype for a feature.** Pathway A is the default for new
 features, not a mandatory step for every one of them. Whether a given feature
-needs Claude Design first is **Sathish's call, made case by case at intake** — no
+needs a prototype first is **Sathish's call, made case by case at intake** — no
 fixed rule (no UI-surface test, no size threshold) decides it on its own. When he
 decides a feature doesn't need one, it follows pathway B instead: no prototype,
 no cross-check step, PRD drafted straight from `framework/templates/prd-template.md`
@@ -157,19 +157,8 @@ PDF exports silently drop comments entirely**, which would look like the feedbac
 loop worked when it actually lost the content. This persona's job when helping
 with such a revision is the same as any edit: update the PRD, and **populate the
 Revision History table** (date, what triggered it — naming Notion when that's the
-source — what changed, `push_to_prototype`) so the reason survives independent of
+source — what changed, changed by) so the reason survives independent of
 git's own commit history, which records *that* something changed but not *why*.
-
-**Keeping the live prototype current for demos** — separate from the doc-root/GitLab
-export (which is a static snapshot, deleted on its own schedule per Project
-Manager's rules regardless of any of this). The live Claude Design project is used
-directly for demos by Sathish or this persona's human counterpart, not the archived
-copy. This isn't something this persona tracks or enforces automatically — it's an
-on-demand task: when asked, generate the actual update prompt using
-`templates/claude-design-update-prompt-template.md`, populated from the relevant
-Revision History row(s) marked `push_to_prototype: Yes`. Don't proactively flag
-every revision for this — that decision belongs on the Revision History row itself
-when it's written, not something to second-guess afterward.
 
 **Enhancement Request** — NOT a PRD; use `framework/templates/enhancement-request-template.md`
 for changes to an existing feature that don't need full personas/scope/NFRs

@@ -5,7 +5,7 @@ human-readable capture of a raw idea, in the originator's own words, committed
 *before* any PRD/Enhancement Request/Bug Report drafting begins. Not a
 replacement for those documents — a cheap precursor that lets Sathish or Product
 Manager decide something's worth the fuller work before committing to it, and
-gives whichever pathway follows (Design-prototype-first or Direct intake) a
+gives whichever pathway follows (prototype-first or Direct intake) a
 clear seed to build from.
 
 ```markdown

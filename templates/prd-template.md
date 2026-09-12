@@ -73,15 +73,9 @@ change happened, not just that it did — git/commit history already answers "wh
 changed and when"; this table exists specifically to answer "what question or
 session prompted it," which commit history alone doesn't carry.
 
-The prototype itself is used for live demos (by Sathish or Product Manager only),
-kept current by hand via `templates/claude-design-update-prompt-template.md` — the
-`push_to_prototype` column below flags which revisions actually warrant that.
-Default is **No**: most revisions (a clarified assumption, a tightened NFR, a
-reworded open question) have no visual counterpart and shouldn't trigger it.
-
-| Date | Triggered by | What changed | Changed by | push_to_prototype |
-|---|---|---|---|---|
-| | e.g. "dev-team question via Slack — clarify status transition on cancel" | | | No (default) |
+| Date | Triggered by | What changed | Changed by |
+|---|---|---|---|
+| | e.g. "dev-team question via Slack — clarify status transition on cancel" | | |
 
 ## 1. Assumptions
 Numbered (A1, A2, ...). Foundational truths the requirements depend on. Explicitly

@@ -51,7 +51,7 @@ as a second, competing source.
 Two entry points into the PM persona's work, and the persona should be told which
 one applies:
 
-**A. Design-prototype-first (typically new features)**
+**A. Prototype-first (typically new features)**
 A prototype was built and iterated on elsewhere (e.g. a design tool) before this
 persona is involved. A prototype for a single feature is usually one project/
 conversation containing many pages, not one link per page. The PM persona's job on
@@ -116,7 +116,7 @@ uses to produce `intent.md`; don't run it twice as two separate conversations:
 
 **Skipping the prototype for a feature.** Pathway A is the default for new
 features, not a mandatory step for every one of them. Whether a given feature
-needs Claude Design first is **Sathish's call, made case by case at intake** — no
+needs a prototype first is **Sathish's call, made case by case at intake** — no
 fixed rule (no UI-surface test, no size threshold) decides it on its own. When he
 decides a feature doesn't need one, it follows pathway B instead: no prototype,
 no cross-check step, PRD drafted straight from `templates/prd-template.md`
@@ -153,19 +153,8 @@ PDF exports silently drop comments entirely**, which would look like the feedbac
 loop worked when it actually lost the content. This persona's job when helping
 with such a revision is the same as any edit: update the PRD, and **populate the
 Revision History table** (date, what triggered it — naming Notion when that's the
-source — what changed, `push_to_prototype`) so the reason survives independent of
+source — what changed, changed by) so the reason survives independent of
 git's own commit history, which records *that* something changed but not *why*.
-
-**Keeping the live prototype current for demos** — separate from the Drive/GitLab
-export (which is a static snapshot, deleted on its own schedule per Project
-Manager's rules regardless of any of this). The live Claude Design project is used
-directly for demos by Sathish or this persona's human counterpart, not the archived
-copy. This isn't something this persona tracks or enforces automatically — it's an
-on-demand task: when asked, generate the actual update prompt using
-`templates/claude-design-update-prompt-template.md`, populated from the relevant
-Revision History row(s) marked `push_to_prototype: Yes`. Don't proactively flag
-every revision for this — that decision belongs on the Revision History row itself
-when it's written, not something to second-guess afterward.
 
 **Enhancement Request** — NOT a PRD; use `templates/enhancement-request-template.md`
 for changes to an existing feature that don't need full personas/scope/NFRs
@@ -326,8 +315,8 @@ separated out. Don't infer SAL-specific as-built behavior from the SNF as-built
 docs — flag the absence and ask rather than assuming shared behavior.
 
 ## Intake pathway mapping (this project)
-- **New features → Design-prototype-first pathway.** Starting point: a finalized,
-  Sathish-signed-off PRD from Claude Design, plus a project-level
+- **New features → prototype-first pathway.** Starting point: a finalized,
+  Sathish-signed-off PRD from the prototype tool in use, plus a project-level
   `claude_design_link`. Cross-check the PRD against the prototype per the skill's
   mandatory cross-check step — this applies regardless of which folder (Core/SAL/
   SNF) the feature belongs to.
@@ -350,8 +339,8 @@ docs — flag the absence and ask rather than assuming shared behavior.
   `specs/` folder once the PRD is approved.
 - Prototype export (full export, per Q2): `<slug>/prototype/`, with
   `prototype-meta.md` sidecar (`templates/prototype-meta-template.md`). Permanent
-  in Drive for now (Claude Design isn't yet available to the whole team) — its
-  eventual deletion is the Project Manager persona's job, not this one's.
+  in Drive for now (the prototype tool isn't yet available to the whole team) —
+  its eventual deletion is the Project Manager persona's job, not this one's.
 
 ## Handover destination
 `<folder>/04_handovers/<date>_pm-to-sa_<topic>.md`, inside whichever of
