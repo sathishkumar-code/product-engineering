@@ -31,7 +31,7 @@ per project — worth checking directly rather than assuming either way.
 ## Tie-in to downstream conventions
 - `// BUSINESS RULE:` comments become the primary source the Product Manager
   persona checks during its mandatory cross-check step — see the updated step in
-  `skill-pm-discipline.md`.
+  `framework/_agent-instructions/skill-pm-discipline.md`.
 - `// PROTOTYPE ONLY:` comments map directly onto the PRD's "Known prototype
   artifacts" section — PM should be able to pull that section almost verbatim from
   these comments rather than inferring what's a shortcut.

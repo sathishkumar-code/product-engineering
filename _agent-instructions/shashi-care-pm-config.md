@@ -2,8 +2,10 @@
 
 Pairs with `framework/_agent-instructions/skill-pm-discipline.md`. **When uncertain about folder structure,
 naming conventions, or any process detail not spelled out here, check
-`_reference/` in the doc root** (`shashi-care-doc-tree.md`, `PROCESS-WALKTHROUGH.md`,
-and related files) before guessing or defaulting to the simplest interpretation.
+`_reference/` in the doc root** (`shashi-care-doc-tree.md`) **and
+`framework/PROCESS-WALKTHROUGH.md`** (the canonical process document — not
+this repository's own superseded `_reference/PROCESS-WALKTHROUGH.md`)
+before guessing or defaulting to the simplest interpretation.
 
 **Locate documents by constructing the path, not by searching.** Once you know
 the product/team folder, document type, and slug, build the exact file path
@@ -11,7 +13,7 @@ directly from `shashi-care-doc-tree.md`'s tree shape and per-slug shape, then
 read that path. Only if the direct read fails, list that one slug's own folder
 (never the wider tree) to see what's actually there — don't run an open-ended
 recursive search or glob across the doc tree to locate a document whose type and
-slug you already know. See `skill-doc-tree-template.md`'s "Locating a document
+slug you already know. See `framework/_agent-instructions/skill-doc-tree-template.md`'s "Locating a document
 directly" section for the general method this follows.
 
 > **Note to Sathish, not an instruction to the agent** (model choice isn't

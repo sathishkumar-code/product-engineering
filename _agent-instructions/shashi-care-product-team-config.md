@@ -1,17 +1,18 @@
 # Config: Product Team — Shashi Care (Core + SAL + SNF)
 
 Pairs with `SOUL.md` (the `product-team` Hermes orchestrator profile), the
-same way `shashi-care-pm-config.md` pairs with `skill-pm-discipline.md` and
-`shashi-care-sa-config.md` pairs with `skill-sa-discipline.md`. SOUL.md
+same way `shashi-care-pm-config.md` pairs with `framework/_agent-instructions/skill-pm-discipline.md` and
+`shashi-care-sa-config.md` pairs with `framework/_agent-instructions/skill-sa-discipline.md`. SOUL.md
 defines what an orchestrator does in general; this file supplies the
 Shashi-Care-specific facts and bindings SOUL.md deliberately leaves generic —
 project name, repository bindings, approver identity, artifact locations,
 and naming conventions. **When uncertain about a repository binding,
 artifact location, or process detail not spelled out here, check
 `_reference/` in the doc root** (`shashi-care-doc-tree.md`,
-`shashi-care-gitlab-binding.md`, `shashi-care-clickup-binding.md`,
-`PROCESS-WALKTHROUGH.md`) before guessing or defaulting to the simplest
-interpretation.
+`shashi-care-gitlab-binding.md`, `shashi-care-clickup-binding.md`) **and
+`framework/PROCESS-WALKTHROUGH.md`** (the canonical process document, not
+this repository's own superseded `_reference/PROCESS-WALKTHROUGH.md`)
+before guessing or defaulting to the simplest interpretation.
 
 ## Purpose and pairing
 
@@ -24,8 +25,8 @@ naming convention. Where SOUL.md says "determine the appropriate artifact
 repository and location from the active project's configuration and
 repository bindings," this file, together with the `_reference/` bindings it
 points to, is that configuration for Shashi Care. This file does not
-restate SOUL.md's orchestration behavior, PROCESS-WALKTHROUGH.md's stage
-detail, or either specialist's discipline file — it binds `product-team` to
+restate SOUL.md's orchestration behavior, `framework/PROCESS-WALKTHROUGH.md`'s
+stage detail, or either specialist's discipline file — it binds `product-team` to
 the concrete facts those generic documents need to operate on this project.
 
 ## Project identity
@@ -77,9 +78,11 @@ this repository's `_reference/` and `_agent-instructions/`:
   statuses. Relevant once Project Manager is activated; not required for
   the current PM/SA-only scope, but kept as the binding `product-team` will
   need when that stage is reached.
-- `_reference/PROCESS-WALKTHROUGH.md` — the authoritative stage-by-stage
+- `framework/PROCESS-WALKTHROUGH.md` — the authoritative stage-by-stage
   process, gates, Open Question lifecycle, and commit discipline. This
-  config does not restate its content.
+  config does not restate its content. (`_reference/PROCESS-WALKTHROUGH.md`
+  is superseded — see the notice at its own top — and must not be treated
+  as authoritative.)
 - `_agent-instructions/shashi-care-pm-config.md` and
   `_agent-instructions/shashi-care-sa-config.md` — the specialist-side
   project bindings; `product-team` reads these to understand what each
@@ -123,7 +126,7 @@ Sathish.
 Approval must never be inferred from a specialist's report, a completed
 Kanban task, chat discussion, or the mere existence of an artifact.
 Approval is established only by the mechanism `shashi-care-gitlab-binding.md`
-and `PROCESS-WALKTHROUGH.md` already define: the relevant document's own
+and `framework/PROCESS-WALKTHROUGH.md` already define: the relevant document's own
 `status`/`Status` field reading `Approved`/`approved` (for gated documents),
 or Sathish's explicit confirmation (for non-gated reference material with no
 status field). `product-team` verifies that signal directly before treating
@@ -138,10 +141,10 @@ For Shashi Care, the currently active specialist personas are:
 
 These are the only specialists `product-team` orchestrates today for this
 project. Project Manager, Developer, QA Engineer, and DevOps Engineer
-configurations exist in this repository's file index (see
-`PROCESS-WALKTHROUGH.md`'s "File index" —
-`shashi-care-pjm-config.md`, `shashi-care-developer-config.md`,
-`shashi-care-qa-config.md`, `shashi-care-devops-config.md`) but are out of
+configurations exist in this repository — see `_reference/team-structure.md`'s
+Roster table for the persona-to-config-file mapping (`shashi-care-pjm-config.md`,
+`shashi-care-developer-config.md`, `shashi-care-qa-config.md`,
+`shashi-care-devops-config.md`) — but are out of
 scope for `product-team` until explicitly activated. Their presence in the
 repository is not itself authorization to invoke, assign Kanban work to, or
 orchestrate around those personas.
@@ -150,7 +153,7 @@ orchestrate around those personas.
 
 `product-team` creates Kanban tasks against the `pm` and `sa` specialist
 profiles. Each profile's own behavior is defined by its discipline file
-(`skill-pm-discipline.md`, `skill-sa-discipline.md`) plus its project config
+(`framework/_agent-instructions/skill-pm-discipline.md`, `framework/_agent-instructions/skill-sa-discipline.md`) plus its project config
 (`shashi-care-pm-config.md`, `shashi-care-sa-config.md`) — `product-team`
 does not reproduce or override that behavior; it only supplies the task
 objective, the authoritative source artifact(s), the expected output
@@ -169,7 +172,7 @@ Kanban tasks for Shashi Care PM/SA work reference source and expected
 artifacts by their concrete GitLab `-docs` checkout path (per
 `shashi-care-doc-tree.md`), never by a path under `product-engineering`.
 Kanban parent/dependency relationships enforce the stage ordering defined
-in `PROCESS-WALKTHROUGH.md` (e.g. a Technical Design task depends on the
+in `framework/PROCESS-WALKTHROUGH.md` (e.g. a Technical Design task depends on the
 PRD/ER reaching the Stage 2 approval gate; a tech-spec task depends on the
 TD reaching its own approval gate) — `product-team` does not invent an
 ordering not already implied by that process document.
@@ -189,7 +192,7 @@ the tree.
 `product-team` is the sole actor that runs `git add`/`commit`/`push` for
 Shashi Care's PM- and SA-authored documents, exactly as
 `shashi-care-gitlab-binding.md`'s "Commit mechanics" and
-`PROCESS-WALKTHROUGH.md`'s "Document commit" section define. For this
+`framework/PROCESS-WALKTHROUGH.md`'s "Document commit" section define. For this
 project, verifying a workflow gate or a commit concretely means:
 
 - Reading the document directly from its GitLab `-docs` checkout path (per
@@ -231,7 +234,7 @@ question. For Shashi Care, those tracked items live at:
 `product-team` confirms the referenced item actually exists at one of these
 locations before treating an Open Question row as satisfying the
 development-readiness gate — a bare disposition label with no recorded
-reference does not satisfy it, per `PROCESS-WALKTHROUGH.md`'s "Open
+reference does not satisfy it, per `framework/PROCESS-WALKTHROUGH.md`'s "Open
 Question lifecycle" section.
 
 ## Access

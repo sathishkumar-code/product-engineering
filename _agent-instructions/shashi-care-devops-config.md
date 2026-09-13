@@ -1,6 +1,6 @@
 # Config: DevOps Engineer — Shashi Care (per code repo)
 
-Pairs with `skill-devops-discipline.md`. Same one-instance-per-repo model and
+Pairs with `framework/_agent-instructions/skill-devops-discipline.md`. Same one-instance-per-repo model and
 repo/product mapping as `shashi-care-developer-config.md` — see that file's
 table.
 
@@ -29,11 +29,11 @@ Sourced from each product's GitLab `-docs` repo
 The generic, template-shaped `_as-built/architecture/technical-debt.md`
 and a generic per-product compliance register (carrying the
 **Release-blocking: Yes/No** column in
-`templates/technical-debt-register-template.md` and
-`templates/compliance-register-template.md`) don't exist yet for any product.
+`framework/templates/technical-debt-register-template.md` and
+`framework/templates/compliance-register-template.md`) don't exist yet for any product.
 Check those first once/if PM or SA stands them up for a given product — but an
 absent register is not the same as a clean check; see
-`skill-devops-discipline.md`'s hard-stop section for the escalation rule.
+`framework/_agent-instructions/skill-devops-discipline.md`'s hard-stop section for the escalation rule.
 Two gaps are already named by hand in the top-level repo CLAUDE.md regardless
 of register state: the pcc-sync hardcoded shared-secret issue (no facility
 scoping) and the unauthenticated WestFax delivery webhook.
@@ -41,7 +41,9 @@ scoping) and the unauthenticated WestFax delivery webhook.
 **SAL/Shashi-Care-Core "none yet" is a scheduled gap, not an oversight.**
 System Architect completes an initial `technical-debt-register.md` +
 `compliance-register.md` logging pass for each product before its first
-real deployment — see `PROCESS-WALKTHROUGH.md`'s Open worklog items. Until
+real deployment — tracked here as an open worklog item, not in
+`framework/PROCESS-WALKTHROUGH.md` (which carries no product-specific
+worklog). Until
 that happens, this persona keeps escalating rather than promoting for either
 product; that's the correct behavior, not a bug to route around.
 
@@ -49,7 +51,7 @@ product; that's the correct behavior, not a bug to route around.
 `Release-blocking`-equivalent field gets added to
 `SNF-docs/_as-built/architecture/technical-debt.md` and
 `SNF-docs/compliance/hipaa-compliance-register.md` when SNF's first real
-release-plan drafting with PjM begins (`PROCESS-WALKTHROUGH.md` Stage 10),
+release-plan drafting with PjM begins (`framework/PROCESS-WALKTHROUGH.md` Stage 10),
 not before.
 Until that cycle happens, keep using the Severity/Priority proxy above for
 SNF — don't treat its absence as something this persona should chase or

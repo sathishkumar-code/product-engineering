@@ -137,7 +137,7 @@ etc. — the filename is always `<template-basename>-<slug>.md`, the matching
 `templates/*-template.md` file's name with `-template` dropped and the slug
 appended. This is what lets a persona open a document by constructing its
 path directly instead of searching for it — see
-`skill-doc-tree-template.md`'s "Locating a document directly" section for the
+`framework/_agent-instructions/skill-doc-tree-template.md`'s "Locating a document directly" section for the
 general method.
 
 Prototype export sits outside this per-slug shape, flat under `prototypes/
@@ -237,7 +237,7 @@ workbook. Authored by DevOps.
 - Deferred Open Questions register: `deferred-open-questions-register.md` at
   the repo root — a fallback tracker only, for a disposition that's
   genuinely neither Technical Debt nor an Enhancement — see
-  `PROCESS-WALKTHROUGH.md`'s "Open Question lifecycle and the
+  `framework/PROCESS-WALKTHROUGH.md`'s "Open Question lifecycle and the
   development-readiness gate." Uses
   `framework/templates/deferred-open-questions-register-template.md`.
 
@@ -275,8 +275,8 @@ provide.
 PM and SA own Plan/Design — PRD through Epics/Stories reaching `ready` and
 the ClickUp handoff. Developer, QA Engineer, and DevOps Engineer — all
 hosted in Hermes rather than Cowork, one instance per code repo — own Build
-(`skill-developer-discipline.md`), Test execution
-(`skill-qa-discipline.md`), and Deploy (`skill-devops-discipline.md`). All
+(`framework/_agent-instructions/skill-developer-discipline.md`), Test execution
+(`framework/_agent-instructions/skill-qa-discipline.md`), and Deploy (`framework/_agent-instructions/skill-devops-discipline.md`). All
 six personas' document output (PRD through deployment records) is authored
 directly in the GitLab-direct model described above. Maintain (production
 monitoring feeding a fresh `intent.md`) is partially covered — DevOps's

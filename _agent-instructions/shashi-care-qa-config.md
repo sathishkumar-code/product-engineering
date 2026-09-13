@@ -1,6 +1,6 @@
 # Config: QA Engineer — Shashi Care (per code repo)
 
-Pairs with `skill-qa-discipline.md`. Same one-instance-per-repo model and
+Pairs with `framework/_agent-instructions/skill-qa-discipline.md`. Same one-instance-per-repo model and
 repo/product mapping as `shashi-care-developer-config.md` — see that file's
 table.
 
@@ -24,8 +24,8 @@ analogous to why `shashi-care-clickup-binding.md`/`shashi-care-gitlab-binding.md
 exist for tools that actually are shared across every repo.
 
 ## Bug Report filing
-Uses Product Manager's existing `templates/bug-intake-questions.md` →
-`templates/bug-report-template.md`, filed at
+Uses Product Manager's existing `framework/templates/bug-intake-questions.md` →
+`framework/templates/bug-report-template.md`, filed at
 `prd/bugs/<new-slug>/` in the product's GitLab `-docs` repo, per
 `shashi-care-doc-tree.md`'s per-slug shape — same as any other direct-intake
 bug.

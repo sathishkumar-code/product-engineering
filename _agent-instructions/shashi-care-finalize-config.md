@@ -38,7 +38,7 @@ against a TD it owns, whenever asked.
 When Sathish confirms a candidate should become its own Enhancement Request (see the
 skill file's escalation rule), file it exactly like any other direct-intake
 enhancement — per `shashi-care-doc-tree.md`'s per-slug shape and
-`skill-pm-discipline.md`'s intake pathway B, in the relevant product's GitLab
+`framework/_agent-instructions/skill-pm-discipline.md`'s intake pathway B, in the relevant product's GitLab
 `-docs` repo:
 - `prd/enhancements/<new-slug>/intent.md`
   (`framework/templates/intent-template.md`)
@@ -52,7 +52,7 @@ underlying feature, per the template's own `Base feature` row.
 
 ## Rebuild note
 Product Manager and System Architect are Hermes-hosted and read this file
-(and `skill-finalize-document-discipline.md`) directly from this repository
+(and `framework/_agent-instructions/skill-finalize-document-discipline.md`) directly from this repository
 (`product-engineering/`), not through a paste-ready file — edits here take
 effect for them directly, no copy step required; see the "Rebuild reminder"
 in `shashi-care-process-architect-config.md`. This file is also still one of

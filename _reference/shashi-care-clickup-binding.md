@@ -47,7 +47,7 @@ workspace before relying on this; if they're not, fall back to a
 ## Test scenario attachment
 A `test_scenario`-tagged task gets the corresponding `test-cases.xlsx` workbook
 attached directly to it via the tracker's file-attachment tools — see
-`skill-pjm-discipline.md`. Only re-attach when the workbook has actually changed.
+`framework/_agent-instructions/skill-pjm-discipline.md`. Only re-attach when the workbook has actually changed.
 
 ## Cross-folder features
 Since Core now has its own Folder, "shared SAL/SNF feature" no longer needs a
@@ -63,12 +63,12 @@ One per product: `tracker-sync/mapping-log.md` in the product's GitLab `-docs` r
 ## Access
 Project Manager (PjM) holds exclusive, unconditional ownership of creation,
 deletion, tagging, re-parenting, and the mapping log for every tracker item in
-this workspace — see `skill-pjm-discipline.md`. There is one narrow, explicit
+this workspace — see `framework/_agent-instructions/skill-pjm-discipline.md`. There is one narrow, explicit
 exception: Developer and QA Engineer (both hosted in Hermes) may move the
 *status* of their own assigned tracker item only (e.g. "In Progress" →
 "Ready for QA", "In QA" → "Done"/"Blocked"). This mirrors the existing
 `tracker_id` write-back precedent and never extends to creation, deletion,
 tagging, re-parenting, or the mapping log — those stay exclusively PjM's, with
 Developer/QA writing back to PjM if any of them is needed. See
-"Tracker-write exception (Developer, QA Engineer)" in `skill-pjm-discipline.md`
+"Tracker-write exception (Developer, QA Engineer)" in `framework/_agent-instructions/skill-pjm-discipline.md`
 for the full rule.

@@ -1,6 +1,6 @@
 # Config: Developer — Shashi Care (per code repo)
 
-Pairs with `skill-developer-discipline.md`. One Developer instance per code
+Pairs with `framework/_agent-instructions/skill-developer-discipline.md`. One Developer instance per code
 repo listed below — not a single instance spanning all repos (see
 `_reference/team-structure.md` for the reasoning: the backend/admin are shared
 across SAL/SNF while the mobile/TV/staff clients are separate binaries with
