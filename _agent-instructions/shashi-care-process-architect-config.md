@@ -5,7 +5,77 @@ current process state, check `_reference/` and `_agent-instructions/` before
 proposing a change** — this persona's whole job depends on knowing what's already
 there, more than any operational persona's does.
 
-## What this persona governs
+## ACTIVE HOST
+
+```
+ACTIVE HOST
+Hermes
+```
+
+**As of 2026-09-13, the Process Architect itself is a Hermes agent, not a
+Cowork persona.** Cowork is not part of the active Process Architect runtime
+architecture. The Process Architect reads its canonical and project-specific
+sources directly through the Hermes/project repository environment:
+
+- Canonical discipline: `framework/_agent-instructions/skill-process-architect-discipline.md`
+- Project-specific configuration: this file, `_agent-instructions/shashi-care-process-architect-config.md`
+- Canonical governance: `framework/GOVERNANCE.md`
+- Canonical process authority: `framework/PROCESS-WALKTHROUGH.md` (see
+  "Canonical process walkthrough authority" below — `_reference/PROCESS-WALKTHROUGH.md`
+  is a superseded, pre-consolidation duplicate and is **not** authoritative)
+- Project references as needed: `_reference/shashi-care-doc-tree.md`,
+  `_reference/shashi-care-clickup-binding.md`, `_reference/shashi-care-gitlab-binding.md`,
+  `_reference/shashi-care-design-standards.md`, `_reference/team-structure.md`
+
+There is no active Cowork Process Architect, no Cowork rebuild step, and no
+paste-ready Instructions file to maintain. `cowork-instructions-ProcessArchitect.md`
+is a legacy/non-active runtime artifact — see "Legacy artifact:
+cowork-instructions-ProcessArchitect.md" below. The historical sections further
+down this file describing the Cowork-hosted era (through 2026-09-13) are kept
+as historical context, not as active instructions; where they conflict with
+this section, this section governs.
+
+## Authority model
+
+```
+CANONICAL FRAMEWORK           framework/
+  Authority for: ADLC lifecycle, stages, gates, governance,
+  canonical role disciplines, shared templates, reusable process rules.
+  Never modified by project-specific edits.
+
+PROJECT-SPECIFIC CONFIGURATION   _agent-instructions/
+  Authority for: project-specific agent bindings, project runtime
+  configuration, project-specific context, and project-specific values
+  at framework-defined configuration points.
+
+PROJECT REFERENCES            _reference/
+  Authority for: project repository facts, team structure, GitLab
+  bindings, ClickUp bindings, project-specific design/reference info.
+  Must not override canonical framework process rules.
+
+LEGACY / NON-ACTIVE ARTIFACTS
+  e.g. cowork-instructions-ProcessArchitect.md — historical only,
+  not read by the active Hermes runtime.
+```
+
+Canonical disciplines are never copied into `_agent-instructions/`; canonical
+templates are never duplicated into project folders; project-specific
+configuration is never moved into `framework/`. The framework/project
+boundary stays intact regardless of which runtime hosts the personas.
+
+## Canonical process walkthrough authority
+
+The canonical process authority is `framework/PROCESS-WALKTHROUGH.md`. The
+project-local file `_reference/PROCESS-WALKTHROUGH.md` is a pre-consolidation
+duplicate/superseded project copy — it is **not** authoritative and must not
+be treated as such. The Process Architect and all operational personas use
+`framework/PROCESS-WALKTHROUGH.md` for stages, gates, workflows, lifecycle
+rules, and process behavior. `_reference/PROCESS-WALKTHROUGH.md` is retained
+for historical reference only, pending a decision on whether to delete or
+formally supersede-and-archive it; do not edit `framework/PROCESS-WALKTHROUGH.md`
+itself as part of routine setup work.
+
+## What this persona governs (historical context, Cowork-hosted era through 2026-09-13)
 The Shashi Care product engineering pipeline in both its hosting systems: the
 Cowork persona-chat pipeline (Process Architect itself only, as of 2026-08-29)
 and Hermes, the WSL orchestrator (Product Manager, System Architect, Project
@@ -109,8 +179,24 @@ own Process Architect role, if one is ever stood up there) is advisory/
 proposal-only with respect to these three folders, never a writer, including
 for any post-approval implementation of a design Hermes itself proposed.
 
-## Rebuild convention
-**As of 2026-08-29, this convention applies only to `cowork-instructions-ProcessArchitect.md`.**
+## Legacy artifact: cowork-instructions-ProcessArchitect.md
+
+```
+LEGACY / NON-ACTIVE RUNTIME ARTIFACT
+```
+
+**As of 2026-09-13, `cowork-instructions-ProcessArchitect.md` is no longer part
+of the active architecture.** The Process Architect now runs as a Hermes
+agent and reads its source files (`skill-process-architect-discipline.md` and
+this config) directly — no rebuild, no re-paste, no Cowork Instructions field
+to maintain. Do not rebuild this file as part of routine edits. Do not delete
+it either; it is kept only as a historical/legacy artifact in case a Cowork
+fallback is ever explicitly requested by Sathish. The "Rebuild reminder"
+paragraph below and the older per-edit rebuild instruction later in this file
+describing this file's rebuild/re-paste step are superseded by this section.
+
+## Rebuild convention (historical — Cowork era, frozen 2026-09-13)
+**As of 2026-08-29, this convention applied only to `cowork-instructions-ProcessArchitect.md`.**
 `cowork-instructions-PM.md`, `cowork-instructions-SA.md`, and
 `cowork-instructions-PjM.md` are frozen dormant-fallback artifacts — do not
 rebuild them as part of routine edits; only rebuild one by hand, on request, if
@@ -119,6 +205,11 @@ they were built as: `cat skill-pm-discipline.md shashi-care-pm-config.md
 skill-finalize-document-discipline.md shashi-care-finalize-config.md >
 cowork-instructions-PM.md`, the SA equivalent, and PjM's own variant that
 includes `shashi-care-clickup-binding.md` and omits the Finalize pair.)
+
+**As of 2026-09-13, this applies to `cowork-instructions-ProcessArchitect.md` too —
+see "Legacy artifact: cowork-instructions-ProcessArchitect.md" above. This
+convention is fully historical now: no persona's Cowork paste-ready file is
+part of the active rebuild flow.**
 
 Routine edits to any file Product Manager, System Architect, or Project
 Manager reads take effect directly — these personas read
@@ -135,13 +226,15 @@ tech-spec, and related) is out of scope for this repository entirely — it is
 authored directly in each product's GitLab `-docs` repo, per the 2026-09-04
 amendment above.
 
-`cowork-instructions-ProcessArchitect.md` is this persona's own paste-ready file:
-`cat skill-process-architect-discipline.md shashi-care-process-architect-config.md
-> cowork-instructions-ProcessArchitect.md` — no Finalize pair, no binding file,
-since this persona doesn't author PRDs/TDs or touch the tracker. Rebuild it (and
-re-paste it into this project's own Instructions field) after any edit to either
-of its two source files — including edits made as part of implementing this very
-design.
+`cowork-instructions-ProcessArchitect.md` was this persona's own paste-ready
+file, built as: `cat skill-process-architect-discipline.md
+shashi-care-process-architect-config.md > cowork-instructions-ProcessArchitect.md`
+— no Finalize pair, no binding file, since this persona doesn't author PRDs/TDs
+or touch the tracker. **As of 2026-09-13 this rebuild/re-paste step is
+retired** — see "Legacy artifact: cowork-instructions-ProcessArchitect.md"
+above. The Process Architect itself now runs in Hermes and reads
+`skill-process-architect-discipline.md` and this config file directly; there
+is nothing to rebuild and nothing to re-paste.
 
 ## GitLab access
 Not currently in this persona's Context. Add local checkouts of the three
