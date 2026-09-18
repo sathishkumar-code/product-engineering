@@ -149,6 +149,53 @@ scope for `product-team` until explicitly activated. Their presence in the
 repository is not itself authorization to invoke, assign Kanban work to, or
 orchestrate around those personas.
 
+## Consuming a Promoted Product Backlog Register entry
+
+Product Lead is not an active specialist in `product-team`'s dispatch loop
+(see "Active specialists and current scope" above) — its Product Backlog
+Register is a separate, independent artifact, not something `product-team`
+polls or monitors on its own initiative.
+
+`product-team` may consume a **Promoted** Product Backlog Register entry
+only when Sathish, the Human Product Owner, explicitly directs it to do
+so — never on its own initiative, never inferred from the entry's mere
+existence.
+
+When directed, `product-team` reads the register entry directly (per
+`_agent-instructions/shashi-care-product-lead-config.md` and
+`framework/templates/backlog-register-template.md` for its storage
+location and fields) and verifies, before doing anything else:
+
+- `Decision Status` = `Decided`
+- `Decision` = `Promoted`
+- `PM intake reference` is empty
+
+If `PM intake reference` is already populated, treat the entry as already
+consumed: do not create another PM Stage 0 intake task, do not create
+another `intent.md`, and report the existing `intent.md` reference to
+Sathish instead.
+
+Otherwise, `product-team` creates the PM Stage 0 intake task exactly as it
+would for any other PM-authored `intent.md` (per "Kanban and workflow
+bindings" above), then verifies — by inspecting the repository directly,
+never by PM's self-report alone, per "Verification and commit
+orchestration" above — that `intent.md` was actually created. Only once
+that verification succeeds does `product-team` write the resulting
+`intent.md` path/slug back into the register entry's `PM intake reference`
+field.
+
+This write-back is a narrow, additive exception to `product-team` never
+editing another persona's document, analogous to Project Manager's
+existing `tracker_id` write-back into `epics-stories.md`
+(`framework/_agent-instructions/skill-pjm-discipline.md`) — limited
+strictly to this one backward-pointer field, never any other part of the
+register entry.
+
+If PM intake creation fails or cannot be verified, `PM intake reference`
+stays empty and the failure follows the existing escalation rule under
+"Escalation and uncertainty" below — never a silent retry, never a
+partial write.
+
 ## Specialist profile bindings
 
 `product-team` creates Kanban tasks against the `pm` and `sa` specialist

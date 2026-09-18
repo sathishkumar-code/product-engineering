@@ -241,6 +241,17 @@ workbook. Authored by DevOps.
   development-readiness gate." Uses
   `framework/templates/deferred-open-questions-register-template.md`.
 
+## Product Backlog Register
+
+`backlog-register.md` at the repo root — Product Lead's running register of
+clarified, classified demand, preceding Product Manager's Stage 0 intake.
+Same root-level placement pattern as `deferred-open-questions-register.md`
+above — a running, per-product register, no per-slug nesting. Uses
+`framework/templates/backlog-register-template.md`. See
+`_agent-instructions/shashi-care-product-lead-config.md` and
+`framework/_agent-instructions/skill-product-lead-discipline.md` for the
+persona discipline and storage-location rationale.
+
 ## Team structure
 
 `_reference/team-structure.md` — the real, filled roster and RACI for all
