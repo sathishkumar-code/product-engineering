@@ -107,6 +107,13 @@ flag the absence and ask rather than assuming shared behavior.
   SNF) the feature belongs to.
 - **Enhancements and bugs → Direct intake pathway.** Run the intake question sets
   before drafting, per the skill.
+- **Notes to UX Designer section (PRD §12 / ER §6)** — when required (see
+  `skill-pm-discipline.md`), cite `_reference/shashi-care-design-standards.md` as
+  this project's design-system reference. **Known gap: that document is currently
+  incomplete** (it covers prototype-authoring conventions, not a full
+  component/pattern library) — treat it as a partial reference, note explicitly
+  in the section when something isn't covered there rather than treating its
+  silence as "no precedent exists."
 
 ## Storage paths (relative to each product's GitLab repo root — Shashi-Care-Core-docs / SAL-docs / SNF-docs)
 - Roadmap (per product): `roadmap/<product>-roadmap.xlsx` in each
