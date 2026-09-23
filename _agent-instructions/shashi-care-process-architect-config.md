@@ -150,11 +150,16 @@ fallback (not deleted) but are no longer part of the active rebuild
 convention.
 
 **Open items from this cutover, not yet resolved:**
-- **Tool bindings** (ClickUp for Project Manager; Google Drive export and
-  Figma for Product Manager) are **not yet configured** for reachability from
-  the Hermes/WSL environment. Each persona's own config now carries an
-  "Access (Hermes)" section flagging this — treat missing tool access as
-  something to escalate to Sathish, never silently work around or fabricate.
+- **Tool bindings** (ClickUp for Project Manager — future-state only, see
+  `_reference/shashi-care-clickup-binding.md`'s status header and
+  `shashi-care-pjm-config.md`'s "Access (Hermes)" section; Google Drive
+  export and Figma for Product Manager) are **not yet configured** for
+  reachability from the Hermes/WSL environment. This does not block
+  Project Manager's current operational tracker work, which runs against
+  the Google Sprint Sheet — see `_reference/shashi-care-sprint-sheet-binding.md`.
+  Each persona's own config now carries an "Access (Hermes)" section
+  flagging this — treat missing tool access as something to escalate to
+  Sathish, never silently work around or fabricate.
   **GitLab checkout write access** (needed as of 2026-09-04 for PM's and SA's
   direct-authoring work) is confirmed for SA (2026-08-31, though that check
   predates SA writing there — only read was verified) but not separately

@@ -1,5 +1,15 @@
 # Binding: ClickUp — Shashi Care
 
+## Status: future-state direction, not the current operational tracker
+
+ClickUp is a **future-state work-management direction** for Shashi Care —
+it is **not** the current operational tracker. The current operational
+tracker is the Google Sprint Sheet, defined by
+`_reference/shashi-care-sprint-sheet-binding.md`. The design below is
+retained as-is for the eventual future-state migration; nothing in this
+file is currently active for sprint planning/creation/tracking, and no
+migration to it is scheduled or authorized by this status note.
+
 Filled instance of `framework/_agent-instructions/skill-clickup-binding-template.md`.
 
 ## Hierarchy mapping

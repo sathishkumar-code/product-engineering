@@ -58,3 +58,12 @@ R = Responsible, A = Accountable, C = Consulted, I = Informed. Exactly one uncon
 ## Coverage / on-call
 
 Not yet applicable — single-operator team at this stage. Revisit when the team grows beyond Sathish plus AI personas.
+
+## Related: human delivery team roster
+
+This file covers only the 7 AI personas and process RACI. The **human**
+delivery team (Web/Admin Dev, Mobile Dev, QA staff, and their Team Leads —
+who PjM's Sprint Sheet draws its Admin Dev Team / Mobile Dev Team selectable
+values from) is a separate document: `_reference/delivery-team-roster.md`.
+See that file's "Relationship to `team-structure.md`" section for why the
+two are kept separate rather than merged.

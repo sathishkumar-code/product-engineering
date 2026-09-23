@@ -32,12 +32,17 @@ the checkout's working tree on `main`; `product-team` commits it once
 Sathish confirms, same as every other persona — see "Commit mechanics"
 there.
 
-## Access (Hermes) — not yet configured
-This persona's ClickUp access (its exclusive tracker-write ownership — see
-`shashi-care-clickup-binding.md`) is **not yet confirmed reachable from the
-Hermes/WSL Claude Code CLI environment**. Until Sathish confirms ClickUp is
-reachable, treat any tracker-write task as blocked and escalate rather than
-assuming access exists or silently deferring the write.
+## Access (Hermes) — ClickUp only, future-state
+This persona's ClickUp access (its exclusive tracker-write ownership under
+the eventual ClickUp binding — see `shashi-care-clickup-binding.md`) is
+**not yet confirmed reachable from the Hermes/WSL Claude Code CLI
+environment**. This blocker applies only to future-state ClickUp work —
+ClickUp is not the current operational tracker (see "Tracker" below) — and
+does **not** block current Sprint Sheet operations. Until Sathish confirms
+ClickUp is reachable, treat any *ClickUp*-write task as blocked and
+escalate rather than assuming access exists or silently deferring the
+write; current Sprint Sheet sprint planning/creation/tracking work
+proceeds normally and is unaffected by this note.
 
 ## Storage paths (relative to each product's GitLab repo root — Shashi-Care-Core-docs / SAL-docs / SNF-docs)
 - Release plans: `releases/SAL-release-plan.xlsx` in SAL-docs,
@@ -51,7 +56,19 @@ assuming access exists or silently deferring the write.
   too.
 
 ## Tracker
-ClickUp — see `_reference/shashi-care-clickup-binding.md`.
+**Current operational tracker: the Google Sprint Sheet** — see
+`_reference/shashi-care-sprint-sheet-binding.md` for the current-state
+contract (ownership, Phase 4 structure, Item ID/Status lifecycle). PjM owns
+sprint planning, sprint creation, sprint tracking, and maintenance of this
+sheet.
+
+**ClickUp is a future-state work-management direction, not currently
+bound** — see `_reference/shashi-care-clickup-binding.md`'s status header.
+No ClickUp migration is implied or authorized by this config.
+
+**Trello is a downstream visualization/management layer only** — it is not
+the sprint-planning source of truth and PjM does not treat it as
+authoritative.
 
 ## Prototype deletion
 This persona never deletes the GitLab `prototypes/<category>-<slug>/` folder
