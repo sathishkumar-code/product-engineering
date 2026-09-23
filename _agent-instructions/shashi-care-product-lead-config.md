@@ -49,17 +49,38 @@ does not prescribe which runtime actor performs that commit.
 
 ## Storage paths (relative to each product's GitLab repo root)
 
-- **Product Backlog Register** (one persistent file per product, at the
-  repository root, alongside the existing root-level running registers):
-  - `Shashi-Care-Core-docs/backlog-register.md`
-  - `SAL-docs/backlog-register.md`
-  - `SNF-docs/backlog-register.md`
+- **Product Backlog Register** — a `backlog/` directory at each product's
+  repository root:
+  - `Shashi-Care-Core-docs/backlog/`
+  - `SAL-docs/backlog/`
+  - `SNF-docs/backlog/`
 
-  Same root-level placement as `deferred-open-questions-register.md` (see
-  `shashi-care-doc-tree.md`'s "Technical debt register and Deferred Open
-  Questions register" section) — a running, per-product register with no
-  per-slug nesting, the same shape this file already uses for that other
-  fallback register. No new `backlog/` directory is introduced.
+  Inside each product's `backlog/` directory:
+  - **`backlog/backlog-register.md`** — one lightweight index per product,
+    per `framework/templates/backlog-register-template.md`: one row per
+    entry, summarizing Entry ID, short title, classification, state,
+    prioritization signal, logged/last-updated dates, and a link to that
+    entry's own document. Never carries the full record itself.
+  - **`backlog/BL-<NN>-<descriptive-slug>.md`** — one document per backlog
+    entry, per `framework/templates/backlog-entry-template.md`: the full
+    record (identity, source/occurrences, clarification, classification,
+    dedup, prioritization signal, lifecycle + transition history,
+    recommendation, decision, rejection/handoff).
+
+  **`BL-<NN>` is this entry's stable identity, not the filename.** The
+  `<descriptive-slug>` portion is descriptive only and may be updated if
+  the entry's title changes; every cross-reference (the register's own
+  index row, deduplication matches, the promotion handoff note) points at
+  the Entry ID, never at the filename. This is a deliberate divergence from
+  this repository's usual pure-slug filename-as-identity convention (see
+  `shashi-care-doc-tree.md`'s "Filename rule") — see
+  `framework/templates/backlog-entry-template.md`'s own header for the
+  rationale.
+
+  This replaces the previous root-level single-file placement
+  (`backlog-register.md` at the repo root, no `backlog/` directory) — see
+  `shashi-care-doc-tree.md`'s "Product Backlog Register" section for the
+  now-current doc-tree shape.
 
 ## Demand sources
 
@@ -73,7 +94,7 @@ channel by assumption:
   its own.
 
 Record which of these two a given entry came from in the register's own
-"Source/channel" field (`templates/backlog-register-template.md` §2) — this
+"Source/channel" field (`framework/templates/backlog-entry-template.md` §2) — this
 config only names the two valid values, it does not define the field
 itself.
 
@@ -103,12 +124,12 @@ the other.
   `skill-product-lead-discipline.md` §7 — an unresolved fact is stated as
   unresolved, never filled with a plausible guess.
 - Once determined, the entry is recorded in that product's own
-  `backlog-register.md` (per "Storage paths" above) — an entry is never
-  logged as "unassigned" or split across more than one product's register;
-  it resolves to exactly one product's register before advancing past
+  `backlog/` directory (per "Storage paths" above) — an entry is never
+  logged as "unassigned" or split across more than one product's backlog;
+  it resolves to exactly one product's `backlog/` before advancing past
   `Clarifying`.
 - A cross-product (shared) demand item is recorded under
-  **Shashi-Care-Core-docs/backlog-register.md**, the same rule
+  **Shashi-Care-Core-docs/backlog/**, the same rule
   `shashi-care-doc-tree.md`'s "Repos" section and `shashi-care-pm-config.md`
   already use for a shared feature crossing SAL/SNF.
 
@@ -120,14 +141,14 @@ config in this repository (see `_reference/team-structure.md`'s Roster:
 `shashi-care-product-team-config.md`'s "Human approval authority"). Every
 reference in `skill-product-lead-discipline.md` to "the Human Product
 Owner" resolves, for Shashi Care, to Sathish. The Promote/Reject decision is
-established only by the register entry's own decision field being set —
+established only by the entry document's own decision field being set —
 never inferred from a specialist's report or from conversation, same
 verification discipline `shashi-care-product-team-config.md` already
 applies to every other approval-gated document.
 
 ## Deduplication references
 
-Check the relevant product's `backlog-register.md` (once product
+Check the relevant product's `backlog/` directory (once product
 association is determined — see above) plus existing in-flight PRDs/ERs/BRs
 under that product's `prd/{features,enhancements,bugs}/<slug>/` — located by
 constructing the path directly from `shashi-care-doc-tree.md`'s tree shape,
@@ -157,7 +178,7 @@ escalate rather than assuming access exists.
 
 ## Handover destination
 
-A Promoted register entry is the handover — Product Manager reads it
-directly from the shared GitLab checkout, at that product's
-`backlog-register.md`. No separate handover file, same principle as every
+A Promoted entry is the handover — Product Manager reads it directly from
+the shared GitLab checkout, at that product's `backlog/BL-<NN>-
+<descriptive-slug>.md`. No separate handover file, same principle as every
 other persona config's "Handover destination" section.

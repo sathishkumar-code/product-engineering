@@ -89,8 +89,11 @@ content, not because the structure differs.
 │   └── pcc/
 │       ├── agreements/
 │       └── api-contracts/
-└── tracker-sync/
-    └── mapping-log.md
+├── tracker-sync/
+│   └── mapping-log.md
+└── backlog/
+    ├── backlog-register.md
+    └── BL-<NN>-<descriptive-slug>.md
 ```
 
 Epics/Stories and test material live in GitLab, in `readiness/` — the
@@ -138,7 +141,10 @@ etc. — the filename is always `<template-basename>-<slug>.md`, the matching
 appended. This is what lets a persona open a document by constructing its
 path directly instead of searching for it — see
 `framework/_agent-instructions/skill-doc-tree-template.md`'s "Locating a document directly" section for the
-general method.
+general method. **One narrow exception**: the Product Backlog Register's
+per-entry documents (see "Product Backlog Register" below) are named
+`BL-<NN>-<descriptive-slug>.md`, where `BL-<NN>` — not the slug — is the
+stable identity; this is called out there, not a silent deviation.
 
 Prototype export sits outside this per-slug shape, flat under `prototypes/
 <category>-<slug>/` with its `prototype-meta.md` sidecar (per Q2, the full
@@ -243,12 +249,33 @@ workbook. Authored by DevOps.
 
 ## Product Backlog Register
 
-`backlog-register.md` at the repo root — Product Lead's running register of
-clarified, classified demand, preceding Product Manager's Stage 0 intake.
-Same root-level placement pattern as `deferred-open-questions-register.md`
-above — a running, per-product register, no per-slug nesting. Uses
-`framework/templates/backlog-register-template.md`. See
-`_agent-instructions/shashi-care-product-lead-config.md` and
+`backlog/` at the repo root — Product Lead's backlog of clarified,
+classified demand, preceding Product Manager's Stage 0 intake:
+
+```
+backlog/
+├── backlog-register.md              # lightweight index, one row per entry
+└── BL-<NN>-<descriptive-slug>.md    # one document per entry, full record
+```
+
+- **`backlog-register.md`** — the index only: Entry ID, short title,
+  classification, state, prioritization signal, logged/last-updated dates,
+  and a link to the entry's own document. Uses
+  `framework/templates/backlog-register-template.md`.
+- **`BL-<NN>-<descriptive-slug>.md`** — one file per entry, carrying the
+  full record (source/occurrences, clarification, classification, dedup,
+  prioritization signal, lifecycle + transition history, recommendation,
+  Human Product Owner decision, rejection/handoff detail). Uses
+  `framework/templates/backlog-entry-template.md`.
+
+**Entry ID vs. filename**: `BL-<NN>` is the entry's stable identity;
+`<descriptive-slug>` is descriptive only and may be renamed if the title
+changes without changing the Entry ID. This is a deliberate, narrow
+exception to the "Filename rule" above (which uses the slug itself as
+identity for PRD/ER/BR/TD/etc.) — the numeric ID, not the filename, is
+what every cross-reference in the backlog points to.
+
+See `_agent-instructions/shashi-care-product-lead-config.md` and
 `framework/_agent-instructions/skill-product-lead-discipline.md` for the
 persona discipline and storage-location rationale.
 
