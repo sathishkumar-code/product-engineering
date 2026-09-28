@@ -37,6 +37,9 @@ R = Responsible, A = Accountable, C = Consulted, I = Informed. Exactly one uncon
 | 7 | Code implementation | I | C | I | I | R/A | I | I | I |
 | 8 | Code merge to main | I | C | I | I | R | I | I | A |
 | 9 | Test scenario/case authorship | R/A | C (technical) | I | I | I | C | I | I |
+| 9a | Test scenario/case QA review & approval (`qa_status`) | I | I | I | I | I | R/A | I | I |
+| 9b | UAT acceptance criteria authorship | R/A | I | I | I | I | I | I | I |
+| 9c | UAT acceptance review & approval (`uat_status`) | C | I | I | I | I | I | I | R/A |
 | 10 | Test execution & QA sign-off | I | I | I | I | C | R/A | I | I |
 | 11 | Bug Report filed from QA/prod | C | I | I | I | C | R/A | C | I |
 | 12 | Release plan drafting | R | C | I | I | I | I | C | A |

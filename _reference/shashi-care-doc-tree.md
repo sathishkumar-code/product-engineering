@@ -47,13 +47,17 @@ content, not because the structure differs.
 │       └── <slug>/
 │           ├── intent.md
 │           ├── prd-<slug>.md          (or enhancement-request-<slug>.md / bug-report-<slug>.md)
-│           └── spec.md
+│           ├── spec.md
+│           └── references/            # external input files cited by the PRD/ER/spec —
+│                                        # see "External reference/input files" below
 ├── architecture/
 │   └── {features,enhancements,bugs}/
 │       └── <slug>/
 │           ├── TD-<slug>.md
 │           ├── SA-comments-<slug>.md
-│           └── tech-spec-<slug>.md
+│           ├── tech-spec-<slug>.md
+│           └── references/            # external input files cited by the TD — same
+│                                        # convention as prd/'s own references/ above
 ├── readiness/
 │   └── {features,enhancements,bugs}/
 │       └── <slug>/
@@ -116,19 +120,25 @@ folder name), since neither has a sibling document to nest alongside.
 prd/{features,enhancements,bugs}/<slug>/
 ├── intent.md            # precedes the PRD/ER/BR — see "Intent" below
 ├── prd-<slug>.md         (or enhancement-request-<slug>.md / bug-report-<slug>.md)
-└── spec.md                # developer-facing, derived from the PRD, own approval gate
+├── spec.md                # developer-facing, derived from the PRD, own approval gate
+└── references/             # external input files this slug's PRD/ER/spec cites —
+                              # see "External reference/input files" below
 
 architecture/{features,enhancements,bugs}/<slug>/
 ├── TD-<slug>.md
 ├── SA-comments-<slug>.md   # one running file per slug — PRD/Epics-Stories review
 │                           # + Technical Design review, both passes
-└── tech-spec-<slug>.md     # developer-facing, derived from the TD, own approval gate
+├── tech-spec-<slug>.md     # developer-facing, derived from the TD, own approval gate
+└── references/             # external input files this slug's TD cites — same
+                              # convention as prd/'s own references/ above
 
 readiness/{features,enhancements,bugs}/<slug>/
 ├── epics-stories.md        # PM drafts, SA adds Round 2 — one running file
 ├── test-scenarios.md       # PM drafts, SA adds technical scenarios
-└── test-cases.xlsx         # PM-Test-Cases + SA-Technical-Test-Cases sheets,
-                             # `qa_status` field gates QA execution starting
+├── test-cases.xlsx         # PM-Test-Cases + SA-Technical-Test-Cases sheets,
+│                            # `qa_status` field gates QA execution starting
+└── uat-acceptance-criteria.md  # PM drafts (Stage 8); human PM reviews at
+                             # Stage 12A, after QA execution — `uat_status` field
 
 build/{features,enhancements,bugs}/<slug>/
 ├── implementation-note-<slug>.md
@@ -194,6 +204,22 @@ instead. No document carries a `repo_status: not-promoted | promoted` or
 permanently, same as every other committed artifact — no persona deletes it,
 no stage checks for or triggers deletion. Any cleanup is Sathish's own manual
 action, entirely outside this process.
+
+## External reference/input files
+
+Per `framework/PROCESS-WALKTHROUGH.md`'s Key conventions: a vendor API guide,
+a customer-supplied spec, an integration reference doc, or similar external
+material a PRD/ER/spec.md or TD grounds a requirement/design decision in gets
+checked into that slug's own `references/` subfolder (`prd/.../references/`
+or `architecture/.../references/`, per the per-slug shape above) — never left
+as a citation to a file that only exists on the author's own machine. This is
+a hard gate: checked as part of that document type's Finalize/approval pass
+(`framework/_agent-instructions/skill-finalize-document-discipline.md`), and
+a document citing an external file not actually present there does not reach
+`Status: Approved`. Same no-deletion posture as prototype exports above —
+once checked in, a reference file stays, even if the citing document is later
+revised; a stale/superseded reference file is a cleanup call for Sathish, not
+a process step.
 
 ## As-built ownership (current state, expected to change)
 
